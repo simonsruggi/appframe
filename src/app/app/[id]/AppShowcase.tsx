@@ -2,17 +2,32 @@
 
 import { useRef, useState, useCallback, useEffect } from "react";
 import html2canvas from "html2canvas-pro";
+import QRCode from "qrcode";
 import type { AppData } from "../../api/app/route";
 
 const THEMES = {
-  noir: { bg: "#080808", text: "text-white", sub: "text-white/50", pill: "bg-white/[0.06] text-white/70", wm: "rgba(255,255,255,0.15)" },
-  cosmic: { bg: "#0a0015", text: "text-white", sub: "text-purple-200/50", pill: "bg-purple-500/10 text-purple-200/70", wm: "rgba(200,180,255,0.15)" },
-  ocean: { bg: "#001020", text: "text-white", sub: "text-cyan-200/50", pill: "bg-cyan-500/10 text-cyan-200/70", wm: "rgba(180,220,255,0.15)" },
-  ember: { bg: "#120800", text: "text-white", sub: "text-orange-200/50", pill: "bg-orange-500/10 text-orange-200/70", wm: "rgba(255,200,150,0.15)" },
-  arctic: { bg: "#f8fafb", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-900/5 text-gray-600", wm: "rgba(0,0,0,0.12)" },
+  noir: { bg: "#080808", text: "text-white", sub: "text-white/50", pill: "bg-white/[0.06] text-white/70", wm: "rgba(255,255,255,0.15)", qrFg: "#ffffff", qrBg: "#080808" },
+  cosmic: { bg: "#0a0015", text: "text-white", sub: "text-purple-200/50", pill: "bg-purple-500/10 text-purple-200/70", wm: "rgba(200,180,255,0.15)", qrFg: "#e0d0ff", qrBg: "#0a0015" },
+  ocean: { bg: "#001020", text: "text-white", sub: "text-cyan-200/50", pill: "bg-cyan-500/10 text-cyan-200/70", wm: "rgba(180,220,255,0.15)", qrFg: "#b0e0ff", qrBg: "#001020" },
+  ember: { bg: "#120800", text: "text-white", sub: "text-orange-200/50", pill: "bg-orange-500/10 text-orange-200/70", wm: "rgba(255,200,150,0.15)", qrFg: "#ffd0a0", qrBg: "#120800" },
+  arctic: { bg: "#f8fafb", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-900/5 text-gray-600", wm: "rgba(0,0,0,0.12)", qrFg: "#1a1a1a", qrBg: "#f8fafb" },
 };
 
 type ThemeKey = keyof typeof THEMES;
+
+const FONTS = [
+  { id: "system", label: "System", css: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" },
+  { id: "serif", label: "Serif", css: "Georgia, 'Times New Roman', serif" },
+  { id: "mono", label: "Mono", css: "'SF Mono', 'Fira Code', 'Courier New', monospace" },
+  { id: "rounded", label: "Rounded", css: "system-ui, -apple-system, sans-serif" },
+];
+
+const ASPECTS = [
+  { id: "16:9", label: "16:9", desc: "Twitter / X", ratio: "16/9" },
+  { id: "4:3", label: "4:3", desc: "Landscape", ratio: "4/3" },
+  { id: "1:1", label: "1:1", desc: "Instagram", ratio: "1/1" },
+  { id: "auto", label: "Auto", desc: "Fit content", ratio: "" },
+];
 
 function formatCount(n: number): string {
   if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
@@ -20,11 +35,14 @@ function formatCount(n: number): string {
   return n.toString();
 }
 
-function PhoneMockup({ src }: { src: string }) {
+function PhoneMockup({ src, size = "md" }: { src: string; size?: "sm" | "md" }) {
+  const w = size === "sm" ? "w-[160px] h-[326px] rounded-[30px]" : "w-[200px] h-[408px] rounded-[38px]";
+  const inner = size === "sm" ? "rounded-[26px]" : "rounded-[33px]";
+  const notch = size === "sm" ? "w-[64px] h-[20px]" : "w-[80px] h-[24px]";
   return (
-    <div className="relative w-[200px] h-[408px] rounded-[38px] bg-[#1a1a1a] p-[5px] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_60px_-12px_rgba(0,0,0,0.8)]">
-      <div className="w-full h-full rounded-[33px] overflow-hidden bg-black relative">
-        <div className="absolute top-2 left-1/2 -translate-x-1/2 w-[80px] h-[24px] bg-black rounded-full z-20" />
+    <div className={`relative ${w} bg-[#1a1a1a] p-[5px] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_60px_-12px_rgba(0,0,0,0.8)]`}>
+      <div className={`w-full h-full ${inner} overflow-hidden bg-black relative`}>
+        <div className={`absolute top-2 left-1/2 -translate-x-1/2 ${notch} bg-black rounded-full z-20`} />
         <img src={src} alt="" className="w-full h-full object-cover" crossOrigin="anonymous" />
       </div>
     </div>
@@ -48,67 +66,110 @@ function StarsRow({ rating, count, theme }: { rating: number; count: number; the
   );
 }
 
-// The card that gets captured as PNG
 function ShowcaseCard({
-  app, theme, showDescription, showScreenshots, showRating, showMeta, screenshotIndex,
+  app, theme, showDescription, showScreenshots, showRating, showMeta, showQR, screenshotIndex,
+  phoneCount, fontFamily, aspectRatio, tagline, qrDataUrl, customAppName, customDeveloper, isPro,
 }: {
-  app: AppData; theme: ThemeKey; showDescription: boolean; showScreenshots: boolean; showRating: boolean; showMeta: boolean; screenshotIndex: number;
+  app: AppData; theme: ThemeKey; showDescription: boolean; showScreenshots: boolean;
+  showRating: boolean; showMeta: boolean; showQR: boolean; screenshotIndex: number;
+  phoneCount: number; fontFamily: string; aspectRatio: string; tagline: string; qrDataUrl: string;
+  customAppName: string; customDeveloper: string; isPro: boolean;
 }) {
   const t = THEMES[theme];
   const isLight = theme === "arctic";
+  const isSquare = aspectRatio === "1/1";
+
+  const displayName = customAppName || app.trackName;
+  const displayDeveloper = customDeveloper || app.developerName;
 
   return (
     <div
       className="relative overflow-hidden"
-      style={{ backgroundColor: t.bg, width: "100%", aspectRatio: showScreenshots ? "16/10" : "16/8" }}
+      style={{
+        backgroundColor: t.bg,
+        width: "100%",
+        aspectRatio: aspectRatio || (showScreenshots ? "16/10" : "16/8"),
+        fontFamily,
+      }}
     >
-      {/* Content */}
-      <div className="relative z-10 h-full flex items-center justify-center px-12 py-10">
-        <div className={`flex items-center gap-12 ${showScreenshots ? "" : "justify-center"}`}>
-          {/* Left: App info */}
-          <div className={`max-w-sm ${showScreenshots ? "" : "text-center"}`}>
-            <div className={`mb-5 ${showScreenshots ? "" : "flex justify-center"}`}>
+      {/* Subtle noise/grain texture overlay */}
+      <div className="absolute inset-0 z-[1] opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, backgroundSize: "128px 128px" }} />
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 z-[2] pointer-events-none" style={{ background: `linear-gradient(180deg, ${isLight ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.02)"} 0%, transparent 40%, ${isLight ? "rgba(0,0,0,0.03)" : "rgba(0,0,0,0.15)"} 100%)` }} />
+      {/* Inner shadow for depth */}
+      <div className="absolute inset-0 z-[2] pointer-events-none" style={{ boxShadow: `inset 0 1px 0 ${isLight ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.04)"}, inset 0 -1px 0 rgba(0,0,0,0.2)` }} />
+
+      {/* Watermark for free users */}
+      {!isPro && (
+        <div className="absolute inset-0 z-[3] flex items-center justify-center pointer-events-none select-none">
+          <span
+            className={`text-6xl font-bold ${isLight ? "text-black" : "text-white"}`}
+            style={{ opacity: 0.07, transform: "rotate(-15deg)", letterSpacing: "0.05em" }}
+          >
+            @AppFrame
+          </span>
+        </div>
+      )}
+
+      <div className={`relative z-10 h-full flex items-center justify-center px-10 py-8 ${isSquare ? "flex-col gap-6" : ""}`}>
+        <div className={`flex items-center gap-10 ${showScreenshots && !isSquare ? "" : "justify-center"} ${isSquare ? "flex-col text-center" : ""}`}>
+          {/* App info */}
+          <div className={`${showScreenshots && !isSquare ? "max-w-sm" : isSquare ? "max-w-md" : "max-w-lg text-center"}`}>
+            <div className={`mb-4 ${!showScreenshots || isSquare ? "flex justify-center" : ""}`}>
               <img
                 src={app.artworkUrl512}
-                alt={app.trackName}
+                alt={displayName}
                 className="w-20 h-20 rounded-[18px] shadow-[0_8px_30px_-8px_rgba(0,0,0,0.5)]"
                 crossOrigin="anonymous"
               />
             </div>
 
             <h1 className={`text-4xl font-bold ${t.text} leading-[1.1] tracking-tight mb-2`}>
-              {app.trackName}
+              {displayName}
             </h1>
-            <p className={`text-base ${t.sub} mb-4`}>{app.developerName}</p>
+            <p className={`text-base ${t.sub} mb-3`}>{displayDeveloper}</p>
+
+            {tagline && (
+              <p className={`text-lg font-medium ${t.text} mb-3 opacity-80`}>{tagline}</p>
+            )}
 
             {showRating && app.averageUserRating > 0 && (
-              <div className={`mb-4 ${showScreenshots ? "" : "flex justify-center"}`}>
+              <div className={`mb-3 ${!showScreenshots || isSquare ? "flex justify-center" : ""}`}>
                 <StarsRow rating={app.averageUserRating} count={app.userRatingCount} theme={theme} />
               </div>
             )}
 
-            {showDescription && (
-              <p className={`text-sm leading-relaxed ${t.sub} mb-5 line-clamp-2`}>
-                {app.description}
-              </p>
+            {showDescription && !tagline && (
+              <p className={`text-sm leading-relaxed ${t.sub} mb-4 line-clamp-2`}>{app.description}</p>
             )}
 
             {showMeta && (
-              <div className={`flex flex-wrap gap-1.5 ${showScreenshots ? "" : "justify-center"}`}>
+              <div className={`flex flex-wrap gap-1.5 ${!showScreenshots || isSquare ? "justify-center" : ""}`}>
                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>{app.primaryGenreName}</span>
                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>{app.formattedPrice}</span>
                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>v{app.version}</span>
               </div>
             )}
+
+            {showQR && qrDataUrl && (
+              <div className={`mt-4 ${!showScreenshots || isSquare ? "flex justify-center" : ""}`}>
+                <img src={qrDataUrl} alt="QR Code" className="w-16 h-16 rounded-lg" />
+              </div>
+            )}
           </div>
 
-          {/* Right: Phone mockups */}
+          {/* Phone mockups */}
           {showScreenshots && app.screenshotUrls.length > 0 && (
-            <div className="flex items-end gap-4 shrink-0">
-              <PhoneMockup src={app.screenshotUrls[screenshotIndex % app.screenshotUrls.length]} />
-              {app.screenshotUrls.length > 1 && (
-                <div className="opacity-60 -translate-y-6">
-                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 1) % app.screenshotUrls.length]} />
+            <div className={`flex items-end gap-3 shrink-0 ${isSquare ? "justify-center" : ""}`}>
+              <PhoneMockup src={app.screenshotUrls[screenshotIndex % app.screenshotUrls.length]} size={phoneCount >= 3 || isSquare ? "sm" : "md"} />
+              {phoneCount >= 2 && app.screenshotUrls.length > 1 && (
+                <div className={`opacity-60 ${isSquare ? "-translate-y-4" : "-translate-y-6"}`}>
+                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 1) % app.screenshotUrls.length]} size={phoneCount >= 3 || isSquare ? "sm" : "md"} />
+                </div>
+              )}
+              {phoneCount >= 3 && app.screenshotUrls.length > 2 && (
+                <div className={`opacity-40 ${isSquare ? "-translate-y-2" : "-translate-y-3"}`}>
+                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 2) % app.screenshotUrls.length]} size="sm" />
                 </div>
               )}
             </div>
@@ -116,24 +177,37 @@ function ShowcaseCard({
         </div>
       </div>
 
-      {/* Bottom bar */}
-      <div className={`absolute bottom-3 left-0 right-0 flex items-center justify-center`}>
-        <a
-          href={app.trackViewUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full font-medium text-xs transition-all ${
-            isLight ? "bg-gray-900/10 text-gray-600" : "bg-white/[0.06] text-white/40"
-          }`}
-        >
-          <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+      {/* Bottom */}
+      <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center">
+        <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs ${isLight ? "text-gray-400" : "text-white/20"}`}>
+          <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
           </svg>
-          App Store
-        </a>
+          Available on the App Store
+        </span>
       </div>
     </div>
   );
+}
+
+// --- Toggle switch ---
+function Toggle({ value, onChange, label }: { value: boolean; onChange: (v: boolean) => void; label: string }) {
+  return (
+    <button
+      onClick={() => onChange(!value)}
+      className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] transition-all cursor-pointer"
+    >
+      <span className="text-sm text-white/70">{label}</span>
+      <div className={`w-9 h-5 rounded-full transition-all relative ${value ? "bg-white" : "bg-white/10"}`}>
+        <div className={`absolute top-0.5 w-4 h-4 rounded-full transition-all ${value ? "right-0.5 bg-black" : "left-0.5 bg-white/30"}`} />
+      </div>
+    </button>
+  );
+}
+
+// --- Section label ---
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return <label className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3 block">{children}</label>;
 }
 
 export default function AppShowcase({
@@ -151,7 +225,15 @@ export default function AppShowcase({
   const [showScreenshots, setShowScreenshots] = useState(true);
   const [showRating, setShowRating] = useState(true);
   const [showMeta, setShowMeta] = useState(true);
+  const [showQR, setShowQR] = useState(false);
+  const [phoneCount, setPhoneCount] = useState(2);
   const [screenshotIndex, setScreenshotIndex] = useState(0);
+  const [currentFont, setCurrentFont] = useState(0);
+  const [aspectRatio, setAspectRatio] = useState("16/9");
+  const [tagline, setTagline] = useState("");
+  const [customAppName, setCustomAppName] = useState("");
+  const [customDeveloper, setCustomDeveloper] = useState("");
+  const [qrDataUrl, setQrDataUrl] = useState("");
   const [downloading, setDownloading] = useState(false);
   const [isPro, setIsPro] = useState(false);
   const [showProModal, setShowProModal] = useState(false);
@@ -159,6 +241,17 @@ export default function AppShowcase({
   const captureRef = useRef<HTMLDivElement>(null);
 
   const t = THEMES[currentTheme];
+
+  // Generate QR code
+  useEffect(() => {
+    if (showQR && app.trackViewUrl) {
+      QRCode.toDataURL(app.trackViewUrl, {
+        width: 128,
+        margin: 1,
+        color: { dark: THEMES[currentTheme].qrFg, light: THEMES[currentTheme].qrBg },
+      }).then(setQrDataUrl).catch(() => {});
+    }
+  }, [showQR, app.trackViewUrl, currentTheme]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -176,7 +269,6 @@ export default function AppShowcase({
   const handleDownload = useCallback(async () => {
     if (!captureRef.current) return;
     setDownloading(true);
-
     try {
       const canvas = await html2canvas(captureRef.current, {
         backgroundColor: t.bg,
@@ -185,19 +277,6 @@ export default function AppShowcase({
         allowTaint: true,
         logging: false,
       });
-
-      if (!isPro) {
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
-          const fontSize = Math.max(13, canvas.width * 0.01);
-          ctx.font = `500 ${fontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
-          ctx.fillStyle = t.wm;
-          ctx.textAlign = "right";
-          ctx.textBaseline = "bottom";
-          ctx.fillText("appfra.me", canvas.width - 24, canvas.height - 16);
-        }
-      }
-
       const link = document.createElement("a");
       link.download = `${app.trackName.replace(/[^a-zA-Z0-9]/g, "-")}-appframe.png`;
       link.href = canvas.toDataURL("image/png");
@@ -205,20 +284,15 @@ export default function AppShowcase({
     } catch (err) {
       console.error("Download failed:", err);
     }
-
     setDownloading(false);
-  }, [app.trackName, isPro, t.bg, t.wm]);
+  }, [app.trackName, t.bg]);
 
   const handleBuy = async () => {
     setProLoading(true);
     try {
       const res = await fetch("/api/checkout", { method: "POST" });
       const data = await res.json();
-      if (res.status === 401) {
-        // Not authenticated, redirect to login
-        window.location.href = "/login";
-        return;
-      }
+      if (res.status === 401) { window.location.href = "/login"; return; }
       if (data.alreadyPro) {
         localStorage.setItem("appframe_pro", "true");
         setIsPro(true);
@@ -226,14 +300,9 @@ export default function AppShowcase({
         setProLoading(false);
         return;
       }
-      if (data.url) {
-        window.location.href = data.url;
-        return;
-      }
+      if (data.url) { window.location.href = data.url; return; }
       alert("Something went wrong. Please try again.");
-    } catch {
-      alert("Connection error. Please try again.");
-    }
+    } catch { alert("Connection error. Please try again."); }
     setProLoading(false);
   };
 
@@ -241,10 +310,9 @@ export default function AppShowcase({
     <>
       <div className="min-h-screen bg-[#0a0a0a] flex">
         {/* Left: Preview */}
-        <div className="flex-1 flex items-center justify-center p-8">
+        <div className="flex-1 flex items-center justify-center p-8 overflow-auto">
           <div className="w-full max-w-3xl">
-            {/* The actual card to capture */}
-            <div ref={captureRef} className="rounded-2xl overflow-hidden shadow-2xl border border-white/[0.06]">
+            <div ref={captureRef} className="rounded-3xl overflow-hidden shadow-2xl border border-white/[0.06]">
               <ShowcaseCard
                 app={app}
                 theme={currentTheme}
@@ -252,17 +320,26 @@ export default function AppShowcase({
                 showScreenshots={showScreenshots}
                 showRating={showRating}
                 showMeta={showMeta}
+                showQR={showQR}
                 screenshotIndex={screenshotIndex}
+                phoneCount={phoneCount}
+                fontFamily={FONTS[currentFont].css}
+                aspectRatio={aspectRatio}
+                tagline={tagline}
+                qrDataUrl={qrDataUrl}
+                customAppName={customAppName}
+                customDeveloper={customDeveloper}
+                isPro={isPro}
               />
             </div>
           </div>
         </div>
 
-        {/* Right: Controls panel */}
-        <div className="w-[320px] shrink-0 bg-[#111] border-l border-white/[0.06] p-6 overflow-y-auto flex flex-col gap-6">
+        {/* Right: Controls */}
+        <div className="w-[320px] shrink-0 bg-[#111] border-l border-white/[0.06] p-5 overflow-y-auto flex flex-col gap-5">
           {/* Theme */}
           <div>
-            <label className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3 block">Theme</label>
+            <SectionLabel>Theme</SectionLabel>
             <div className="grid grid-cols-5 gap-2">
               {(Object.keys(THEMES) as ThemeKey[]).map((key) => (
                 <button
@@ -278,41 +355,81 @@ export default function AppShowcase({
             </div>
           </div>
 
-          {/* Toggles */}
+          {/* Aspect Ratio */}
           <div>
-            <label className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3 block">Elements</label>
-            <div className="space-y-2">
-              {[
-                { label: "Screenshots", value: showScreenshots, set: setShowScreenshots },
-                { label: "Description", value: showDescription, set: setShowDescription },
-                { label: "Rating", value: showRating, set: setShowRating },
-                { label: "Meta info", value: showMeta, set: setShowMeta },
-              ].map((toggle) => (
+            <SectionLabel>Aspect Ratio</SectionLabel>
+            <div className="grid grid-cols-4 gap-1.5">
+              {ASPECTS.map((a) => (
                 <button
-                  key={toggle.label}
-                  onClick={() => toggle.set(!toggle.value)}
-                  className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] transition-all cursor-pointer"
+                  key={a.id}
+                  onClick={() => setAspectRatio(a.ratio)}
+                  className={`py-2 px-1 rounded-lg text-center transition-all cursor-pointer ${
+                    aspectRatio === a.ratio
+                      ? "bg-white text-black"
+                      : "bg-white/[0.04] text-white/50 hover:bg-white/[0.08]"
+                  }`}
                 >
-                  <span className="text-sm text-white/70">{toggle.label}</span>
-                  <div className={`w-9 h-5 rounded-full transition-all relative ${toggle.value ? "bg-white" : "bg-white/10"}`}>
-                    <div className={`absolute top-0.5 w-4 h-4 rounded-full transition-all ${toggle.value ? "right-0.5 bg-black" : "left-0.5 bg-white/30"}`} />
-                  </div>
+                  <div className="text-xs font-semibold">{a.label}</div>
+                  <div className="text-[10px] opacity-60">{a.desc}</div>
                 </button>
               ))}
             </div>
           </div>
 
+          {/* Font */}
+          <div>
+            <SectionLabel>Font</SectionLabel>
+            <div className="grid grid-cols-2 gap-1.5">
+              {FONTS.map((f, i) => (
+                <button
+                  key={f.id}
+                  onClick={() => setCurrentFont(i)}
+                  className={`py-2 px-3 rounded-lg text-sm transition-all cursor-pointer ${
+                    currentFont === i
+                      ? "bg-white text-black"
+                      : "bg-white/[0.04] text-white/50 hover:bg-white/[0.08]"
+                  }`}
+                  style={{ fontFamily: f.css }}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Phone count */}
+          {showScreenshots && (
+            <div>
+              <SectionLabel>Phones</SectionLabel>
+              <div className="grid grid-cols-3 gap-1.5">
+                {[1, 2, 3].map((n) => (
+                  <button
+                    key={n}
+                    onClick={() => setPhoneCount(n)}
+                    className={`py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+                      phoneCount === n
+                        ? "bg-white text-black"
+                        : "bg-white/[0.04] text-white/50 hover:bg-white/[0.08]"
+                    }`}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Screenshot selector */}
           {showScreenshots && app.screenshotUrls.length > 2 && (
             <div>
-              <label className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3 block">Screenshot</label>
-              <div className="flex gap-2 overflow-x-auto pb-2">
-                {app.screenshotUrls.slice(0, 6).map((url, i) => (
+              <SectionLabel>Start from</SectionLabel>
+              <div className="flex gap-1.5 overflow-x-auto pb-1">
+                {app.screenshotUrls.slice(0, 8).map((url, i) => (
                   <button
                     key={i}
                     onClick={() => setScreenshotIndex(i)}
-                    className={`shrink-0 w-12 h-24 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
-                      screenshotIndex === i ? "border-white" : "border-white/10 opacity-50 hover:opacity-80"
+                    className={`shrink-0 w-10 h-20 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+                      screenshotIndex === i ? "border-white" : "border-white/10 opacity-40 hover:opacity-70"
                     }`}
                   >
                     <img src={url} alt="" className="w-full h-full object-cover" />
@@ -322,11 +439,56 @@ export default function AppShowcase({
             </div>
           )}
 
+          {/* Content */}
+          <div>
+            <SectionLabel>Content</SectionLabel>
+            <div className="space-y-2">
+              <input
+                type="text"
+                value={customAppName}
+                onChange={(e) => setCustomAppName(e.target.value)}
+                placeholder={app.trackName}
+                className="w-full px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20"
+              />
+              <input
+                type="text"
+                value={customDeveloper}
+                onChange={(e) => setCustomDeveloper(e.target.value)}
+                placeholder={app.developerName}
+                className="w-full px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20"
+              />
+            </div>
+          </div>
+
+          {/* Tagline */}
+          <div>
+            <SectionLabel>Custom tagline</SectionLabel>
+            <input
+              type="text"
+              value={tagline}
+              onChange={(e) => setTagline(e.target.value)}
+              placeholder="e.g. Just launched! 🚀"
+              className="w-full px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20"
+            />
+          </div>
+
+          {/* Toggles */}
+          <div>
+            <SectionLabel>Elements</SectionLabel>
+            <div className="space-y-1.5">
+              <Toggle label="Screenshots" value={showScreenshots} onChange={setShowScreenshots} />
+              <Toggle label="Description" value={showDescription} onChange={setShowDescription} />
+              <Toggle label="Rating" value={showRating} onChange={setShowRating} />
+              <Toggle label="Meta info" value={showMeta} onChange={setShowMeta} />
+              <Toggle label="QR Code" value={showQR} onChange={setShowQR} />
+            </div>
+          </div>
+
           {/* Spacer */}
           <div className="flex-1" />
 
           {/* Download */}
-          <div className="space-y-3">
+          <div className="space-y-2.5 pt-4 border-t border-white/[0.06]">
             <button
               onClick={handleDownload}
               disabled={downloading}
@@ -334,8 +496,7 @@ export default function AppShowcase({
             >
               {downloading ? (
                 <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <circle cx="12" cy="12" r="10" strokeOpacity="0.25" />
-                  <path d="M12 2a10 10 0 019.95 9" />
+                  <circle cx="12" cy="12" r="10" strokeOpacity="0.25" /><path d="M12 2a10 10 0 019.95 9" />
                 </svg>
               ) : (
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

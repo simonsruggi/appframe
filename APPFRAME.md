@@ -52,7 +52,10 @@ public/
 - **App search:** Search iTunes API by name or paste App Store URL/ID
 - **Showcase generation:** 5 themes (noir, cosmic, ocean, ember, arctic) with phone mockups
 - **Download:** html2canvas-pro renders the showcase to PNG at 2x scale
-- **Watermark:** Free users get a small "appfra.me" watermark; Pro removes it
+- **Watermark:** Free users get a large "@AppFrame" watermark centered on the card (low opacity, -15deg rotation), rendered inside the DOM so it appears in both preview and download. Pro removes it.
+- **Editable fields:** App name and Developer name are customizable via text inputs in the right sidebar "Content" section
+- **Examples carousel:** Homepage shows a horizontal scroll-snap carousel of 5 popular app mini-previews (WhatsApp, Instagram, Spotify, Notion, Duolingo) between "How it works" and pricing CTA
+- **Card styling:** Showcase card uses rounded-3xl, CSS noise/grain texture overlay, subtle gradient overlay and inner shadow for depth
 - **Pro:** $5 one-time via Stripe, stored as localStorage flag + server verification
 - **SEO:** Full OpenGraph/Twitter cards, dynamic sitemap, per-app OG images (app icon)
 - **Navbar:** Shared across all pages except showcase, with auth state awareness
