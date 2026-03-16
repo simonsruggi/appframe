@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -57,6 +58,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Script
+          defer
+          data-ea-website-id="1s8sflsqam2"
+          data-ea-domain="appfra.me"
+          data-ea-track-accuracy="most accurate"
+          src="https://pure-analytics.com/tracking/utilities/script.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
