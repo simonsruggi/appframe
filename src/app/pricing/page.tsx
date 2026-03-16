@@ -34,16 +34,13 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-[#080808] relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-blue-900/10" />
-      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-purple-600/5 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-[120px]" />
+      <div className="absolute inset-0 bg-[#080808]" />
+      <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-white/[0.015] rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-white/[0.01] rounded-full blur-[120px]" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 py-20">
+      <div className="relative z-10 max-w-4xl mx-auto px-4 pt-24 pb-20">
         {/* Header */}
         <div className="text-center mb-16">
-          <Link href="/" className="inline-block mb-8 text-white/40 hover:text-white/60 text-sm transition-colors">
-            &larr; Back to AppFrame
-          </Link>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             Simple pricing
           </h1>
@@ -85,11 +82,11 @@ export default function PricingPage() {
           </div>
 
           {/* Pro */}
-          <div className="rounded-3xl bg-gradient-to-b from-amber-500/[0.08] to-orange-500/[0.04] border border-amber-500/20 p-8 relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white text-xs font-semibold">
+          <div className="rounded-3xl bg-white/[0.05] border border-white/[0.12] p-8 relative">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white text-black text-xs font-semibold">
               Recommended
             </div>
-            <p className="text-amber-300/70 text-sm font-medium uppercase tracking-wider mb-4">Pro</p>
+            <p className="text-white/70 text-sm font-medium uppercase tracking-wider mb-4">Pro</p>
             <div className="flex items-baseline gap-1 mb-1">
               <span className="text-4xl font-bold text-white">$5</span>
             </div>
@@ -102,7 +99,7 @@ export default function PricingPage() {
                 "Lifetime access",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-white/80">
-                  <svg className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg className="w-4 h-4 text-white mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 6L9 17l-5-5" />
                   </svg>
                   {item}
@@ -111,7 +108,7 @@ export default function PricingPage() {
             </ul>
             <Link
               href="/"
-              className="block w-full text-center py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm hover:from-amber-400 hover:to-orange-400 transition-all"
+              className="block w-full text-center py-3.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all"
             >
               Search an app to get started
             </Link>

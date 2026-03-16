@@ -16,7 +16,7 @@ Server-side Next.js App Router app. The homepage is a client component with sear
 src/
   app/
     page.tsx              # Homepage — hero, search, how-it-works, pricing link
-    layout.tsx            # Root layout with comprehensive SEO metadata
+    layout.tsx            # Root layout with Navbar, SEO metadata, analytics
     globals.css           # Tailwind + custom animations
     sitemap.ts            # Dynamic sitemap (/, /login, /pricing)
     not-found.tsx         # Custom 404 page
@@ -33,9 +33,19 @@ src/
       verify/route.ts     # Verify Stripe payment status
   auth.ts                 # NextAuth config
   middleware.ts           # Route protection middleware
+  components/
+    Navbar.tsx            # Shared navbar (client component, session-aware, hidden on /app/*)
 public/
+  logo.svg               # Monochrome logo (white bg, dark frame)
+  favicon.svg            # Monochrome favicon
   robots.txt              # Allows all, sitemap link
 ```
+
+## Design
+
+- **Color scheme:** Monochrome — black (#080808) backgrounds, white text, grey (zinc) accents. No purple/blue gradients on marketing pages.
+- **Navbar:** Fixed top, dark translucent bg with backdrop blur, border-b. Shows on all pages EXCEPT /app/[id] showcase pages (they have their own controls bar). Contains logo + "AppFrame", nav links (Home, Pricing), and login/user avatar button.
+- **Buttons:** White on black (primary) or ghost style (bg-white/[0.04] border).
 
 ## Key Features
 
@@ -45,10 +55,24 @@ public/
 - **Watermark:** Free users get a small "appfra.me" watermark; Pro removes it
 - **Pro:** $5 one-time via Stripe, stored as localStorage flag + server verification
 - **SEO:** Full OpenGraph/Twitter cards, dynamic sitemap, per-app OG images (app icon)
+- **Navbar:** Shared across all pages except showcase, with auth state awareness
 
-## Themes
+## Themes (AppShowcase only)
 
-noir, cosmic, ocean, ember (dark), arctic (light)
+noir, cosmic, ocean, ember (dark), arctic (light) — these are user-selectable in the showcase component and are NOT affected by the monochrome marketing design.
+
+## Auth Flow
+
+1. Middleware redirects unauthenticated users from /app/* to /login
+2. /login uses server action to call signIn("google")
+3. Logged-in users redirected away from /login to /
+
+## Pro Flow
+
+1. User clicks "Buy Pro" in AppShowcase -> POST /api/checkout -> Stripe checkout
+2. Success redirect to /pro/success?session_id=...
+3. /pro/success calls POST /api/verify to confirm payment
+4. Pro status stored in localStorage (appframe_pro, appframe_email)
 
 ## Environment Variables
 

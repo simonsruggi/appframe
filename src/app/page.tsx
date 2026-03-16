@@ -65,16 +65,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-[#080808]" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.02] rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/[0.015] rounded-full blur-3xl" />
 
       {/* Hero + Search */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-28 pb-16">
         <div className="w-full max-w-2xl text-center">
           <div className="animate-fade-in">
-            <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
+            <h1 className="text-6xl font-bold mb-4 text-white">
               AppFrame
             </h1>
             <p className="text-zinc-300 text-xl mb-2">
@@ -92,12 +92,12 @@ export default function Home() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Paste App Store URL or search by name..."
-                className="flex-1 px-5 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-lg focus:outline-none focus:border-purple-500/50 focus:bg-white/10 transition-all"
+                className="flex-1 px-5 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-lg focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="px-8 py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold text-lg hover:from-purple-500 hover:to-blue-500 transition-all disabled:opacity-50 cursor-pointer"
+                className="px-8 py-4 rounded-2xl bg-white text-black font-semibold text-lg hover:bg-white/90 transition-all disabled:opacity-50 cursor-pointer"
               >
                 {loading ? "..." : "Go"}
               </button>
@@ -111,7 +111,7 @@ export default function Home() {
                 <button
                   key={app.trackId}
                   onClick={() => router.push(`/app/${app.trackId}`)}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-500/30 transition-all text-left cursor-pointer"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-left cursor-pointer"
                 >
                   <img
                     src={app.artworkUrl512}
@@ -185,10 +185,10 @@ export default function Home() {
               key={item.step}
               className="text-center p-6 rounded-3xl bg-white/[0.02] border border-white/[0.05]"
             >
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-purple-500/10 flex items-center justify-center mx-auto mb-4 text-purple-300">
+              <div className="w-12 h-12 rounded-2xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center mx-auto mb-4 text-zinc-300">
                 {item.icon}
               </div>
-              <p className="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-2">
+              <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
                 Step {item.step}
               </p>
               <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
@@ -205,7 +205,7 @@ export default function Home() {
         </p>
         <Link
           href="/pricing"
-          className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 text-sm font-medium transition-colors"
+          className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors"
         >
           See pricing for Pro
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
