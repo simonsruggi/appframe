@@ -14,14 +14,16 @@ export async function POST() {
     const email = session.user.email;
 
     // Check if already paid
-    const sessions = await stripe.checkout.sessions.list({
-      customer_details: { email },
-      status: "complete",
-      limit: 1,
-    });
-
-    if (sessions.data.length > 0) {
-      return NextResponse.json({ alreadyPro: true });
+    try {
+      const sessions = await stripe.checkout.sessions.list({ limit: 100 });
+      const alreadyPaid = sessions.data.some(
+        (s) => s.payment_status === "paid" && s.customer_details?.email?.toLowerCase() === email.toLowerCase()
+      );
+      if (alreadyPaid) {
+        return NextResponse.json({ alreadyPro: true });
+      }
+    } catch {
+      // Continue to checkout if check fails
     }
 
     const checkoutSession = await stripe.checkout.sessions.create({

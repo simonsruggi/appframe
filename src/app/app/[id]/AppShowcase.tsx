@@ -214,14 +214,26 @@ export default function AppShowcase({
     try {
       const res = await fetch("/api/checkout", { method: "POST" });
       const data = await res.json();
+      if (res.status === 401) {
+        // Not authenticated, redirect to login
+        window.location.href = "/login";
+        return;
+      }
       if (data.alreadyPro) {
         localStorage.setItem("appframe_pro", "true");
         setIsPro(true);
         setShowProModal(false);
+        setProLoading(false);
         return;
       }
-      if (data.url) window.location.href = data.url;
-    } catch { /* ignore */ }
+      if (data.url) {
+        window.location.href = data.url;
+        return;
+      }
+      alert("Something went wrong. Please try again.");
+    } catch {
+      alert("Connection error. Please try again.");
+    }
     setProLoading(false);
   };
 
