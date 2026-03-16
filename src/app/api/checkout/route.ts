@@ -30,12 +30,12 @@ export async function POST() {
       line_items: [
         {
           price_data: {
-            currency: "eur",
+            currency: "usd",
             product_data: {
               name: "AppFrame Pro",
-              description: "Lifetime access — no watermark on downloads",
+              description: "One-time payment — no watermark, high-res exports forever",
             },
-            unit_amount: 300,
+            unit_amount: 500,
           },
           quantity: 1,
         },

@@ -408,8 +408,7 @@ export default function AppShowcase({
             <p className="text-white/40 text-sm mb-5">Clean downloads, no watermark. Forever.</p>
 
             <div className="flex items-baseline gap-1 mb-6">
-              <span className="text-3xl font-bold text-white">3</span>
-              <span className="text-lg font-semibold text-white/50">EUR</span>
+              <span className="text-3xl font-bold text-white">$5</span>
               <span className="text-white/30 text-sm ml-2">one-time</span>
             </div>
 
@@ -418,7 +417,7 @@ export default function AppShowcase({
               disabled={proLoading}
               className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm hover:from-amber-400 hover:to-orange-400 transition-all cursor-pointer disabled:opacity-50"
             >
-              {proLoading ? "Redirecting to Stripe..." : "Unlock Pro — 3 EUR"}
+              {proLoading ? "Redirecting to Stripe..." : "Unlock Pro — $5"}
             </button>
           </div>
         </div>

@@ -50,12 +50,28 @@ export async function generateMetadata(
   const app = await getAppData(id, "us");
   if (!app) return { title: "App Not Found — AppFrame" };
 
+  const description = `${app.trackName} by ${app.developerName}. ${app.description?.slice(0, 120)}...`;
+
   return {
-    title: `${app.trackName} — AppFrame`,
-    description: `${app.trackName} by ${app.developerName}. ${app.description?.slice(0, 120)}...`,
+    title: `${app.trackName}`,
+    description,
     openGraph: {
       title: `${app.trackName} — AppFrame`,
-      description: `${app.trackName} by ${app.developerName}`,
+      description,
+      images: [
+        {
+          url: app.artworkUrl512,
+          width: 512,
+          height: 512,
+          alt: `${app.trackName} app icon`,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${app.trackName} — AppFrame`,
+      description,
       images: [app.artworkUrl512],
     },
   };

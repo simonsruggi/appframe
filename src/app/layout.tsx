@@ -13,8 +13,37 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AppFrame — Beautiful App Store Showcases",
-  description: "Generate stunning showcase images for your iOS apps. Share your app launches with style.",
+  metadataBase: new URL("https://appfra.me"),
+  title: {
+    default: "AppFrame — Beautiful App Store Showcases",
+    template: "%s | AppFrame",
+  },
+  description:
+    "Generate stunning showcase images for your iOS apps. Share app launches on social media with beautiful, ready-to-post visuals.",
+  keywords: [
+    "app showcase",
+    "app store screenshot",
+    "ios app promotion",
+    "app launch",
+    "indie dev tools",
+    "app store marketing",
+    "app promo image",
+  ],
+  openGraph: {
+    siteName: "AppFrame",
+    locale: "en_US",
+    type: "website",
+    title: "AppFrame — Beautiful App Store Showcases",
+    description:
+      "Generate stunning showcase images for your iOS apps. Share app launches on social media with beautiful, ready-to-post visuals.",
+    url: "https://appfra.me",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AppFrame — Beautiful App Store Showcases",
+    description:
+      "Generate stunning showcase images for your iOS apps. Share app launches on social media with beautiful, ready-to-post visuals.",
+  },
 };
 
 export default function RootLayout({
