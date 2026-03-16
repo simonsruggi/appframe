@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { AppData } from "./api/app/route";
@@ -11,29 +11,56 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const router = useRouter();
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
-  const handleSearch = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!query.trim()) return;
+  const doSearch = useCallback(async (q: string) => {
+    if (!q.trim()) {
+      setResults([]);
+      setSearched(false);
+      return;
+    }
 
     // If it's a direct URL or ID, go straight to showcase
-    const isDirectId = /^\d+$/.test(query.trim()) || query.includes("apps.apple.com");
+    const isDirectId = /^\d+$/.test(q.trim()) || q.includes("apps.apple.com");
     if (isDirectId) {
-      const idMatch = query.match(/\/id(\d+)/) || [null, query.trim()];
+      const idMatch = q.match(/\/id(\d+)/) || [null, q.trim()];
       router.push(`/app/${idMatch[1]}`);
       return;
     }
 
+    // Abort previous request
+    if (abortRef.current) abortRef.current.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
+
     setLoading(true);
     setSearched(true);
     try {
-      const res = await fetch(`/api/app?q=${encodeURIComponent(query)}`);
+      const res = await fetch(`/api/app?q=${encodeURIComponent(q)}`, { signal: controller.signal });
       const data = await res.json();
       setResults(data.results || []);
-    } catch {
-      setResults([]);
+    } catch (err) {
+      if ((err as Error).name !== "AbortError") setResults([]);
     }
     setLoading(false);
+  }, [router]);
+
+  // Debounced live search on typing
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (query.trim().length < 2) {
+      setResults([]);
+      setSearched(false);
+      return;
+    }
+    debounceRef.current = setTimeout(() => doSearch(query), 350);
+    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
+  }, [query, doSearch]);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    doSearch(query);
   };
 
   return (
