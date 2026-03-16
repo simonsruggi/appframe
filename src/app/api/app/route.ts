@@ -86,8 +86,9 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ app: mapApp(data.results[0]) });
     }
 
-    // Search across multiple stores in parallel to find more results
-    const stores = [country, ...(country !== "us" ? ["us"] : []), ...(country !== "it" ? ["it"] : []), ...(country !== "gb" ? ["gb"] : [])];
+    // Search across multiple stores in parallel for broader coverage
+    const baseStores = ["us", "gb", "de", "fr", "it", "es", "br", "jp", "kr", "au", "ca", "in"];
+    const stores = [country, ...baseStores];
     const uniqueStores = [...new Set(stores)];
 
     const allResults = await Promise.all(
