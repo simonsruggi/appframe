@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="140" y1="140" x2="372" y2="372" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#e0e7ff" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded square background -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- Inner frame (rounded rect outline) -->
+  <rect x="120" y="120" width="272" height="272" rx="40" stroke="url(#frame)" stroke-width="28" fill="none"/>
+  <!-- Small app icon square inside -->
+  <rect x="200" y="200" width="112" height="112" rx="24" fill="white" fill-opacity="0.9"/>
+  <!-- Corner accents - top left -->
+  <circle cx="120" cy="120" r="8" fill="white" fill-opacity="0.6"/>
+  <!-- Corner accents - top right -->
+  <circle cx="392" cy="120" r="8" fill="white" fill-opacity="0.6"/>
+  <!-- Corner accents - bottom left -->
+  <circle cx="120" cy="392" r="8" fill="white" fill-opacity="0.6"/>
+  <!-- Corner accents - bottom right -->
+  <circle cx="392" cy="392" r="8" fill="white" fill-opacity="0.6"/>
+</svg>

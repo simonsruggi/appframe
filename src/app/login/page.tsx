@@ -5,9 +5,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-[#080808] flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="bg-white/[0.03] border border-white/[0.06] rounded-3xl p-8 text-center">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center mx-auto mb-3">
-            <span className="text-white font-bold text-xl">A</span>
-          </div>
+          <img src="/logo.svg" alt="AppFrame" className="w-14 h-14 mx-auto mb-3" />
           <p className="text-lg font-bold bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent mb-6">
             AppFrame
           </p>

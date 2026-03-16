@@ -30,6 +30,9 @@ export const metadata: Metadata = {
     "app store marketing",
     "app promo image",
   ],
+  icons: {
+    icon: "/favicon.svg",
+  },
   openGraph: {
     siteName: "AppFrame",
     locale: "en_US",
