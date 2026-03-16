@@ -48,48 +48,81 @@ export async function GET(request: NextRequest) {
 
   try {
     const appId = extractAppId(query);
-    let url: string;
 
-    if (appId) {
-      url = `https://itunes.apple.com/lookup?id=${appId}&country=${country}`;
-    } else {
-      url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&country=${country}&entity=software&limit=6`;
+    function mapApp(app: Record<string, unknown>): AppData {
+      return {
+        trackId: app.trackId as number,
+        trackName: app.trackName as string,
+        artworkUrl512: (app.artworkUrl512 as string) || (app.artworkUrl100 as string)?.replace("100x100", "512x512"),
+        screenshotUrls: (app.screenshotUrls as string[]) || [],
+        ipadScreenshotUrls: (app.ipadScreenshotUrls as string[]) || [],
+        description: app.description as string,
+        developerName: app.artistName as string,
+        price: app.price as number,
+        formattedPrice: app.formattedPrice as string,
+        averageUserRating: (app.averageUserRating as number) || 0,
+        userRatingCount: (app.userRatingCount as number) || 0,
+        primaryGenreName: app.primaryGenreName as string,
+        genres: (app.genres as string[]) || [],
+        version: app.version as string,
+        releaseNotes: (app.releaseNotes as string) || "",
+        contentAdvisoryRating: app.contentAdvisoryRating as string,
+        fileSizeBytes: app.fileSizeBytes as string,
+        trackViewUrl: app.trackViewUrl as string,
+        sellerName: app.sellerName as string,
+        bundleId: app.bundleId as string,
+        minimumOsVersion: app.minimumOsVersion as string,
+        releaseDate: app.releaseDate as string,
+        currentVersionReleaseDate: app.currentVersionReleaseDate as string,
+      };
     }
 
-    const res = await fetch(url, { next: { revalidate: 3600 } });
-    const data = await res.json();
+    if (appId) {
+      const res = await fetch(`https://itunes.apple.com/lookup?id=${appId}&country=${country}`, { next: { revalidate: 3600 } });
+      const data = await res.json();
+      if (!data.results?.length) {
+        return NextResponse.json({ error: "App not found" }, { status: 404 });
+      }
+      return NextResponse.json({ app: mapApp(data.results[0]) });
+    }
 
-    if (!data.results || data.results.length === 0) {
+    // Search across multiple stores in parallel to find more results
+    const stores = [country, ...(country !== "us" ? ["us"] : []), ...(country !== "it" ? ["it"] : []), ...(country !== "gb" ? ["gb"] : [])];
+    const uniqueStores = [...new Set(stores)];
+
+    const allResults = await Promise.all(
+      uniqueStores.map(async (c) => {
+        try {
+          const res = await fetch(
+            `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&country=${c}&entity=software&limit=6`,
+            { next: { revalidate: 3600 } }
+          );
+          const data = await res.json();
+          return (data.results || []) as Record<string, unknown>[];
+        } catch {
+          return [];
+        }
+      })
+    );
+
+    // Merge and deduplicate by trackId
+    const seen = new Set<number>();
+    const apps: AppData[] = [];
+    for (const results of allResults) {
+      for (const app of results) {
+        const id = app.trackId as number;
+        if (!seen.has(id)) {
+          seen.add(id);
+          apps.push(mapApp(app));
+        }
+      }
+    }
+
+    if (apps.length === 0) {
       return NextResponse.json({ error: "App not found" }, { status: 404 });
     }
 
-    const apps: AppData[] = data.results.map((app: Record<string, unknown>) => ({
-      trackId: app.trackId,
-      trackName: app.trackName,
-      artworkUrl512: (app.artworkUrl512 as string) || (app.artworkUrl100 as string)?.replace("100x100", "512x512"),
-      screenshotUrls: app.screenshotUrls || [],
-      ipadScreenshotUrls: app.ipadScreenshotUrls || [],
-      description: app.description,
-      developerName: app.artistName,
-      price: app.price,
-      formattedPrice: app.formattedPrice,
-      averageUserRating: app.averageUserRating || 0,
-      userRatingCount: app.userRatingCount || 0,
-      primaryGenreName: app.primaryGenreName,
-      genres: app.genres || [],
-      version: app.version,
-      releaseNotes: app.releaseNotes || "",
-      contentAdvisoryRating: app.contentAdvisoryRating,
-      fileSizeBytes: app.fileSizeBytes,
-      trackViewUrl: app.trackViewUrl,
-      sellerName: app.sellerName,
-      bundleId: app.bundleId,
-      minimumOsVersion: app.minimumOsVersion,
-      releaseDate: app.releaseDate,
-      currentVersionReleaseDate: app.currentVersionReleaseDate,
-    }));
-
-    return NextResponse.json(appId ? { app: apps[0] } : { results: apps });
+    return NextResponse.json({ results: apps.slice(0, 12) });
   } catch {
     return NextResponse.json({ error: "Failed to fetch app data" }, { status: 500 });
   }
