@@ -1,0 +1,78 @@
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { AppData } from "../../api/app/route";
+import AppShowcase from "./AppShowcase";
+
+async function getAppData(id: string, country: string): Promise<AppData | null> {
+  try {
+    const res = await fetch(
+      `https://itunes.apple.com/lookup?id=${id}&country=${country}`,
+      { next: { revalidate: 3600 } }
+    );
+    const data = await res.json();
+    if (!data.results || data.results.length === 0) return null;
+
+    const app = data.results[0];
+    return {
+      trackId: app.trackId,
+      trackName: app.trackName,
+      artworkUrl512: app.artworkUrl512 || app.artworkUrl100?.replace("100x100", "512x512"),
+      screenshotUrls: app.screenshotUrls || [],
+      ipadScreenshotUrls: app.ipadScreenshotUrls || [],
+      description: app.description,
+      developerName: app.artistName,
+      price: app.price,
+      formattedPrice: app.formattedPrice,
+      averageUserRating: app.averageUserRating || 0,
+      userRatingCount: app.userRatingCount || 0,
+      primaryGenreName: app.primaryGenreName,
+      genres: app.genres || [],
+      version: app.version,
+      releaseNotes: app.releaseNotes || "",
+      contentAdvisoryRating: app.contentAdvisoryRating,
+      fileSizeBytes: app.fileSizeBytes,
+      trackViewUrl: app.trackViewUrl,
+      sellerName: app.sellerName,
+      bundleId: app.bundleId,
+      minimumOsVersion: app.minimumOsVersion,
+      releaseDate: app.releaseDate,
+      currentVersionReleaseDate: app.currentVersionReleaseDate,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ id: string }> }
+): Promise<Metadata> {
+  const { id } = await params;
+  const app = await getAppData(id, "us");
+  if (!app) return { title: "App Not Found — AppShot" };
+
+  return {
+    title: `${app.trackName} — AppShot`,
+    description: `${app.trackName} by ${app.developerName}. ${app.description?.slice(0, 120)}...`,
+    openGraph: {
+      title: `${app.trackName} — AppShot`,
+      description: `${app.trackName} by ${app.developerName}`,
+      images: [app.artworkUrl512],
+    },
+  };
+}
+
+export default async function AppPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ theme?: string; color?: string; country?: string }>;
+}) {
+  const { id } = await params;
+  const { theme, color, country } = await searchParams;
+  const app = await getAppData(id, country || "us");
+
+  if (!app) notFound();
+
+  return <AppShowcase app={app} theme={theme || "midnight"} accentColor={color || "purple"} />;
+}
