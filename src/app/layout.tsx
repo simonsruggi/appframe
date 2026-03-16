@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AppShot — Beautiful App Store Showcases",
+  title: "AppFrame — Beautiful App Store Showcases",
   description: "Generate stunning showcase images for your iOS apps. Share your app launches with style.",
 };
 

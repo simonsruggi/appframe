@@ -9,7 +9,7 @@ export default function LoginPage() {
             <span className="text-white font-bold text-xl">A</span>
           </div>
 
-          <h1 className="text-2xl font-bold text-white mb-2">Login to AppShot</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">Login to AppFrame</h1>
           <p className="text-white/40 text-sm mb-8">Sign in to create your app showcase</p>
 
           <form

@@ -48,13 +48,13 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { id } = await params;
   const app = await getAppData(id, "us");
-  if (!app) return { title: "App Not Found — AppShot" };
+  if (!app) return { title: "App Not Found — AppFrame" };
 
   return {
-    title: `${app.trackName} — AppShot`,
+    title: `${app.trackName} — AppFrame`,
     description: `${app.trackName} by ${app.developerName}. ${app.description?.slice(0, 120)}...`,
     openGraph: {
-      title: `${app.trackName} — AppShot`,
+      title: `${app.trackName} — AppFrame`,
       description: `${app.trackName} by ${app.developerName}`,
       images: [app.artworkUrl512],
     },

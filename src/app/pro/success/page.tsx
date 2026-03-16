@@ -24,8 +24,8 @@ function SuccessContent() {
       .then((r) => r.json())
       .then((data) => {
         if (data.pro) {
-          localStorage.setItem("appshot_pro", "true");
-          localStorage.setItem("appshot_email", data.email || "");
+          localStorage.setItem("appframe_pro", "true");
+          localStorage.setItem("appframe_email", data.email || "");
           setStatus("success");
         } else {
           setStatus("error");
@@ -71,7 +71,7 @@ function SuccessContent() {
           onClick={() => router.push("/")}
           className="px-6 py-3 rounded-full bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all cursor-pointer"
         >
-          Create your first AppShot
+          Create your first AppFrame
         </button>
       </div>
     </div>

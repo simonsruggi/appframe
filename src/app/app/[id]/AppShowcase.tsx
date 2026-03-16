@@ -122,14 +122,14 @@ export default function AppShowcase({
   // Check pro status on mount (localStorage cache + server verify)
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const pro = localStorage.getItem("appshot_pro");
+      const pro = localStorage.getItem("appframe_pro");
       if (pro === "true") {
         setIsPro(true);
       }
       // Also verify with server
       fetch("/api/verify").then(r => r.json()).then(data => {
         if (data.pro) {
-          localStorage.setItem("appshot_pro", "true");
+          localStorage.setItem("appframe_pro", "true");
           setIsPro(true);
         }
       }).catch(() => {});
@@ -167,7 +167,7 @@ export default function AppShowcase({
           ctx.fillStyle = t.watermarkColor;
           ctx.textAlign = "right";
           ctx.textBaseline = "bottom";
-          ctx.fillText("appshot.dev", canvas.width - 24, canvas.height - 16);
+          ctx.fillText("appfra.me", canvas.width - 24, canvas.height - 16);
         }
       }
 
@@ -176,7 +176,7 @@ export default function AppShowcase({
       if (downloadBarEl) downloadBarEl.style.display = "";
 
       const link = document.createElement("a");
-      link.download = `${app.trackName.replace(/[^a-zA-Z0-9]/g, "-")}-appshot.png`;
+      link.download = `${app.trackName.replace(/[^a-zA-Z0-9]/g, "-")}-appframe.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
     } catch (err) {
@@ -193,7 +193,7 @@ export default function AppShowcase({
       const data = await res.json();
 
       if (data.alreadyPro) {
-        localStorage.setItem("appshot_pro", "true");
+        localStorage.setItem("appframe_pro", "true");
         setIsPro(true);
         setShowProModal(false);
         return;
@@ -404,7 +404,7 @@ export default function AppShowcase({
               </svg>
             </div>
 
-            <h2 className="text-2xl font-bold text-white mb-1">AppShot Pro</h2>
+            <h2 className="text-2xl font-bold text-white mb-1">AppFrame Pro</h2>
             <p className="text-white/40 text-sm mb-5">Clean downloads, no watermark. Forever.</p>
 
             <div className="flex items-baseline gap-1 mb-6">

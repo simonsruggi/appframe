@@ -45,7 +45,7 @@ export default function Home() {
       <div className="relative z-10 w-full max-w-2xl text-center">
         <div className="animate-fade-in">
           <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
-            AppShot
+            AppFrame
           </h1>
           <p className="text-zinc-400 text-lg mb-10">
             Generate stunning showcase images for your iOS apps
@@ -100,7 +100,7 @@ export default function Home() {
         )}
 
         <p className="mt-12 text-zinc-600 text-sm animate-fade-in-delay-2">
-          Tip: You can also go directly to <code className="text-zinc-500">appshot.dev/app/APP_ID</code>
+          Tip: You can also go directly to <code className="text-zinc-500">appfra.me/app/APP_ID</code>
         </p>
       </div>
     </div>

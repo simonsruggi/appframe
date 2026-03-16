@@ -32,7 +32,7 @@ export async function POST() {
           price_data: {
             currency: "eur",
             product_data: {
-              name: "AppShot Pro",
+              name: "AppFrame Pro",
               description: "Lifetime access — no watermark on downloads",
             },
             unit_amount: 300,
