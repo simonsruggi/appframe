@@ -55,8 +55,12 @@ const LIGHT_THEMES = new Set(["arctic", "snow", "cream", "mint", "lavender"]);
 
 type ThemeKey = keyof typeof THEMES;
 
-const FREE_THEMES = new Set(["noir", "midnight", "cosmic", "ocean", "arctic"]);
+const FREE_THEME_KEYS = ["noir", "ocean", "ember", "arctic", "snow"];
+const FREE_THEMES = new Set(FREE_THEME_KEYS);
 const FREE_FONTS = 4; // First 4 fonts are free (Geist, Inter, DM Sans, Jakarta)
+
+// Show free themes first, then pro themes
+const THEME_KEYS_SORTED = [...FREE_THEME_KEYS, ...Object.keys(THEMES).filter(k => !FREE_THEMES.has(k))];
 
 const FONTS = [
   { id: "geist", label: "Geist", css: "var(--font-geist-sans), -apple-system, sans-serif", google: "" },
@@ -597,7 +601,7 @@ export default function AppShowcase({
             <SectionLabel>Theme</SectionLabel>
             {/* First row: 8 circles + expand button */}
             <div className="flex items-center gap-2 flex-wrap">
-              {Object.keys(THEMES).slice(0, 8).map((key) => {
+              {THEME_KEYS_SORTED.slice(0, 8).map((key) => {
                 const locked = !isPro && !FREE_THEMES.has(key);
                 return (
                   <button
@@ -628,7 +632,7 @@ export default function AppShowcase({
             {/* Expanded grid */}
             {themesExpanded && (
               <div className="mt-3 grid grid-cols-5 gap-3">
-                {Object.keys(THEMES).map((key) => {
+                {THEME_KEYS_SORTED.map((key) => {
                   const locked = !isPro && !FREE_THEMES.has(key);
                   return (
                     <button
