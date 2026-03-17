@@ -78,10 +78,10 @@ export default function Home() {
               AppFrame
             </h1>
             <p className="text-zinc-300 text-xl mb-2">
-              Beautiful showcase images for your iOS apps
+              Your app got approved. Time to celebrate.
             </p>
             <p className="text-zinc-500 text-base mb-10 max-w-lg mx-auto">
-              Search any app on the App Store, pick a theme, and download a stunning promo image ready for social media, press kits, or your portfolio.
+              Generate a stunning showcase image in seconds. Pick a theme, customize it, and share your launch on social media.
             </p>
           </div>
 
@@ -212,16 +212,16 @@ export default function Home() {
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#080808] to-transparent z-10" />
           <div className="flex gap-6 animate-marquee">
             {[
-              { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", bg: "#0a0015", genre: "Social" },
-              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", bg: "#001020", genre: "Music" },
-              { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", bg: "#080808", genre: "Productivity" },
-              { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", bg: "#120800", genre: "Education" },
-              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", bg: "#0a0015", genre: "Messaging" },
-              { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", bg: "#0a0015", genre: "Social" },
-              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", bg: "#001020", genre: "Music" },
-              { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", bg: "#080808", genre: "Productivity" },
-              { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", bg: "#120800", genre: "Education" },
-              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", bg: "#0a0015", genre: "Messaging" },
+              { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", bg: "#0a0015", genre: "Social", tagline: "Approved! ✅" },
+              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", bg: "#001020", genre: "Music", tagline: "Just launched! 🚀" },
+              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", bg: "#080808", genre: "Messaging", tagline: "Now available" },
+              { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", bg: "#120800", genre: "Productivity", tagline: "10K downloads 🎉" },
+              { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", bg: "#0a0015", genre: "Education", tagline: "v2.0 is here!" },
+              { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", bg: "#0a0015", genre: "Social", tagline: "Approved! ✅" },
+              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", bg: "#001020", genre: "Music", tagline: "Just launched! 🚀" },
+              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", bg: "#080808", genre: "Messaging", tagline: "Now available" },
+              { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", bg: "#120800", genre: "Productivity", tagline: "10K downloads 🎉" },
+              { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", bg: "#0a0015", genre: "Education", tagline: "v2.0 is here!" },
             ].map((ex, i) => (
               <div key={i} className={`shrink-0 ${ex.screenshot ? "w-[480px]" : "w-[300px]"} rounded-3xl overflow-hidden border border-white/[0.06] shadow-2xl`} style={{ backgroundColor: ex.bg }}>
                 <div className={`flex items-center gap-6 p-8 ${!ex.screenshot ? "justify-center" : ""}`}>
@@ -229,6 +229,7 @@ export default function Home() {
                     <div className={`${!ex.screenshot ? "flex justify-center" : ""}`}>
                       <img src={ex.icon} alt={ex.name} className="w-14 h-14 rounded-[12px] shadow-lg mb-3" />
                     </div>
+                    {ex.tagline && <p className="text-white/70 text-sm font-medium mb-1">{ex.tagline}</p>}
                     <h3 className="text-white font-bold text-xl leading-tight">{ex.name}</h3>
                     <p className="text-white/40 text-xs mt-1">{ex.developer}</p>
                     <div className={`flex items-center gap-1 mt-2 ${!ex.screenshot ? "justify-center" : ""}`}>

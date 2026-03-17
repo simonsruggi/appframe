@@ -74,12 +74,12 @@ function StarsRow({ rating, count, theme }: { rating: number; count: number; the
 
 function ShowcaseCard({
   app, theme, showDescription, showScreenshots, showRating, showMeta, showQR, screenshotIndex,
-  phoneCount, fontFamily, aspectRatio, tagline, qrDataUrl, customAppName, customDeveloper, isPro,
+  phoneCount, fontFamily, aspectRatio, tagline, qrDataUrl, customAppName, customDeveloper, isPro, headline,
 }: {
   app: AppData; theme: ThemeKey; showDescription: boolean; showScreenshots: boolean;
   showRating: boolean; showMeta: boolean; showQR: boolean; screenshotIndex: number;
   phoneCount: number; fontFamily: string; aspectRatio: string; tagline: string; qrDataUrl: string;
-  customAppName: string; customDeveloper: string; isPro: boolean;
+  customAppName: string; customDeveloper: string; isPro: boolean; headline: string;
 }) {
   const t = THEMES[theme];
   const isLight = theme === "arctic";
@@ -121,6 +121,10 @@ function ShowcaseCard({
         <div className={`flex items-center gap-10 ${showScreenshots && !isSquare ? "" : "justify-center"} ${isSquare ? "flex-col text-center" : ""}`}>
           {/* App info */}
           <div className={`${showScreenshots && !isSquare ? "max-w-sm" : isSquare ? "max-w-md" : "max-w-lg text-center"}`}>
+            {headline && (
+              <p className={`text-2xl font-bold ${t.text} mb-4 opacity-90`}>{headline}</p>
+            )}
+
             <div className={`mb-4 ${!showScreenshots || isSquare ? "flex justify-center" : ""}`}>
               <img
                 src={app.artworkUrl512}
@@ -238,6 +242,7 @@ export default function AppShowcase({
   const [aspectRatio, setAspectRatio] = useState("16/9");
   const [tagline, setTagline] = useState("");
   const [customAppName, setCustomAppName] = useState("");
+  const [headline, setHeadline] = useState("Approved! ✅");
   const [customDeveloper, setCustomDeveloper] = useState("");
   const [qrDataUrl, setQrDataUrl] = useState("");
   const [downloading, setDownloading] = useState(false);
@@ -349,6 +354,7 @@ export default function AppShowcase({
                 customAppName={customAppName}
                 customDeveloper={customDeveloper}
                 isPro={isPro}
+                headline={headline}
               />
             </div>
           </div>
@@ -458,6 +464,13 @@ export default function AppShowcase({
           <div>
             <SectionLabel>Content</SectionLabel>
             <div className="space-y-2">
+              <input
+                type="text"
+                value={headline}
+                onChange={(e) => setHeadline(e.target.value)}
+                placeholder="e.g. Approved! ✅"
+                className="w-full px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-white text-sm placeholder-white/20 focus:outline-none focus:border-white/20"
+              />
               <input
                 type="text"
                 value={customAppName}
