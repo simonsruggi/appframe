@@ -82,8 +82,15 @@ export default function Navbar() {
                       <p className="text-white text-sm font-medium truncate">{session.user.name}</p>
                     </div>
                     <button
-                      onClick={() => {
-                        fetch("/api/auth/signout", { method: "POST" }).then(() => window.location.href = "/");
+                      onClick={async () => {
+                        const csrfRes = await fetch("/api/auth/csrf");
+                        const { csrfToken } = await csrfRes.json();
+                        await fetch("/api/auth/signout", {
+                          method: "POST",
+                          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                          body: `csrfToken=${csrfToken}`,
+                        });
+                        window.location.href = "/";
                       }}
                       className="w-full px-4 py-2.5 text-left text-sm text-white/50 hover:text-white hover:bg-white/[0.04] transition-all cursor-pointer"
                     >
