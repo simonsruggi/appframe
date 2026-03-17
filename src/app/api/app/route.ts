@@ -113,7 +113,11 @@ export async function GET(request: NextRequest) {
       }
       const app = mapApp(data.results[0]);
       if (app.screenshotUrls.length === 0) {
+        console.log(`[AppFrame] iTunes API returned 0 screenshots for ${app.trackName} (${app.trackId}), scraping App Store...`);
         app.screenshotUrls = await scrapeScreenshots(app.trackId, country);
+        console.log(`[AppFrame] Scraped ${app.screenshotUrls.length} screenshots:`, app.screenshotUrls);
+      } else {
+        console.log(`[AppFrame] iTunes API returned ${app.screenshotUrls.length} screenshots for ${app.trackName} (${app.trackId})`);
       }
       return NextResponse.json({ app });
     }
