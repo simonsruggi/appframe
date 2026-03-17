@@ -188,7 +188,7 @@ function ShowcaseCard({
   // Scale sizes based on aspect ratio
   const iconSize = isCompact ? "w-14 h-14 rounded-[12px]" : "w-20 h-20 rounded-[18px]";
   const titleSize = isCompact ? "text-2xl" : isWide ? "text-3xl" : "text-4xl";
-  const headlineSize = isCompact ? "text-lg" : "text-2xl";
+  const headlineSize = isCompact ? "text-xl" : "text-4xl";
   const maxPhones = isVertical ? 1 : isSquare ? Math.min(phoneCount, 2) : phoneCount;
   const phoneScale = isCompact ? 0.7 : maxPhones >= 3 ? 0.8 : maxPhones >= 2 ? 0.9 : 1;
   const phoneScaleSm = isCompact ? 0.6 : 0.65;
