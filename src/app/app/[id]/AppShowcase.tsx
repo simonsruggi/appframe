@@ -149,14 +149,17 @@ function ShowcaseCard({
   // Auto-scale content to fit card whenever anything changes
   useEffect(() => {
     const recalc = () => {
+      const card = cardRef.current;
       const content = contentRef.current;
       const wrapper = content?.parentElement;
-      if (!content || !wrapper) return;
+      if (!card || !content || !wrapper) return;
       // Reset to natural size to measure
       content.style.transform = "scale(1)";
       requestAnimationFrame(() => {
-        const cw = wrapper.clientWidth;
-        const ch = wrapper.clientHeight;
+        // Use wrapper's content box (excluding padding) as available space
+        const style = getComputedStyle(wrapper);
+        const cw = wrapper.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+        const ch = wrapper.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
         const sw = content.scrollWidth;
         const sh = content.scrollHeight;
         const scale = Math.min(cw / sw, ch / sh, 1);
@@ -219,7 +222,7 @@ function ShowcaseCard({
         </div>
       )}
 
-      <div className={`relative z-10 h-full ${isCompact ? "px-5 py-6 pb-12" : "px-10 py-8 pb-12"}`}>
+      <div className={`relative z-10 h-full overflow-hidden ${isCompact ? "px-5 py-6 pb-12" : "px-10 py-8 pb-12"}`}>
       <div
         ref={contentRef}
         className={`h-full flex items-center justify-center ${isVertical ? "flex-col" : ""}`}
