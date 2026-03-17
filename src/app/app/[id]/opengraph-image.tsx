@@ -119,14 +119,17 @@ export default async function Image({ params }: { params: Promise<{ id: string }
           {/* Headline */}
           <div
             style={{
-              fontSize: 28,
+              fontSize: 22,
               fontWeight: 700,
               color: "white",
               opacity: 0.85,
               marginBottom: 12,
+              lineHeight: 1.4,
             }}
           >
-            Approved! ✅
+            Your app got approved.
+            <br />
+            Time to celebrate!! 🎉
           </div>
 
           {/* Icon */}
