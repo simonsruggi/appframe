@@ -60,16 +60,25 @@ export default function PricingPage() {
             <p className="text-white/30 text-sm mb-8">Free forever</p>
             <ul className="space-y-3 mb-8">
               {[
-                "Unlimited showcase images",
-                "All themes included",
-                "5 beautiful themes",
-                "Small watermark on downloads",
+                { text: "Unlimited showcase images", included: true },
+                { text: "5 themes", included: true },
+                { text: "Basic PNG export", included: true },
+                { text: "Watermark on downloads", included: true },
+                { text: "20+ premium themes", included: false },
+                { text: "No watermark", included: false },
+                { text: "High-resolution export (3x)", included: false },
               ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-white/60">
-                  <svg className="w-4 h-4 text-white/30 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                  {item}
+                <li key={i} className={`flex items-start gap-3 text-sm ${item.included ? "text-white/60" : "text-white/25"}`}>
+                  {item.included ? (
+                    <svg className="w-4 h-4 text-white/30 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  ) : (
+                    <svg className="w-4 h-4 text-white/20 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M18 6L6 18M6 6l12 12" />
+                    </svg>
+                  )}
+                  {item.text}
                 </li>
               ))}
             </ul>
@@ -94,8 +103,10 @@ export default function PricingPage() {
             <ul className="space-y-3 mb-8">
               {[
                 "Everything in Free",
+                "20+ premium themes",
                 "No watermark on downloads",
-                "High-resolution PNG export",
+                "High-resolution PNG export (3x)",
+                "All fonts included",
                 "Lifetime access",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-white/80">

@@ -1,7 +1,23 @@
 import type { MetadataRoute } from "next";
+import { posts } from "./blog/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://appfra.me";
+
+  const blogEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...posts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
 
   return [
     {
@@ -34,5 +50,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.3,
     },
+    ...blogEntries,
   ];
 }
