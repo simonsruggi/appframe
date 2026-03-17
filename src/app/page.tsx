@@ -322,8 +322,8 @@ export default function Home() {
           <div className="flex gap-6 animate-marquee">
             {[
               { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", genre: "Social", tagline: "Approved! ✅" },
-              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", bg: "#001020", genre: "Music", tagline: "Just launched! 🚀" },
-              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", bg: "#080808", genre: "Messaging", tagline: "Now available" },
+              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", bg: "#001020", genre: "Music", tagline: "Just launched! 🚀", text: "white" },
+              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", bg: "#080808", genre: "Messaging", tagline: "Now available", text: "white" },
               { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", genre: "Productivity", tagline: "10K downloads 🎉" },
               { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", genre: "Education", tagline: "v2.0 is here!" },
               { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", genre: "Social", tagline: "Approved! ✅", bg: "#080808", text: "white" },
