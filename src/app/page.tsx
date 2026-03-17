@@ -65,19 +65,71 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background */}
+      {/* Background with floating app icons */}
       <div className="absolute inset-0 bg-[#080808]" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/[0.02] rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/[0.015] rounded-full blur-3xl" />
+      {/* Ambient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-amber-500/[0.04] rounded-full blur-[120px]" />
+      <div className="absolute top-1/4 left-1/5 w-80 h-80 bg-blue-500/[0.03] rounded-full blur-[100px]" />
+      <div className="absolute bottom-1/4 right-1/5 w-80 h-80 bg-purple-500/[0.03] rounded-full blur-[100px]" />
+
+      {/* Floating app icons background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[
+          { icon: "/examples/whatsapp-icon.jpg", top: "8%", left: "5%", size: 56, blur: 2, opacity: 0.15, delay: "0s" },
+          { icon: "/examples/spotify-icon.jpg", top: "15%", right: "8%", size: 48, blur: 3, opacity: 0.12, delay: "0.5s" },
+          { icon: "/examples/telegram-icon.jpg", top: "60%", left: "8%", size: 44, blur: 2, opacity: 0.1, delay: "1s" },
+          { icon: "/examples/notion-icon.jpg", top: "70%", right: "12%", size: 52, blur: 3, opacity: 0.12, delay: "1.5s" },
+          { icon: "/examples/duolingo-icon.jpg", top: "35%", left: "2%", size: 40, blur: 4, opacity: 0.08, delay: "2s" },
+          { icon: "/examples/whatsapp-icon.jpg", top: "25%", right: "3%", size: 36, blur: 4, opacity: 0.08, delay: "0.8s" },
+          { icon: "/examples/spotify-icon.jpg", top: "80%", left: "15%", size: 42, blur: 3, opacity: 0.1, delay: "1.2s" },
+          { icon: "/examples/telegram-icon.jpg", top: "5%", right: "20%", size: 38, blur: 3, opacity: 0.08, delay: "0.3s" },
+          { icon: "/examples/notion-icon.jpg", top: "45%", right: "2%", size: 50, blur: 2, opacity: 0.1, delay: "1.8s" },
+          { icon: "/examples/duolingo-icon.jpg", top: "85%", right: "25%", size: 34, blur: 4, opacity: 0.07, delay: "0.6s" },
+        ].map((item, i) => (
+          <img
+            key={i}
+            src={item.icon}
+            alt=""
+            className="absolute rounded-2xl animate-float"
+            style={{
+              top: item.top,
+              left: item.left,
+              right: item.right,
+              width: item.size,
+              height: item.size,
+              filter: `blur(${item.blur}px)`,
+              opacity: item.opacity,
+              animationDelay: item.delay,
+              animationDuration: `${4 + i * 0.3}s`,
+            } as React.CSSProperties}
+          />
+        ))}
+      </div>
+
+      {/* Sparkle particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-amber-300/40 rounded-full animate-float"
+            style={{
+              top: `${10 + Math.random() * 80}%`,
+              left: `${5 + Math.random() * 90}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Hero + Search */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-28 pb-16">
         <div className="w-full max-w-2xl text-center">
           <div className="animate-fade-in">
-            <h1 className="text-5xl font-bold mb-4 text-white leading-tight">
-              Your app got approved.<br />Time to <span className="relative inline-block"><span className="relative z-10 bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent">celebrate</span><span className="absolute -inset-1 bg-amber-400/15 rounded-lg blur-sm" /></span>.
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight">
+              Your app got approved.<br />Time to <span className="relative inline-block"><span className="relative z-10 bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent">celebrate</span><span className="absolute -inset-2 bg-amber-400/20 rounded-xl blur-md" /></span>.
             </h1>
-            <p className="text-zinc-500 text-base mb-10 max-w-lg mx-auto">
+            <p className="text-zinc-400 text-lg mb-10 max-w-lg mx-auto">
               Generate a stunning showcase image in seconds. Pick a theme, customize it, and share your launch on social media.
             </p>
           </div>
@@ -254,7 +306,7 @@ export default function Home() {
       </div>
 
       {/* CTA / Pricing link */}
-      <div className="relative z-10 text-center px-4 pb-20">
+      <div className="relative z-10 text-center px-4 pb-12">
         <p className="text-zinc-500 text-sm mb-3">
           Free to use with a small watermark.
         </p>
@@ -267,6 +319,15 @@ export default function Home() {
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </Link>
+      </div>
+
+      {/* Footer */}
+      <div className="relative z-10 border-t border-white/[0.06] py-8 text-center">
+        <div className="flex items-center justify-center gap-4 text-xs text-white/25">
+          <Link href="/privacy" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
+          <span>&middot;</span>
+          <Link href="/terms" className="hover:text-white/50 transition-colors">Terms of Service</Link>
+        </div>
       </div>
     </div>
   );

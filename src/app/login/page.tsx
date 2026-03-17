@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { signIn } from "@/auth";
 
 export default function LoginPage() {
@@ -32,6 +33,13 @@ export default function LoginPage() {
               Continue with Google
             </button>
           </form>
+
+          <p className="mt-6 text-[11px] text-white/20">
+            By signing in, you agree to our{" "}
+            <Link href="/terms" className="underline hover:text-white/40 transition-colors">Terms</Link>
+            {" "}and{" "}
+            <Link href="/privacy" className="underline hover:text-white/40 transition-colors">Privacy Policy</Link>.
+          </p>
         </div>
       </div>
     </div>
