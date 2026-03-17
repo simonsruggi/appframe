@@ -253,21 +253,23 @@ export default function Home() {
               { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", bg: "#080808", genre: "Messaging", tagline: "Now available" },
               { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", genre: "Productivity", tagline: "10K downloads 🎉" },
               { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", genre: "Education", tagline: "v2.0 is here!" },
-              { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", genre: "Social", tagline: "Approved! ✅" },
-              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", genre: "Music", tagline: "Just launched! 🚀" },
-              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", genre: "Messaging", tagline: "Now available" },
-              { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", genre: "Productivity", tagline: "10K downloads 🎉" },
-              { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", genre: "Education", tagline: "v2.0 is here!" },
-            ].map((ex, i) => (
-              <div key={i} className={`shrink-0 ${ex.screenshot ? "w-[480px]" : "w-[280px]"} rounded-3xl overflow-hidden bg-white border border-gray-200 shadow-lg`}>
+              { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", genre: "Social", tagline: "Approved! ✅", bg: "#080808", text: "white" },
+              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", genre: "Music", tagline: "Just launched! 🚀", bg: "#0a0015", text: "white" },
+              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", genre: "Messaging", tagline: "Now available", bg: "#001020", text: "white" },
+              { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", genre: "Productivity", tagline: "10K downloads 🎉", bg: "#f8fafb", text: "dark" },
+              { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", genre: "Education", tagline: "v2.0 is here!", bg: "#120800", text: "white" },
+            ].map((ex, i) => {
+              const isDark = ex.text === "white";
+              return (
+              <div key={i} className={`shrink-0 ${ex.screenshot ? "w-[480px]" : "w-[280px]"} rounded-3xl overflow-hidden shadow-lg ${isDark ? "" : "border border-gray-200"}`} style={{ backgroundColor: ex.bg }}>
                 <div className={`flex items-center gap-6 p-7 ${!ex.screenshot ? "justify-center" : ""}`}>
                   <div className={`${ex.screenshot ? "flex-1" : ""} min-w-0 ${!ex.screenshot ? "text-center" : ""}`}>
                     <div className={`${!ex.screenshot ? "flex justify-center" : ""}`}>
                       <img src={ex.icon} alt={ex.name} className="w-14 h-14 rounded-[12px] shadow-md mb-3" />
                     </div>
-                    {ex.tagline && <p className="text-amber-600 text-sm font-medium mb-1">{ex.tagline}</p>}
-                    <h3 className="text-gray-900 font-bold text-xl leading-tight">{ex.name}</h3>
-                    <p className="text-gray-400 text-xs mt-1">{ex.developer}</p>
+                    {ex.tagline && <p className={`text-sm font-medium mb-1 ${isDark ? "text-amber-400" : "text-amber-600"}`}>{ex.tagline}</p>}
+                    <h3 className={`font-bold text-xl leading-tight ${isDark ? "text-white" : "text-gray-900"}`}>{ex.name}</h3>
+                    <p className={`text-xs mt-1 ${isDark ? "text-white/40" : "text-gray-400"}`}>{ex.developer}</p>
                     <div className={`flex items-center gap-1 mt-2 ${!ex.screenshot ? "justify-center" : ""}`}>
                       {[1,2,3,4,5].map(s => (
                         <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
@@ -275,10 +277,10 @@ export default function Home() {
                         </svg>
                       ))}
                     </div>
-                    <span className={`inline-block mt-3 px-2.5 py-1 rounded-full text-[10px] font-medium bg-gray-100 text-gray-500`}>{ex.genre}</span>
+                    <span className={`inline-block mt-3 px-2.5 py-1 rounded-full text-[10px] font-medium ${isDark ? "bg-white/[0.08] text-white/50" : "bg-gray-100 text-gray-500"}`}>{ex.genre}</span>
                   </div>
                   {ex.screenshot && (
-                    <div className="shrink-0 w-[120px] h-[245px] rounded-[24px] bg-gray-200 p-[3px] shadow-lg">
+                    <div className={`shrink-0 w-[120px] h-[245px] rounded-[24px] ${isDark ? "bg-[#1a1a1a]" : "bg-gray-200"} p-[3px] shadow-lg`}>
                       <div className="w-full h-full rounded-[21px] overflow-hidden bg-black relative">
                         <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-[48px] h-[14px] bg-black rounded-full z-10" />
                         <img src={ex.screenshot} alt="" className="w-full h-full object-cover" />
@@ -287,6 +289,8 @@ export default function Home() {
                   )}
                 </div>
               </div>
+              );
+            }
             ))}
           </div>
         </div>
