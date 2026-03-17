@@ -135,6 +135,32 @@ function ShowcaseCard({
   phoneCount: number; fontFamily: string; aspectRatio: string; tagline: string; qrDataUrl: string;
   customAppName: string; customDeveloper: string; isPro: boolean; headline: string;
 }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentScale, setContentScale] = useState(1);
+
+  // Auto-scale content to fit card whenever anything changes
+  useEffect(() => {
+    const recalc = () => {
+      const card = cardRef.current;
+      const content = contentRef.current;
+      if (!card || !content) return;
+      // Reset to natural size to measure
+      content.style.transform = "scale(1)";
+      requestAnimationFrame(() => {
+        const cw = card.clientWidth;
+        const ch = card.clientHeight;
+        const sw = content.scrollWidth;
+        const sh = content.scrollHeight;
+        const scale = Math.min(cw / sw, ch / sh, 1);
+        setContentScale(Math.round(scale * 1000) / 1000);
+      });
+    };
+    recalc();
+    // Also recalc on window resize
+    window.addEventListener("resize", recalc);
+    return () => window.removeEventListener("resize", recalc);
+  }, [aspectRatio, phoneCount, showDescription, showRating, showMeta, showQR, showScreenshots, headline, tagline, customAppName, customDeveloper, fontFamily, theme]);
   const t = THEMES[theme];
   const isLight = LIGHT_THEMES.has(theme);
   const hasScreenshots = showScreenshots && app.screenshotUrls.length > 0;
@@ -151,12 +177,12 @@ function ShowcaseCard({
   const titleSize = isCompact ? "text-2xl" : isWide ? "text-3xl" : "text-4xl";
   const headlineSize = isCompact ? "text-lg" : "text-2xl";
   const maxPhones = isVertical ? 1 : isSquare ? Math.min(phoneCount, 2) : phoneCount;
-  // Scale phones down when multiple are shown to prevent overflow
-  const phoneScale = isCompact ? 0.65 : maxPhones >= 3 ? 0.7 : maxPhones >= 2 ? 0.85 : 1;
-  const phoneScaleSm = isCompact ? 0.55 : 0.6;
+  const phoneScale = isCompact ? 0.7 : maxPhones >= 3 ? 0.8 : maxPhones >= 2 ? 0.9 : 1;
+  const phoneScaleSm = isCompact ? 0.6 : 0.65;
 
   return (
     <div
+      ref={cardRef}
       data-showcase-card
       className="relative overflow-hidden"
       style={{
@@ -176,7 +202,7 @@ function ShowcaseCard({
 
       {/* Watermark for free users */}
       {!isPro && (
-        <div className="absolute inset-0 z-[3] flex items-center justify-center pointer-events-none select-none">
+        <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none select-none">
           <span
             className={`text-sm font-medium ${isLight ? "text-black" : "text-white"}`}
             style={{ opacity: 0.12, letterSpacing: "0.05em" }}
@@ -186,7 +212,11 @@ function ShowcaseCard({
         </div>
       )}
 
-      <div className={`relative z-10 h-full flex items-center justify-center ${isCompact ? "px-4 py-4 pb-10" : "px-8 py-6 pb-10"} ${isVertical ? "flex-col" : ""}`}>
+      <div
+        ref={contentRef}
+        className={`relative z-10 h-full flex items-center justify-center ${isCompact ? "px-4 py-4 pb-10" : "px-8 py-6 pb-10"} ${isVertical ? "flex-col" : ""}`}
+        style={{ transform: `scale(${contentScale})`, transformOrigin: "center center" }}
+      >
         <div className={`flex items-center ${isCompact ? "gap-4" : "gap-10"} ${hasScreenshots && !isCompact ? "" : "justify-center"} ${isCompact ? "flex-col text-center" : ""}`}>
           {/* App info */}
           <div className={`${hasScreenshots && !isCompact ? "max-w-sm" : isCompact ? "max-w-xs" : "max-w-lg text-center"}`}>
@@ -302,22 +332,39 @@ export default function AppShowcase({
 }) {
   const resolvedInitialTheme = initialTheme in THEMES ? initialTheme : "noir";
   const initialPreset = THEMES[resolvedInitialTheme];
-  const [currentTheme, setCurrentTheme] = useState(resolvedInitialTheme);
-  const [showDescription, setShowDescription] = useState(initialPreset.showDesc);
-  const [showScreenshots, setShowScreenshots] = useState(true);
-  const [showRating, setShowRating] = useState(initialPreset.showRating);
-  const [showMeta, setShowMeta] = useState(initialPreset.showMeta);
-  const [showQR, setShowQR] = useState(false);
-  const [phoneCount, setPhoneCount] = useState(initialPreset.phones);
-  const [screenshotIndex, setScreenshotIndex] = useState(0);
-  const [currentFont, setCurrentFont] = useState(initialPreset.font);
-  const [aspectRatio, setAspectRatio] = useState(initialPreset.aspect);
+
+  // Persist state in sessionStorage per app
+  const storageKey = `appframe_${app.trackId}`;
+  const saved = typeof window !== "undefined" ? (() => { try { return JSON.parse(sessionStorage.getItem(storageKey) || "{}"); } catch { return {}; } })() : {};
+
+  const [currentTheme, setCurrentTheme] = useState(saved.theme ?? resolvedInitialTheme);
+  const [showDescription, setShowDescription] = useState(saved.showDesc ?? initialPreset.showDesc);
+  const [showScreenshots, setShowScreenshots] = useState(saved.showScreens ?? true);
+  const [showRating, setShowRating] = useState(saved.showRating ?? initialPreset.showRating);
+  const [showMeta, setShowMeta] = useState(saved.showMeta ?? initialPreset.showMeta);
+  const [showQR, setShowQR] = useState(saved.showQR ?? false);
+  const [phoneCount, setPhoneCount] = useState(saved.phones ?? initialPreset.phones);
+  const [screenshotIndex, setScreenshotIndex] = useState(saved.ssIdx ?? 0);
+  const [currentFont, setCurrentFont] = useState(saved.font ?? initialPreset.font);
+  const [aspectRatio, setAspectRatio] = useState(saved.aspect ?? initialPreset.aspect);
   const [themesExpanded, setThemesExpanded] = useState(false);
-  const [tagline, setTagline] = useState("");
-  const [customAppName, setCustomAppName] = useState("");
-  const [headline, setHeadline] = useState("Approved! ✅");
-  const [customDeveloper, setCustomDeveloper] = useState("");
+  const [tagline, setTagline] = useState(saved.tagline ?? "");
+  const [customAppName, setCustomAppName] = useState(saved.appName ?? "");
+  const [headline, setHeadline] = useState(saved.headline ?? "Approved! ✅");
+  const [customDeveloper, setCustomDeveloper] = useState(saved.dev ?? "");
   const [qrDataUrl, setQrDataUrl] = useState("");
+  // Save state to sessionStorage on every change
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(storageKey, JSON.stringify({
+        theme: currentTheme, showDesc: showDescription, showScreens: showScreenshots,
+        showRating, showMeta, showQR, phones: phoneCount, ssIdx: screenshotIndex,
+        font: currentFont, aspect: aspectRatio, tagline, appName: customAppName,
+        headline, dev: customDeveloper,
+      }));
+    } catch {}
+  }, [currentTheme, showDescription, showScreenshots, showRating, showMeta, showQR, phoneCount, screenshotIndex, currentFont, aspectRatio, tagline, customAppName, headline, customDeveloper, storageKey]);
+
   const [downloading, setDownloading] = useState(false);
   const [isPro, setIsPro] = useState(false);
   const [showProModal, setShowProModal] = useState(false);
@@ -401,11 +448,7 @@ export default function AppShowcase({
         onclone: (_doc: Document, el: HTMLElement) => {
           // Remove overlays that html2canvas renders with artifacts
           el.querySelectorAll(".showcase-overlay").forEach(o => o.remove());
-          // Replace gradient with solid bg — html2canvas renders gradients with banding
-          const card = el.querySelector("[data-showcase-card]") as HTMLElement;
-          if (card) {
-            card.style.background = t.bg;
-          }
+          // Keep gradient background — only overlays cause artifacts
         },
       });
 
