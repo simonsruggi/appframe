@@ -49,7 +49,7 @@ export default function Home() {
   // Debounced live search on typing
   useEffect(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (query.trim().length < 2) {
+    if (query.trim().length < 1) {
       setResults([]);
       setSearched(false);
       return;
@@ -114,8 +114,19 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Loading spinner */}
+          {loading && (
+            <div className="mt-6 flex items-center justify-center gap-2 text-gray-400 text-sm animate-fade-in">
+              <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <circle cx="12" cy="12" r="10" strokeOpacity="0.2" />
+                <path d="M12 2a10 10 0 019.95 9" />
+              </svg>
+              Searching...
+            </div>
+          )}
+
           {/* Search results */}
-          {searched && results.length > 0 && (
+          {!loading && searched && results.length > 0 && (
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade-in max-w-2xl mx-auto">
               {results.map((app) => (
                 <button

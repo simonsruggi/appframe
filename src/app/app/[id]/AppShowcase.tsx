@@ -454,9 +454,9 @@ export default function AppShowcase({
           </div>
 
           {/* Scrollable controls */}
-          <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-3">
+          <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-3">
           {/* Theme */}
-          <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+          <div className="pb-3 border-b border-gray-100">
             <SectionLabel>Theme</SectionLabel>
             <div className="grid grid-cols-5 gap-2">
               {(Object.keys(THEMES) as ThemeKey[]).map((key) => (
@@ -474,7 +474,7 @@ export default function AppShowcase({
           </div>
 
           {/* Aspect Ratio */}
-          <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+          <div className="pb-3 border-b border-gray-100">
             <SectionLabel>Aspect Ratio</SectionLabel>
             <div className="grid grid-cols-3 gap-1.5">
               {ASPECTS.map((a) => (
@@ -495,7 +495,7 @@ export default function AppShowcase({
           </div>
 
           {/* Font */}
-          <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+          <div className="pb-3 border-b border-gray-100">
             <SectionLabel>Font</SectionLabel>
             <select
               value={currentFont}
@@ -513,7 +513,7 @@ export default function AppShowcase({
 
           {/* Phone count */}
           {showScreenshots && (
-            <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+            <div className="pb-3 border-b border-gray-100">
               <SectionLabel>Phones</SectionLabel>
               <div className="grid grid-cols-3 gap-1.5">
                 {[1, 2, 3].map((n) => (
@@ -535,7 +535,7 @@ export default function AppShowcase({
 
           {/* Screenshot selector */}
           {showScreenshots && app.screenshotUrls.length > 2 && (
-            <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+            <div className="pb-3 border-b border-gray-100">
               <SectionLabel>Start from</SectionLabel>
               <div className="flex gap-1.5 overflow-x-auto pb-1">
                 {app.screenshotUrls.slice(0, 8).map((url, i) => (
@@ -554,7 +554,7 @@ export default function AppShowcase({
           )}
 
           {/* Content */}
-          <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+          <div className="pb-3 border-b border-gray-100">
             <SectionLabel>Content</SectionLabel>
             <div className="space-y-2">
               <input
@@ -582,7 +582,7 @@ export default function AppShowcase({
           </div>
 
           {/* Tagline */}
-          <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+          <div className="pb-3 border-b border-gray-100">
             <SectionLabel>Custom tagline</SectionLabel>
             <input
               type="text"
@@ -594,7 +594,7 @@ export default function AppShowcase({
           </div>
 
           {/* Toggles */}
-          <div className="rounded-xl bg-gray-50 border border-gray-100 p-4">
+          <div className="pb-3 border-b border-gray-100">
             <SectionLabel>Elements</SectionLabel>
             <div className="space-y-1.5">
               <Toggle label="Screenshots" value={showScreenshots} onChange={setShowScreenshots} />
