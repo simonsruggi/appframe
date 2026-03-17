@@ -27,7 +27,7 @@ export interface AppData {
 }
 
 /** Scrape App Store web page for screenshot URLs when iTunes API returns none */
-async function scrapeScreenshots(trackId: number, country: string): Promise<string[]> {
+export async function scrapeScreenshots(trackId: number, country: string): Promise<string[]> {
   try {
     const res = await fetch(`https://apps.apple.com/${country}/app/id${trackId}`, {
       headers: { "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" },

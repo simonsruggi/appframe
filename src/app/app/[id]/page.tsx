@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AppData } from "../../api/app/route";
+import { scrapeScreenshots } from "../../api/app/route";
 import AppShowcase from "./AppShowcase";
 
 async function getAppData(id: string, country: string): Promise<AppData | null> {
@@ -29,11 +30,20 @@ async function getAppData(id: string, country: string): Promise<AppData | null> 
 
     if (!bestApp) return null;
     const app = bestApp;
+    const screenshotUrls = app.screenshotUrls || [];
+
+    // Fallback: scrape App Store page if iTunes API returns no screenshots
+    const finalScreenshots = screenshotUrls.length > 0
+      ? screenshotUrls
+      : await scrapeScreenshots(app.trackId, country);
+
+    console.log(`[AppFrame] ${app.trackName} (${app.trackId}): ${screenshotUrls.length} from API, ${finalScreenshots.length} final`);
+
     return {
       trackId: app.trackId,
       trackName: app.trackName,
       artworkUrl512: app.artworkUrl512 || app.artworkUrl100?.replace("100x100", "512x512"),
-      screenshotUrls: app.screenshotUrls || [],
+      screenshotUrls: finalScreenshots,
       ipadScreenshotUrls: app.ipadScreenshotUrls || [],
       description: app.description,
       developerName: app.artistName,
