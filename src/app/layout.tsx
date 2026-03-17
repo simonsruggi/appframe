@@ -52,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${albertSans.variable} antialiased`}
         style={{ fontFamily: "'Albert Sans', sans-serif" }}

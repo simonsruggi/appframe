@@ -6,11 +6,16 @@ import QRCode from "qrcode";
 import type { AppData } from "../../api/app/route";
 
 const THEMES = {
-  noir: { bg: "#080808", text: "text-white", sub: "text-white/50", pill: "bg-white/[0.06] text-white/70", wm: "rgba(255,255,255,0.15)", qrFg: "#ffffff", qrBg: "#080808" },
-  cosmic: { bg: "#0a0015", text: "text-white", sub: "text-purple-200/50", pill: "bg-purple-500/10 text-purple-200/70", wm: "rgba(200,180,255,0.15)", qrFg: "#e0d0ff", qrBg: "#0a0015" },
-  ocean: { bg: "#001020", text: "text-white", sub: "text-cyan-200/50", pill: "bg-cyan-500/10 text-cyan-200/70", wm: "rgba(180,220,255,0.15)", qrFg: "#b0e0ff", qrBg: "#001020" },
-  ember: { bg: "#120800", text: "text-white", sub: "text-orange-200/50", pill: "bg-orange-500/10 text-orange-200/70", wm: "rgba(255,200,150,0.15)", qrFg: "#ffd0a0", qrBg: "#120800" },
-  arctic: { bg: "#f8fafb", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-900/5 text-gray-600", wm: "rgba(0,0,0,0.12)", qrFg: "#1a1a1a", qrBg: "#f8fafb" },
+  noir: { bg: "#080808", gradient: "", text: "text-white", sub: "text-white/50", pill: "bg-white/[0.06] text-white/70", wm: "rgba(255,255,255,0.25)", qrFg: "#ffffff", qrBg: "#080808" },
+  midnight: { bg: "#0a0a1a", gradient: "linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a2a 100%)", text: "text-white", sub: "text-indigo-200/50", pill: "bg-indigo-500/10 text-indigo-200/70", wm: "rgba(200,200,255,0.2)", qrFg: "#c0c0ff", qrBg: "#0a0a1a" },
+  cosmic: { bg: "#0a0015", gradient: "linear-gradient(135deg, #0a0015 0%, #1a0030 40%, #0d0020 100%)", text: "text-white", sub: "text-purple-200/50", pill: "bg-purple-500/10 text-purple-200/70", wm: "rgba(200,180,255,0.2)", qrFg: "#e0d0ff", qrBg: "#0a0015" },
+  ocean: { bg: "#001020", gradient: "linear-gradient(135deg, #001020 0%, #002040 50%, #001530 100%)", text: "text-white", sub: "text-cyan-200/50", pill: "bg-cyan-500/10 text-cyan-200/70", wm: "rgba(180,220,255,0.2)", qrFg: "#b0e0ff", qrBg: "#001020" },
+  forest: { bg: "#001008", gradient: "linear-gradient(135deg, #001008 0%, #002010 50%, #001808 100%)", text: "text-white", sub: "text-emerald-200/50", pill: "bg-emerald-500/10 text-emerald-200/70", wm: "rgba(180,255,200,0.2)", qrFg: "#b0ffc0", qrBg: "#001008" },
+  ember: { bg: "#120800", gradient: "linear-gradient(135deg, #120800 0%, #201000 50%, #180a00 100%)", text: "text-white", sub: "text-orange-200/50", pill: "bg-orange-500/10 text-orange-200/70", wm: "rgba(255,200,150,0.2)", qrFg: "#ffd0a0", qrBg: "#120800" },
+  rose: { bg: "#150010", gradient: "linear-gradient(135deg, #150010 0%, #250018 50%, #1a0012 100%)", text: "text-white", sub: "text-pink-200/50", pill: "bg-pink-500/10 text-pink-200/70", wm: "rgba(255,180,200,0.2)", qrFg: "#ffb0c8", qrBg: "#150010" },
+  sunset: { bg: "#1a0a00", gradient: "linear-gradient(135deg, #1a0a00 0%, #2a1000 30%, #1a0015 70%, #100020 100%)", text: "text-white", sub: "text-amber-200/50", pill: "bg-amber-500/10 text-amber-200/70", wm: "rgba(255,220,150,0.2)", qrFg: "#ffe0a0", qrBg: "#1a0a00" },
+  arctic: { bg: "#f8fafb", gradient: "linear-gradient(135deg, #f8fafb 0%, #eef2f7 50%, #f0f4f8 100%)", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-900/5 text-gray-600", wm: "rgba(0,0,0,0.15)", qrFg: "#1a1a1a", qrBg: "#f8fafb" },
+  snow: { bg: "#ffffff", gradient: "linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, #fafafa 100%)", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-100 text-gray-600", wm: "rgba(0,0,0,0.12)", qrFg: "#1a1a1a", qrBg: "#ffffff" },
 };
 
 type ThemeKey = keyof typeof THEMES;
@@ -99,6 +104,7 @@ function ShowcaseCard({
       className="relative overflow-hidden"
       style={{
         backgroundColor: t.bg,
+        background: t.gradient || t.bg,
         width: "100%",
         aspectRatio: aspectRatio || (hasScreenshots ? "16/10" : "16/8"),
         fontFamily,
@@ -301,11 +307,34 @@ export default function AppShowcase({
     try {
       const canvas = await html2canvas(captureRef.current, {
         backgroundColor: t.bg,
-        scale: 2,
+        scale: isPro ? 2 : 1,
         useCORS: true,
         allowTaint: true,
         logging: false,
       });
+
+      // Bake watermark into canvas for free users (can't be removed via DevTools)
+      if (!isPro) {
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          // Center watermark
+          const fontSize = Math.max(16, canvas.width * 0.02);
+          ctx.font = `600 ${fontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
+          ctx.fillStyle = t.wm;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("@AppFrame", canvas.width / 2, canvas.height / 2);
+
+          // Bottom-right small text
+          const smallFont = Math.max(11, canvas.width * 0.008);
+          ctx.font = `500 ${smallFont}px -apple-system, BlinkMacSystemFont, sans-serif`;
+          ctx.fillStyle = t.wm;
+          ctx.textAlign = "right";
+          ctx.textBaseline = "bottom";
+          ctx.fillText("appfra.me", canvas.width - 16, canvas.height - 12);
+        }
+      }
+
       const link = document.createElement("a");
       link.download = `${app.trackName.replace(/[^a-zA-Z0-9]/g, "-")}-appframe.png`;
       link.href = canvas.toDataURL("image/png");
@@ -536,7 +565,7 @@ export default function AppShowcase({
                   <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
                 </svg>
               )}
-              {downloading ? "Generating..." : "Download PNG"}
+              {downloading ? "Generating..." : isPro ? "Download HD PNG" : "Download PNG"}
             </button>
 
             {!isPro ? (
