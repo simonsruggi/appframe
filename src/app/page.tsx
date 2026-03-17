@@ -135,13 +135,15 @@ export default function Home() {
           </div>
 
           <div className="animate-fade-in-delay">
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Paste App Store URL or search by name..."
-              className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-lg focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
-            />
+            <div className="search-wrapper">
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Paste App Store URL or search by name..."
+                className="w-full px-6 py-4 rounded-[18px] bg-[#0d0d0d] text-white placeholder-zinc-500 text-lg focus:outline-none transition-all relative z-10"
+              />
+            </div>
           </div>
 
           {/* Search results */}
