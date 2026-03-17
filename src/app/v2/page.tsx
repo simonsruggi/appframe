@@ -61,60 +61,39 @@ export default function V2Page() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: "#0a0a12" }}>
-      {/* Stars background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 80 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full animate-float"
-            style={{
-              width: Math.random() > 0.8 ? 2 : 1,
-              height: Math.random() > 0.8 ? 2 : 1,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              background: `rgba(255,255,255,${0.1 + Math.random() * 0.4})`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Cosmic glow orbs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[600px] bg-purple-600/[0.07] rounded-full blur-[150px]" />
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-blue-600/[0.05] rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-indigo-600/[0.05] rounded-full blur-[130px]" />
+    <div className="min-h-screen relative overflow-hidden bg-white">
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(180deg, #ffffff 0%, #f5f5f5 40%, #fafafa 70%, #f0f0f0 100%)" }} />
 
       {/* ============ HERO SECTION ============ */}
       <section className="relative z-10 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-12 items-center pt-20">
+        <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center pt-20">
           {/* Left: text + search */}
           <div>
             {/* Pill badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-sm font-medium mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gray-200 bg-amber-50 text-gray-700 text-sm font-medium mb-8">
               <span>🔥</span>
               <span>#1 tool for indie app launches</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-bold text-white leading-[1.1] tracking-tight mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-bold text-gray-900 leading-[1.1] tracking-tight mb-6">
               Turn your App Store link into a{" "}
-              <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 bg-clip-text text-transparent">
                 viral launch image
               </span>{" "}
               in seconds.
             </h1>
 
-            <p className="text-zinc-400 text-lg md:text-xl mb-10 max-w-lg">
+            <p className="text-gray-500 text-lg md:text-xl mb-10 max-w-lg">
               Generate stunning, share-ready images for Twitter, LinkedIn and Product Hunt in one click.
             </p>
 
             {/* Search input */}
             <form onSubmit={handleSearch} className="relative max-w-lg">
               <div className="v2-search-wrapper">
-                <div className="flex items-center gap-3 px-5 py-4 rounded-2xl bg-[#12121e] relative z-10">
+                <div className="flex items-center gap-3 px-5 py-4 rounded-2xl bg-white border border-gray-200 relative z-10 shadow-sm">
                   {/* App Store icon */}
-                  <svg className="w-5 h-5 text-purple-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <svg className="w-5 h-5 text-gray-400 shrink-0" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M8.807 14.49l-1.795 3.11a.75.75 0 01-1.299-.75l1.674-2.9H5.25a.75.75 0 110-1.5h3.557c.068 0 .135.006.2.016L10.5 10.08l1.5 2.598-1.693 2.935a.208.208 0 01-.028.039l-.022.028L8.807 14.49zm2.193-4.73L9.5 7.16l-.75 1.3a.75.75 0 01-1.299-.75L8.7 5.46a.75.75 0 011.299 0L13 10.5h4.75a.75.75 0 110 1.5h-3.019l1.769 3.064a.75.75 0 01-1.299.75L13 12.25l-1-.866L11 9.76zm3.25-4.51a.75.75 0 011.299.75l-5.5 9.526a.75.75 0 01-1.298-.75l5.5-9.526z" />
                   </svg>
                   <input
@@ -122,29 +101,29 @@ export default function V2Page() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Paste App Store URL or search by name..."
-                    className="flex-1 bg-transparent text-white placeholder-zinc-500 text-base focus:outline-none"
+                    className="flex-1 bg-transparent text-gray-900 placeholder-gray-400 text-base focus:outline-none"
                   />
                   {loading && (
-                    <div className="w-5 h-5 border-2 border-purple-400/30 border-t-purple-400 rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-gray-300 border-t-gray-600 rounded-full animate-spin" />
                   )}
                 </div>
               </div>
             </form>
 
             {/* Social proof */}
-            <div className="flex items-center gap-3 mt-6 text-zinc-500 text-sm">
+            <div className="flex items-center gap-3 mt-6 text-gray-500 text-sm">
               <div className="flex -space-x-2">
-                {["#6366f1", "#8b5cf6", "#a855f7", "#ec4899"].map((c, i) => (
+                {["#374151", "#6b7280", "#4b5563", "#1f2937"].map((c, i) => (
                   <div
                     key={i}
-                    className="w-7 h-7 rounded-full border-2 border-[#0a0a12] flex items-center justify-center text-[10px] font-bold text-white"
+                    className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white"
                     style={{ background: c }}
                   >
                     {["S", "M", "A", "J"][i]}
                   </div>
                 ))}
               </div>
-              <span>Used by <strong className="text-zinc-300">1,200+</strong> indie hackers</span>
+              <span>Used by <strong className="text-gray-700">1,200+</strong> indie hackers</span>
             </div>
 
             {/* Search results */}
@@ -154,7 +133,7 @@ export default function V2Page() {
                   <button
                     key={app.trackId}
                     onClick={() => router.push(`/app/${app.trackId}`)}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-purple-500/30 transition-all text-left cursor-pointer"
+                    className="flex items-center gap-3 p-3 rounded-xl bg-white border border-gray-200 hover:bg-gray-50 hover:border-gray-300 transition-all text-left cursor-pointer shadow-sm"
                   >
                     <img
                       src={app.artworkUrl512}
@@ -162,9 +141,9 @@ export default function V2Page() {
                       className="w-12 h-12 rounded-xl"
                     />
                     <div className="min-w-0">
-                      <p className="text-white font-semibold text-sm truncate">{app.trackName}</p>
-                      <p className="text-zinc-400 text-xs truncate">{app.developerName}</p>
-                      <p className="text-zinc-500 text-[11px]">{app.primaryGenreName}</p>
+                      <p className="text-gray-900 font-semibold text-sm truncate">{app.trackName}</p>
+                      <p className="text-gray-500 text-xs truncate">{app.developerName}</p>
+                      <p className="text-gray-400 text-[11px]">{app.primaryGenreName}</p>
                     </div>
                   </button>
                 ))}
@@ -172,27 +151,24 @@ export default function V2Page() {
             )}
 
             {searched && !loading && results.length === 0 && (
-              <p className="mt-6 text-zinc-500 text-sm animate-fade-in">No apps found. Try a different search.</p>
+              <p className="mt-6 text-gray-400 text-sm animate-fade-in">No apps found. Try a different search.</p>
             )}
 
-            <p className="mt-6 text-zinc-600 text-xs">
-              Tip: You can also go directly to <code className="text-zinc-500">appfra.me/app/APP_ID</code>
+            <p className="mt-6 text-gray-400 text-xs">
+              Tip: You can also go directly to <code className="text-gray-500">appfra.me/app/APP_ID</code>
             </p>
           </div>
 
           {/* Right: Phone mockup */}
           <div className="hidden lg:flex justify-center items-center">
             <div className="relative">
-              {/* Glow behind phone */}
-              <div className="absolute inset-0 bg-purple-500/20 blur-[80px] rounded-full scale-75" />
-
-              {/* Phone frame */}
-              <div className="relative w-[300px] h-[600px] rounded-[48px] bg-gradient-to-b from-zinc-700 to-zinc-800 p-[3px] shadow-[0_0_80px_-20px_rgba(139,92,246,0.3)]">
+              {/* Phone frame - silver/light */}
+              <div className="relative w-[300px] h-[600px] rounded-[48px] bg-gradient-to-b from-gray-200 to-gray-300 p-[3px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)]">
                 <div className="w-full h-full rounded-[45px] bg-[#0e0e1a] overflow-hidden relative">
                   {/* Notch */}
                   <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[100px] h-[28px] bg-black rounded-full z-20" />
 
-                  {/* Screen content */}
+                  {/* Screen content - dark themed (showing tool output) */}
                   <div className="absolute inset-0 p-6 pt-14 flex flex-col items-center">
                     {/* Mini card preview */}
                     <div className="w-full rounded-3xl bg-gradient-to-br from-[#1a1030] to-[#0d1025] border border-purple-500/20 p-6 mt-4">
@@ -256,8 +232,8 @@ export default function V2Page() {
 
       {/* ============ HOW IT WORKS ============ */}
       <section className="relative z-10 max-w-4xl mx-auto px-6 py-24">
-        <h2 className="text-3xl font-bold text-white text-center mb-4">How it works</h2>
-        <p className="text-zinc-500 text-center mb-14 text-sm">Three steps. Zero design skills needed.</p>
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">How it works</h2>
+        <p className="text-gray-500 text-center mb-14 text-sm">Three steps. Zero design skills needed.</p>
 
         <div className="grid md:grid-cols-3 gap-8">
           {[
@@ -302,16 +278,16 @@ export default function V2Page() {
           ].map((item) => (
             <div
               key={item.step}
-              className="text-center p-8 rounded-3xl bg-white/[0.02] border border-white/[0.06] hover:border-purple-500/20 transition-all group"
+              className="text-center p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-gray-200 transition-all group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/20 border border-purple-500/20 flex items-center justify-center mx-auto mb-5 text-purple-400 group-hover:from-purple-500/30 group-hover:to-blue-500/30 transition-all">
+              <div className="w-14 h-14 rounded-2xl bg-gray-100 border border-gray-200 flex items-center justify-center mx-auto mb-5 text-gray-700 group-hover:bg-gray-200 transition-all">
                 {item.icon}
               </div>
-              <p className="text-xs font-semibold text-purple-400/70 uppercase tracking-wider mb-2">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                 Step {item.step}
               </p>
-              <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-              <p className="text-zinc-500 text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -326,13 +302,13 @@ export default function V2Page() {
       <section className="relative z-10 max-w-5xl mx-auto px-6 py-24">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-3xl font-bold text-white mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               Built specifically for{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent">
                 App Store launches
               </span>
             </h2>
-            <p className="text-zinc-400 mb-8">
+            <p className="text-gray-500 mb-8">
               No more fiddling with Figma templates or hiring a designer. AppFrame knows exactly what makes a great launch image.
             </p>
 
@@ -345,19 +321,19 @@ export default function V2Page() {
                 "No account required to try",
               ].map((item, i) => (
                 <li key={i} className="flex items-center gap-3">
-                  <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center shrink-0">
-                    <svg className="w-3 h-3 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
+                    <svg className="w-3 h-3 text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
                   </div>
-                  <span className="text-zinc-300 text-sm">{item}</span>
+                  <span className="text-gray-600 text-sm">{item}</span>
                 </li>
               ))}
             </ul>
 
             <Link
               href="#v2-pricing"
-              className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold text-sm hover:from-purple-500 hover:to-blue-500 transition-all shadow-lg shadow-purple-500/25"
+              className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl bg-gray-900 text-white font-semibold text-sm hover:bg-gray-800 transition-all shadow-lg shadow-gray-900/10"
             >
               Get started free
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -368,8 +344,7 @@ export default function V2Page() {
 
           {/* Feature mockup */}
           <div className="relative">
-            <div className="absolute inset-0 bg-blue-500/10 blur-[60px] rounded-full" />
-            <div className="relative rounded-3xl bg-gradient-to-br from-[#12121e] to-[#0e0e1a] border border-white/[0.08] p-8 shadow-2xl">
+            <div className="relative rounded-3xl bg-gradient-to-br from-[#12121e] to-[#0e0e1a] border border-gray-200 p-8 shadow-xl">
               {/* Fake browser bar */}
               <div className="flex items-center gap-2 mb-6">
                 <div className="w-3 h-3 rounded-full bg-red-400/60" />
@@ -428,16 +403,16 @@ export default function V2Page() {
 
       {/* ============ EXAMPLES CAROUSEL ============ */}
       <section className="relative z-10 py-24 overflow-hidden">
-        <h2 className="text-3xl font-bold text-white text-center mb-4">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
           See what you can create
         </h2>
-        <p className="text-zinc-500 text-center mb-12 text-sm">
+        <p className="text-gray-500 text-center mb-12 text-sm">
           Beautiful showcase images generated in seconds
         </p>
 
         <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0a0a12] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0a0a12] to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
           <div className="flex gap-6 animate-marquee">
             {[
               { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", bg: "#0a0015", genre: "Social", tagline: "Approved!" },
@@ -486,23 +461,23 @@ export default function V2Page() {
 
       {/* ============ PRICING ============ */}
       <section id="v2-pricing" className="relative z-10 max-w-4xl mx-auto px-6 py-24 scroll-mt-20">
-        <h2 className="text-3xl font-bold text-white text-center mb-4">Simple pricing</h2>
-        <p className="text-zinc-500 text-center mb-12 text-sm">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">Simple pricing</h2>
+        <p className="text-gray-500 text-center mb-12 text-sm">
           Create beautiful app showcases for free. Go Pro when you need clean exports.
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
           {/* Free */}
-          <div className="rounded-3xl bg-white/[0.02] border border-white/[0.06] p-8">
-            <p className="text-zinc-500 text-sm font-medium uppercase tracking-wider mb-4">Free</p>
+          <div className="rounded-3xl bg-white border border-gray-200 p-8 shadow-sm">
+            <p className="text-gray-500 text-sm font-medium uppercase tracking-wider mb-4">Free</p>
             <div className="flex items-baseline gap-1 mb-1">
-              <span className="text-4xl font-bold text-white">$0</span>
+              <span className="text-4xl font-bold text-gray-900">$0</span>
             </div>
-            <p className="text-zinc-600 text-sm mb-8">Free forever</p>
+            <p className="text-gray-400 text-sm mb-8">Free forever</p>
             <ul className="space-y-3">
               {["Unlimited showcase images", "All themes included", "5 beautiful themes", "Small watermark on downloads"].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-zinc-400">
-                  <svg className="w-4 h-4 text-zinc-600 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-500">
+                  <svg className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
                   {item}
                 </li>
               ))}
@@ -510,19 +485,19 @@ export default function V2Page() {
           </div>
 
           {/* Pro */}
-          <div className="rounded-3xl bg-white/[0.04] border border-purple-500/20 p-8 relative shadow-[0_0_40px_-15px_rgba(139,92,246,0.15)]">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-semibold">
+          <div className="rounded-3xl bg-white border border-gray-300 p-8 relative shadow-md">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gray-900 text-white text-xs font-semibold">
               Recommended
             </div>
-            <p className="text-purple-300/70 text-sm font-medium uppercase tracking-wider mb-4">Pro</p>
+            <p className="text-gray-700 text-sm font-medium uppercase tracking-wider mb-4">Pro</p>
             <div className="flex items-baseline gap-1 mb-1">
-              <span className="text-4xl font-bold text-white">$5</span>
+              <span className="text-4xl font-bold text-gray-900">$5</span>
             </div>
-            <p className="text-zinc-600 text-sm mb-8">One-time payment</p>
+            <p className="text-gray-400 text-sm mb-8">One-time payment</p>
             <ul className="space-y-3">
               {["Everything in Free", "No watermark on downloads", "High-resolution PNG export", "Lifetime access"].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-zinc-300">
-                  <svg className="w-4 h-4 text-purple-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+                  <svg className="w-4 h-4 text-gray-900 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
                   {item}
                 </li>
               ))}
@@ -532,7 +507,7 @@ export default function V2Page() {
 
         {/* FAQ */}
         <div className="max-w-2xl mx-auto">
-          <h3 className="text-2xl font-bold text-white text-center mb-10">FAQ</h3>
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-10">FAQ</h3>
           <div className="space-y-6">
             {[
               { q: "What do I get for free?", a: "Unlimited showcase images for any iOS app. Free downloads include a small @AppFrame watermark." },
@@ -540,9 +515,9 @@ export default function V2Page() {
               { q: "Is it a subscription?", a: "No. $5 one-time, yours forever." },
               { q: "Can I get a refund?", a: "Contact us within 7 days for a full refund, no questions asked." },
             ].map((faq, i) => (
-              <div key={i} className="border-b border-white/[0.06] pb-6">
-                <h4 className="text-white font-semibold mb-2">{faq.q}</h4>
-                <p className="text-zinc-500 text-sm leading-relaxed">{faq.a}</p>
+              <div key={i} className="border-b border-gray-200 pb-6">
+                <h4 className="text-gray-900 font-semibold mb-2">{faq.q}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -550,17 +525,17 @@ export default function V2Page() {
       </section>
 
       {/* ============ FOOTER ============ */}
-      <footer className="relative z-10 border-t border-white/[0.06] py-10">
+      <footer className="relative z-10 bg-gray-50 border-t border-gray-200 py-10">
         <div className="max-w-4xl mx-auto px-6 flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 text-zinc-600 text-sm">
+          <div className="flex items-center gap-2 text-gray-500 text-sm">
             <span>Made with</span>
-            <svg className="w-4 h-4 text-purple-400/60" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
-            <span>by <a href="https://simoneruggiero.com/?utm_source=appshot&utm_medium=footer" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-zinc-200 transition-colors">Simone Ruggiero</a></span>
+            <svg className="w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+            <span>by <a href="https://simoneruggiero.com/?utm_source=appshot&utm_medium=footer" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-gray-900 transition-colors">Simone Ruggiero</a></span>
           </div>
-          <div className="flex items-center justify-center gap-4 text-xs text-zinc-600">
-            <Link href="/privacy" className="hover:text-zinc-400 transition-colors">Privacy</Link>
+          <div className="flex items-center justify-center gap-4 text-xs text-gray-400">
+            <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
             <span>&middot;</span>
-            <Link href="/terms" className="hover:text-zinc-400 transition-colors">Terms</Link>
+            <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
             <span>&middot;</span>
             <span>&copy; {new Date().getFullYear()} AppFrame</span>
           </div>
