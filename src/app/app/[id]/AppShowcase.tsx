@@ -103,8 +103,8 @@ function ShowcaseCard({
       {!isPro && (
         <div className="absolute inset-0 z-[3] flex items-center justify-center pointer-events-none select-none">
           <span
-            className={`text-6xl font-bold ${isLight ? "text-black" : "text-white"}`}
-            style={{ opacity: 0.07, transform: "rotate(-15deg)", letterSpacing: "0.05em" }}
+            className={`text-sm font-medium ${isLight ? "text-black" : "text-white"}`}
+            style={{ opacity: 0.12, letterSpacing: "0.05em" }}
           >
             @AppFrame
           </span>
