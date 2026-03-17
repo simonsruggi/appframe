@@ -74,12 +74,9 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-28 pb-16">
         <div className="w-full max-w-2xl text-center">
           <div className="animate-fade-in">
-            <h1 className="text-6xl font-bold mb-4 text-white">
-              AppFrame
+            <h1 className="text-5xl font-bold mb-4 text-white leading-tight">
+              Your app got approved.<br />Time to <span className="italic underline decoration-white/30 underline-offset-4">celebrate</span>.
             </h1>
-            <p className="text-zinc-300 text-xl mb-2">
-              Your app got approved. Time to celebrate.
-            </p>
             <p className="text-zinc-500 text-base mb-10 max-w-lg mx-auto">
               Generate a stunning showcase image in seconds. Pick a theme, customize it, and share your launch on social media.
             </p>
