@@ -872,8 +872,16 @@ export default function AppShowcase({
               </svg>
             </div>
             <h2 className="text-2xl font-bold text-white mb-1">AppFrame Pro</h2>
-            <p className="text-white/40 text-sm mb-5">Clean downloads, no watermark. Forever.</p>
-            <div className="flex items-baseline gap-1 mb-6">
+            <p className="text-white/40 text-sm mb-4">One-time payment, yours forever.</p>
+            <ul className="space-y-2.5 mb-5">
+              {["20+ premium themes", "No watermark on downloads", "High-resolution export (3x)", "All fonts included", "Lifetime access"].map((item, i) => (
+                <li key={i} className="flex items-center gap-2.5 text-sm text-white/70">
+                  <svg className="w-4 h-4 text-white/50 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-baseline gap-1 mb-5">
               <span className="text-3xl font-bold text-white">$5</span>
               <span className="text-white/30 text-sm ml-2">one-time</span>
             </div>
@@ -882,7 +890,7 @@ export default function AppShowcase({
               disabled={proLoading}
               className="w-full py-3.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all cursor-pointer disabled:opacity-50"
             >
-              {proLoading ? "Redirecting to Stripe..." : "Unlock Pro — $5"}
+              {proLoading ? "Redirecting to payment..." : "Unlock Pro — $5"}
             </button>
           </div>
         </div>
