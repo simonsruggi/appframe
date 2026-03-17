@@ -375,42 +375,6 @@ export default function AppShowcase({
   return (
     <>
       <div className="h-screen bg-[#0a0a0a] flex overflow-hidden relative">
-        {/* Account button top-right */}
-        {userSession && (
-          <div className="absolute top-4 right-4 z-50">
-            <button onClick={() => setShowAccountMenu(!showAccountMenu)} className="cursor-pointer">
-              {userSession.image ? (
-                <img src={userSession.image} alt="" className="w-8 h-8 rounded-full border border-white/10 hover:border-white/30 transition-all" />
-              ) : (
-                <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs font-medium transition-all">
-                  {userSession.name?.[0]?.toUpperCase() || "U"}
-                </div>
-              )}
-            </button>
-            {showAccountMenu && (
-              <>
-                <div className="fixed inset-0 z-40" onClick={() => setShowAccountMenu(false)} />
-                <div className="absolute right-0 top-11 z-50 w-44 rounded-xl bg-[#111] border border-white/10 shadow-2xl overflow-hidden">
-                  <div className="px-4 py-2.5 border-b border-white/[0.06]">
-                    <p className="text-white text-sm font-medium truncate">{userSession.name}</p>
-                  </div>
-                  <button
-                    onClick={async () => {
-                      const csrfRes = await fetch("/api/auth/csrf");
-                      const { csrfToken } = await csrfRes.json();
-                      await fetch("/api/auth/signout", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: `csrfToken=${csrfToken}` });
-                      window.location.href = "/";
-                    }}
-                    className="w-full px-4 py-2.5 text-left text-sm text-white/50 hover:text-white hover:bg-white/[0.04] transition-all cursor-pointer"
-                  >
-                    Logout
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-        )}
-
         {/* Left: Preview */}
         <div className="flex-1 flex items-center justify-center p-4 overflow-auto">
           <div className="w-full max-w-3xl">
@@ -439,7 +403,48 @@ export default function AppShowcase({
         </div>
 
         {/* Right: Controls */}
-        <div className="w-[320px] shrink-0 bg-[#111] border-l border-white/[0.06] p-5 overflow-y-auto flex flex-col gap-5">
+        <div className="w-[320px] shrink-0 bg-[#111] border-l border-white/[0.06] flex flex-col">
+          {/* Fixed header - User */}
+          <div className="shrink-0 px-5 py-3 border-b border-white/[0.06] flex items-center justify-between">
+            <span className="text-white/40 text-xs font-medium uppercase tracking-wider">Customize</span>
+            {userSession && (
+              <div className="relative">
+                <button onClick={() => setShowAccountMenu(!showAccountMenu)} className="cursor-pointer">
+                  {userSession.image ? (
+                    <img src={userSession.image} alt="" className="w-7 h-7 rounded-full border border-white/10 hover:border-white/30 transition-all" />
+                  ) : (
+                    <div className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-[10px] font-medium transition-all">
+                      {userSession.name?.[0]?.toUpperCase() || "U"}
+                    </div>
+                  )}
+                </button>
+                {showAccountMenu && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setShowAccountMenu(false)} />
+                    <div className="absolute right-0 top-9 z-50 w-40 rounded-xl bg-[#1a1a1a] border border-white/10 shadow-2xl overflow-hidden">
+                      <div className="px-3 py-2 border-b border-white/[0.06]">
+                        <p className="text-white text-xs font-medium truncate">{userSession.name}</p>
+                      </div>
+                      <button
+                        onClick={async () => {
+                          const csrfRes = await fetch("/api/auth/csrf");
+                          const { csrfToken } = await csrfRes.json();
+                          await fetch("/api/auth/signout", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: `csrfToken=${csrfToken}` });
+                          window.location.href = "/";
+                        }}
+                        className="w-full px-3 py-2 text-left text-xs text-white/50 hover:text-white hover:bg-white/[0.04] transition-all cursor-pointer"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Scrollable controls */}
+          <div className="flex-1 overflow-y-auto p-5 flex flex-col gap-5">
           {/* Theme */}
           <div>
             <SectionLabel>Theme</SectionLabel>
@@ -590,15 +595,14 @@ export default function AppShowcase({
             </div>
           </div>
 
-          {/* Spacer */}
-          <div className="flex-1" />
+          </div>
 
-          {/* Download */}
-          <div className="space-y-2.5 pt-4 border-t border-white/[0.06]">
+          {/* Fixed footer - Download & Share */}
+          <div className="shrink-0 px-5 py-4 border-t border-white/[0.06] space-y-2">
             <button
               onClick={handleDownload}
               disabled={downloading}
-              className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all cursor-pointer disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all cursor-pointer disabled:opacity-50"
             >
               {downloading ? (
                 <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -612,24 +616,45 @@ export default function AppShowcase({
               {downloading ? "Generating..." : isPro ? "Download HD PNG" : "Download PNG"}
             </button>
 
-            {!isPro ? (
+            <div className="flex gap-2">
+              {/* Share button */}
               <button
-                onClick={() => setShowProModal(true)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/60 font-medium text-sm hover:bg-white/[0.08] transition-all cursor-pointer"
+                onClick={() => {
+                  if (navigator.share) {
+                    navigator.share({ title: `${app.trackName} — AppFrame`, url: window.location.href });
+                  } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert("Link copied!");
+                  }
+                }}
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/60 font-medium text-xs hover:bg-white/[0.08] transition-all cursor-pointer"
               >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
                 </svg>
-                Remove watermark — $5
+                Share
               </button>
-            ) : (
-              <div className="flex items-center justify-center gap-1.5 py-2 text-emerald-400 text-xs font-medium">
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-                PRO — No watermark
-              </div>
-            )}
+
+              {/* Pro button */}
+              {!isPro ? (
+                <button
+                  onClick={() => setShowProModal(true)}
+                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/60 font-medium text-xs hover:bg-white/[0.08] transition-all cursor-pointer"
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+                  </svg>
+                  Pro — $5
+                </button>
+              ) : (
+                <div className="flex-1 flex items-center justify-center gap-1.5 py-2 text-emerald-400 text-xs font-medium">
+                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                  PRO
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
