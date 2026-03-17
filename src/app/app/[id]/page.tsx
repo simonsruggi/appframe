@@ -84,21 +84,12 @@ export async function generateMetadata(
     openGraph: {
       title: `${app.trackName} — AppFrame`,
       description,
-      images: [
-        {
-          url: app.artworkUrl512,
-          width: 512,
-          height: 512,
-          alt: `${app.trackName} app icon`,
-        },
-      ],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: `${app.trackName} — AppFrame`,
       description,
-      images: [app.artworkUrl512],
     },
   };
 }
