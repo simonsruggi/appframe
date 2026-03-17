@@ -64,34 +64,46 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-white">
-      {/* Hero + Search */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 min-h-screen">
-        <div className="w-full max-w-3xl text-center">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-white">
+      {/* Subtle bg elements */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-b from-amber-100/30 via-orange-50/20 to-transparent rounded-full blur-[100px] -top-[400px]" />
+      <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-blue-50/40 rounded-full blur-[80px]" />
+      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-purple-50/30 rounded-full blur-[80px]" />
+
+      {/* Hero */}
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-32 pb-16">
+        <div className="w-full max-w-4xl text-center">
+          {/* Badge */}
+          <div className="animate-fade-in mb-6">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-50 border border-amber-200/60 text-amber-700 text-sm font-medium">
+              <span>🎉</span> The #1 showcase tool for indie devs
+            </span>
+          </div>
+
           <div className="animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-8 text-gray-900 leading-[1.1] tracking-tight whitespace-nowrap">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900 leading-[1.1] tracking-tight whitespace-nowrap">
               Your app got approved.<br />Time to <span className="relative inline-block"><span className="relative z-10 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-clip-text text-transparent">celebrate</span><span className="absolute -inset-3 bg-amber-400/10 rounded-2xl blur-lg" /></span>.
             </h1>
-            <p className="text-gray-500 text-lg md:text-xl mb-12 max-w-xl mx-auto">
+            <p className="text-gray-500 text-lg md:text-xl mb-10 max-w-xl mx-auto">
               Generate a stunning showcase image in seconds. Pick a theme, customize it, and share your launch on social media.
             </p>
           </div>
 
-          <div className="animate-fade-in-delay">
+          <div className="animate-fade-in-delay max-w-2xl mx-auto">
             <div className="search-wrapper">
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Paste App Store URL or search by name..."
-                className="w-full px-6 py-4 rounded-[18px] bg-white text-gray-900 placeholder-gray-400 text-lg focus:outline-none transition-all relative z-10"
+                className="w-full px-6 py-4 rounded-[18px] bg-white text-gray-900 placeholder-gray-400 text-lg focus:outline-none transition-all relative z-10 shadow-sm"
               />
             </div>
           </div>
 
           {/* Search results */}
           {searched && results.length > 0 && (
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade-in">
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade-in max-w-2xl mx-auto">
               {results.map((app) => (
                 <button
                   key={app.trackId}
@@ -101,7 +113,7 @@ export default function Home() {
                   <img
                     src={app.artworkUrl512}
                     alt={app.trackName}
-                    className="w-16 h-16 rounded-2xl"
+                    className="w-16 h-16 rounded-2xl shadow-sm"
                   />
                   <div className="min-w-0">
                     <p className="text-gray-900 font-semibold truncate">{app.trackName}</p>
@@ -117,9 +129,48 @@ export default function Home() {
             <p className="mt-8 text-gray-400 animate-fade-in">No apps found. Try a different search.</p>
           )}
 
-          <p className="mt-10 text-gray-400 text-sm animate-fade-in-delay-2">
-            Tip: You can also go directly to <code className="text-gray-500">appfra.me/app/APP_ID</code>
-          </p>
+          {/* Social proof */}
+          <div className="mt-12 animate-fade-in-delay-2">
+            <p className="text-gray-400 text-sm mb-4">Perfect for Twitter, LinkedIn, Product Hunt & more</p>
+            <div className="flex items-center justify-center gap-6 text-gray-300">
+              <span className="text-xl font-bold tracking-tight">𝕏</span>
+              <span className="text-sm font-semibold">LinkedIn</span>
+              <span className="text-sm font-semibold">Product Hunt</span>
+              <span className="text-sm font-semibold">Instagram</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Preview mockup */}
+        <div className="mt-16 w-full max-w-4xl animate-fade-in-delay-2">
+          <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200/60 bg-[#080808]">
+            <div className="flex items-center gap-8 p-8">
+              <div className="flex-1">
+                <p className="text-xl font-bold text-white mb-2">Approved! ✅</p>
+                <img src="/examples/whatsapp-icon.jpg" alt="" className="w-14 h-14 rounded-xl mb-3" />
+                <h3 className="text-2xl font-bold text-white">WhatsApp</h3>
+                <p className="text-white/40 text-sm mt-1">WhatsApp Inc.</p>
+                <div className="flex gap-1 mt-2">
+                  {[1,2,3,4,5].map(s => (
+                    <svg key={s} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <div className="flex gap-2 mt-3">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] bg-white/[0.06] text-white/50">Social</span>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] bg-white/[0.06] text-white/50">Free</span>
+                </div>
+              </div>
+              <div className="shrink-0 w-[140px] h-[286px] rounded-[28px] bg-[#1a1a1a] p-[4px] shadow-lg">
+                <div className="w-full h-full rounded-[24px] overflow-hidden bg-black relative">
+                  <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-[56px] h-[16px] bg-black rounded-full z-10" />
+                  <img src="/examples/whatsapp-ss.jpg" alt="" className="w-full h-full object-cover" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="text-center text-gray-400 text-xs mt-4">Example output — yours will look even better ✨</p>
         </div>
       </div>
 
