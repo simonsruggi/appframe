@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { posts } from "./blog/posts";
 
+export const dynamic = "force-dynamic";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://appfra.me";
 
