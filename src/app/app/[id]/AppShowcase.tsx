@@ -150,27 +150,28 @@ function ShowcaseCard({
   // Auto-scale content to fit card whenever anything changes
   useEffect(() => {
     const recalc = () => {
-      const card = cardRef.current;
       const content = contentRef.current;
       const wrapper = content?.parentElement;
-      if (!card || !content || !wrapper) return;
+      if (!content || !wrapper) return;
       // Reset to natural size to measure
-      content.style.transform = "scale(1)";
+      content.style.transform = "none";
+      // Double rAF ensures the browser has reflowed after state changes
       requestAnimationFrame(() => {
-        // Use wrapper's content box (excluding padding) as available space
-        const style = getComputedStyle(wrapper);
-        const cw = wrapper.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-        const ch = wrapper.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-        // Measure the inner content child to get true dimensions (scrollWidth can be clamped by flex)
-        const inner = content.firstElementChild as HTMLElement | null;
-        const sw = inner ? inner.scrollWidth : content.scrollWidth;
-        const sh = inner ? inner.scrollHeight : content.scrollHeight;
-        const scale = Math.min(cw / sw, ch / sh, 1);
-        setContentScale(Math.round(scale * 1000) / 1000);
+        requestAnimationFrame(() => {
+          // Available space = wrapper content box (excluding padding)
+          const style = getComputedStyle(wrapper);
+          const cw = wrapper.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+          const ch = wrapper.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+          // Measure the inner content child to get true natural dimensions
+          const inner = content.firstElementChild as HTMLElement | null;
+          const sw = inner ? inner.scrollWidth : content.scrollWidth;
+          const sh = inner ? inner.scrollHeight : content.scrollHeight;
+          const scale = Math.min(cw / sw, ch / sh, 1);
+          setContentScale(Math.round(scale * 1000) / 1000);
+        });
       });
     };
     recalc();
-    // Also recalc on window resize
     window.addEventListener("resize", recalc);
     return () => window.removeEventListener("resize", recalc);
   }, [aspectRatio, phoneCount, showDescription, showRating, showMeta, showQR, showScreenshots, headline, tagline, customAppName, customDeveloper, fontFamily, theme]);
