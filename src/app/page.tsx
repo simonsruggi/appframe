@@ -134,24 +134,15 @@ export default function Home() {
             </p>
           </div>
 
-          <form onSubmit={handleSearch} className="animate-fade-in-delay">
-            <div className="flex gap-3">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Paste App Store URL or search by name..."
-                className="flex-1 px-5 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-lg focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
-              />
-              <button
-                type="submit"
-                disabled={loading}
-                className="px-8 py-4 rounded-2xl bg-white text-black font-semibold text-lg hover:bg-white/90 transition-all disabled:opacity-50 cursor-pointer"
-              >
-                {loading ? "..." : "Go"}
-              </button>
-            </div>
-          </form>
+          <div className="animate-fade-in-delay">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Paste App Store URL or search by name..."
+              className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-zinc-500 text-lg focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
+            />
+          </div>
 
           {/* Search results */}
           {searched && results.length > 0 && (
