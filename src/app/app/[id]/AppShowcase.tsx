@@ -64,7 +64,7 @@ const FONTS = [
   { id: "space", label: "Space", css: "'Space Grotesk', sans-serif", google: "Space+Grotesk:wght@400;500;600;700" },
   { id: "sora", label: "Sora", css: "'Sora', sans-serif", google: "Sora:wght@400;500;600;700" },
   { id: "poppins", label: "Poppins", css: "'Poppins', sans-serif", google: "Poppins:wght@400;500;600;700" },
-  { id: "playfair", label: "Playfair", css: "'Playfair Display', serif", google: "Playfair+Display:wght@400;500;600;700" },
+
   { id: "mono", label: "Mono", css: "'JetBrains Mono', monospace", google: "JetBrains+Mono:wght@400;500;600;700" },
 ];
 
@@ -220,8 +220,12 @@ function ShowcaseCard({
             )}
 
             {showQR && qrDataUrl && !isVertical && (
-              <div className={`mt-3 ${!hasScreenshots || isCompact ? "flex justify-center" : ""}`}>
+              <div className={`mt-3 flex items-center gap-2 ${!hasScreenshots || isCompact ? "justify-center" : ""}`}>
                 <img src={qrDataUrl} alt="QR Code" className={`${isCompact ? "w-12 h-12" : "w-16 h-16"} rounded-lg`} />
+                <div className={`flex items-center gap-1 ${t.sub} text-[10px] font-medium`}>
+                  <span>←</span>
+                  <span>Scan to<br />download</span>
+                </div>
               </div>
             )}
           </div>
@@ -246,8 +250,8 @@ function ShowcaseCard({
       </div>
 
       {/* Bottom */}
-      <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center">
-        <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs ${isLight ? "text-gray-400" : "text-white/20"}`}>
+      <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center z-20">
+        <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs ${isLight ? "text-gray-400" : "text-white/40"}`}>
           <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
           </svg>
@@ -319,6 +323,7 @@ export default function AppShowcase({
     setCurrentTheme(key);
     setCurrentFont(preset.font);
     setPhoneCount(preset.phones);
+    setAspectRatio(preset.aspect);
     setShowDescription(preset.showDesc);
     setShowRating(preset.showRating);
     setShowMeta(preset.showMeta);
@@ -369,7 +374,7 @@ export default function AppShowcase({
     if (!captureRef.current) return;
     setDownloading(true);
     try {
-      const canvas = await html2canvas(captureRef.current, {
+      const raw = await html2canvas(captureRef.current, {
         backgroundColor: null,
         scale: 3,
         useCORS: true,
@@ -377,10 +382,20 @@ export default function AppShowcase({
         logging: false,
       });
 
-      // Bake watermark into canvas for free users (can't be removed via DevTools)
-      if (!isPro) {
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
+      // Clip to rounded corners to match preview
+      const radius = 24 * 3; // rounded-3xl ≈ 24px, scaled by 3
+      const canvas = document.createElement("canvas");
+      canvas.width = raw.width;
+      canvas.height = raw.height;
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.beginPath();
+        ctx.roundRect(0, 0, raw.width, raw.height, radius);
+        ctx.clip();
+        ctx.drawImage(raw, 0, 0);
+
+        // Bake watermark into canvas for free users (can't be removed via DevTools)
+        if (!isPro) {
           // Center watermark
           const fontSize = Math.max(16, canvas.width * 0.02);
           ctx.font = `600 ${fontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
@@ -434,7 +449,8 @@ export default function AppShowcase({
         {/* Left: Preview */}
         <div className="flex-1 flex items-center justify-center p-4 overflow-auto">
           <div className="w-full max-w-3xl">
-            <div ref={captureRef} className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200">
+            <div className="rounded-3xl overflow-hidden shadow-2xl border border-gray-200">
+              <div ref={captureRef}>
               <ShowcaseCard
                 app={app}
                 theme={currentTheme}
@@ -454,6 +470,7 @@ export default function AppShowcase({
                 isPro={isPro}
                 headline={headline}
               />
+              </div>
             </div>
           </div>
         </div>
