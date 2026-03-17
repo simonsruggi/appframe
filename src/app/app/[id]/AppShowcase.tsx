@@ -149,14 +149,14 @@ function ShowcaseCard({
   // Auto-scale content to fit card whenever anything changes
   useEffect(() => {
     const recalc = () => {
-      const card = cardRef.current;
       const content = contentRef.current;
-      if (!card || !content) return;
+      const wrapper = content?.parentElement;
+      if (!content || !wrapper) return;
       // Reset to natural size to measure
       content.style.transform = "scale(1)";
       requestAnimationFrame(() => {
-        const cw = card.clientWidth;
-        const ch = card.clientHeight;
+        const cw = wrapper.clientWidth;
+        const ch = wrapper.clientHeight;
         const sw = content.scrollWidth;
         const sh = content.scrollHeight;
         const scale = Math.min(cw / sw, ch / sh, 1);
@@ -219,9 +219,10 @@ function ShowcaseCard({
         </div>
       )}
 
+      <div className={`relative z-10 h-full ${isCompact ? "px-5 py-6 pb-12" : "px-10 py-8 pb-12"}`}>
       <div
         ref={contentRef}
-        className={`relative z-10 h-full flex items-center justify-center ${isCompact ? "px-5 py-6 pb-12" : "px-10 py-8 pb-12"} ${isVertical ? "flex-col" : ""}`}
+        className={`h-full flex items-center justify-center ${isVertical ? "flex-col" : ""}`}
         style={{ transform: `scale(${contentScale})`, transformOrigin: "center center" }}
       >
         <div className={`flex items-center ${isCompact ? "gap-4" : "gap-10"} ${hasScreenshots && !isCompact ? "" : "justify-center"} ${isCompact ? "flex-col text-center" : ""}`}>
@@ -294,6 +295,7 @@ function ShowcaseCard({
             </div>
           )}
         </div>
+      </div>
       </div>
 
       {/* Bottom */}
