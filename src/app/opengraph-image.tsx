@@ -5,6 +5,8 @@ export const alt = "AppFrame — Turn any iOS app into a beautiful showcase imag
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+const BASE = "https://appfra.me";
+
 export default function Image() {
   return new ImageResponse(
     (
@@ -21,15 +23,15 @@ export default function Image() {
           overflow: "hidden",
         }}
       >
-        {/* Subtle glow behind cards */}
+        {/* Subtle glow */}
         <div
           style={{
             position: "absolute",
-            width: 900,
-            height: 500,
+            width: 1000,
+            height: 600,
             borderRadius: "50%",
-            background: "radial-gradient(ellipse, rgba(0,80,160,0.12) 0%, transparent 70%)",
-            bottom: -100,
+            background: "radial-gradient(ellipse, rgba(0,80,180,0.08) 0%, transparent 70%)",
+            bottom: -200,
             left: "50%",
             transform: "translateX(-50%)",
           }}
@@ -38,11 +40,11 @@ export default function Image() {
         {/* Domain */}
         <div
           style={{
-            marginTop: 40,
+            marginTop: 36,
             fontSize: 14,
             fontWeight: 600,
-            color: "rgba(255,255,255,0.35)",
-            letterSpacing: "0.08em",
+            color: "rgba(255,255,255,0.3)",
+            letterSpacing: "0.1em",
             textTransform: "uppercase",
           }}
         >
@@ -52,220 +54,267 @@ export default function Image() {
         {/* Headline */}
         <div
           style={{
-            fontSize: 52,
+            fontSize: 46,
             fontWeight: 800,
             color: "white",
             letterSpacing: "-0.03em",
-            lineHeight: 1.15,
+            lineHeight: 1.2,
             textAlign: "center",
-            marginTop: 16,
-            padding: "0 80px",
+            marginTop: 12,
+            marginBottom: 32,
           }}
         >
-          Turn Any iOS App Into a
-        </div>
-        <div
-          style={{
-            fontSize: 52,
-            fontWeight: 800,
-            color: "white",
-            letterSpacing: "-0.03em",
-            lineHeight: 1.15,
-            textAlign: "center",
-          }}
-        >
-          Stunning Showcase
+          Turn Any iOS App Into a Stunning Showcase
         </div>
 
-        {/* Two showcase cards */}
+        {/* Three showcase cards */}
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "flex-start",
             justifyContent: "center",
-            marginTop: 32,
-            gap: 0,
+            gap: 24,
             position: "relative",
             width: "100%",
-            height: 340,
           }}
         >
-          {/* Card 1 — Ocean theme, tilted left */}
+          {/* Card 1 — Ocean theme with Spotify */}
           <div
             style={{
-              position: "absolute",
-              left: 160,
-              top: 10,
-              width: 420,
-              height: 280,
+              width: 360,
+              height: 240,
               borderRadius: 20,
               background: "linear-gradient(135deg, #001020 0%, #003060 50%, #001830 100%)",
               display: "flex",
               alignItems: "center",
-              padding: "24px 28px",
-              gap: 24,
-              transform: "rotate(-6deg)",
+              padding: "20px 24px",
+              gap: 16,
+              transform: "rotate(-4deg) translateY(8px)",
               boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06)",
             }}
           >
-            {/* App info */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, width: 160 }}>
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 12,
-                  background: "linear-gradient(135deg, #34d399 0%, #059669 100%)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
-                }}
-              >
-                <div style={{ fontSize: 24, display: "flex" }}>💰</div>
-              </div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "white", lineHeight: 1.2 }}>Budget App</div>
-              <div style={{ fontSize: 11, color: "rgba(180,220,255,0.5)" }}>Finance Studio</div>
+            {/* Left info */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, width: 130 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/spotify-icon.jpg`}
+                width={44}
+                height={44}
+                style={{ borderRadius: 10, boxShadow: "0 4px 12px rgba(0,0,0,0.3)" }}
+              />
+              <div style={{ fontSize: 15, fontWeight: 700, color: "white", lineHeight: 1.2, marginTop: 4 }}>Spotify</div>
+              <div style={{ fontSize: 10, color: "rgba(180,220,255,0.5)" }}>Spotify AB</div>
               <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
-                <span style={{ fontSize: 11, color: "white", fontWeight: 600 }}>4.9</span>
-                <span style={{ fontSize: 10, color: "#fbbf24" }}>★★★★★</span>
+                <span style={{ fontSize: 10, color: "white", fontWeight: 600 }}>4.8</span>
+                <span style={{ fontSize: 9, color: "#fbbf24" }}>★★★★★</span>
+              </div>
+              <div style={{ display: "flex", gap: 3, marginTop: 4, flexWrap: "wrap" }}>
+                <span style={{ fontSize: 8, padding: "2px 6px", borderRadius: 20, background: "rgba(0,180,255,0.1)", color: "rgba(180,220,255,0.7)" }}>Music</span>
+                <span style={{ fontSize: 8, padding: "2px 6px", borderRadius: 20, background: "rgba(0,180,255,0.1)", color: "rgba(180,220,255,0.7)" }}>Free</span>
               </div>
             </div>
-            {/* Phone mockup */}
+            {/* Phone mockup with real screenshot */}
             <div
               style={{
-                width: 100,
-                height: 204,
-                borderRadius: 18,
+                width: 88,
+                height: 180,
+                borderRadius: 16,
                 background: "#1a1a1a",
                 border: "1.5px solid rgba(255,255,255,0.1)",
-                padding: 4,
+                padding: 3,
                 display: "flex",
-                boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
               }}
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: 14,
-                  background: "linear-gradient(180deg, #059669 0%, #047857 50%, #065f46 100%)",
-                  display: "flex",
-                }}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/spotify-ss.jpg`}
+                width={82}
+                height={174}
+                style={{ borderRadius: 13, objectFit: "cover" }}
               />
             </div>
-            {/* Phone mockup 2 */}
+            {/* Second phone */}
             <div
               style={{
-                width: 100,
-                height: 204,
-                borderRadius: 18,
+                width: 88,
+                height: 180,
+                borderRadius: 16,
                 background: "#1a1a1a",
                 border: "1.5px solid rgba(255,255,255,0.08)",
-                padding: 4,
+                padding: 3,
                 opacity: 0.6,
                 display: "flex",
                 transform: "translateY(12px)",
               }}
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: 14,
-                  background: "linear-gradient(180deg, #047857 0%, #065f46 100%)",
-                  display: "flex",
-                }}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/spotify-ss.jpg`}
+                width={82}
+                height={174}
+                style={{ borderRadius: 13, objectFit: "cover" }}
               />
             </div>
           </div>
 
-          {/* Card 2 — Ember theme, tilted right */}
+          {/* Card 2 — Noir theme with WhatsApp (center, bigger) */}
           <div
             style={{
-              position: "absolute",
-              right: 140,
-              top: 30,
-              width: 420,
-              height: 280,
+              width: 380,
+              height: 250,
               borderRadius: 20,
-              background: "linear-gradient(135deg, #120800 0%, #301800 50%, #120800 100%)",
+              background: "radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0d0d0d 40%, #080808 100%)",
               display: "flex",
               alignItems: "center",
-              padding: "24px 28px",
-              gap: 24,
-              transform: "rotate(4deg)",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06)",
+              padding: "20px 24px",
+              gap: 16,
+              transform: "translateY(-4px)",
+              boxShadow: "0 24px 70px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06)",
+              zIndex: 2,
             }}
           >
-            {/* App info */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, width: 160 }}>
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 12,
-                  background: "linear-gradient(135deg, #f97316 0%, #ea580c 100%)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
-                }}
-              >
-                <div style={{ fontSize: 24, display: "flex" }}>🎵</div>
-              </div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "white", lineHeight: 1.2 }}>Music Player</div>
-              <div style={{ fontSize: 11, color: "rgba(255,200,150,0.5)" }}>Sound Labs</div>
+            {/* Left info */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, width: 140 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/whatsapp-icon.jpg`}
+                width={48}
+                height={48}
+                style={{ borderRadius: 12, boxShadow: "0 4px 12px rgba(0,0,0,0.3)" }}
+              />
+              <div style={{ fontSize: 16, fontWeight: 700, color: "white", lineHeight: 1.2, marginTop: 4 }}>WhatsApp</div>
+              <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)" }}>Meta Platforms</div>
               <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
                 <span style={{ fontSize: 11, color: "white", fontWeight: 600 }}>4.7</span>
                 <span style={{ fontSize: 10, color: "#fbbf24" }}>★★★★★</span>
               </div>
+              <div style={{ display: "flex", gap: 3, marginTop: 4, flexWrap: "wrap" }}>
+                <span style={{ fontSize: 8, padding: "2px 6px", borderRadius: 20, background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.7)" }}>Social</span>
+                <span style={{ fontSize: 8, padding: "2px 6px", borderRadius: 20, background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.7)" }}>Free</span>
+              </div>
             </div>
-            {/* Phone mockup */}
+            {/* Phone mockup with real screenshot */}
             <div
               style={{
-                width: 100,
-                height: 204,
-                borderRadius: 18,
+                width: 92,
+                height: 188,
+                borderRadius: 17,
                 background: "#1a1a1a",
                 border: "1.5px solid rgba(255,255,255,0.1)",
-                padding: 4,
+                padding: 3,
                 display: "flex",
-                boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
               }}
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: 14,
-                  background: "linear-gradient(180deg, #f97316 0%, #ea580c 50%, #c2410c 100%)",
-                  display: "flex",
-                }}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/whatsapp-ss.jpg`}
+                width={86}
+                height={182}
+                style={{ borderRadius: 14, objectFit: "cover" }}
               />
             </div>
-            {/* Phone mockup 2 */}
+            {/* Second phone */}
             <div
               style={{
-                width: 100,
-                height: 204,
-                borderRadius: 18,
+                width: 92,
+                height: 188,
+                borderRadius: 17,
                 background: "#1a1a1a",
                 border: "1.5px solid rgba(255,255,255,0.08)",
-                padding: 4,
+                padding: 3,
                 opacity: 0.6,
                 display: "flex",
                 transform: "translateY(12px)",
               }}
             >
-              <div
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: 14,
-                  background: "linear-gradient(180deg, #ea580c 0%, #c2410c 100%)",
-                  display: "flex",
-                }}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/whatsapp-ss.jpg`}
+                width={86}
+                height={182}
+                style={{ borderRadius: 14, objectFit: "cover" }}
+              />
+            </div>
+          </div>
+
+          {/* Card 3 — Ember theme with Telegram */}
+          <div
+            style={{
+              width: 360,
+              height: 240,
+              borderRadius: 20,
+              background: "linear-gradient(135deg, #120800 0%, #301800 50%, #120800 100%)",
+              display: "flex",
+              alignItems: "center",
+              padding: "20px 24px",
+              gap: 16,
+              transform: "rotate(4deg) translateY(8px)",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06)",
+            }}
+          >
+            {/* Left info */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 6, width: 130 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/telegram-icon.jpg`}
+                width={44}
+                height={44}
+                style={{ borderRadius: 10, boxShadow: "0 4px 12px rgba(0,0,0,0.3)" }}
+              />
+              <div style={{ fontSize: 15, fontWeight: 700, color: "white", lineHeight: 1.2, marginTop: 4 }}>Telegram</div>
+              <div style={{ fontSize: 10, color: "rgba(255,200,150,0.5)" }}>Telegram FZ-LLC</div>
+              <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
+                <span style={{ fontSize: 10, color: "white", fontWeight: 600 }}>4.6</span>
+                <span style={{ fontSize: 9, color: "#fbbf24" }}>★★★★★</span>
+              </div>
+              <div style={{ display: "flex", gap: 3, marginTop: 4, flexWrap: "wrap" }}>
+                <span style={{ fontSize: 8, padding: "2px 6px", borderRadius: 20, background: "rgba(255,160,80,0.1)", color: "rgba(255,200,150,0.7)" }}>Social</span>
+                <span style={{ fontSize: 8, padding: "2px 6px", borderRadius: 20, background: "rgba(255,160,80,0.1)", color: "rgba(255,200,150,0.7)" }}>Free</span>
+              </div>
+            </div>
+            {/* Phone mockup with real screenshot */}
+            <div
+              style={{
+                width: 88,
+                height: 180,
+                borderRadius: 16,
+                background: "#1a1a1a",
+                border: "1.5px solid rgba(255,255,255,0.1)",
+                padding: 3,
+                display: "flex",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/telegram-ss.jpg`}
+                width={82}
+                height={174}
+                style={{ borderRadius: 13, objectFit: "cover" }}
+              />
+            </div>
+            {/* Second phone */}
+            <div
+              style={{
+                width: 88,
+                height: 180,
+                borderRadius: 16,
+                background: "#1a1a1a",
+                border: "1.5px solid rgba(255,255,255,0.08)",
+                padding: 3,
+                opacity: 0.6,
+                display: "flex",
+                transform: "translateY(12px)",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE}/examples/telegram-ss.jpg`}
+                width={82}
+                height={174}
+                style={{ borderRadius: 13, objectFit: "cover" }}
               />
             </div>
           </div>
