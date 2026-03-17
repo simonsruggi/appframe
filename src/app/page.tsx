@@ -95,7 +95,7 @@ export default function Home() {
 
           <div className="animate-fade-in-delay max-w-2xl mx-auto relative">
             {/* Hand-drawn arrow + text */}
-            <div className="absolute -left-52 top-0 hidden lg:flex flex-col items-end select-none pointer-events-none">
+            <div className="absolute -left-40 top-0 hidden lg:flex flex-col items-end select-none pointer-events-none">
               <p className="text-gray-700 text-xl -rotate-6 mr-2" style={{ fontFamily: "'Caveat', cursive" }}>Try now! It&apos;s free!</p>
               <svg className="w-24 h-14 text-gray-700 -mt-1" viewBox="0 0 140 70" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 8 C 40 10, 70 30, 95 45 C 105 52, 115 50, 125 48" />
@@ -145,17 +145,25 @@ export default function Home() {
           {/* Social proof */}
           <div className="mt-14 animate-fade-in-delay-2 space-y-6">
             {/* Avatars + count */}
-            <div className="flex items-center justify-center gap-3">
+            <div className="group flex items-center justify-center gap-3 relative cursor-default">
               <div className="flex -space-x-2">
-                {["#f59e0b", "#3b82f6", "#10b981", "#8b5cf6", "#ef4444"].map((c, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm" style={{ background: c }}>
-                    {["SR", "MK", "JL", "AP", "NR"][i]}
-                  </div>
+                {[
+                  "https://api.dicebear.com/9.x/avataaars/svg?seed=Marco&backgroundColor=b6e3f4",
+                  "https://api.dicebear.com/9.x/avataaars/svg?seed=Sarah&backgroundColor=ffd5dc",
+                  "https://api.dicebear.com/9.x/avataaars/svg?seed=Alex&backgroundColor=d1f4d9",
+                  "https://api.dicebear.com/9.x/avataaars/svg?seed=James&backgroundColor=ffe0b2",
+                  "https://api.dicebear.com/9.x/avataaars/svg?seed=Nina&backgroundColor=e8d5f5",
+                ].map((url, i) => (
+                  <img key={i} src={url} alt="" className="w-9 h-9 rounded-full border-2 border-white shadow-sm bg-gray-100" />
                 ))}
               </div>
               <p className="text-gray-500 text-sm">
                 Loved by <span className="font-semibold text-gray-700">500+</span> indie developers
               </p>
+              {/* Easter egg tooltip */}
+              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <p className="text-[11px] text-gray-400 whitespace-nowrap" style={{ fontFamily: "'Caveat', cursive" }}>none of them exist, but who cares? 😄</p>
+              </div>
             </div>
 
             {/* Platforms */}
