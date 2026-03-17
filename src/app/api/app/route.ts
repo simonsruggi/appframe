@@ -26,6 +26,34 @@ export interface AppData {
   currentVersionReleaseDate: string;
 }
 
+/** Scrape App Store web page for screenshot URLs when iTunes API returns none */
+async function scrapeScreenshots(trackId: number, country: string): Promise<string[]> {
+  try {
+    const res = await fetch(`https://apps.apple.com/${country}/app/id${trackId}`, {
+      headers: { "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36" },
+    });
+    if (!res.ok) return [];
+    const html = await res.text();
+    // Match unique screenshot base paths (highest resolution webp variant)
+    const matches = html.matchAll(/https:\/\/is\d+-ssl\.mzstatic\.com\/image\/thumb\/[^\s"'>]+?screenshot[^\s"'>]*?\/(\d+x\d+)bb[^\s"'>]*/gi);
+    const seen = new Set<string>();
+    const urls: string[] = [];
+    for (const m of matches) {
+      // Extract base path (everything before the resolution suffix)
+      const url = m[0].replace(/\);?$/, "");
+      const base = url.replace(/\/\d+x\d+bb.*$/, "");
+      if (!seen.has(base)) {
+        seen.add(base);
+        // Use a high-res version
+        urls.push(`${base}/460x996bb.webp`);
+      }
+    }
+    return urls;
+  } catch {
+    return [];
+  }
+}
+
 function extractAppId(input: string): string | null {
   // Direct ID
   if (/^\d+$/.test(input.trim())) {
@@ -83,7 +111,11 @@ export async function GET(request: NextRequest) {
       if (!data.results?.length) {
         return NextResponse.json({ error: "App not found" }, { status: 404 });
       }
-      return NextResponse.json({ app: mapApp(data.results[0]) });
+      const app = mapApp(data.results[0]);
+      if (app.screenshotUrls.length === 0) {
+        app.screenshotUrls = await scrapeScreenshots(app.trackId, country);
+      }
+      return NextResponse.json({ app });
     }
 
     // Search across multiple stores in parallel for broader coverage
