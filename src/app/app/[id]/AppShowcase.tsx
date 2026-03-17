@@ -153,22 +153,33 @@ function ShowcaseCard({
       const content = contentRef.current;
       const wrapper = content?.parentElement;
       if (!content || !wrapper) return;
-      // Reset to natural size to measure
+
+      // Temporarily unconstrain content to measure natural size
       content.style.transform = "none";
-      // Double rAF ensures the browser has reflowed after state changes
+      content.style.width = "max-content";
+      content.style.height = "max-content";
+      content.style.position = "absolute";
+      content.style.visibility = "hidden";
+
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          // Available space = wrapper content box (excluding padding)
-          const style = getComputedStyle(wrapper);
-          const cw = wrapper.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-          const ch = wrapper.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-          // Measure the inner content child to get true natural dimensions
-          const inner = content.firstElementChild as HTMLElement | null;
-          const sw = inner ? inner.scrollWidth : content.scrollWidth;
-          const sh = inner ? inner.scrollHeight : content.scrollHeight;
-          const scale = Math.min(cw / sw, ch / sh, 1);
-          setContentScale(Math.round(scale * 1000) / 1000);
-        });
+        // Available space = wrapper content box (excluding padding)
+        const ws = getComputedStyle(wrapper);
+        const cw = wrapper.clientWidth - parseFloat(ws.paddingLeft) - parseFloat(ws.paddingRight);
+        const ch = wrapper.clientHeight - parseFloat(ws.paddingTop) - parseFloat(ws.paddingBottom);
+
+        // Natural dimensions of unconstrained content
+        const rect = content.getBoundingClientRect();
+        const sw = rect.width;
+        const sh = rect.height;
+
+        // Restore styles
+        content.style.width = "";
+        content.style.height = "";
+        content.style.position = "";
+        content.style.visibility = "";
+
+        const scale = Math.min(cw / sw, ch / sh, 1);
+        setContentScale(Math.round(scale * 1000) / 1000);
       });
     };
     recalc();
