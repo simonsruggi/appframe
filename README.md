@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AppFrame (appfra.me)
 
-## Getting Started
+App Store screenshot showcase generator. Users search for an iOS app, then customize and download a styled promotional image.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework**: Next.js 16 (App Router, Turbopack)
+- **Styling**: Tailwind CSS 4
+- **Auth**: NextAuth.js (via `/api/auth/[...nextauth]`)
+- **Payments**: Stripe (one-time Pro purchase, $5)
+- **Screenshot capture**: html2canvas-pro
+- **QR codes**: qrcode library
+- **Deployment**: Vercel
+
+## Project Structure
+
+```
+src/app/
+  page.tsx              - Homepage with app search
+  layout.tsx            - Root layout (Geist font)
+  globals.css           - Global styles
+  not-found.tsx         - 404 page
+  sitemap.ts            - Dynamic sitemap
+  login/                - Login page
+  pricing/              - Pricing page
+  privacy/              - Privacy policy
+  terms/                - Terms of service
+  pro/success/          - Post-purchase success page
+  app/[id]/             - Main showcase editor page
+    AppShowcase.tsx      - Core component: preview + sidebar controls
+  api/
+    app/                - iTunes Search API proxy (fetches app data)
+    auth/[...nextauth]/ - NextAuth endpoints
+    checkout/           - Stripe checkout session creation
+    image/              - Image proxy for mzstatic.com URLs (CORS)
+    md/                 - Markdown endpoint
+    verify/             - Pro status verification
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Component: AppShowcase.tsx
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The main editor component at `src/app/app/[id]/AppShowcase.tsx`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **THEMES**: 20 theme presets (ThemePreset interface), each controlling:
+  - Visual: bg, gradient, thumb, text, sub, pill, wm, qrFg, qrBg
+  - Defaults: font (index into FONTS), phones (1-3), aspect ratio, showDesc, showRating, showMeta
+  - Categories: Dark (noir, midnight, cosmic, ocean, forest, ember, rose, sunset, neon, galaxy), Light (arctic, snow, cream, mint, lavender), Bold (aurora, fire, electric, velvet, carbon)
+- **FONTS**: 10 fonts (Geist, Inter, DM Sans, Jakarta, Outfit, Space Grotesk, Sora, Poppins, Playfair, JetBrains Mono)
+- **ASPECTS**: 6 ratios (16:9, 1:1, 9:16, 1.91:1, 3:2, Auto)
+- **Theme selector**: Circle-based UI with first 8 visible + expand button for full grid
+- **Preset + override**: Selecting a theme applies all preset values; individual controls override after
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+- Search any iOS app via iTunes API
+- 20+ theme presets (dark, light, bold/gradient)
+- Customizable: font, phone count (1-3), aspect ratio, headline, tagline, app name, developer name
+- Toggle: screenshots, description, rating, meta info, QR code
+- Phone mockup display with dynamic island
+- HD PNG download (3x scale)
+- Watermark for free users, removed with Pro ($5 one-time via Stripe)
+- Share link / native share
+- Google Fonts loaded dynamically
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Light Theme Detection
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Uses `LIGHT_THEMES` Set containing: arctic, snow, cream, mint, lavender. Affects text colors, star colors, watermark opacity.
