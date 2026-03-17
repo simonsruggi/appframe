@@ -161,8 +161,10 @@ function ShowcaseCard({
         const style = getComputedStyle(wrapper);
         const cw = wrapper.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
         const ch = wrapper.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
-        const sw = content.scrollWidth;
-        const sh = content.scrollHeight;
+        // Measure the inner content child to get true dimensions (scrollWidth can be clamped by flex)
+        const inner = content.firstElementChild as HTMLElement | null;
+        const sw = inner ? inner.scrollWidth : content.scrollWidth;
+        const sh = inner ? inner.scrollHeight : content.scrollHeight;
         const scale = Math.min(cw / sw, ch / sh, 1);
         setContentScale(Math.round(scale * 1000) / 1000);
       });
