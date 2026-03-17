@@ -327,10 +327,10 @@ export default function Home() {
               { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", genre: "Productivity", tagline: "10K downloads 🎉" },
               { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", genre: "Education", tagline: "v2.0 is here!" },
               { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", genre: "Social", tagline: "Approved! ✅", bg: "#080808", text: "white" },
-              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", genre: "Music", tagline: "Just launched! 🚀", bg: "#0a0015", text: "white" },
-              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", genre: "Messaging", tagline: "Now available", bg: "#001020", text: "white" },
-              { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", genre: "Productivity", tagline: "10K downloads 🎉", bg: "#f8fafb", text: "dark" },
-              { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", genre: "Education", tagline: "v2.0 is here!", bg: "#120800", text: "white" },
+              { name: "Spotify", developer: "Spotify AB", icon: "/examples/spotify-icon.jpg", screenshot: "/examples/spotify-ss.jpg", genre: "Music", tagline: "Just launched! 🚀", bg: "#1a0030", text: "white" },
+              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "/examples/telegram-icon.jpg", screenshot: "/examples/telegram-ss.jpg", genre: "Messaging", tagline: "Now available", bg: "#002540", text: "white" },
+              { name: "Notion", developer: "Notion Labs", icon: "/examples/notion-icon.jpg", screenshot: "", genre: "Productivity", tagline: "10K downloads 🎉", bg: "#f0f4f8", text: "dark" },
+              { name: "Duolingo", developer: "Duolingo", icon: "/examples/duolingo-icon.jpg", screenshot: "", genre: "Education", tagline: "v2.0 is here!", bg: "#2a1500", text: "white" },
             ].map((ex, i) => {
               const isDark = ex.text === "white";
               return (
