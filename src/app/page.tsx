@@ -239,7 +239,7 @@ export default function Home() {
       </div>
 
       {/* Examples carousel */}
-      <div className="relative z-10 py-20 overflow-hidden">
+      <div id="examples" className="relative z-10 py-20 overflow-hidden scroll-mt-20">
         <h2 className="text-3xl font-bold text-white text-center mb-4">
           See what you can create
         </h2>

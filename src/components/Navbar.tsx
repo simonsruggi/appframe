@@ -33,7 +33,7 @@ export default function Navbar() {
         </Link>
 
         {/* Center: Nav links */}
-        <div className="flex items-center gap-6">
+        <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-6">
           <Link
             href="/"
             className={`text-sm transition-colors ${
@@ -41,6 +41,12 @@ export default function Navbar() {
             }`}
           >
             Home
+          </Link>
+          <Link
+            href="/#examples"
+            className="text-sm text-white/40 hover:text-white/70 transition-colors"
+          >
+            Examples
           </Link>
           <Link
             href="/pricing"
