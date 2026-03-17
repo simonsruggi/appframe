@@ -43,8 +43,8 @@ export async function POST() {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/pro/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXTAUTH_URL || "http://localhost:3000"}`,
+      success_url: `https://appfra.me/pro/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://appfra.me`,
     });
 
     return NextResponse.json({ url: checkoutSession.url });
