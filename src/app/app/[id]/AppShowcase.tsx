@@ -221,7 +221,7 @@ function ShowcaseCard({
 
       <div
         ref={contentRef}
-        className={`relative z-10 h-full flex items-center justify-center ${isCompact ? "px-4 py-4 pb-10" : "px-8 py-6 pb-10"} ${isVertical ? "flex-col" : ""}`}
+        className={`relative z-10 h-full flex items-center justify-center ${isCompact ? "px-5 py-6 pb-12" : "px-10 py-8 pb-12"} ${isVertical ? "flex-col" : ""}`}
         style={{ transform: `scale(${contentScale})`, transformOrigin: "center center" }}
       >
         <div className={`flex items-center ${isCompact ? "gap-4" : "gap-10"} ${hasScreenshots && !isCompact ? "" : "justify-center"} ${isCompact ? "flex-col text-center" : ""}`}>
