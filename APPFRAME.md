@@ -39,7 +39,7 @@ src/
       verify/route.ts     # GET: checks Pro status by email via Stripe sessions. POST: verifies specific session_id.
       image/route.ts      # Image proxy for mzstatic.com (Apple CDN) — returns image with CORS headers and 24h cache
   auth.ts                 # NextAuth config (Google provider, custom sign-in page)
-  middleware.ts           # Route protection: /app/* requires auth (redirect to /login), /login redirects to / if logged in
+  middleware.ts           # Route protection: /app/* requires auth, /login redirects if logged in, ?format=md rewrites to /api/md
   components/
     Navbar.tsx            # Shared navbar (client component) — session-aware via fetch to /api/auth/session, hidden on /app/* pages, has logout via CSRF token
 public/
@@ -121,6 +121,7 @@ These are user-selectable in the showcase component and NOT used on marketing pa
 | `/api/verify`       | GET    | Checks if current user's email has a paid Stripe session.    |
 | `/api/verify`       | POST   | Verifies a specific Stripe session_id. Returns `{ pro, email }`. |
 | `/api/image`        | GET    | Proxies images from mzstatic.com with CORS headers. `?url=` required. |
+| `/api/md`           | GET    | Converts any page to Markdown (for AI agents). `?url=` path required. Triggered via `?format=md` on any page. |
 
 ## Environment Variables
 
