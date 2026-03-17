@@ -53,6 +53,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+      </head>
       <body
         className={`${albertSans.variable} antialiased bg-white`}
         style={{ fontFamily: "'Albert Sans', sans-serif" }}
