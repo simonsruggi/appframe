@@ -16,10 +16,16 @@ const THEMES = {
 type ThemeKey = keyof typeof THEMES;
 
 const FONTS = [
-  { id: "system", label: "System", css: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" },
-  { id: "serif", label: "Serif", css: "Georgia, 'Times New Roman', serif" },
-  { id: "mono", label: "Mono", css: "'SF Mono', 'Fira Code', 'Courier New', monospace" },
-  { id: "rounded", label: "Rounded", css: "system-ui, -apple-system, sans-serif" },
+  { id: "geist", label: "Geist", css: "var(--font-geist-sans), -apple-system, sans-serif", google: "" },
+  { id: "inter", label: "Inter", css: "'Inter', sans-serif", google: "Inter:wght@400;500;600;700" },
+  { id: "dm-sans", label: "DM Sans", css: "'DM Sans', sans-serif", google: "DM+Sans:wght@400;500;600;700" },
+  { id: "jakarta", label: "Jakarta", css: "'Plus Jakarta Sans', sans-serif", google: "Plus+Jakarta+Sans:wght@400;500;600;700" },
+  { id: "satoshi", label: "Satoshi", css: "'Outfit', sans-serif", google: "Outfit:wght@400;500;600;700" },
+  { id: "space", label: "Space", css: "'Space Grotesk', sans-serif", google: "Space+Grotesk:wght@400;500;600;700" },
+  { id: "sora", label: "Sora", css: "'Sora', sans-serif", google: "Sora:wght@400;500;600;700" },
+  { id: "poppins", label: "Poppins", css: "'Poppins', sans-serif", google: "Poppins:wght@400;500;600;700" },
+  { id: "playfair", label: "Playfair", css: "'Playfair Display', serif", google: "Playfair+Display:wght@400;500;600;700" },
+  { id: "mono", label: "Mono", css: "'JetBrains Mono', monospace", google: "JetBrains+Mono:wght@400;500;600;700" },
 ];
 
 const ASPECTS = [
@@ -242,6 +248,19 @@ export default function AppShowcase({
 
   const t = THEMES[currentTheme];
 
+  // Load Google Font dynamically
+  useEffect(() => {
+    const font = FONTS[currentFont];
+    if (!font.google) return;
+    const id = `gfont-${font.id}`;
+    if (document.getElementById(id)) return;
+    const link = document.createElement("link");
+    link.id = id;
+    link.rel = "stylesheet";
+    link.href = `https://fonts.googleapis.com/css2?family=${font.google}&display=swap`;
+    document.head.appendChild(link);
+  }, [currentFont]);
+
   // Generate QR code
   useEffect(() => {
     if (showQR && app.trackViewUrl) {
@@ -379,22 +398,18 @@ export default function AppShowcase({
           {/* Font */}
           <div>
             <SectionLabel>Font</SectionLabel>
-            <div className="grid grid-cols-2 gap-1.5">
+            <select
+              value={currentFont}
+              onChange={(e) => setCurrentFont(Number(e.target.value))}
+              className="w-full px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-white text-sm focus:outline-none focus:border-white/20 cursor-pointer appearance-none"
+              style={{ fontFamily: FONTS[currentFont].css }}
+            >
               {FONTS.map((f, i) => (
-                <button
-                  key={f.id}
-                  onClick={() => setCurrentFont(i)}
-                  className={`py-2 px-3 rounded-lg text-sm transition-all cursor-pointer ${
-                    currentFont === i
-                      ? "bg-white text-black"
-                      : "bg-white/[0.04] text-white/50 hover:bg-white/[0.08]"
-                  }`}
-                  style={{ fontFamily: f.css }}
-                >
+                <option key={f.id} value={i} style={{ fontFamily: f.css, backgroundColor: "#111", color: "white" }}>
                   {f.label}
-                </button>
+                </option>
               ))}
-            </div>
+            </select>
           </div>
 
           {/* Phone count */}
