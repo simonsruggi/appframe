@@ -94,12 +94,22 @@ function ShowcaseCard({
   customAppName: string; customDeveloper: string; isPro: boolean; headline: string;
 }) {
   const t = THEMES[theme];
-  const isLight = theme === "arctic";
+  const isLight = theme === "arctic" || theme === "snow";
   const hasScreenshots = showScreenshots && app.screenshotUrls.length > 0;
   const isSquare = aspectRatio === "1/1";
+  const isVertical = aspectRatio === "9/16";
+  const isWide = aspectRatio === "1.91/1" || aspectRatio === "16/9";
+  const isCompact = isVertical || isSquare;
 
   const displayName = customAppName || app.trackName;
   const displayDeveloper = customDeveloper || app.developerName;
+
+  // Scale sizes based on aspect ratio
+  const iconSize = isCompact ? "w-14 h-14 rounded-[12px]" : "w-20 h-20 rounded-[18px]";
+  const titleSize = isCompact ? "text-2xl" : isWide ? "text-3xl" : "text-4xl";
+  const headlineSize = isCompact ? "text-lg" : "text-2xl";
+  const phoneSize = isCompact ? "sm" as const : "md" as const;
+  const maxPhones = isVertical ? 1 : isSquare ? Math.min(phoneCount, 2) : phoneCount;
 
   return (
     <div
@@ -131,67 +141,67 @@ function ShowcaseCard({
         </div>
       )}
 
-      <div className={`relative z-10 h-full flex items-center justify-center px-8 py-6 ${isSquare ? "flex-col gap-4" : ""}`}>
-        <div className={`flex items-center gap-10 ${hasScreenshots && !isSquare ? "" : "justify-center"} ${isSquare ? "flex-col text-center" : ""}`}>
+      <div className={`relative z-10 h-full flex items-center justify-center ${isCompact ? "px-4 py-4" : "px-8 py-6"} ${isVertical ? "flex-col" : ""}`}>
+        <div className={`flex items-center ${isCompact ? "gap-4" : "gap-10"} ${hasScreenshots && !isCompact ? "" : "justify-center"} ${isCompact ? "flex-col text-center" : ""}`}>
           {/* App info */}
-          <div className={`${hasScreenshots && !isSquare ? "max-w-sm" : isSquare ? "max-w-md" : "max-w-lg text-center"}`}>
+          <div className={`${hasScreenshots && !isCompact ? "max-w-sm" : isCompact ? "max-w-xs" : "max-w-lg text-center"}`}>
             {headline && (
-              <p className={`text-2xl font-bold ${t.text} mb-4 opacity-90`}>{headline}</p>
+              <p className={`${headlineSize} font-bold ${t.text} ${isCompact ? "mb-2" : "mb-4"} opacity-90`}>{headline}</p>
             )}
 
-            <div className={`mb-4 ${!hasScreenshots || isSquare ? "flex justify-center" : ""}`}>
+            <div className={`${isCompact ? "mb-2" : "mb-4"} ${!hasScreenshots || isCompact ? "flex justify-center" : ""}`}>
               <img
                 src={proxyImg(app.artworkUrl512)}
                 alt={displayName}
-                className="w-20 h-20 rounded-[18px] shadow-[0_8px_30px_-8px_rgba(0,0,0,0.5)]"
+                className={`${iconSize} shadow-[0_8px_30px_-8px_rgba(0,0,0,0.5)]`}
               />
             </div>
 
-            <h1 className={`text-4xl font-bold ${t.text} leading-[1.1] tracking-tight mb-2`}>
+            <h1 className={`${titleSize} font-bold ${t.text} leading-[1.1] tracking-tight mb-1`}>
               {displayName}
             </h1>
-            <p className={`text-base ${t.sub} mb-3`}>{displayDeveloper}</p>
+            <p className={`${isCompact ? "text-sm" : "text-base"} ${t.sub} ${isCompact ? "mb-2" : "mb-3"}`}>{displayDeveloper}</p>
 
             {tagline && (
-              <p className={`text-lg font-medium ${t.text} mb-3 opacity-80`}>{tagline}</p>
+              <p className={`${isCompact ? "text-sm" : "text-lg"} font-medium ${t.text} ${isCompact ? "mb-2" : "mb-3"} opacity-80`}>{tagline}</p>
             )}
 
             {showRating && app.averageUserRating > 0 && (
-              <div className={`mb-3 ${!hasScreenshots || isSquare ? "flex justify-center" : ""}`}>
+              <div className={`${isCompact ? "mb-2" : "mb-3"} ${!hasScreenshots || isCompact ? "flex justify-center" : ""}`}>
                 <StarsRow rating={app.averageUserRating} count={app.userRatingCount} theme={theme} />
               </div>
             )}
 
-            {showDescription && !tagline && (
-              <p className={`text-sm leading-relaxed ${t.sub} mb-4 line-clamp-2`}>{app.description}</p>
+            {showDescription && !tagline && !isVertical && (
+              <p className={`text-sm leading-relaxed ${t.sub} mb-3 line-clamp-2`}>{app.description}</p>
             )}
 
             {showMeta && (
-              <div className={`flex flex-wrap gap-1.5 ${!hasScreenshots || isSquare ? "justify-center" : ""}`}>
-                <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>{app.primaryGenreName}</span>
-                <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>{app.formattedPrice}</span>
-                <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>v{app.version}</span>
+              <div className={`flex flex-wrap gap-1 ${!hasScreenshots || isCompact ? "justify-center" : ""}`}>
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${t.pill}`}>{app.primaryGenreName}</span>
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${t.pill}`}>{app.formattedPrice}</span>
+                {!isVertical && <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${t.pill}`}>v{app.version}</span>}
               </div>
             )}
 
-            {showQR && qrDataUrl && (
-              <div className={`mt-4 ${!hasScreenshots || isSquare ? "flex justify-center" : ""}`}>
-                <img src={qrDataUrl} alt="QR Code" className="w-16 h-16 rounded-lg" />
+            {showQR && qrDataUrl && !isVertical && (
+              <div className={`mt-3 ${!hasScreenshots || isCompact ? "flex justify-center" : ""}`}>
+                <img src={qrDataUrl} alt="QR Code" className={`${isCompact ? "w-12 h-12" : "w-16 h-16"} rounded-lg`} />
               </div>
             )}
           </div>
 
           {/* Phone mockups */}
           {hasScreenshots && (
-            <div className={`flex items-end gap-3 shrink-0 ${isSquare ? "justify-center" : ""}`}>
-              <PhoneMockup src={app.screenshotUrls[screenshotIndex % app.screenshotUrls.length]} size={phoneCount >= 3 || isSquare ? "sm" : "md"} />
-              {phoneCount >= 2 && app.screenshotUrls.length > 1 && (
-                <div className={`opacity-60 ${isSquare ? "-translate-y-4" : "-translate-y-6"}`}>
-                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 1) % app.screenshotUrls.length]} size={phoneCount >= 3 || isSquare ? "sm" : "md"} />
+            <div className={`flex items-end ${isCompact ? "gap-2" : "gap-3"} shrink-0 ${isCompact ? "justify-center" : ""}`}>
+              <PhoneMockup src={app.screenshotUrls[screenshotIndex % app.screenshotUrls.length]} size={phoneSize} />
+              {maxPhones >= 2 && app.screenshotUrls.length > 1 && (
+                <div className={`opacity-60 ${isCompact ? "-translate-y-3" : "-translate-y-6"}`}>
+                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 1) % app.screenshotUrls.length]} size={phoneSize} />
                 </div>
               )}
-              {phoneCount >= 3 && app.screenshotUrls.length > 2 && (
-                <div className={`opacity-40 ${isSquare ? "-translate-y-2" : "-translate-y-3"}`}>
+              {maxPhones >= 3 && app.screenshotUrls.length > 2 && (
+                <div className={`opacity-40 -translate-y-3`}>
                   <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 2) % app.screenshotUrls.length]} size="sm" />
                 </div>
               )}
