@@ -95,11 +95,11 @@ export default function Home() {
 
           <div className="animate-fade-in-delay max-w-2xl mx-auto relative">
             {/* Hand-drawn arrow + text */}
-            <div className="absolute -left-48 -top-2 hidden lg:block select-none pointer-events-none">
-              <p className="text-gray-700 text-xl -rotate-3 mb-0" style={{ fontFamily: "'Caveat', cursive" }}>Try now! It&apos;s free!</p>
-              <svg className="w-20 h-12 text-gray-700 ml-12" viewBox="0 0 120 60" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M10 5 C 25 25, 60 40, 100 35" />
-                <path d="M90 28 L 102 36 L 88 42" />
+            <div className="absolute -left-52 top-0 hidden lg:flex flex-col items-end select-none pointer-events-none">
+              <p className="text-gray-700 text-xl -rotate-6 mr-2" style={{ fontFamily: "'Caveat', cursive" }}>Try now! It&apos;s free!</p>
+              <svg className="w-24 h-14 text-gray-700 -mt-1" viewBox="0 0 140 70" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 8 C 40 10, 70 30, 95 45 C 105 52, 115 50, 125 48" />
+                <path d="M115 40 L 128 48 L 118 55" />
               </svg>
             </div>
 
