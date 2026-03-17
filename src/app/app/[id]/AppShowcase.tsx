@@ -55,6 +55,9 @@ const LIGHT_THEMES = new Set(["arctic", "snow", "cream", "mint", "lavender"]);
 
 type ThemeKey = keyof typeof THEMES;
 
+const FREE_THEMES = new Set(["noir", "midnight", "cosmic", "ocean", "arctic"]);
+const FREE_FONTS = 4; // First 4 fonts are free (Geist, Inter, DM Sans, Jakarta)
+
 const FONTS = [
   { id: "geist", label: "Geist", css: "var(--font-geist-sans), -apple-system, sans-serif", google: "" },
   { id: "inter", label: "Inter", css: "'Inter', sans-serif", google: "Inter:wght@400;500;600;700" },
@@ -441,7 +444,7 @@ export default function AppShowcase({
       const verifiedPro = verifyRes.pro === true;
       const raw = await html2canvas(captureRef.current, {
         backgroundColor: null,
-        scale: 3,
+        scale: verifiedPro ? 3 : 1,
         useCORS: true,
         allowTaint: true,
         logging: false,
@@ -453,7 +456,8 @@ export default function AppShowcase({
       });
 
       // Clip to rounded corners to match preview
-      const radius = 24 * 3; // rounded-3xl ≈ 24px, scaled by 3
+      const exportScale = verifiedPro ? 3 : 1;
+      const radius = 24 * exportScale; // rounded-3xl ≈ 24px
       const canvas = document.createElement("canvas");
       canvas.width = raw.width;
       canvas.height = raw.height;
@@ -593,17 +597,24 @@ export default function AppShowcase({
             <SectionLabel>Theme</SectionLabel>
             {/* First row: 8 circles + expand button */}
             <div className="flex items-center gap-2 flex-wrap">
-              {Object.keys(THEMES).slice(0, 8).map((key) => (
-                <button
-                  key={key}
-                  onClick={() => applyThemePreset(key)}
-                  className={`w-9 h-9 rounded-full border-2 transition-all cursor-pointer shrink-0 ${
-                    currentTheme === key ? "border-white ring-2 ring-gray-900 scale-110" : "border-gray-200 hover:border-gray-400"
-                  }`}
-                  style={{ background: THEMES[key].thumb }}
-                  title={key}
-                />
-              ))}
+              {Object.keys(THEMES).slice(0, 8).map((key) => {
+                const locked = !isPro && !FREE_THEMES.has(key);
+                return (
+                  <button
+                    key={key}
+                    onClick={() => locked ? setShowProModal(true) : applyThemePreset(key)}
+                    className={`relative w-9 h-9 rounded-full border-2 transition-all cursor-pointer shrink-0 ${
+                      currentTheme === key ? "border-white ring-2 ring-gray-900 scale-110" : locked ? "border-gray-200 opacity-50" : "border-gray-200 hover:border-gray-400"
+                    }`}
+                    style={{ background: THEMES[key].thumb }}
+                    title={locked ? `${key} (Pro)` : key}
+                  >
+                    {locked && (
+                      <svg className="absolute inset-0 m-auto w-3.5 h-3.5 text-white drop-shadow-md" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z"/></svg>
+                    )}
+                  </button>
+                );
+              })}
               <button
                 onClick={() => setThemesExpanded(!themesExpanded)}
                 className="w-9 h-9 rounded-full border-2 border-gray-200 hover:border-gray-400 flex items-center justify-center cursor-pointer shrink-0 bg-gray-50 transition-all"
@@ -617,21 +628,30 @@ export default function AppShowcase({
             {/* Expanded grid */}
             {themesExpanded && (
               <div className="mt-3 grid grid-cols-5 gap-3">
-                {Object.keys(THEMES).map((key) => (
-                  <button
-                    key={key}
-                    onClick={() => applyThemePreset(key)}
-                    className="flex flex-col items-center gap-1 cursor-pointer group"
-                  >
-                    <div
-                      className={`w-10 h-10 rounded-full border-2 transition-all ${
-                        currentTheme === key ? "border-white ring-2 ring-gray-900 scale-110" : "border-gray-200 group-hover:border-gray-400"
-                      }`}
-                      style={{ background: THEMES[key].thumb }}
-                    />
-                    <span className={`text-[10px] leading-tight ${currentTheme === key ? "text-gray-900 font-semibold" : "text-gray-400"}`}>{key}</span>
-                  </button>
-                ))}
+                {Object.keys(THEMES).map((key) => {
+                  const locked = !isPro && !FREE_THEMES.has(key);
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => locked ? setShowProModal(true) : applyThemePreset(key)}
+                      className={`flex flex-col items-center gap-1 cursor-pointer group ${locked ? "opacity-50" : ""}`}
+                    >
+                      <div
+                        className={`relative w-10 h-10 rounded-full border-2 transition-all ${
+                          currentTheme === key ? "border-white ring-2 ring-gray-900 scale-110" : locked ? "border-gray-200" : "border-gray-200 group-hover:border-gray-400"
+                        }`}
+                        style={{ background: THEMES[key].thumb }}
+                      >
+                        {locked && (
+                          <svg className="absolute inset-0 m-auto w-3.5 h-3.5 text-white drop-shadow-md" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z"/></svg>
+                        )}
+                      </div>
+                      <span className={`text-[10px] leading-tight ${currentTheme === key ? "text-gray-900 font-semibold" : "text-gray-400"}`}>
+                        {key}{locked ? " 🔒" : ""}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -662,13 +682,17 @@ export default function AppShowcase({
             <SectionLabel>Font</SectionLabel>
             <select
               value={currentFont}
-              onChange={(e) => setCurrentFont(Number(e.target.value))}
+              onChange={(e) => {
+                const idx = Number(e.target.value);
+                if (!isPro && idx >= FREE_FONTS) { setShowProModal(true); return; }
+                setCurrentFont(idx);
+              }}
               className="w-full px-3 py-2.5 rounded-xl bg-white border border-gray-200 text-gray-900 text-sm focus:outline-none focus:border-gray-400 cursor-pointer appearance-none"
               style={{ fontFamily: FONTS[currentFont].css }}
             >
               {FONTS.map((f, i) => (
                 <option key={f.id} value={i} style={{ fontFamily: f.css, backgroundColor: "white", color: "#111" }}>
-                  {f.label}
+                  {f.label}{!isPro && i >= FREE_FONTS ? " 🔒 Pro" : ""}
                 </option>
               ))}
             </select>
