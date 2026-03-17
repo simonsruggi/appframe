@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "AppFrame — Beautiful App Store Showcases";
+export const alt = "AppFrame — Create stunning App Store showcase images in seconds";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -13,194 +13,299 @@ export default function Image() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "linear-gradient(135deg, #001020 0%, #003060 40%, #001830 70%, #000a18 100%)",
+          background: "#080808",
           fontFamily: "system-ui, sans-serif",
           position: "relative",
           overflow: "hidden",
         }}
       >
-        {/* Subtle glow effects */}
+        {/* Subtle radial glow */}
         <div
           style={{
             position: "absolute",
-            width: 600,
-            height: 600,
+            width: 800,
+            height: 800,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(0,100,200,0.15) 0%, transparent 70%)",
-            top: -100,
-            right: -100,
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            width: 500,
-            height: 500,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(0,60,150,0.12) 0%, transparent 70%)",
-            bottom: -100,
-            left: -50,
+            background: "radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 70%)",
+            top: -200,
+            left: "50%",
+            transform: "translateX(-50%)",
           }}
         />
 
-        {/* Phone mockups preview */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 24,
-            marginBottom: 48,
-          }}
-        >
-          {/* Phone 1 */}
-          <div
-            style={{
-              width: 120,
-              height: 245,
-              borderRadius: 22,
-              background: "linear-gradient(180deg, #1a3a5c 0%, #0a2040 100%)",
-              border: "2px solid rgba(255,255,255,0.12)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              opacity: 0.6,
-              transform: "translateY(16px)",
-            }}
-          >
-            <div
-              style={{
-                width: 108,
-                height: 233,
-                borderRadius: 18,
-                background: "linear-gradient(180deg, #004080 0%, #002040 100%)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(255,255,255,0.3)">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-              </svg>
-            </div>
-          </div>
-
-          {/* Phone 2 (main) */}
-          <div
-            style={{
-              width: 160,
-              height: 326,
-              borderRadius: 30,
-              background: "linear-gradient(180deg, #1a3a5c 0%, #0a2040 100%)",
-              border: "2px solid rgba(255,255,255,0.15)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
-            }}
-          >
-            <div
-              style={{
-                width: 146,
-                height: 312,
-                borderRadius: 24,
-                background: "linear-gradient(180deg, #0060b0 0%, #003060 100%)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 8,
-              }}
-            >
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="rgba(255,255,255,0.4)">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-              </svg>
-              <div style={{ display: "flex", gap: 4 }}>
-                <div style={{ width: 24, height: 4, borderRadius: 2, background: "rgba(255,255,255,0.3)" }} />
-                <div style={{ width: 16, height: 4, borderRadius: 2, background: "rgba(255,255,255,0.15)" }} />
-              </div>
-            </div>
-          </div>
-
-          {/* Phone 3 */}
-          <div
-            style={{
-              width: 120,
-              height: 245,
-              borderRadius: 22,
-              background: "linear-gradient(180deg, #1a3a5c 0%, #0a2040 100%)",
-              border: "2px solid rgba(255,255,255,0.12)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              opacity: 0.6,
-              transform: "translateY(16px)",
-            }}
-          >
-            <div
-              style={{
-                width: 108,
-                height: 233,
-                borderRadius: 18,
-                background: "linear-gradient(180deg, #004080 0%, #002040 100%)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="rgba(255,255,255,0.3)">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-              </svg>
-            </div>
-          </div>
-        </div>
-
-        {/* Logo + Title */}
+        {/* Left side — text */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            gap: 12,
+            justifyContent: "center",
+            padding: "60px 70px",
+            width: "55%",
+            gap: 24,
           }}
         >
+          {/* Logo */}
           <div
             style={{
-              fontSize: 56,
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+            }}
+          >
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: 10,
+                background: "white",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: 28,
+                  height: 22,
+                  borderRadius: 4,
+                  border: "3px solid #080808",
+                  display: "flex",
+                }}
+              />
+            </div>
+            <div
+              style={{
+                fontSize: 28,
+                fontWeight: 700,
+                color: "white",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              AppFrame
+            </div>
+          </div>
+
+          {/* Headline */}
+          <div
+            style={{
+              fontSize: 48,
               fontWeight: 800,
               color: "white",
               letterSpacing: "-0.03em",
-              lineHeight: 1,
+              lineHeight: 1.15,
             }}
           >
-            AppFrame
+            Create stunning App Store showcases
           </div>
+
+          {/* Subtitle */}
           <div
             style={{
-              fontSize: 22,
-              color: "rgba(180,210,240,0.7)",
-              fontWeight: 500,
-              letterSpacing: "0.01em",
+              fontSize: 20,
+              color: "rgba(255,255,255,0.5)",
+              lineHeight: 1.5,
             }}
           >
-            Beautiful App Store Showcases
+            Search any iOS app, pick a theme, and download a ready-to-share promotional image. Free.
+          </div>
+
+          {/* CTA pill */}
+          <div
+            style={{
+              display: "flex",
+              marginTop: 8,
+            }}
+          >
+            <div
+              style={{
+                background: "white",
+                color: "#080808",
+                fontSize: 16,
+                fontWeight: 700,
+                padding: "12px 28px",
+                borderRadius: 50,
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Try it free — appfra.me
+            </div>
           </div>
         </div>
 
-        {/* Bottom URL */}
+        {/* Right side — showcase card mockup */}
         <div
           style={{
-            position: "absolute",
-            bottom: 28,
-            fontSize: 16,
-            color: "rgba(255,255,255,0.3)",
-            fontWeight: 500,
-            letterSpacing: "0.05em",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "45%",
+            padding: "40px 40px 40px 0",
           }}
         >
-          appfra.me
+          {/* Card */}
+          <div
+            style={{
+              width: 440,
+              height: 500,
+              borderRadius: 24,
+              background: "linear-gradient(135deg, #001020 0%, #003060 50%, #001830 100%)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 20,
+              padding: 32,
+              boxShadow: "0 25px 80px rgba(0,80,180,0.15), 0 0 0 1px rgba(255,255,255,0.06)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+          >
+            {/* Inner glow */}
+            <div
+              style={{
+                position: "absolute",
+                width: 300,
+                height: 300,
+                borderRadius: "50%",
+                background: "radial-gradient(circle, rgba(0,100,200,0.15) 0%, transparent 70%)",
+                top: -50,
+                right: -50,
+              }}
+            />
+
+            {/* App icon */}
+            <div
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 16,
+                background: "linear-gradient(135deg, #4a90d9 0%, #2060a0 100%)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 8px 24px rgba(0,0,0,0.3)",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 28,
+                  display: "flex",
+                }}
+              >
+                📱
+              </div>
+            </div>
+
+            {/* App name */}
+            <div
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              Your App Name
+            </div>
+
+            {/* Stars */}
+            <div
+              style={{
+                display: "flex",
+                gap: 4,
+                alignItems: "center",
+              }}
+            >
+              <div style={{ fontSize: 14, color: "white", fontWeight: 600 }}>4.8</div>
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} style={{ fontSize: 12, color: "#fbbf24" }}>★</div>
+              ))}
+            </div>
+
+            {/* Phone mockups */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                gap: 12,
+                marginTop: 8,
+              }}
+            >
+              {/* Phone left */}
+              <div
+                style={{
+                  width: 90,
+                  height: 184,
+                  borderRadius: 16,
+                  background: "#1a1a1a",
+                  border: "1.5px solid rgba(255,255,255,0.1)",
+                  padding: 4,
+                  opacity: 0.7,
+                  transform: "translateY(10px)",
+                  display: "flex",
+                }}
+              >
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: 12,
+                    background: "linear-gradient(180deg, #1a3a5c 0%, #0a2040 100%)",
+                    display: "flex",
+                  }}
+                />
+              </div>
+
+              {/* Phone center */}
+              <div
+                style={{
+                  width: 110,
+                  height: 224,
+                  borderRadius: 20,
+                  background: "#1a1a1a",
+                  border: "1.5px solid rgba(255,255,255,0.12)",
+                  padding: 4,
+                  boxShadow: "0 12px 40px rgba(0,0,0,0.3)",
+                  display: "flex",
+                }}
+              >
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: 16,
+                    background: "linear-gradient(180deg, #2060a0 0%, #0a3060 100%)",
+                    display: "flex",
+                  }}
+                />
+              </div>
+
+              {/* Phone right */}
+              <div
+                style={{
+                  width: 90,
+                  height: 184,
+                  borderRadius: 16,
+                  background: "#1a1a1a",
+                  border: "1.5px solid rgba(255,255,255,0.1)",
+                  padding: 4,
+                  opacity: 0.7,
+                  transform: "translateY(10px)",
+                  display: "flex",
+                }}
+              >
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: 12,
+                    background: "linear-gradient(180deg, #1a3a5c 0%, #0a2040 100%)",
+                    display: "flex",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     ),
