@@ -4,6 +4,12 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
+// Owner accounts — always Pro
+const PRO_WHITELIST = new Set([
+  "simone.ruggiero97@gmail.com",
+  "wildgroup97@gmail.com",
+]);
+
 export async function GET() {
   try {
     const session = await auth();
@@ -11,12 +17,16 @@ export async function GET() {
       return NextResponse.json({ pro: false });
     }
 
-    const email = session.user.email;
+    const email = session.user.email.toLowerCase();
+    if (PRO_WHITELIST.has(email)) {
+      return NextResponse.json({ pro: true });
+    }
+
     const sessions = await stripe.checkout.sessions.list({ limit: 100 });
     const paid = sessions.data.find(
       (s) =>
         s.payment_status === "paid" &&
-        s.customer_details?.email?.toLowerCase() === email.toLowerCase()
+        s.customer_details?.email?.toLowerCase() === email
     );
 
     return NextResponse.json({ pro: !!paid });
