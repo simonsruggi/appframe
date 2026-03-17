@@ -88,6 +88,7 @@ function ShowcaseCard({
 }) {
   const t = THEMES[theme];
   const isLight = theme === "arctic";
+  const hasScreenshots = showScreenshots && app.screenshotUrls.length > 0;
   const isSquare = aspectRatio === "1/1";
 
   const displayName = customAppName || app.trackName;
@@ -99,7 +100,7 @@ function ShowcaseCard({
       style={{
         backgroundColor: t.bg,
         width: "100%",
-        aspectRatio: aspectRatio || (showScreenshots ? "16/10" : "16/8"),
+        aspectRatio: aspectRatio || (hasScreenshots ? "16/10" : "16/8"),
         fontFamily,
       }}
     >
@@ -123,14 +124,14 @@ function ShowcaseCard({
       )}
 
       <div className={`relative z-10 h-full flex items-center justify-center px-8 py-6 ${isSquare ? "flex-col gap-4" : ""}`}>
-        <div className={`flex items-center gap-10 ${showScreenshots && !isSquare ? "" : "justify-center"} ${isSquare ? "flex-col text-center" : ""}`}>
+        <div className={`flex items-center gap-10 ${hasScreenshots && !isSquare ? "" : "justify-center"} ${isSquare ? "flex-col text-center" : ""}`}>
           {/* App info */}
-          <div className={`${showScreenshots && !isSquare ? "max-w-sm" : isSquare ? "max-w-md" : "max-w-lg text-center"}`}>
+          <div className={`${hasScreenshots && !isSquare ? "max-w-sm" : isSquare ? "max-w-md" : "max-w-lg text-center"}`}>
             {headline && (
               <p className={`text-2xl font-bold ${t.text} mb-4 opacity-90`}>{headline}</p>
             )}
 
-            <div className={`mb-4 ${!showScreenshots || isSquare ? "flex justify-center" : ""}`}>
+            <div className={`mb-4 ${!hasScreenshots || isSquare ? "flex justify-center" : ""}`}>
               <img
                 src={proxyImg(app.artworkUrl512)}
                 alt={displayName}
@@ -148,7 +149,7 @@ function ShowcaseCard({
             )}
 
             {showRating && app.averageUserRating > 0 && (
-              <div className={`mb-3 ${!showScreenshots || isSquare ? "flex justify-center" : ""}`}>
+              <div className={`mb-3 ${!hasScreenshots || isSquare ? "flex justify-center" : ""}`}>
                 <StarsRow rating={app.averageUserRating} count={app.userRatingCount} theme={theme} />
               </div>
             )}
@@ -158,7 +159,7 @@ function ShowcaseCard({
             )}
 
             {showMeta && (
-              <div className={`flex flex-wrap gap-1.5 ${!showScreenshots || isSquare ? "justify-center" : ""}`}>
+              <div className={`flex flex-wrap gap-1.5 ${!hasScreenshots || isSquare ? "justify-center" : ""}`}>
                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>{app.primaryGenreName}</span>
                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>{app.formattedPrice}</span>
                 <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${t.pill}`}>v{app.version}</span>
@@ -166,14 +167,14 @@ function ShowcaseCard({
             )}
 
             {showQR && qrDataUrl && (
-              <div className={`mt-4 ${!showScreenshots || isSquare ? "flex justify-center" : ""}`}>
+              <div className={`mt-4 ${!hasScreenshots || isSquare ? "flex justify-center" : ""}`}>
                 <img src={qrDataUrl} alt="QR Code" className="w-16 h-16 rounded-lg" />
               </div>
             )}
           </div>
 
           {/* Phone mockups */}
-          {showScreenshots && app.screenshotUrls.length > 0 && (
+          {hasScreenshots && (
             <div className={`flex items-end gap-3 shrink-0 ${isSquare ? "justify-center" : ""}`}>
               <PhoneMockup src={app.screenshotUrls[screenshotIndex % app.screenshotUrls.length]} size={phoneCount >= 3 || isSquare ? "sm" : "md"} />
               {phoneCount >= 2 && app.screenshotUrls.length > 1 && (
