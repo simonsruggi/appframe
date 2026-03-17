@@ -65,10 +65,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-white">
+      {/* Dot grid pattern */}
+      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, #d1d5db 1px, transparent 1px)", backgroundSize: "32px 32px", opacity: 0.3 }} />
       {/* Subtle bg elements */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-gradient-to-b from-amber-100/30 via-orange-50/20 to-transparent rounded-full blur-[100px] -top-[400px]" />
       <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-blue-50/40 rounded-full blur-[80px]" />
       <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-purple-50/30 rounded-full blur-[80px]" />
+      <div className="absolute top-[60%] left-1/4 w-[500px] h-[500px] bg-amber-50/30 rounded-full blur-[100px]" />
+      <div className="absolute top-[80%] right-1/4 w-[400px] h-[400px] bg-blue-50/30 rounded-full blur-[80px]" />
 
       {/* Hero */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-32 pb-16">
@@ -216,19 +220,26 @@ export default function Home() {
                 </svg>
               ),
             },
-          ].map((item) => (
-            <div
-              key={item.step}
-              className="text-center p-6 rounded-3xl bg-gray-50 border border-gray-100"
-            >
-              <div className="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center mx-auto mb-4 text-gray-500 shadow-sm">
-                {item.icon}
+          ].map((item, idx) => (
+            <div key={item.step} className="relative">
+              <div className="text-center p-6 rounded-3xl bg-gray-50 border border-gray-100">
+                <div className="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center mx-auto mb-4 text-gray-500 shadow-sm">
+                  {item.icon}
+                </div>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                  Step {item.step}
+                </p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
               </div>
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                Step {item.step}
-              </p>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+              {/* Arrow between cards */}
+              {idx < 2 && (
+                <div className="hidden md:flex absolute top-1/2 -right-5 -translate-y-1/2 z-10 text-gray-300">
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </div>
+              )}
             </div>
           ))}
         </div>
