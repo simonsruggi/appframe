@@ -56,7 +56,7 @@ export default function Navbar() {
           {loading ? (
             <div className="w-8 h-8 rounded-full bg-white/[0.06]" />
           ) : session?.user ? (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               {session.user.image ? (
                 <img
                   src={session.user.image}
@@ -68,6 +68,14 @@ export default function Navbar() {
                   {session.user.name?.[0]?.toUpperCase() || "U"}
                 </div>
               )}
+              <button
+                onClick={() => {
+                  fetch("/api/auth/signout", { method: "POST" }).then(() => window.location.href = "/");
+                }}
+                className="text-white/30 hover:text-white/60 text-xs transition-colors cursor-pointer"
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <Link
