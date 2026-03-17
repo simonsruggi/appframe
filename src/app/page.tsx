@@ -123,13 +123,13 @@ export default function Home() {
       </div>
 
       {/* Hero + Search */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 pt-28 pb-16">
-        <div className="w-full max-w-2xl text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center px-4 min-h-screen">
+        <div className="w-full max-w-3xl text-center">
           <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white leading-tight">
-              Your app got approved.<br />Time to <span className="relative inline-block"><span className="relative z-10 bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent">celebrate</span><span className="absolute -inset-2 bg-amber-400/20 rounded-xl blur-md" /></span>.
+            <h1 className="text-6xl md:text-8xl font-bold mb-8 text-white leading-[1.05] tracking-tight">
+              Your app got approved.<br />Time to <span className="relative inline-block"><span className="relative z-10 bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent">celebrate</span><span className="absolute -inset-3 bg-amber-400/20 rounded-2xl blur-lg" /></span>.
             </h1>
-            <p className="text-zinc-400 text-lg mb-10 max-w-lg mx-auto">
+            <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-xl mx-auto">
               Generate a stunning showcase image in seconds. Pick a theme, customize it, and share your launch on social media.
             </p>
           </div>
@@ -298,28 +298,86 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CTA / Pricing link */}
-      <div className="relative z-10 text-center px-4 pb-12">
-        <p className="text-zinc-500 text-sm mb-3">
-          Free to use with a small watermark.
+      {/* Pricing */}
+      <div id="pricing" className="relative z-10 max-w-4xl mx-auto px-4 py-20 scroll-mt-20">
+        <h2 className="text-3xl font-bold text-white text-center mb-4">Simple pricing</h2>
+        <p className="text-white/40 text-center mb-12 text-sm">
+          Create beautiful app showcases for free. Go Pro when you need clean exports.
         </p>
-        <Link
-          href="/pricing"
-          className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors"
-        >
-          See pricing for Pro
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </Link>
+
+        <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
+          {/* Free */}
+          <div className="rounded-3xl bg-white/[0.03] border border-white/[0.06] p-8">
+            <p className="text-white/50 text-sm font-medium uppercase tracking-wider mb-4">Free</p>
+            <div className="flex items-baseline gap-1 mb-1">
+              <span className="text-4xl font-bold text-white">$0</span>
+            </div>
+            <p className="text-white/30 text-sm mb-8">Free forever</p>
+            <ul className="space-y-3">
+              {["Unlimited showcase images", "All themes included", "5 beautiful themes", "Small watermark on downloads"].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-white/60">
+                  <svg className="w-4 h-4 text-white/30 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Pro */}
+          <div className="rounded-3xl bg-white/[0.05] border border-white/[0.12] p-8 relative">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white text-black text-xs font-semibold">
+              Recommended
+            </div>
+            <p className="text-white/70 text-sm font-medium uppercase tracking-wider mb-4">Pro</p>
+            <div className="flex items-baseline gap-1 mb-1">
+              <span className="text-4xl font-bold text-white">$5</span>
+            </div>
+            <p className="text-white/30 text-sm mb-8">One-time payment</p>
+            <ul className="space-y-3">
+              {["Everything in Free", "No watermark on downloads", "High-resolution PNG export", "Lifetime access"].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-white/80">
+                  <svg className="w-4 h-4 text-white mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* FAQ */}
+        <div className="max-w-2xl mx-auto">
+          <h3 className="text-2xl font-bold text-white text-center mb-10">FAQ</h3>
+          <div className="space-y-6">
+            {[
+              { q: "What do I get for free?", a: "Unlimited showcase images for any iOS app. Free downloads include a small @AppFrame watermark." },
+              { q: "What does Pro unlock?", a: "Removes the watermark and gives you high-res PNG exports, perfect for social media and press kits." },
+              { q: "Is it a subscription?", a: "No. $5 one-time, yours forever." },
+              { q: "Can I get a refund?", a: "Contact us within 7 days for a full refund, no questions asked." },
+            ].map((faq, i) => (
+              <div key={i} className="border-b border-white/[0.06] pb-6">
+                <h4 className="text-white font-semibold mb-2">{faq.q}</h4>
+                <p className="text-white/40 text-sm leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="relative z-10 border-t border-white/[0.06] py-8 text-center">
-        <div className="flex items-center justify-center gap-4 text-xs text-white/25">
-          <Link href="/privacy" className="hover:text-white/50 transition-colors">Privacy Policy</Link>
-          <span>&middot;</span>
-          <Link href="/terms" className="hover:text-white/50 transition-colors">Terms of Service</Link>
+      <div className="relative z-10 border-t border-white/[0.06] py-10">
+        <div className="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
+          <div className="flex items-center gap-2 text-white/20 text-sm">
+            <span>Made with</span>
+            <svg className="w-4 h-4 text-red-400/60" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+            <span>by <a href="https://x.com/simonsruggi" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white/60 transition-colors">Simone Ruggiero</a></span>
+          </div>
+          <div className="flex items-center justify-center gap-4 text-xs text-white/20">
+            <Link href="/privacy" className="hover:text-white/40 transition-colors">Privacy</Link>
+            <span>&middot;</span>
+            <Link href="/terms" className="hover:text-white/40 transition-colors">Terms</Link>
+            <span>&middot;</span>
+            <span>&copy; {new Date().getFullYear()} AppFrame</span>
+          </div>
         </div>
       </div>
     </div>

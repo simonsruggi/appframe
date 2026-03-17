@@ -49,10 +49,8 @@ export default function Navbar() {
             Examples
           </Link>
           <Link
-            href="/pricing"
-            className={`text-sm transition-colors ${
-              pathname === "/pricing" ? "text-white" : "text-white/40 hover:text-white/70"
-            }`}
+            href="/#pricing"
+            className="text-sm text-white/40 hover:text-white/70 transition-colors"
           >
             Pricing
           </Link>
