@@ -12,6 +12,23 @@ const SITE_FONTS = [
   { id: "space", label: "Space Grotesk", google: "Space+Grotesk:wght@400;500;600;700", css: "'Space Grotesk', sans-serif" },
   { id: "sora", label: "Sora", google: "Sora:wght@400;500;600;700", css: "'Sora', sans-serif" },
   { id: "poppins", label: "Poppins", google: "Poppins:wght@400;500;600;700", css: "'Poppins', sans-serif" },
+  { id: "outfit", label: "Outfit", google: "Outfit:wght@400;500;600;700", css: "'Outfit', sans-serif" },
+  { id: "manrope", label: "Manrope", google: "Manrope:wght@400;500;600;700", css: "'Manrope', sans-serif" },
+  { id: "rubik", label: "Rubik", google: "Rubik:wght@400;500;600;700", css: "'Rubik', sans-serif" },
+  { id: "nunito", label: "Nunito", google: "Nunito:wght@400;500;600;700", css: "'Nunito', sans-serif" },
+  { id: "raleway", label: "Raleway", google: "Raleway:wght@400;500;600;700", css: "'Raleway', sans-serif" },
+  { id: "montserrat", label: "Montserrat", google: "Montserrat:wght@400;500;600;700", css: "'Montserrat', sans-serif" },
+  { id: "lato", label: "Lato", google: "Lato:wght@400;700", css: "'Lato', sans-serif" },
+  { id: "open-sans", label: "Open Sans", google: "Open+Sans:wght@400;500;600;700", css: "'Open Sans', sans-serif" },
+  { id: "roboto", label: "Roboto", google: "Roboto:wght@400;500;700", css: "'Roboto', sans-serif" },
+  { id: "work-sans", label: "Work Sans", google: "Work+Sans:wght@400;500;600;700", css: "'Work Sans', sans-serif" },
+  { id: "albert", label: "Albert Sans", google: "Albert+Sans:wght@400;500;600;700", css: "'Albert Sans', sans-serif" },
+  { id: "figtree", label: "Figtree", google: "Figtree:wght@400;500;600;700", css: "'Figtree', sans-serif" },
+  { id: "lexend", label: "Lexend", google: "Lexend:wght@400;500;600;700", css: "'Lexend', sans-serif" },
+  { id: "playfair", label: "Playfair", google: "Playfair+Display:wght@400;500;600;700", css: "'Playfair Display', serif" },
+  { id: "merriweather", label: "Merriweather", google: "Merriweather:wght@400;700", css: "'Merriweather', serif" },
+  { id: "jetbrains", label: "JetBrains Mono", google: "JetBrains+Mono:wght@400;500;600;700", css: "'JetBrains Mono', monospace" },
+  { id: "fira-code", label: "Fira Code", google: "Fira+Code:wght@400;500;600;700", css: "'Fira Code', monospace" },
 ];
 
 export default function Navbar() {
