@@ -12,7 +12,7 @@ const albertSans = Albert_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://appfra.me"),
   title: {
-    default: "AppFrame — Beautiful App Store Showcases",
+    default: "AppFrame - Celebrate Your Approval!",
     template: "%s | AppFrame",
   },
   description:
@@ -33,14 +33,14 @@ export const metadata: Metadata = {
     siteName: "AppFrame",
     locale: "en_US",
     type: "website",
-    title: "AppFrame — Beautiful App Store Showcases",
+    title: "AppFrame - Celebrate Your Approval!",
     description:
       "Generate stunning showcase images for your iOS apps. Share app launches on social media with beautiful, ready-to-post visuals.",
     url: "https://appfra.me",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AppFrame — Beautiful App Store Showcases",
+    title: "AppFrame - Celebrate Your Approval!",
     description:
       "Generate stunning showcase images for your iOS apps. Share app launches on social media with beautiful, ready-to-post visuals.",
   },
