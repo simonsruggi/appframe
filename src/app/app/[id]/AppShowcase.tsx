@@ -88,14 +88,21 @@ function proxyImg(url: string) {
   return url;
 }
 
-function PhoneMockup({ src, size = "md" }: { src: string; size?: "sm" | "md" }) {
-  const w = size === "sm" ? "w-[160px] h-[326px] rounded-[30px]" : "w-[200px] h-[408px] rounded-[38px]";
-  const inner = size === "sm" ? "rounded-[26px]" : "rounded-[33px]";
-  const notch = size === "sm" ? "w-[64px] h-[20px]" : "w-[80px] h-[24px]";
+function PhoneMockup({ src, scale = 1 }: { src: string; scale?: number }) {
+  const w = 200 * scale;
+  const h = 408 * scale;
+  const r = 38 * scale;
+  const ri = 33 * scale;
+  const nw = 80 * scale;
+  const nh = 24 * scale;
+  const pad = 5 * scale;
   return (
-    <div className={`relative ${w} bg-[#1a1a1a] p-[5px] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_60px_-12px_rgba(0,0,0,0.8)]`}>
-      <div className={`w-full h-full ${inner} overflow-hidden bg-black relative`}>
-        <div className={`absolute top-2 left-1/2 -translate-x-1/2 ${notch} bg-black rounded-full z-20`} />
+    <div
+      className="relative bg-[#1a1a1a] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_60px_-12px_rgba(0,0,0,0.8)]"
+      style={{ width: w, height: h, borderRadius: r, padding: pad }}
+    >
+      <div className="w-full h-full overflow-hidden bg-black relative" style={{ borderRadius: ri }}>
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-black rounded-full z-20" style={{ width: nw, height: nh }} />
         <img src={proxyImg(src)} alt="" className="w-full h-full object-cover" />
       </div>
     </div>
@@ -143,8 +150,10 @@ function ShowcaseCard({
   const iconSize = isCompact ? "w-14 h-14 rounded-[12px]" : "w-20 h-20 rounded-[18px]";
   const titleSize = isCompact ? "text-2xl" : isWide ? "text-3xl" : "text-4xl";
   const headlineSize = isCompact ? "text-lg" : "text-2xl";
-  const phoneSize = isCompact ? "sm" as const : "md" as const;
   const maxPhones = isVertical ? 1 : isSquare ? Math.min(phoneCount, 2) : phoneCount;
+  // Scale phones down when multiple are shown to prevent overflow
+  const phoneScale = isCompact ? 0.65 : maxPhones >= 3 ? 0.7 : maxPhones >= 2 ? 0.85 : 1;
+  const phoneScaleSm = isCompact ? 0.55 : 0.6;
 
   return (
     <div
@@ -176,7 +185,7 @@ function ShowcaseCard({
         </div>
       )}
 
-      <div className={`relative z-10 h-full flex items-center justify-center ${isCompact ? "px-4 py-4" : "px-8 py-6"} ${isVertical ? "flex-col" : ""}`}>
+      <div className={`relative z-10 h-full flex items-center justify-center ${isCompact ? "px-4 py-4 pb-10" : "px-8 py-6 pb-10"} ${isVertical ? "flex-col" : ""}`}>
         <div className={`flex items-center ${isCompact ? "gap-4" : "gap-10"} ${hasScreenshots && !isCompact ? "" : "justify-center"} ${isCompact ? "flex-col text-center" : ""}`}>
           {/* App info */}
           <div className={`${hasScreenshots && !isCompact ? "max-w-sm" : isCompact ? "max-w-xs" : "max-w-lg text-center"}`}>
@@ -233,15 +242,15 @@ function ShowcaseCard({
           {/* Phone mockups */}
           {hasScreenshots && (
             <div className={`flex items-end ${isCompact ? "gap-2" : "gap-3"} shrink-0 ${isCompact ? "justify-center" : ""}`}>
-              <PhoneMockup src={app.screenshotUrls[screenshotIndex % app.screenshotUrls.length]} size={phoneSize} />
+              <PhoneMockup src={app.screenshotUrls[screenshotIndex % app.screenshotUrls.length]} scale={phoneScale} />
               {maxPhones >= 2 && app.screenshotUrls.length > 1 && (
-                <div className={`opacity-60 ${isCompact ? "-translate-y-3" : "-translate-y-6"}`}>
-                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 1) % app.screenshotUrls.length]} size={phoneSize} />
+                <div className={`opacity-60 ${isCompact ? "-translate-y-3" : "-translate-y-4"}`}>
+                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 1) % app.screenshotUrls.length]} scale={phoneScale} />
                 </div>
               )}
               {maxPhones >= 3 && app.screenshotUrls.length > 2 && (
-                <div className={`opacity-40 -translate-y-3`}>
-                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 2) % app.screenshotUrls.length]} size="sm" />
+                <div className="opacity-40 -translate-y-2">
+                  <PhoneMockup src={app.screenshotUrls[(screenshotIndex + 2) % app.screenshotUrls.length]} scale={phoneScaleSm} />
                 </div>
               )}
             </div>
@@ -251,7 +260,7 @@ function ShowcaseCard({
 
       {/* Bottom */}
       <div className="absolute bottom-3 left-0 right-0 flex items-center justify-center z-20">
-        <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs ${isLight ? "text-gray-400" : "text-white/40"}`}>
+        <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs backdrop-blur-md ${isLight ? "bg-white/60 text-gray-500" : "bg-black/40 text-white/60"}`}>
           <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
           </svg>
