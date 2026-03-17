@@ -41,6 +41,11 @@ function formatCount(n: number): string {
   return n.toString();
 }
 
+function proxyImg(url: string) {
+  if (url.includes("mzstatic.com")) return `/api/image?url=${encodeURIComponent(url)}`;
+  return url;
+}
+
 function PhoneMockup({ src, size = "md" }: { src: string; size?: "sm" | "md" }) {
   const w = size === "sm" ? "w-[160px] h-[326px] rounded-[30px]" : "w-[200px] h-[408px] rounded-[38px]";
   const inner = size === "sm" ? "rounded-[26px]" : "rounded-[33px]";
@@ -49,7 +54,7 @@ function PhoneMockup({ src, size = "md" }: { src: string; size?: "sm" | "md" }) 
     <div className={`relative ${w} bg-[#1a1a1a] p-[5px] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_60px_-12px_rgba(0,0,0,0.8)]`}>
       <div className={`w-full h-full ${inner} overflow-hidden bg-black relative`}>
         <div className={`absolute top-2 left-1/2 -translate-x-1/2 ${notch} bg-black rounded-full z-20`} />
-        <img src={src} alt="" className="w-full h-full object-cover" crossOrigin="anonymous" />
+        <img src={proxyImg(src)} alt="" className="w-full h-full object-cover" />
       </div>
     </div>
   );
@@ -127,10 +132,9 @@ function ShowcaseCard({
 
             <div className={`mb-4 ${!showScreenshots || isSquare ? "flex justify-center" : ""}`}>
               <img
-                src={app.artworkUrl512}
+                src={proxyImg(app.artworkUrl512)}
                 alt={displayName}
                 className="w-20 h-20 rounded-[18px] shadow-[0_8px_30px_-8px_rgba(0,0,0,0.5)]"
-                crossOrigin="anonymous"
               />
             </div>
 
@@ -453,7 +457,7 @@ export default function AppShowcase({
                       screenshotIndex === i ? "border-white" : "border-white/10 opacity-40 hover:opacity-70"
                     }`}
                   >
-                    <img src={url} alt="" className="w-full h-full object-cover" />
+                    <img src={proxyImg(url)} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
