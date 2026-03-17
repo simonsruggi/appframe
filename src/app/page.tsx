@@ -126,7 +126,7 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center justify-center px-4 min-h-screen">
         <div className="w-full max-w-3xl text-center">
           <div className="animate-fade-in">
-            <h1 className="text-6xl md:text-8xl font-bold mb-8 text-white leading-[1.05] tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-bold mb-8 text-white leading-[1.1] tracking-tight whitespace-nowrap">
               Your app got approved.<br />Time to <span className="relative inline-block"><span className="relative z-10 bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent">celebrate</span><span className="absolute -inset-3 bg-amber-400/20 rounded-2xl blur-lg" /></span>.
             </h1>
             <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-xl mx-auto">
