@@ -93,6 +93,7 @@ export default function Image() {
           >
             {/* Left info */}
             <div style={{ display: "flex", flexDirection: "column", gap: 7, width: 155 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "#111", opacity: 0.85 }}>Approved! ✅</div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`${BASE}/examples/spotify-icon.jpg`}
@@ -173,6 +174,7 @@ export default function Image() {
           >
             {/* Left info */}
             <div style={{ display: "flex", flexDirection: "column", gap: 7, width: 155 }}>
+              <div style={{ fontSize: 14, fontWeight: 700, color: "white", opacity: 0.85 }}>Approved! ✅</div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`${BASE}/examples/telegram-icon.jpg`}
