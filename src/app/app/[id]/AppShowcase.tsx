@@ -117,7 +117,7 @@ function ShowcaseCard({
         </div>
       )}
 
-      <div className={`relative z-10 h-full flex items-center justify-center px-10 py-8 ${isSquare ? "flex-col gap-6" : ""}`}>
+      <div className={`relative z-10 h-full flex items-center justify-center px-8 py-6 ${isSquare ? "flex-col gap-4" : ""}`}>
         <div className={`flex items-center gap-10 ${showScreenshots && !isSquare ? "" : "justify-center"} ${isSquare ? "flex-col text-center" : ""}`}>
           {/* App info */}
           <div className={`${showScreenshots && !isSquare ? "max-w-sm" : isSquare ? "max-w-md" : "max-w-lg text-center"}`}>
@@ -332,9 +332,9 @@ export default function AppShowcase({
 
   return (
     <>
-      <div className="min-h-screen bg-[#0a0a0a] flex">
+      <div className="h-screen bg-[#0a0a0a] flex overflow-hidden">
         {/* Left: Preview */}
-        <div className="flex-1 flex items-center justify-center p-8 overflow-auto">
+        <div className="flex-1 flex items-center justify-center p-4 overflow-auto">
           <div className="w-full max-w-3xl">
             <div ref={captureRef} className="rounded-3xl overflow-hidden shadow-2xl border border-white/[0.06]">
               <ShowcaseCard
