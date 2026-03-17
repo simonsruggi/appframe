@@ -5,14 +5,17 @@ export default auth((req) => {
   const isAppPage = req.nextUrl.pathname.startsWith("/app/");
   const isLoginPage = req.nextUrl.pathname === "/login";
 
-  // Redirect to login if accessing /app/* without auth
+  // Redirect to login if accessing /app/* without auth, preserving the original URL
   if (isAppPage && !isLoggedIn) {
-    return Response.redirect(new URL("/login", req.nextUrl));
+    const loginUrl = new URL("/login", req.nextUrl);
+    loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
+    return Response.redirect(loginUrl);
   }
 
-  // Redirect to home if already logged in and visiting /login
+  // Redirect to callbackUrl or home if already logged in and visiting /login
   if (isLoginPage && isLoggedIn) {
-    return Response.redirect(new URL("/", req.nextUrl));
+    const callbackUrl = req.nextUrl.searchParams.get("callbackUrl") || "/";
+    return Response.redirect(new URL(callbackUrl, req.nextUrl));
   }
 });
 

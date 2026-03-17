@@ -1,28 +1,31 @@
 import Link from "next/link";
 import { signIn } from "@/auth";
 
-export default function LoginPage() {
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ callbackUrl?: string }> }) {
+  const { callbackUrl } = await searchParams;
+  const redirectTo = callbackUrl || "/";
+
   return (
-    <div className="min-h-screen bg-[#080808] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <div className="bg-white/[0.03] border border-white/[0.06] rounded-3xl p-8 text-center">
+        <div className="bg-white border border-gray-200 rounded-3xl p-8 text-center shadow-sm">
           <img src="/logo.svg" alt="AppFrame" className="w-14 h-14 mx-auto mb-3" />
-          <p className="text-lg font-bold text-white mb-6">
+          <p className="text-lg font-bold text-gray-900 mb-6">
             AppFrame
           </p>
 
-          <h1 className="text-2xl font-bold text-white mb-2">Welcome back</h1>
-          <p className="text-white/40 text-sm mb-8">Sign in to create beautiful app showcases</p>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome back</h1>
+          <p className="text-gray-500 text-sm mb-8">Sign in to create beautiful app showcases</p>
 
           <form
             action={async () => {
               "use server";
-              await signIn("google", { redirectTo: "/" });
+              await signIn("google", { redirectTo });
             }}
           >
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-3 px-4 py-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white font-medium text-sm hover:bg-white/[0.08] transition-all cursor-pointer"
+              className="w-full flex items-center justify-center gap-3 px-4 py-3.5 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 font-medium text-sm hover:bg-gray-100 transition-all cursor-pointer"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4" />
@@ -34,11 +37,11 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="mt-6 text-[11px] text-white/20">
+          <p className="mt-6 text-[11px] text-gray-400">
             By signing in, you agree to our{" "}
-            <Link href="/terms" className="underline hover:text-white/40 transition-colors">Terms</Link>
+            <Link href="/terms" className="underline hover:text-gray-600 transition-colors">Terms</Link>
             {" "}and{" "}
-            <Link href="/privacy" className="underline hover:text-white/40 transition-colors">Privacy Policy</Link>.
+            <Link href="/privacy" className="underline hover:text-gray-600 transition-colors">Privacy Policy</Link>.
           </p>
         </div>
       </div>

@@ -34,10 +34,12 @@ const FONTS = [
 ];
 
 const ASPECTS = [
-  { id: "16:9", label: "16:9", desc: "Twitter / X", ratio: "16/9" },
-  { id: "4:3", label: "4:3", desc: "Landscape", ratio: "4/3" },
-  { id: "1:1", label: "1:1", desc: "Instagram", ratio: "1/1" },
-  { id: "auto", label: "Auto", desc: "Fit content", ratio: "" },
+  { id: "twitter", label: "Twitter / X", desc: "16:9", ratio: "16/9" },
+  { id: "instagram-post", label: "Instagram", desc: "1:1", ratio: "1/1" },
+  { id: "instagram-story", label: "Story", desc: "9:16", ratio: "9/16" },
+  { id: "linkedin", label: "LinkedIn", desc: "1.91:1", ratio: "1.91/1" },
+  { id: "producthunt", label: "Product Hunt", desc: "3:2", ratio: "3/2" },
+  { id: "auto", label: "Auto", desc: "Fit", ratio: "" },
 ];
 
 function formatCount(n: number): string {
@@ -260,6 +262,8 @@ export default function AppShowcase({
   const [isPro, setIsPro] = useState(false);
   const [showProModal, setShowProModal] = useState(false);
   const [proLoading, setProLoading] = useState(false);
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const [userSession, setUserSession] = useState<{ name?: string; image?: string } | null>(null);
   const captureRef = useRef<HTMLDivElement>(null);
 
   const t = THEMES[currentTheme];
@@ -297,6 +301,10 @@ export default function AppShowcase({
           localStorage.setItem("appframe_pro", "true");
           setIsPro(true);
         }
+      }).catch(() => {});
+      // Fetch user session
+      fetch("/api/auth/session").then(r => r.json()).then(data => {
+        if (data?.user) setUserSession(data.user);
       }).catch(() => {});
     }
   }, []);
@@ -350,7 +358,7 @@ export default function AppShowcase({
     try {
       const res = await fetch("/api/checkout", { method: "POST" });
       const data = await res.json();
-      if (res.status === 401) { window.location.href = "/login"; return; }
+      if (res.status === 401) { window.location.href = `/login?callbackUrl=${encodeURIComponent(window.location.pathname)}`; return; }
       if (data.alreadyPro) {
         localStorage.setItem("appframe_pro", "true");
         setIsPro(true);
@@ -358,7 +366,7 @@ export default function AppShowcase({
         setProLoading(false);
         return;
       }
-      if (data.url) { window.location.href = data.url; return; }
+      if (data.url) { localStorage.setItem("appframe_return_url", window.location.pathname); window.location.href = data.url; return; }
       alert("Something went wrong. Please try again.");
     } catch { alert("Connection error. Please try again."); }
     setProLoading(false);
@@ -366,7 +374,43 @@ export default function AppShowcase({
 
   return (
     <>
-      <div className="h-screen bg-[#0a0a0a] flex overflow-hidden">
+      <div className="h-screen bg-[#0a0a0a] flex overflow-hidden relative">
+        {/* Account button top-right */}
+        {userSession && (
+          <div className="absolute top-4 right-4 z-50">
+            <button onClick={() => setShowAccountMenu(!showAccountMenu)} className="cursor-pointer">
+              {userSession.image ? (
+                <img src={userSession.image} alt="" className="w-8 h-8 rounded-full border border-white/10 hover:border-white/30 transition-all" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs font-medium transition-all">
+                  {userSession.name?.[0]?.toUpperCase() || "U"}
+                </div>
+              )}
+            </button>
+            {showAccountMenu && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setShowAccountMenu(false)} />
+                <div className="absolute right-0 top-11 z-50 w-44 rounded-xl bg-[#111] border border-white/10 shadow-2xl overflow-hidden">
+                  <div className="px-4 py-2.5 border-b border-white/[0.06]">
+                    <p className="text-white text-sm font-medium truncate">{userSession.name}</p>
+                  </div>
+                  <button
+                    onClick={async () => {
+                      const csrfRes = await fetch("/api/auth/csrf");
+                      const { csrfToken } = await csrfRes.json();
+                      await fetch("/api/auth/signout", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: `csrfToken=${csrfToken}` });
+                      window.location.href = "/";
+                    }}
+                    className="w-full px-4 py-2.5 text-left text-sm text-white/50 hover:text-white hover:bg-white/[0.04] transition-all cursor-pointer"
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
         {/* Left: Preview */}
         <div className="flex-1 flex items-center justify-center p-4 overflow-auto">
           <div className="w-full max-w-3xl">
@@ -417,7 +461,7 @@ export default function AppShowcase({
           {/* Aspect Ratio */}
           <div>
             <SectionLabel>Aspect Ratio</SectionLabel>
-            <div className="grid grid-cols-4 gap-1.5">
+            <div className="grid grid-cols-3 gap-1.5">
               {ASPECTS.map((a) => (
                 <button
                   key={a.id}

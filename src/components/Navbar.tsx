@@ -24,12 +24,12 @@ export default function Navbar() {
   if (pathname.startsWith("/app/")) return null;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/[0.06]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
         {/* Left: Logo + name */}
         <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
           <img src="/logo.svg" alt="AppFrame" className="w-7 h-7 rounded-lg" />
-          <span className="text-white font-semibold text-sm">AppFrame</span>
+          <span className="text-gray-900 font-semibold text-sm">AppFrame</span>
         </Link>
 
         {/* Center: Nav links */}
@@ -37,20 +37,20 @@ export default function Navbar() {
           <Link
             href="/"
             className={`text-sm transition-colors ${
-              pathname === "/" ? "text-white" : "text-white/40 hover:text-white/70"
+              pathname === "/" ? "text-gray-900" : "text-gray-400 hover:text-gray-600"
             }`}
           >
             Home
           </Link>
           <Link
             href="/#examples"
-            className="text-sm text-white/40 hover:text-white/70 transition-colors"
+            className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
           >
             Examples
           </Link>
           <Link
             href="/#pricing"
-            className="text-sm text-white/40 hover:text-white/70 transition-colors"
+            className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
           >
             Pricing
           </Link>
@@ -59,7 +59,7 @@ export default function Navbar() {
         {/* Right: Auth */}
         <div className="flex items-center">
           {loading ? (
-            <div className="w-8 h-8 rounded-full bg-white/[0.06]" />
+            <div className="w-8 h-8 rounded-full bg-gray-100" />
           ) : session?.user ? (
             <div className="relative">
               <button
@@ -70,10 +70,10 @@ export default function Navbar() {
                   <img
                     src={session.user.image}
                     alt={session.user.name || "User"}
-                    className="w-8 h-8 rounded-full border border-white/10 hover:border-white/30 transition-all"
+                    className="w-8 h-8 rounded-full border border-gray-200 hover:border-gray-400 transition-all"
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs font-medium transition-all">
+                  <div className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 text-xs font-medium transition-all">
                     {session.user.name?.[0]?.toUpperCase() || "U"}
                   </div>
                 )}
@@ -81,9 +81,9 @@ export default function Navbar() {
               {showMenu && (
                 <>
                   <div className="fixed inset-0 z-40" onClick={() => setShowMenu(false)} />
-                  <div className="absolute right-0 top-12 z-50 w-48 rounded-xl bg-[#111] border border-white/10 shadow-2xl overflow-hidden">
-                    <div className="px-4 py-3 border-b border-white/[0.06]">
-                      <p className="text-white text-sm font-medium truncate">{session.user.name}</p>
+                  <div className="absolute right-0 top-12 z-50 w-48 rounded-xl bg-white border border-gray-200 shadow-lg overflow-hidden">
+                    <div className="px-4 py-3 border-b border-gray-100">
+                      <p className="text-gray-900 text-sm font-medium truncate">{session.user.name}</p>
                     </div>
                     <button
                       onClick={async () => {
@@ -96,7 +96,7 @@ export default function Navbar() {
                         });
                         window.location.href = "/";
                       }}
-                      className="w-full px-4 py-2.5 text-left text-sm text-white/50 hover:text-white hover:bg-white/[0.04] transition-all cursor-pointer"
+                      className="w-full px-4 py-2.5 text-left text-sm text-gray-500 hover:text-gray-900 hover:bg-gray-50 transition-all cursor-pointer"
                     >
                       Logout
                     </button>
@@ -107,7 +107,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="px-4 py-1.5 rounded-lg bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors"
+              className="px-4 py-1.5 rounded-lg bg-gray-900 text-white text-sm font-medium hover:bg-gray-800 transition-colors"
             >
               Login
             </Link>

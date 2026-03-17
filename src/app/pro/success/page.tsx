@@ -26,6 +26,13 @@ function SuccessContent() {
         if (data.pro) {
           localStorage.setItem("appframe_pro", "true");
           localStorage.setItem("appframe_email", data.email || "");
+          // Auto-redirect back to the app they were editing
+          const returnUrl = localStorage.getItem("appframe_return_url");
+          if (returnUrl) {
+            localStorage.removeItem("appframe_return_url");
+            router.push(returnUrl);
+            return;
+          }
           setStatus("success");
         } else {
           setStatus("error");

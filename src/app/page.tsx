@@ -64,72 +64,15 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background with floating app icons */}
-      <div className="absolute inset-0 bg-[#080808]" />
-      {/* Ambient glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-amber-500/[0.04] rounded-full blur-[120px]" />
-      <div className="absolute top-1/4 left-1/5 w-80 h-80 bg-blue-500/[0.03] rounded-full blur-[100px]" />
-      <div className="absolute bottom-1/4 right-1/5 w-80 h-80 bg-purple-500/[0.03] rounded-full blur-[100px]" />
-
-      {/* Floating app icons background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[
-          { icon: "/examples/whatsapp-icon.jpg", top: "8%", left: "5%", size: 56, blur: 2, opacity: 0.15, delay: "0s" },
-          { icon: "/examples/spotify-icon.jpg", top: "15%", right: "8%", size: 48, blur: 3, opacity: 0.12, delay: "0.5s" },
-          { icon: "/examples/telegram-icon.jpg", top: "60%", left: "8%", size: 44, blur: 2, opacity: 0.1, delay: "1s" },
-          { icon: "/examples/notion-icon.jpg", top: "70%", right: "12%", size: 52, blur: 3, opacity: 0.12, delay: "1.5s" },
-          { icon: "/examples/duolingo-icon.jpg", top: "35%", left: "2%", size: 40, blur: 4, opacity: 0.08, delay: "2s" },
-          { icon: "/examples/whatsapp-icon.jpg", top: "25%", right: "3%", size: 36, blur: 4, opacity: 0.08, delay: "0.8s" },
-          { icon: "/examples/spotify-icon.jpg", top: "80%", left: "15%", size: 42, blur: 3, opacity: 0.1, delay: "1.2s" },
-          { icon: "/examples/telegram-icon.jpg", top: "5%", right: "20%", size: 38, blur: 3, opacity: 0.08, delay: "0.3s" },
-          { icon: "/examples/notion-icon.jpg", top: "45%", right: "2%", size: 50, blur: 2, opacity: 0.1, delay: "1.8s" },
-          { icon: "/examples/duolingo-icon.jpg", top: "85%", right: "25%", size: 34, blur: 4, opacity: 0.07, delay: "0.6s" },
-        ].map((item, i) => (
-          <img
-            key={i}
-            src={item.icon}
-            alt=""
-            className="absolute rounded-2xl animate-float"
-            style={{
-              top: item.top,
-              left: item.left,
-              right: item.right,
-              width: item.size,
-              height: item.size,
-              filter: `blur(${item.blur}px)`,
-              opacity: item.opacity,
-              animationDelay: item.delay,
-              animationDuration: `${4 + i * 0.3}s`,
-            } as React.CSSProperties}
-          />
-        ))}
-      </div>
-
-      {/* Sparkle particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-amber-300/40 rounded-full animate-float"
-            style={{
-              top: `${10 + Math.random() * 80}%`,
-              left: `${5 + Math.random() * 90}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 3}s`,
-            }}
-          />
-        ))}
-      </div>
-
+    <div className="min-h-screen relative overflow-hidden bg-white">
       {/* Hero + Search */}
       <div className="relative z-10 flex flex-col items-center justify-center px-4 min-h-screen">
         <div className="w-full max-w-3xl text-center">
           <div className="animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold mb-8 text-white leading-[1.1] tracking-tight whitespace-nowrap">
-              Your app got approved.<br />Time to <span className="relative inline-block"><span className="relative z-10 bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-300 bg-clip-text text-transparent">celebrate</span><span className="absolute -inset-3 bg-amber-400/20 rounded-2xl blur-lg" /></span>.
+            <h1 className="text-4xl md:text-6xl font-bold mb-8 text-gray-900 leading-[1.1] tracking-tight whitespace-nowrap">
+              Your app got approved.<br />Time to <span className="relative inline-block"><span className="relative z-10 bg-gradient-to-r from-amber-500 via-orange-400 to-amber-500 bg-clip-text text-transparent">celebrate</span><span className="absolute -inset-3 bg-amber-400/10 rounded-2xl blur-lg" /></span>.
             </h1>
-            <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-xl mx-auto">
+            <p className="text-gray-500 text-lg md:text-xl mb-12 max-w-xl mx-auto">
               Generate a stunning showcase image in seconds. Pick a theme, customize it, and share your launch on social media.
             </p>
           </div>
@@ -141,7 +84,7 @@ export default function Home() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Paste App Store URL or search by name..."
-                className="w-full px-6 py-4 rounded-[18px] bg-[#0d0d0d] text-white placeholder-zinc-500 text-lg focus:outline-none transition-all relative z-10"
+                className="w-full px-6 py-4 rounded-[18px] bg-white text-gray-900 placeholder-gray-400 text-lg focus:outline-none transition-all relative z-10"
               />
             </div>
           </div>
@@ -153,7 +96,7 @@ export default function Home() {
                 <button
                   key={app.trackId}
                   onClick={() => router.push(`/app/${app.trackId}`)}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all text-left cursor-pointer"
+                  className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left cursor-pointer"
                 >
                   <img
                     src={app.artworkUrl512}
@@ -161,9 +104,9 @@ export default function Home() {
                     className="w-16 h-16 rounded-2xl"
                   />
                   <div className="min-w-0">
-                    <p className="text-white font-semibold truncate">{app.trackName}</p>
-                    <p className="text-zinc-400 text-sm truncate">{app.developerName}</p>
-                    <p className="text-zinc-500 text-xs">{app.primaryGenreName}</p>
+                    <p className="text-gray-900 font-semibold truncate">{app.trackName}</p>
+                    <p className="text-gray-500 text-sm truncate">{app.developerName}</p>
+                    <p className="text-gray-400 text-xs">{app.primaryGenreName}</p>
                   </div>
                 </button>
               ))}
@@ -171,18 +114,18 @@ export default function Home() {
           )}
 
           {searched && !loading && results.length === 0 && (
-            <p className="mt-8 text-zinc-500 animate-fade-in">No apps found. Try a different search.</p>
+            <p className="mt-8 text-gray-400 animate-fade-in">No apps found. Try a different search.</p>
           )}
 
-          <p className="mt-10 text-zinc-600 text-sm animate-fade-in-delay-2">
-            Tip: You can also go directly to <code className="text-zinc-500">appfra.me/app/APP_ID</code>
+          <p className="mt-10 text-gray-400 text-sm animate-fade-in-delay-2">
+            Tip: You can also go directly to <code className="text-gray-500">appfra.me/app/APP_ID</code>
           </p>
         </div>
       </div>
 
       {/* How it works */}
       <div className="relative z-10 max-w-4xl mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-white text-center mb-14 animate-fade-in">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-14 animate-fade-in">
           How it works
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
@@ -225,16 +168,16 @@ export default function Home() {
           ].map((item) => (
             <div
               key={item.step}
-              className="text-center p-6 rounded-3xl bg-white/[0.02] border border-white/[0.05]"
+              className="text-center p-6 rounded-3xl bg-gray-50 border border-gray-100"
             >
-              <div className="w-12 h-12 rounded-2xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center mx-auto mb-4 text-zinc-300">
+              <div className="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center mx-auto mb-4 text-gray-500 shadow-sm">
                 {item.icon}
               </div>
-              <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-2">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                 Step {item.step}
               </p>
-              <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-              <p className="text-zinc-500 text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -242,16 +185,16 @@ export default function Home() {
 
       {/* Examples carousel */}
       <div id="examples" className="relative z-10 py-20 overflow-hidden scroll-mt-20">
-        <h2 className="text-3xl font-bold text-white text-center mb-4">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">
           See what you can create
         </h2>
-        <p className="text-zinc-500 text-center mb-12 text-sm">
+        <p className="text-gray-500 text-center mb-12 text-sm">
           Beautiful showcase images generated in seconds
         </p>
         {/* Auto-scrolling infinite marquee */}
         <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#080808] to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#080808] to-transparent z-10" />
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10" />
           <div className="flex gap-6 animate-marquee">
             {[
               { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "/examples/whatsapp-icon.jpg", screenshot: "/examples/whatsapp-ss.jpg", bg: "#0a0015", genre: "Social", tagline: "Approved! ✅" },
@@ -300,23 +243,23 @@ export default function Home() {
 
       {/* Pricing */}
       <div id="pricing" className="relative z-10 max-w-4xl mx-auto px-4 py-20 scroll-mt-20">
-        <h2 className="text-3xl font-bold text-white text-center mb-4">Simple pricing</h2>
-        <p className="text-white/40 text-center mb-12 text-sm">
+        <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">Simple pricing</h2>
+        <p className="text-gray-400 text-center mb-12 text-sm">
           Create beautiful app showcases for free. Go Pro when you need clean exports.
         </p>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-16">
           {/* Free */}
-          <div className="rounded-3xl bg-white/[0.03] border border-white/[0.06] p-8">
-            <p className="text-white/50 text-sm font-medium uppercase tracking-wider mb-4">Free</p>
+          <div className="rounded-3xl bg-gray-50 border border-gray-200 p-8">
+            <p className="text-gray-500 text-sm font-medium uppercase tracking-wider mb-4">Free</p>
             <div className="flex items-baseline gap-1 mb-1">
-              <span className="text-4xl font-bold text-white">$0</span>
+              <span className="text-4xl font-bold text-gray-900">$0</span>
             </div>
-            <p className="text-white/30 text-sm mb-8">Free forever</p>
+            <p className="text-gray-400 text-sm mb-8">Free forever</p>
             <ul className="space-y-3">
               {["Unlimited showcase images", "All themes included", "5 beautiful themes", "Small watermark on downloads"].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-white/60">
-                  <svg className="w-4 h-4 text-white/30 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
+                  <svg className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
                   {item}
                 </li>
               ))}
@@ -324,19 +267,19 @@ export default function Home() {
           </div>
 
           {/* Pro */}
-          <div className="rounded-3xl bg-white/[0.05] border border-white/[0.12] p-8 relative">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-white text-black text-xs font-semibold">
+          <div className="rounded-3xl bg-white border border-gray-300 p-8 relative shadow-sm">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gray-900 text-white text-xs font-semibold">
               Recommended
             </div>
-            <p className="text-white/70 text-sm font-medium uppercase tracking-wider mb-4">Pro</p>
+            <p className="text-gray-600 text-sm font-medium uppercase tracking-wider mb-4">Pro</p>
             <div className="flex items-baseline gap-1 mb-1">
-              <span className="text-4xl font-bold text-white">$5</span>
+              <span className="text-4xl font-bold text-gray-900">$5</span>
             </div>
-            <p className="text-white/30 text-sm mb-8">One-time payment</p>
+            <p className="text-gray-400 text-sm mb-8">One-time payment</p>
             <ul className="space-y-3">
               {["Everything in Free", "No watermark on downloads", "High-resolution PNG export", "Lifetime access"].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-white/80">
-                  <svg className="w-4 h-4 text-white mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
+                  <svg className="w-4 h-4 text-gray-900 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
                   {item}
                 </li>
               ))}
@@ -346,7 +289,7 @@ export default function Home() {
 
         {/* FAQ */}
         <div className="max-w-2xl mx-auto">
-          <h3 className="text-2xl font-bold text-white text-center mb-10">FAQ</h3>
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-10">FAQ</h3>
           <div className="space-y-6">
             {[
               { q: "What do I get for free?", a: "Unlimited showcase images for any iOS app. Free downloads include a small @AppFrame watermark." },
@@ -354,9 +297,9 @@ export default function Home() {
               { q: "Is it a subscription?", a: "No. $5 one-time, yours forever." },
               { q: "Can I get a refund?", a: "Contact us within 7 days for a full refund, no questions asked." },
             ].map((faq, i) => (
-              <div key={i} className="border-b border-white/[0.06] pb-6">
-                <h4 className="text-white font-semibold mb-2">{faq.q}</h4>
-                <p className="text-white/40 text-sm leading-relaxed">{faq.a}</p>
+              <div key={i} className="border-b border-gray-200 pb-6">
+                <h4 className="text-gray-900 font-semibold mb-2">{faq.q}</h4>
+                <p className="text-gray-500 text-sm leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>
@@ -364,17 +307,17 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <div className="relative z-10 border-t border-white/[0.06] py-10">
+      <div className="relative z-10 border-t border-gray-200 bg-gray-50 py-10">
         <div className="max-w-4xl mx-auto px-4 flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 text-white/20 text-sm">
+          <div className="flex items-center gap-2 text-gray-400 text-sm">
             <span>Made with</span>
-            <svg className="w-4 h-4 text-red-400/60" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
-            <span>by <a href="https://x.com/simonsruggi" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white/60 transition-colors">Simone Ruggiero</a></span>
+            <svg className="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+            <span>by <a href="https://x.com/simonsruggi" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-gray-700 transition-colors">Simone Ruggiero</a></span>
           </div>
-          <div className="flex items-center justify-center gap-4 text-xs text-white/20">
-            <Link href="/privacy" className="hover:text-white/40 transition-colors">Privacy</Link>
+          <div className="flex items-center justify-center gap-4 text-xs text-gray-400">
+            <Link href="/privacy" className="hover:text-gray-600 transition-colors">Privacy</Link>
             <span>&middot;</span>
-            <Link href="/terms" className="hover:text-white/40 transition-colors">Terms</Link>
+            <Link href="/terms" className="hover:text-gray-600 transition-colors">Terms</Link>
             <span>&middot;</span>
             <span>&copy; {new Date().getFullYear()} AppFrame</span>
           </div>

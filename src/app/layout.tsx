@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${albertSans.variable} antialiased`}
+        className={`${albertSans.variable} antialiased bg-white`}
         style={{ fontFamily: "'Albert Sans', sans-serif" }}
       >
         <Navbar />

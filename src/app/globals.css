@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #ffffff;
+  --foreground: #111111;
 }
 
 @theme inline {
@@ -84,7 +84,7 @@ body {
 .glow-border {
   --border-angle: 0deg;
   animation: border-spin 3s linear infinite;
-  background: conic-gradient(from var(--border-angle), transparent 60%, rgba(255,255,255,0.3) 80%, rgba(251,191,36,0.6) 90%, rgba(255,255,255,0.3) 100%) border-box;
+  background: conic-gradient(from var(--border-angle), transparent 60%, rgba(0,0,0,0.1) 80%, rgba(217,119,6,0.3) 90%, rgba(0,0,0,0.1) 100%) border-box;
   border: 2px solid transparent;
   -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
   mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
@@ -101,7 +101,7 @@ body {
   position: absolute;
   inset: -2px;
   border-radius: 20px;
-  background: conic-gradient(from var(--border-angle, 0deg), transparent 50%, rgba(255,255,255,0.15) 70%, rgba(251,191,36,0.5) 85%, rgba(255,255,255,0.15) 100%);
+  background: conic-gradient(from var(--border-angle, 0deg), transparent 50%, rgba(209,213,219,0.6) 70%, rgba(217,119,6,0.3) 85%, rgba(209,213,219,0.6) 100%);
   animation: border-spin 3s linear infinite;
   z-index: -1;
 }
@@ -111,7 +111,7 @@ body {
   position: absolute;
   inset: 0;
   border-radius: 18px;
-  background: #0d0d0d;
+  background: #ffffff;
   z-index: -1;
 }
 
