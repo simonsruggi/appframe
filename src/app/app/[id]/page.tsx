@@ -106,5 +106,5 @@ export default async function AppPage({
 
   if (!app) notFound();
 
-  return <AppShowcase app={app} theme={theme || "midnight"} accentColor={color || "purple"} />;
+  return <AppShowcase app={app} theme={theme || "ocean"} accentColor={color || "purple"} />;
 }

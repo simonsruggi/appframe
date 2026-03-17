@@ -343,7 +343,7 @@ export default function AppShowcase({
   theme: string;
   accentColor: string;
 }) {
-  const resolvedInitialTheme = initialTheme in THEMES ? initialTheme : "noir";
+  const resolvedInitialTheme = initialTheme in THEMES ? initialTheme : "ocean";
   const initialPreset = THEMES[resolvedInitialTheme];
 
   // Persist state in localStorage per app (survives refresh & tab close)
