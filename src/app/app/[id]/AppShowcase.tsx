@@ -6,6 +6,7 @@ import QRCode from "qrcode";
 import type { AppData } from "../../api/app/route";
 
 interface ThemePreset {
+  name: string;
   // Visual
   bg: string;
   gradient: string;
@@ -27,28 +28,28 @@ interface ThemePreset {
 
 const THEMES: Record<string, ThemePreset> = {
   // --- Dark themes ---
-  noir:     { bg: "#080808", gradient: "radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0d0d0d 40%, #080808 100%)", thumb: "linear-gradient(135deg, #1a1a2e, #080808)", text: "text-white", sub: "text-white/50", pill: "bg-white/[0.06] text-white/70", wm: "rgba(255,255,255,0.25)", qrFg: "#ffffff", qrBg: "#080808", font: 0, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
-  midnight: { bg: "#0a0a1a", gradient: "radial-gradient(ellipse at 70% 30%, #1e1e4a 0%, #12123a 30%, #0a0a1a 70%), linear-gradient(135deg, #0a0a1a 0%, #15153a 100%)", thumb: "linear-gradient(135deg, #2a2a5a, #0a0a1a)", text: "text-white", sub: "text-indigo-200/50", pill: "bg-indigo-500/10 text-indigo-200/70", wm: "rgba(200,200,255,0.2)", qrFg: "#c0c0ff", qrBg: "#0a0a1a", font: 8, phones: 1, aspect: "16/9", showDesc: true, showRating: true, showMeta: false },
-  cosmic:   { bg: "#0a0015", gradient: "radial-gradient(ellipse at 20% 50%, #2a0050 0%, #150030 30%, #0a0015 70%), radial-gradient(ellipse at 80% 20%, #1a0040 0%, transparent 50%)", thumb: "linear-gradient(135deg, #3a0070, #0a0015)", text: "text-white", sub: "text-purple-200/50", pill: "bg-purple-500/10 text-purple-200/70", wm: "rgba(200,180,255,0.2)", qrFg: "#e0d0ff", qrBg: "#0a0015", font: 6, phones: 2, aspect: "1/1", showDesc: false, showRating: true, showMeta: true },
-  ocean:    { bg: "#001020", gradient: "radial-gradient(ellipse at 60% 40%, #003060 0%, #002040 30%, #001020 70%), radial-gradient(ellipse at 10% 80%, #002050 0%, transparent 50%)", thumb: "linear-gradient(135deg, #004080, #001020)", text: "text-white", sub: "text-cyan-200/50", pill: "bg-cyan-500/10 text-cyan-200/70", wm: "rgba(180,220,255,0.2)", qrFg: "#b0e0ff", qrBg: "#001020", font: 1, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
-  forest:   { bg: "#001008", gradient: "radial-gradient(ellipse at 40% 60%, #003020 0%, #002015 30%, #001008 70%), radial-gradient(ellipse at 80% 20%, #002818 0%, transparent 50%)", thumb: "linear-gradient(135deg, #004030, #001008)", text: "text-white", sub: "text-emerald-200/50", pill: "bg-emerald-500/10 text-emerald-200/70", wm: "rgba(180,255,200,0.2)", qrFg: "#b0ffc0", qrBg: "#001008", font: 2, phones: 1, aspect: "3/2", showDesc: true, showRating: true, showMeta: false },
-  ember:    { bg: "#120800", gradient: "radial-gradient(ellipse at 30% 30%, #301800 0%, #201000 30%, #120800 70%), radial-gradient(ellipse at 70% 70%, #281200 0%, transparent 50%)", thumb: "linear-gradient(135deg, #402000, #120800)", text: "text-white", sub: "text-orange-200/50", pill: "bg-orange-500/10 text-orange-200/70", wm: "rgba(255,200,150,0.2)", qrFg: "#ffd0a0", qrBg: "#120800", font: 7, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
-  rose:     { bg: "#150010", gradient: "radial-gradient(ellipse at 50% 30%, #350020 0%, #200015 30%, #150010 70%), radial-gradient(ellipse at 20% 80%, #2a0018 0%, transparent 50%)", thumb: "linear-gradient(135deg, #450030, #150010)", text: "text-white", sub: "text-pink-200/50", pill: "bg-pink-500/10 text-pink-200/70", wm: "rgba(255,180,200,0.2)", qrFg: "#ffb0c8", qrBg: "#150010", font: 4, phones: 1, aspect: "1/1", showDesc: false, showRating: true, showMeta: false },
-  sunset:   { bg: "#1a0a00", gradient: "radial-gradient(ellipse at 20% 40%, #3a1500 0%, #2a0a00 25%, transparent 50%), radial-gradient(ellipse at 80% 60%, #250020 0%, #1a0015 25%, #1a0a00 70%)", thumb: "linear-gradient(135deg, #4a1a00, #250020)", text: "text-white", sub: "text-amber-200/50", pill: "bg-amber-500/10 text-amber-200/70", wm: "rgba(255,220,150,0.2)", qrFg: "#ffe0a0", qrBg: "#1a0a00", font: 5, phones: 2, aspect: "1.91/1", showDesc: true, showRating: true, showMeta: true },
-  neon:     { bg: "#050505", gradient: "radial-gradient(ellipse at 50% 50%, #0a1a2a 0%, #050510 40%, #050505 100%), linear-gradient(135deg, #00ff8820 0%, #ff00ff10 100%)", thumb: "linear-gradient(135deg, #00ff88, #ff00ff)", text: "text-white", sub: "text-emerald-300/50", pill: "bg-emerald-500/10 text-emerald-300/70", wm: "rgba(0,255,136,0.2)", qrFg: "#00ff88", qrBg: "#050505", font: 8, phones: 1, aspect: "16/9", showDesc: false, showRating: true, showMeta: false },
-  galaxy:   { bg: "#06001a", gradient: "radial-gradient(ellipse at 30% 20%, #1a0050 0%, #0d0030 30%, #06001a 70%), radial-gradient(ellipse at 70% 80%, #000840 0%, transparent 50%)", thumb: "linear-gradient(135deg, #2a0070, #000840)", text: "text-white", sub: "text-blue-200/50", pill: "bg-blue-500/10 text-blue-200/70", wm: "rgba(180,180,255,0.2)", qrFg: "#c0c0ff", qrBg: "#06001a", font: 6, phones: 1, aspect: "9/16", showDesc: false, showRating: true, showMeta: false },
+  noir:     { name: "Noir", bg: "#080808", gradient: "radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #0d0d0d 40%, #080808 100%)", thumb: "linear-gradient(135deg, #1a1a2e, #080808)", text: "text-white", sub: "text-white/50", pill: "bg-white/[0.06] text-white/70", wm: "rgba(255,255,255,0.25)", qrFg: "#ffffff", qrBg: "#080808", font: 0, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
+  midnight: { name: "Midnight", bg: "#0a0a1a", gradient: "radial-gradient(ellipse at 70% 30%, #1e1e4a 0%, #12123a 30%, #0a0a1a 70%), linear-gradient(135deg, #0a0a1a 0%, #15153a 100%)", thumb: "linear-gradient(135deg, #2a2a5a, #0a0a1a)", text: "text-white", sub: "text-indigo-200/50", pill: "bg-indigo-500/10 text-indigo-200/70", wm: "rgba(200,200,255,0.2)", qrFg: "#c0c0ff", qrBg: "#0a0a1a", font: 8, phones: 1, aspect: "16/9", showDesc: true, showRating: true, showMeta: false },
+  cosmic:   { name: "Cosmic", bg: "#0a0015", gradient: "radial-gradient(ellipse at 20% 50%, #2a0050 0%, #150030 30%, #0a0015 70%), radial-gradient(ellipse at 80% 20%, #1a0040 0%, transparent 50%)", thumb: "linear-gradient(135deg, #3a0070, #0a0015)", text: "text-white", sub: "text-purple-200/50", pill: "bg-purple-500/10 text-purple-200/70", wm: "rgba(200,180,255,0.2)", qrFg: "#e0d0ff", qrBg: "#0a0015", font: 6, phones: 2, aspect: "1/1", showDesc: false, showRating: true, showMeta: true },
+  ocean:    { name: "Ocean", bg: "#001020", gradient: "radial-gradient(ellipse at 60% 40%, #003060 0%, #002040 30%, #001020 70%), radial-gradient(ellipse at 10% 80%, #002050 0%, transparent 50%)", thumb: "linear-gradient(135deg, #004080, #001020)", text: "text-white", sub: "text-cyan-200/50", pill: "bg-cyan-500/10 text-cyan-200/70", wm: "rgba(180,220,255,0.2)", qrFg: "#b0e0ff", qrBg: "#001020", font: 1, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
+  forest:   { name: "Forest", bg: "#001008", gradient: "radial-gradient(ellipse at 40% 60%, #003020 0%, #002015 30%, #001008 70%), radial-gradient(ellipse at 80% 20%, #002818 0%, transparent 50%)", thumb: "linear-gradient(135deg, #004030, #001008)", text: "text-white", sub: "text-emerald-200/50", pill: "bg-emerald-500/10 text-emerald-200/70", wm: "rgba(180,255,200,0.2)", qrFg: "#b0ffc0", qrBg: "#001008", font: 2, phones: 1, aspect: "3/2", showDesc: true, showRating: true, showMeta: false },
+  ember:    { name: "Ember", bg: "#120800", gradient: "radial-gradient(ellipse at 30% 30%, #301800 0%, #201000 30%, #120800 70%), radial-gradient(ellipse at 70% 70%, #281200 0%, transparent 50%)", thumb: "linear-gradient(135deg, #402000, #120800)", text: "text-white", sub: "text-orange-200/50", pill: "bg-orange-500/10 text-orange-200/70", wm: "rgba(255,200,150,0.2)", qrFg: "#ffd0a0", qrBg: "#120800", font: 7, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
+  rose:     { name: "Rose", bg: "#150010", gradient: "radial-gradient(ellipse at 50% 30%, #350020 0%, #200015 30%, #150010 70%), radial-gradient(ellipse at 20% 80%, #2a0018 0%, transparent 50%)", thumb: "linear-gradient(135deg, #450030, #150010)", text: "text-white", sub: "text-pink-200/50", pill: "bg-pink-500/10 text-pink-200/70", wm: "rgba(255,180,200,0.2)", qrFg: "#ffb0c8", qrBg: "#150010", font: 4, phones: 1, aspect: "1/1", showDesc: false, showRating: true, showMeta: false },
+  sunset:   { name: "Sunset", bg: "#1a0a00", gradient: "radial-gradient(ellipse at 20% 40%, #3a1500 0%, #2a0a00 25%, transparent 50%), radial-gradient(ellipse at 80% 60%, #250020 0%, #1a0015 25%, #1a0a00 70%)", thumb: "linear-gradient(135deg, #4a1a00, #250020)", text: "text-white", sub: "text-amber-200/50", pill: "bg-amber-500/10 text-amber-200/70", wm: "rgba(255,220,150,0.2)", qrFg: "#ffe0a0", qrBg: "#1a0a00", font: 5, phones: 2, aspect: "1.91/1", showDesc: true, showRating: true, showMeta: true },
+  neon:     { name: "Neon", bg: "#050505", gradient: "radial-gradient(ellipse at 50% 50%, #0a1a2a 0%, #050510 40%, #050505 100%), linear-gradient(135deg, #00ff8820 0%, #ff00ff10 100%)", thumb: "linear-gradient(135deg, #00ff88, #ff00ff)", text: "text-white", sub: "text-emerald-300/50", pill: "bg-emerald-500/10 text-emerald-300/70", wm: "rgba(0,255,136,0.2)", qrFg: "#00ff88", qrBg: "#050505", font: 8, phones: 1, aspect: "16/9", showDesc: false, showRating: true, showMeta: false },
+  galaxy:   { name: "Galaxy", bg: "#06001a", gradient: "radial-gradient(ellipse at 30% 20%, #1a0050 0%, #0d0030 30%, #06001a 70%), radial-gradient(ellipse at 70% 80%, #000840 0%, transparent 50%)", thumb: "linear-gradient(135deg, #2a0070, #000840)", text: "text-white", sub: "text-blue-200/50", pill: "bg-blue-500/10 text-blue-200/70", wm: "rgba(180,180,255,0.2)", qrFg: "#c0c0ff", qrBg: "#06001a", font: 6, phones: 1, aspect: "9/16", showDesc: false, showRating: true, showMeta: false },
   // --- Light themes ---
-  arctic:   { bg: "#f0f4f8", gradient: "radial-gradient(ellipse at 50% 0%, #ffffff 0%, #f0f4f8 50%, #e8edf3 100%)", thumb: "linear-gradient(135deg, #e8edf5, #d0d8e8)", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-900/5 text-gray-600", wm: "rgba(0,0,0,0.15)", qrFg: "#1a1a1a", qrBg: "#f0f4f8", font: 1, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
-  snow:     { bg: "#ffffff", gradient: "radial-gradient(ellipse at 30% 20%, #f5f0ff 0%, #ffffff 40%, #f8fafb 100%)", thumb: "linear-gradient(135deg, #f0eaff, #ffffff)", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-100 text-gray-600", wm: "rgba(0,0,0,0.12)", qrFg: "#1a1a1a", qrBg: "#ffffff", font: 2, phones: 1, aspect: "1/1", showDesc: false, showRating: true, showMeta: false },
-  cream:    { bg: "#faf6f0", gradient: "radial-gradient(ellipse at 40% 30%, #fff8ee 0%, #faf6f0 50%, #f0ebe0 100%)", thumb: "linear-gradient(135deg, #f0e8d8, #faf6f0)", text: "text-gray-900", sub: "text-amber-800/40", pill: "bg-amber-900/5 text-amber-900/60", wm: "rgba(0,0,0,0.1)", qrFg: "#1a1a1a", qrBg: "#faf6f0", font: 8, phones: 2, aspect: "3/2", showDesc: true, showRating: true, showMeta: true },
-  mint:     { bg: "#f0faf5", gradient: "radial-gradient(ellipse at 50% 30%, #e8fff0 0%, #f0faf5 50%, #e0f5ea 100%)", thumb: "linear-gradient(135deg, #d0f0e0, #f0faf5)", text: "text-gray-900", sub: "text-emerald-700/40", pill: "bg-emerald-900/5 text-emerald-800/60", wm: "rgba(0,0,0,0.1)", qrFg: "#1a1a1a", qrBg: "#f0faf5", font: 4, phones: 1, aspect: "16/9", showDesc: true, showRating: true, showMeta: false },
-  lavender: { bg: "#f5f0fa", gradient: "radial-gradient(ellipse at 60% 30%, #efe5ff 0%, #f5f0fa 50%, #ece5f5 100%)", thumb: "linear-gradient(135deg, #e0d0f0, #f5f0fa)", text: "text-gray-900", sub: "text-purple-700/40", pill: "bg-purple-900/5 text-purple-800/60", wm: "rgba(0,0,0,0.1)", qrFg: "#1a1a1a", qrBg: "#f5f0fa", font: 7, phones: 2, aspect: "1/1", showDesc: true, showRating: true, showMeta: true },
+  arctic:   { name: "Arctic", bg: "#f0f4f8", gradient: "radial-gradient(ellipse at 50% 0%, #ffffff 0%, #f0f4f8 50%, #e8edf3 100%)", thumb: "linear-gradient(135deg, #e8edf5, #d0d8e8)", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-900/5 text-gray-600", wm: "rgba(0,0,0,0.15)", qrFg: "#1a1a1a", qrBg: "#f0f4f8", font: 1, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
+  snow:     { name: "Snow", bg: "#ffffff", gradient: "radial-gradient(ellipse at 30% 20%, #f5f0ff 0%, #ffffff 40%, #f8fafb 100%)", thumb: "linear-gradient(135deg, #f0eaff, #ffffff)", text: "text-gray-900", sub: "text-gray-400", pill: "bg-gray-100 text-gray-600", wm: "rgba(0,0,0,0.12)", qrFg: "#1a1a1a", qrBg: "#ffffff", font: 2, phones: 1, aspect: "1/1", showDesc: false, showRating: true, showMeta: false },
+  cream:    { name: "Cream", bg: "#faf6f0", gradient: "radial-gradient(ellipse at 40% 30%, #fff8ee 0%, #faf6f0 50%, #f0ebe0 100%)", thumb: "linear-gradient(135deg, #f0e8d8, #faf6f0)", text: "text-gray-900", sub: "text-amber-800/40", pill: "bg-amber-900/5 text-amber-900/60", wm: "rgba(0,0,0,0.1)", qrFg: "#1a1a1a", qrBg: "#faf6f0", font: 8, phones: 2, aspect: "3/2", showDesc: true, showRating: true, showMeta: true },
+  mint:     { name: "Mint", bg: "#f0faf5", gradient: "radial-gradient(ellipse at 50% 30%, #e8fff0 0%, #f0faf5 50%, #e0f5ea 100%)", thumb: "linear-gradient(135deg, #d0f0e0, #f0faf5)", text: "text-gray-900", sub: "text-emerald-700/40", pill: "bg-emerald-900/5 text-emerald-800/60", wm: "rgba(0,0,0,0.1)", qrFg: "#1a1a1a", qrBg: "#f0faf5", font: 4, phones: 1, aspect: "16/9", showDesc: true, showRating: true, showMeta: false },
+  lavender: { name: "Lavender", bg: "#f5f0fa", gradient: "radial-gradient(ellipse at 60% 30%, #efe5ff 0%, #f5f0fa 50%, #ece5f5 100%)", thumb: "linear-gradient(135deg, #e0d0f0, #f5f0fa)", text: "text-gray-900", sub: "text-purple-700/40", pill: "bg-purple-900/5 text-purple-800/60", wm: "rgba(0,0,0,0.1)", qrFg: "#1a1a1a", qrBg: "#f5f0fa", font: 7, phones: 2, aspect: "1/1", showDesc: true, showRating: true, showMeta: true },
   // --- Bold/Gradient themes ---
-  aurora:   { bg: "#0a1a20", gradient: "linear-gradient(135deg, #0d4040 0%, #1a0050 50%, #2a0060 100%), radial-gradient(ellipse at 30% 70%, #006060 0%, transparent 50%)", thumb: "linear-gradient(135deg, #00aaaa, #8800ff)", text: "text-white", sub: "text-teal-200/50", pill: "bg-teal-500/10 text-teal-200/70", wm: "rgba(100,255,220,0.2)", qrFg: "#80ffd0", qrBg: "#0a1a20", font: 5, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
-  fire:     { bg: "#1a0000", gradient: "linear-gradient(135deg, #4a0000 0%, #8a2000 50%, #ff6000 100%)", thumb: "linear-gradient(135deg, #cc3300, #ff8800)", text: "text-white", sub: "text-orange-200/50", pill: "bg-orange-500/10 text-orange-200/70", wm: "rgba(255,180,100,0.2)", qrFg: "#ffc080", qrBg: "#1a0000", font: 7, phones: 1, aspect: "1.91/1", showDesc: false, showRating: true, showMeta: false },
-  electric: { bg: "#000820", gradient: "linear-gradient(135deg, #001050 0%, #002080 50%, #00c8ff 100%)", thumb: "linear-gradient(135deg, #0040cc, #00e0ff)", text: "text-white", sub: "text-cyan-200/50", pill: "bg-cyan-500/10 text-cyan-200/70", wm: "rgba(100,220,255,0.2)", qrFg: "#80e0ff", qrBg: "#000820", font: 8, phones: 3, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
-  velvet:   { bg: "#1a0008", gradient: "radial-gradient(ellipse at 40% 40%, #400018 0%, #280010 40%, #1a0008 100%)", thumb: "linear-gradient(135deg, #600028, #1a0008)", text: "text-white", sub: "text-rose-200/50", pill: "bg-rose-500/10 text-rose-200/70", wm: "rgba(255,150,180,0.2)", qrFg: "#ffa0c0", qrBg: "#1a0008", font: 8, phones: 1, aspect: "3/2", showDesc: true, showRating: true, showMeta: false },
-  carbon:   { bg: "#1a1a1a", gradient: "radial-gradient(ellipse at 50% 50%, #2a2a2a 0%, #1e1e1e 40%, #1a1a1a 100%)", thumb: "linear-gradient(135deg, #3a3a3a, #1a1a1a)", text: "text-white", sub: "text-gray-400", pill: "bg-white/[0.06] text-gray-300", wm: "rgba(255,255,255,0.2)", qrFg: "#ffffff", qrBg: "#1a1a1a", font: 0, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
+  aurora:   { name: "Aurora", bg: "#0a1a20", gradient: "linear-gradient(135deg, #0d4040 0%, #1a0050 50%, #2a0060 100%), radial-gradient(ellipse at 30% 70%, #006060 0%, transparent 50%)", thumb: "linear-gradient(135deg, #00aaaa, #8800ff)", text: "text-white", sub: "text-teal-200/50", pill: "bg-teal-500/10 text-teal-200/70", wm: "rgba(100,255,220,0.2)", qrFg: "#80ffd0", qrBg: "#0a1a20", font: 5, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
+  fire:     { name: "Fire", bg: "#1a0000", gradient: "linear-gradient(135deg, #4a0000 0%, #8a2000 50%, #ff6000 100%)", thumb: "linear-gradient(135deg, #cc3300, #ff8800)", text: "text-white", sub: "text-orange-200/50", pill: "bg-orange-500/10 text-orange-200/70", wm: "rgba(255,180,100,0.2)", qrFg: "#ffc080", qrBg: "#1a0000", font: 7, phones: 1, aspect: "1.91/1", showDesc: false, showRating: true, showMeta: false },
+  electric: { name: "Electric", bg: "#000820", gradient: "linear-gradient(135deg, #001050 0%, #002080 50%, #00c8ff 100%)", thumb: "linear-gradient(135deg, #0040cc, #00e0ff)", text: "text-white", sub: "text-cyan-200/50", pill: "bg-cyan-500/10 text-cyan-200/70", wm: "rgba(100,220,255,0.2)", qrFg: "#80e0ff", qrBg: "#000820", font: 8, phones: 3, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
+  velvet:   { name: "Velvet", bg: "#1a0008", gradient: "radial-gradient(ellipse at 40% 40%, #400018 0%, #280010 40%, #1a0008 100%)", thumb: "linear-gradient(135deg, #600028, #1a0008)", text: "text-white", sub: "text-rose-200/50", pill: "bg-rose-500/10 text-rose-200/70", wm: "rgba(255,150,180,0.2)", qrFg: "#ffa0c0", qrBg: "#1a0008", font: 8, phones: 1, aspect: "3/2", showDesc: true, showRating: true, showMeta: false },
+  carbon:   { name: "Carbon", bg: "#1a1a1a", gradient: "radial-gradient(ellipse at 50% 50%, #2a2a2a 0%, #1e1e1e 40%, #1a1a1a 100%)", thumb: "linear-gradient(135deg, #3a3a3a, #1a1a1a)", text: "text-white", sub: "text-gray-400", pill: "bg-white/[0.06] text-gray-300", wm: "rgba(255,255,255,0.2)", qrFg: "#ffffff", qrBg: "#1a1a1a", font: 0, phones: 2, aspect: "16/9", showDesc: true, showRating: true, showMeta: true },
 };
 
 const LIGHT_THEMES = new Set(["arctic", "snow", "cream", "mint", "lavender"]);
@@ -345,9 +346,9 @@ export default function AppShowcase({
   const resolvedInitialTheme = initialTheme in THEMES ? initialTheme : "noir";
   const initialPreset = THEMES[resolvedInitialTheme];
 
-  // Persist state in sessionStorage per app
+  // Persist state in localStorage per app (survives refresh & tab close)
   const storageKey = `appframe_${app.trackId}`;
-  const saved = typeof window !== "undefined" ? (() => { try { return JSON.parse(sessionStorage.getItem(storageKey) || "{}"); } catch { return {}; } })() : {};
+  const saved = typeof window !== "undefined" ? (() => { try { return JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch { return {}; } })() : {};
 
   const [currentTheme, setCurrentTheme] = useState(saved.theme ?? resolvedInitialTheme);
   const [showDescription, setShowDescription] = useState(saved.showDesc ?? initialPreset.showDesc);
@@ -365,10 +366,10 @@ export default function AppShowcase({
   const [headline, setHeadline] = useState(saved.headline ?? "Approved! ✅");
   const [customDeveloper, setCustomDeveloper] = useState(saved.dev ?? "");
   const [qrDataUrl, setQrDataUrl] = useState("");
-  // Save state to sessionStorage on every change
+  // Save state to localStorage on every change
   useEffect(() => {
     try {
-      sessionStorage.setItem(storageKey, JSON.stringify({
+      localStorage.setItem(storageKey, JSON.stringify({
         theme: currentTheme, showDesc: showDescription, showScreens: showScreenshots,
         showRating, showMeta, showQR, phones: phoneCount, ssIdx: screenshotIndex,
         font: currentFont, aspect: aspectRatio, tagline, appName: customAppName,
@@ -603,7 +604,10 @@ export default function AppShowcase({
           <div className="flex-1 overflow-y-auto px-4 py-3 flex flex-col gap-3">
           {/* Theme */}
           <div className="pb-3 border-b border-gray-100">
-            <SectionLabel>Theme</SectionLabel>
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Theme</label>
+              <span className="text-xs font-medium text-gray-600">{THEMES[currentTheme].name}</span>
+            </div>
             {/* First row: 8 circles + expand button */}
             <div className="flex items-center gap-2 flex-wrap">
               {THEME_KEYS_SORTED.slice(0, 8).map((key) => {
@@ -616,7 +620,7 @@ export default function AppShowcase({
                       currentTheme === key ? "border-white ring-2 ring-gray-900 scale-110" : locked ? "border-gray-200 opacity-50" : "border-gray-200 hover:border-gray-400"
                     }`}
                     style={{ background: THEMES[key].thumb }}
-                    title={locked ? `${key} (Pro)` : key}
+                    title={locked ? `${THEMES[key].name} (Pro)` : THEMES[key].name}
                   >
                     {locked && (
                       <svg className="absolute inset-0 m-auto w-3.5 h-3.5 text-white drop-shadow-md" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 17c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM15.1 8H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z"/></svg>
@@ -656,7 +660,7 @@ export default function AppShowcase({
                         )}
                       </div>
                       <span className={`text-[10px] leading-tight ${currentTheme === key ? "text-gray-900 font-semibold" : "text-gray-400"}`}>
-                        {key}{locked ? " 🔒" : ""}
+                        {THEMES[key].name}{locked ? " 🔒" : ""}
                       </span>
                     </button>
                   );
