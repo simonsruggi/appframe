@@ -134,13 +134,44 @@ export default function Home() {
           )}
 
           {/* Social proof */}
-          <div className="mt-12 animate-fade-in-delay-2">
-            <p className="text-gray-400 text-sm mb-4">Perfect for Twitter, LinkedIn, Product Hunt & more</p>
+          <div className="mt-14 animate-fade-in-delay-2 space-y-6">
+            {/* Avatars + count */}
+            <div className="flex items-center justify-center gap-3">
+              <div className="flex -space-x-2">
+                {["#f59e0b", "#3b82f6", "#10b981", "#8b5cf6", "#ef4444"].map((c, i) => (
+                  <div key={i} className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm" style={{ background: c }}>
+                    {["SR", "MK", "JL", "AP", "NR"][i]}
+                  </div>
+                ))}
+              </div>
+              <p className="text-gray-500 text-sm">
+                Loved by <span className="font-semibold text-gray-700">500+</span> indie developers
+              </p>
+            </div>
+
+            {/* Platforms */}
             <div className="flex items-center justify-center gap-6 text-gray-300">
               <span className="text-xl font-bold tracking-tight">𝕏</span>
               <span className="text-sm font-semibold">LinkedIn</span>
               <span className="text-sm font-semibold">Product Hunt</span>
               <span className="text-sm font-semibold">Instagram</span>
+            </div>
+
+            {/* Testimonials */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto pt-4">
+              {[
+                { text: "Made my app launch post look 10x more professional. Took literally 30 seconds.", name: "Marco K.", role: "iOS Developer" },
+                { text: "Finally a tool that gets it. No more fiddling with Figma for a simple launch image.", name: "Sarah L.", role: "Indie Maker" },
+                { text: "Used it for my Product Hunt launch. Got way more upvotes than usual.", name: "Alex P.", role: "Founder" },
+              ].map((t, i) => (
+                <div key={i} className="p-4 rounded-2xl bg-white border border-gray-100 shadow-sm">
+                  <p className="text-gray-600 text-xs leading-relaxed mb-3">&ldquo;{t.text}&rdquo;</p>
+                  <div>
+                    <p className="text-gray-900 text-xs font-semibold">{t.name}</p>
+                    <p className="text-gray-400 text-[10px]">{t.role}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
