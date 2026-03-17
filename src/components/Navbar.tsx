@@ -8,6 +8,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [session, setSession] = useState<{ user?: { name?: string; image?: string } } | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     fetch("/api/auth/session")
@@ -56,26 +57,41 @@ export default function Navbar() {
           {loading ? (
             <div className="w-8 h-8 rounded-full bg-white/[0.06]" />
           ) : session?.user ? (
-            <div className="flex items-center gap-3">
-              {session.user.image ? (
-                <img
-                  src={session.user.image}
-                  alt={session.user.name || "User"}
-                  className="w-8 h-8 rounded-full border border-white/10"
-                />
-              ) : (
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white text-xs font-medium">
-                  {session.user.name?.[0]?.toUpperCase() || "U"}
-                </div>
-              )}
+            <div className="relative">
               <button
-                onClick={() => {
-                  fetch("/api/auth/signout", { method: "POST" }).then(() => window.location.href = "/");
-                }}
-                className="text-white/30 hover:text-white/60 text-xs transition-colors cursor-pointer"
+                onClick={() => setShowMenu(!showMenu)}
+                className="cursor-pointer"
               >
-                Logout
+                {session.user.image ? (
+                  <img
+                    src={session.user.image}
+                    alt={session.user.name || "User"}
+                    className="w-8 h-8 rounded-full border border-white/10 hover:border-white/30 transition-all"
+                  />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xs font-medium transition-all">
+                    {session.user.name?.[0]?.toUpperCase() || "U"}
+                  </div>
+                )}
               </button>
+              {showMenu && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setShowMenu(false)} />
+                  <div className="absolute right-0 top-12 z-50 w-48 rounded-xl bg-[#111] border border-white/10 shadow-2xl overflow-hidden">
+                    <div className="px-4 py-3 border-b border-white/[0.06]">
+                      <p className="text-white text-sm font-medium truncate">{session.user.name}</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        fetch("/api/auth/signout", { method: "POST" }).then(() => window.location.href = "/");
+                      }}
+                      className="w-full px-4 py-2.5 text-left text-sm text-white/50 hover:text-white hover:bg-white/[0.04] transition-all cursor-pointer"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           ) : (
             <Link
