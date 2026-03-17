@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
-export async function POST() {
+export async function POST(req: NextRequest) {
   try {
     const session = await auth();
     if (!session?.user?.email) {
@@ -43,8 +43,8 @@ export async function POST() {
         },
       ],
       mode: "payment",
-      success_url: `https://appfra.me/pro/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `https://appfra.me`,
+      success_url: `${req.nextUrl.origin}/pro/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${req.nextUrl.origin}`,
     });
 
     return NextResponse.json({ url: checkoutSession.url });

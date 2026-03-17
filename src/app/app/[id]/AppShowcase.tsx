@@ -98,8 +98,8 @@ function PhoneMockup({ src, scale = 1 }: { src: string; scale?: number }) {
   const pad = 5 * scale;
   return (
     <div
-      className="relative bg-[#1a1a1a] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_20px_60px_-12px_rgba(0,0,0,0.8)]"
-      style={{ width: w, height: h, borderRadius: r, padding: pad }}
+      className="relative bg-[#1a1a1a]"
+      style={{ width: w, height: h, borderRadius: r, padding: pad, border: "1px solid rgba(255,255,255,0.1)" }}
     >
       <div className="w-full h-full overflow-hidden bg-black relative" style={{ borderRadius: ri }}>
         <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-black rounded-full z-20" style={{ width: nw, height: nh }} />
@@ -157,6 +157,7 @@ function ShowcaseCard({
 
   return (
     <div
+      data-showcase-card
       className="relative overflow-hidden"
       style={{
         backgroundColor: t.bg,
@@ -166,12 +167,12 @@ function ShowcaseCard({
         fontFamily,
       }}
     >
-      {/* Subtle noise/grain texture overlay */}
-      <div className="absolute inset-0 z-[1] opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, backgroundSize: "128px 128px" }} />
+      {/* Subtle noise/grain texture overlay — hidden during export via onclone */}
+      <div className="showcase-overlay absolute inset-0 z-[1] opacity-[0.03] pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`, backgroundSize: "128px 128px" }} />
       {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 z-[2] pointer-events-none" style={{ background: `linear-gradient(180deg, ${isLight ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.02)"} 0%, transparent 40%, ${isLight ? "rgba(0,0,0,0.03)" : "rgba(0,0,0,0.15)"} 100%)` }} />
+      <div className="showcase-overlay absolute inset-0 z-[2] pointer-events-none" style={{ background: `linear-gradient(180deg, ${isLight ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.02)"} 0%, transparent 40%, ${isLight ? "rgba(0,0,0,0.03)" : "rgba(0,0,0,0.15)"} 100%)` }} />
       {/* Inner shadow for depth */}
-      <div className="absolute inset-0 z-[2] pointer-events-none" style={{ boxShadow: `inset 0 1px 0 ${isLight ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.04)"}, inset 0 -1px 0 rgba(0,0,0,0.2)` }} />
+      <div className="showcase-overlay absolute inset-0 z-[2] pointer-events-none" style={{ boxShadow: `inset 0 1px 0 ${isLight ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.04)"}, inset 0 -1px 0 rgba(0,0,0,0.2)` }} />
 
       {/* Watermark for free users */}
       {!isPro && (
@@ -364,12 +365,17 @@ export default function AppShowcase({
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const pro = localStorage.getItem("appframe_pro");
-      if (pro === "true") setIsPro(true);
+      // localStorage is only a cache to avoid watermark flash — server is authoritative
+      const cached = localStorage.getItem("appframe_pro") === "true";
+      if (cached) setIsPro(true);
       fetch("/api/verify").then(r => r.json()).then(data => {
         if (data.pro) {
           localStorage.setItem("appframe_pro", "true");
           setIsPro(true);
+        } else {
+          localStorage.removeItem("appframe_pro");
+          localStorage.removeItem("appframe_email");
+          setIsPro(false);
         }
       }).catch(() => {});
       // Fetch user session
@@ -383,12 +389,24 @@ export default function AppShowcase({
     if (!captureRef.current) return;
     setDownloading(true);
     try {
+      // Server-side Pro check before download — prevents localStorage tampering
+      const verifyRes = await fetch("/api/verify").then(r => r.json()).catch(() => ({ pro: false }));
+      const verifiedPro = verifyRes.pro === true;
       const raw = await html2canvas(captureRef.current, {
         backgroundColor: null,
         scale: 3,
         useCORS: true,
         allowTaint: true,
         logging: false,
+        onclone: (_doc: Document, el: HTMLElement) => {
+          // Remove overlays that html2canvas renders with artifacts
+          el.querySelectorAll(".showcase-overlay").forEach(o => o.remove());
+          // Replace gradient with solid bg — html2canvas renders gradients with banding
+          const card = el.querySelector("[data-showcase-card]") as HTMLElement;
+          if (card) {
+            card.style.background = t.bg;
+          }
+        },
       });
 
       // Clip to rounded corners to match preview
@@ -403,8 +421,8 @@ export default function AppShowcase({
         ctx.clip();
         ctx.drawImage(raw, 0, 0);
 
-        // Bake watermark into canvas for free users (can't be removed via DevTools)
-        if (!isPro) {
+        // Bake watermark into canvas for free users (server-verified)
+        if (!verifiedPro) {
           // Center watermark
           const fontSize = Math.max(16, canvas.width * 0.02);
           ctx.font = `600 ${fontSize}px -apple-system, BlinkMacSystemFont, sans-serif`;
