@@ -319,7 +319,6 @@ export default function AppShowcase({
     setCurrentTheme(key);
     setCurrentFont(preset.font);
     setPhoneCount(preset.phones);
-    setAspectRatio(preset.aspect);
     setShowDescription(preset.showDesc);
     setShowRating(preset.showRating);
     setShowMeta(preset.showMeta);
