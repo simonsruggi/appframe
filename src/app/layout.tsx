@@ -61,7 +61,7 @@ export default function RootLayout({
         {children}
         <Script
           defer
-          data-ea-website-id="1s8sflsqam2"
+          data-ea-website-id="aew6kgwp03"
           data-ea-domain="appfra.me"
           data-ea-track-accuracy="most accurate"
           src="https://pure-analytics.com/tracking/utilities/script.js"
