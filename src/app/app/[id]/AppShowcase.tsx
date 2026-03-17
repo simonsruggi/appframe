@@ -307,7 +307,7 @@ export default function AppShowcase({
     try {
       const canvas = await html2canvas(captureRef.current, {
         backgroundColor: t.bg,
-        scale: isPro ? 2 : 1,
+        scale: 2,
         useCORS: true,
         allowTaint: true,
         logging: false,

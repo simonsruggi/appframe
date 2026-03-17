@@ -5,14 +5,30 @@ import AppShowcase from "./AppShowcase";
 
 async function getAppData(id: string, country: string): Promise<AppData | null> {
   try {
-    const res = await fetch(
-      `https://itunes.apple.com/lookup?id=${id}&country=${country}`,
-      { next: { revalidate: 3600 } }
-    );
-    const data = await res.json();
-    if (!data.results || data.results.length === 0) return null;
+    // Try primary country first, then fallback to others for screenshots
+    const countries = [country, ...(country !== "us" ? ["us"] : []), "gb", "it", "de", "fr"];
+    let bestApp = null;
 
-    const app = data.results[0];
+    for (const c of countries) {
+      const res = await fetch(
+        `https://itunes.apple.com/lookup?id=${id}&country=${c}`,
+        { next: { revalidate: 3600 } }
+      );
+      const data = await res.json();
+      if (!data.results || data.results.length === 0) continue;
+
+      const app = data.results[0];
+      if (!bestApp) bestApp = app;
+
+      // If this country has screenshots, use it
+      if (app.screenshotUrls && app.screenshotUrls.length > 0) {
+        bestApp = { ...bestApp, screenshotUrls: app.screenshotUrls, ipadScreenshotUrls: app.ipadScreenshotUrls || [] };
+        break;
+      }
+    }
+
+    if (!bestApp) return null;
+    const app = bestApp;
     return {
       trackId: app.trackId,
       trackName: app.trackName,
