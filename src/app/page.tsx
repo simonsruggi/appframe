@@ -384,10 +384,22 @@ export default function Home() {
             </div>
             <p className="text-gray-400 text-sm mb-8">Free forever</p>
             <ul className="space-y-3">
-              {["Unlimited showcase images", "All themes included", "5 beautiful themes", "Small watermark on downloads"].map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-sm text-gray-600">
-                  <svg className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
-                  {item}
+              {[
+                { text: "Unlimited showcase images", ok: true },
+                { text: "5 themes", ok: true },
+                { text: "Basic PNG export", ok: true },
+                { text: "Watermark on downloads", ok: true },
+                { text: "20+ premium themes", ok: false },
+                { text: "No watermark", ok: false },
+                { text: "High-resolution export (3x)", ok: false },
+              ].map((item, i) => (
+                <li key={i} className={`flex items-start gap-3 text-sm ${item.ok ? "text-gray-600" : "text-gray-300"}`}>
+                  {item.ok ? (
+                    <svg className="w-4 h-4 text-gray-400 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
+                  ) : (
+                    <svg className="w-4 h-4 text-gray-300 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                  )}
+                  {item.text}
                 </li>
               ))}
             </ul>
@@ -404,7 +416,7 @@ export default function Home() {
             </div>
             <p className="text-gray-400 text-sm mb-8">One-time payment</p>
             <ul className="space-y-3">
-              {["Everything in Free", "No watermark on downloads", "High-resolution PNG export", "Lifetime access"].map((item, i) => (
+              {["Everything in Free", "20+ premium themes", "No watermark on downloads", "High-resolution PNG export (3x)", "All fonts included", "Lifetime access"].map((item, i) => (
                 <li key={i} className="flex items-start gap-3 text-sm text-gray-700">
                   <svg className="w-4 h-4 text-gray-900 mt-0.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>
                   {item}
