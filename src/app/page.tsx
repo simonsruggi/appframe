@@ -199,81 +199,57 @@ export default function Home() {
       </div>
 
       {/* Examples carousel */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-        <h2 className="text-3xl font-bold text-white text-center mb-4 animate-fade-in">
+      <div className="relative z-10 py-20 overflow-hidden">
+        <h2 className="text-3xl font-bold text-white text-center mb-4">
           See what you can create
         </h2>
         <p className="text-zinc-500 text-center mb-12 text-sm">
           Beautiful showcase images generated in seconds
         </p>
-        <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-          {[
-            {
-              name: "WhatsApp",
-              developer: "WhatsApp Inc.",
-              icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/4e/72/01/4e7201d5-e27a-f9a9-42c0-cc93691b37b9/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg",
-              bg: "#075E54",
-              genre: "Social Networking",
-            },
-            {
-              name: "Instagram",
-              developer: "Meta Platforms, Inc.",
-              icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/83/73/f6/8373f60b-eaf3-b479-4299-72ea234e498a/Instagram-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-85-220.png/512x512bb.jpg",
-              bg: "#C13584",
-              genre: "Photo & Video",
-            },
-            {
-              name: "Spotify",
-              developer: "Spotify AB",
-              icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ba/1e/e8/ba1ee81c-0053-a1ab-07c3-60db23cff573/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg",
-              bg: "#1DB954",
-              genre: "Music",
-            },
-            {
-              name: "Notion",
-              developer: "Notion Labs, Inc.",
-              icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/fe/40/77/fe407752-14ab-5958-5e48-e0a087ca6a2b/AppIcon-0-0-1x_U007epad-0-85-220.png/512x512bb.jpg",
-              bg: "#191919",
-              genre: "Productivity",
-            },
-            {
-              name: "Duolingo",
-              developer: "Duolingo",
-              icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/17/10/96171033-83a0-f498-8fa3-5c73f38a0a2e/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg",
-              bg: "#58CC02",
-              genre: "Education",
-            },
-          ].map((example) => (
-            <div
-              key={example.name}
-              className="snap-center shrink-0 w-[320px] rounded-2xl overflow-hidden border border-white/[0.06] shadow-lg"
-            >
-              <div
-                className="relative p-6 pb-8"
-                style={{ backgroundColor: example.bg + "18", backgroundImage: `radial-gradient(ellipse at top, ${example.bg}30, transparent 70%)` }}
-              >
-                <div className="absolute inset-0 bg-[#080808]/80" />
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <img
-                    src={example.icon}
-                    alt={example.name}
-                    className="w-16 h-16 rounded-[14px] shadow-lg mb-3"
-                  />
-                  <h3 className="text-white font-bold text-lg leading-tight">{example.name}</h3>
-                  <p className="text-white/40 text-xs mt-0.5">{example.developer}</p>
-                  <div className="flex items-center gap-1 mt-2">
-                    {[1, 2, 3, 4, 5].map((s) => (
-                      <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                    <span className="text-white/30 text-[10px] ml-1">4.8</span>
+        {/* Auto-scrolling infinite marquee */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#080808] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#080808] to-transparent z-10" />
+          <div className="flex gap-6 animate-marquee">
+            {[
+              { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e3/b2/8a/e3b28a99-2fc5-641f-7b35-0a8094337b1a/AppIcon-0-0-1x_U007epad-0-0-0-1-0-0-sRGB-0-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/46/b3/59/46b3593b-3e88-3b48-2c82-6df72e23a492/0a0fb59e-e3e0-40e3-8cb1-df6d4bb1ebba_EN_01.jpg/392x696bb.jpg", bg: "#0a0015", genre: "Social" },
+              { name: "Spotify", developer: "Spotify AB", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ba/1e/e8/ba1ee81c-0053-a1ab-07c3-60db23cff573/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/d2/5c/6c/d25c6c33-5e55-d80d-9b88-84f868ef0312/ba0ca975-3f10-4424-b744-600487e14e72_2_en.jpg/392x696bb.jpg", bg: "#001020", genre: "Music" },
+              { name: "Notion", developer: "Notion Labs", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/fe/40/77/fe407752-14ab-5958-5e48-e0a087ca6a2b/AppIcon-0-0-1x_U007epad-0-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/86/c0/a7/86c0a72c-d040-d87a-7f69-7eee8a02daa9/9d5c4c11-e591-4b24-aebe-e14c43575ea6_1290_2796_Productivity_01.jpg/392x696bb.jpg", bg: "#080808", genre: "Productivity" },
+              { name: "Duolingo", developer: "Duolingo", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/17/10/96171033-83a0-f498-8fa3-5c73f38a0a2e/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/5c/a0/1a/5ca01aab-8b83-fe5e-c689-72fb29e15ef7/a42f6ab7-84a0-4daa-b498-7b229a0e8d35_iOS_1_6.7.jpg/392x696bb.jpg", bg: "#120800", genre: "Education" },
+              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/10/2d/b1/102db1da-e532-1597-67cb-1e9a2adfa45a/AppIconLLC-0-0-1x_U007epad-0-0-0-1-0-0-sRGB-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/0a/3d/3e/0a3d3e04-ced3-7e9a-a5ce-5940f7599b5b/0c5e5752-b07f-4bb2-b7f5-be7e12cd52be_Apple_iPhone_15_Pro_Max_1.jpg/392x696bb.jpg", bg: "#0a0015", genre: "Messaging" },
+              { name: "WhatsApp", developer: "WhatsApp Inc.", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/e3/b2/8a/e3b28a99-2fc5-641f-7b35-0a8094337b1a/AppIcon-0-0-1x_U007epad-0-0-0-1-0-0-sRGB-0-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/46/b3/59/46b3593b-3e88-3b48-2c82-6df72e23a492/0a0fb59e-e3e0-40e3-8cb1-df6d4bb1ebba_EN_01.jpg/392x696bb.jpg", bg: "#0a0015", genre: "Social" },
+              { name: "Spotify", developer: "Spotify AB", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ba/1e/e8/ba1ee81c-0053-a1ab-07c3-60db23cff573/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/d2/5c/6c/d25c6c33-5e55-d80d-9b88-84f868ef0312/ba0ca975-3f10-4424-b744-600487e14e72_2_en.jpg/392x696bb.jpg", bg: "#001020", genre: "Music" },
+              { name: "Notion", developer: "Notion Labs", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/fe/40/77/fe407752-14ab-5958-5e48-e0a087ca6a2b/AppIcon-0-0-1x_U007epad-0-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/86/c0/a7/86c0a72c-d040-d87a-7f69-7eee8a02daa9/9d5c4c11-e591-4b24-aebe-e14c43575ea6_1290_2796_Productivity_01.jpg/392x696bb.jpg", bg: "#080808", genre: "Productivity" },
+              { name: "Duolingo", developer: "Duolingo", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/96/17/10/96171033-83a0-f498-8fa3-5c73f38a0a2e/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/5c/a0/1a/5ca01aab-8b83-fe5e-c689-72fb29e15ef7/a42f6ab7-84a0-4daa-b498-7b229a0e8d35_iOS_1_6.7.jpg/392x696bb.jpg", bg: "#120800", genre: "Education" },
+              { name: "Telegram", developer: "Telegram FZ-LLC", icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/10/2d/b1/102db1da-e532-1597-67cb-1e9a2adfa45a/AppIconLLC-0-0-1x_U007epad-0-0-0-1-0-0-sRGB-85-220.png/512x512bb.jpg", screenshot: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/0a/3d/3e/0a3d3e04-ced3-7e9a-a5ce-5940f7599b5b/0c5e5752-b07f-4bb2-b7f5-be7e12cd52be_Apple_iPhone_15_Pro_Max_1.jpg/392x696bb.jpg", bg: "#0a0015", genre: "Messaging" },
+            ].map((ex, i) => (
+              <div key={i} className="shrink-0 w-[480px] rounded-3xl overflow-hidden border border-white/[0.06] shadow-2xl" style={{ backgroundColor: ex.bg }}>
+                <div className="flex items-center gap-6 p-8">
+                  {/* Left info */}
+                  <div className="flex-1 min-w-0">
+                    <img src={ex.icon} alt={ex.name} className="w-14 h-14 rounded-[12px] shadow-lg mb-3" />
+                    <h3 className="text-white font-bold text-xl leading-tight">{ex.name}</h3>
+                    <p className="text-white/40 text-xs mt-1">{ex.developer}</p>
+                    <div className="flex items-center gap-1 mt-2">
+                      {[1,2,3,4,5].map(s => (
+                        <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <span className="inline-block mt-3 px-2.5 py-1 rounded-full text-[10px] font-medium bg-white/[0.06] text-white/50">{ex.genre}</span>
                   </div>
-                  <span className="mt-3 px-2.5 py-1 rounded-full text-[10px] font-medium bg-white/[0.06] text-white/50">{example.genre}</span>
+                  {/* Phone mockup */}
+                  <div className="shrink-0 w-[120px] h-[245px] rounded-[24px] bg-[#1a1a1a] p-[3px] shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_15px_40px_-8px_rgba(0,0,0,0.8)]">
+                    <div className="w-full h-full rounded-[21px] overflow-hidden bg-black relative">
+                      <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-[48px] h-[14px] bg-black rounded-full z-10" />
+                      <img src={ex.screenshot} alt="" className="w-full h-full object-cover" />
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
