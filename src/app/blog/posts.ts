@@ -9,6 +9,413 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ios-app-press-kit",
+    title: "How to Create a Press Kit for Your iOS App",
+    description:
+      "A professional press kit helps journalists, bloggers, and influencers write about your app. Learn what to include and how to put one together as an indie developer.",
+    date: "2026-03-18",
+    readingTime: 6,
+    content: `
+## Why Indie Developers Need a Press Kit
+
+When a journalist, blogger, or YouTuber decides to cover an app, they need materials fast. They're writing under deadline pressure and don't have time to hunt for your app icon, track down your screenshots, or figure out who built the app.
+
+If you can't hand them everything they need in 30 seconds, you lose the coverage. A press kit solves this problem.
+
+A press kit is a single, organized collection of everything the media needs to write about your app. It makes your app look professional, saves journalists time, and dramatically increases your chances of getting covered. Yet most indie developers never create one — which means if you do, you already have an edge.
+
+## What to Include in Your Press Kit
+
+A solid iOS app press kit doesn't need to be complicated. Here's what to include:
+
+### 1. App Overview (One-Pager)
+
+Write a concise, factual document covering:
+
+- **App name and tagline**: One sentence that captures your app's core value
+- **What it does**: Two to three sentences explaining the app's purpose and key features
+- **Who it's for**: The target audience (e.g., "indie developers launching their first app")
+- **Price and availability**: Free, paid, freemium — and which countries it's available in
+- **App Store link**: The direct link to your App Store listing
+- **Developer name and location**: Who made the app and where they're based
+
+Avoid marketing fluff. Journalists want facts, not hype. Write like you're explaining the app to a smart friend who's never heard of it.
+
+### 2. High-Resolution App Icon
+
+Provide your app icon at 1024×1024 pixels in PNG format. This is the size Apple requires for the App Store, and it's what publications use when they feature an app.
+
+Also include a version with a transparent background if your icon has a non-standard shape. Some publications overlay icons on colored backgrounds.
+
+### 3. Screenshots and Showcase Images
+
+Provide 5–8 high-quality screenshots in PNG format. These should be your best App Store screenshots — the ones that best communicate your app's value.
+
+Beyond raw screenshots, include professional showcase images: screenshots displayed in device frames with caption text and a styled background. These are what bloggers actually use in articles because they look better than bare screenshots.
+
+Tools like [AppFrame](https://appfra.me) let you generate polished showcase images in seconds — just search for your app and export. Having these ready to go means journalists can illustrate their article without any extra work.
+
+### 4. Short Description (50 words)
+
+Write a tight, 50-word description of your app. Publications often use this directly in app roundups. Make it punchy, specific, and free of jargon.
+
+*Example: "Luma is a minimal habit tracker that focuses on streaks and consistency, not complexity. Built for people who've tried every habit app and given up, Luma uses a single daily check-in to build momentum that actually sticks. Free with an optional premium plan."*
+
+### 5. Long Description (200–300 words)
+
+A longer version for feature articles and blog posts. Cover the app's story, the problem it solves, how it works, and what makes it different. This is where you can be slightly more narrative and personal.
+
+Include your inspiration for building the app if it's compelling — journalists love a good "why I built this" story.
+
+### 6. Developer Biography
+
+A short bio (100–150 words) about you. Include:
+
+- Your background and relevant experience
+- Other apps you've built (if any)
+- A professional photo (headshot, at least 500×500 pixels)
+- Links to your personal website and Twitter/X handle
+
+For indie developers, your personal story is often as interesting to journalists as the app itself.
+
+### 7. Key Facts and Stats
+
+If you have numbers to share, include them. Downloads, active users, App Store ratings, media coverage — anything that establishes credibility. Even "launched two weeks ago and reached #5 in the Productivity category" is worth including.
+
+### 8. Contact Information
+
+Make it easy to reach you:
+
+- **Email**: A professional email address (not a gmail if you can avoid it)
+- **Twitter/X**: Your handle for quick communication
+- **Website**: Your personal site or the app's landing page
+
+Include a note that you're available for interviews and can provide additional materials on request.
+
+## How to Distribute Your Press Kit
+
+### Option 1: A Dedicated Webpage
+
+The cleanest solution. Create a "/press" page on your app's website with all materials available for download. This looks professional and is easy to link to.
+
+If you don't have an app website, set one up — even a simple one-page site with your press kit is better than nothing.
+
+### Option 2: Dropbox or Google Drive Folder
+
+A shared folder with all assets organized neatly. Create subfolders for icons, screenshots, and documents. Share the link in your outreach emails.
+
+### Option 3: A ZIP File
+
+For direct email outreach, you can attach a ZIP file with your press kit. Keep it under 10MB — use compressed PNGs and limit yourself to the most essential assets.
+
+## Making Your Press Kit Discoverable
+
+Once your press kit exists, you need to point people toward it.
+
+Add a "Press" link in your app's website footer. Include your press kit link in your App Store developer page. Mention it in your email signature. When you launch on Product Hunt or Hacker News, link to it in the comments.
+
+The press kit works best when journalists can find it themselves, without you needing to send it. Many writers prefer to research apps independently rather than responding to pitches — if your press kit is findable, they can self-serve.
+
+## Common Press Kit Mistakes
+
+**Making it a marketing brochure**: Press kits are for journalists, not users. Keep the tone factual and the claims verifiable. Journalists will ignore hyperbole.
+
+**Using low-resolution assets**: Every image should be at least 2x the display resolution. A blurry screenshot in a publication reflects badly on your app.
+
+**Forgetting to update it**: Your press kit should reflect your current app, not the version from six months ago. After major updates, refresh your screenshots and stats.
+
+**Hiding it behind a contact form**: If journalists have to fill out a form to get your materials, most won't bother. Make everything publicly accessible.
+
+## The ROI of a Good Press Kit
+
+Creating a press kit takes about half a day of work. That investment can pay off for years in the form of coverage you didn't have to chase.
+
+When your app gets covered in a popular blog post or included in an "apps of the week" roundup, it drives downloads, improves your App Store ranking, and builds the kind of credibility that money can't easily buy.
+
+You've already done the hard part by building the app. Spend a few hours making sure the world can discover it.
+`,
+  },
+  {
+    slug: "app-launch-announcement-social-media",
+    title: "How to Announce Your App Launch on Social Media",
+    description:
+      "Your app is live — now what? Learn how to craft launch announcements for Twitter, LinkedIn, and Instagram that drive downloads and build momentum.",
+    date: "2026-03-18",
+    readingTime: 5,
+    content: `
+## Your Launch Post Is Your First Marketing Asset
+
+You've spent weeks or months building your app. App Store approval comes through and suddenly you have a decision to make: how do you tell the world?
+
+Most developers post a single tweet that says something like "My app is live! [link]" — and then wonder why nobody downloaded it. The problem isn't the app. It's the announcement.
+
+A well-crafted launch announcement can drive hundreds of downloads on day one. It sets the tone for your app's public presence, builds your personal brand as a developer, and creates shareable content that can spread far beyond your immediate audience.
+
+Here's how to do it right on each major platform.
+
+## Before You Post: Prepare Your Assets
+
+Great launch posts need great visuals. Before writing a single word, assemble:
+
+- **App icon**: High-resolution PNG, 1024×1024
+- **Showcase images**: Professional screenshots in device frames with caption text. Use [AppFrame](https://appfra.me) to generate these quickly — your app is already in the App Store, so AppFrame can pull your screenshots and wrap them in a polished frame in seconds.
+- **Short demo video or GIF**: 15–30 seconds showing the core feature of your app
+- **App Store link**: The direct link (keep it short with a URL shortener if needed)
+
+Prepare 3–5 showcase images showing different features. Different platforms require different image dimensions, so export accordingly.
+
+## Twitter/X: The Developer Community Hub
+
+Twitter/X is where the indie developer community lives. A good launch thread here can get retweeted by other developers, reach journalists, and end up on aggregators like Indie Hackers.
+
+### The Thread Format
+
+Threads perform significantly better than single tweets for app launches. Here's a proven structure:
+
+**Tweet 1 (the hook)**: Lead with the problem your app solves, not the app itself.
+
+*"I spent 3 years trying every habit tracker on the App Store. None of them worked for me. So I built my own. 🧵"*
+
+**Tweet 2 (the reveal)**: Introduce your app with your best showcase image.
+
+*"Introducing Luma — a habit tracker that focuses on one thing: showing up. No gamification, no badges, no guilt. Just a clean streak and a daily check-in. Available now on the App Store."*
+
+**Tweet 3 (the story)**: Why you built it. This is the tweet that gets people emotionally invested.
+
+**Tweet 4 (key features)**: 3–4 features shown with screenshots.
+
+**Tweet 5 (the ask)**: Your call to action. Ask people to download, reply, or share.
+
+### Twitter Tips
+
+- Post between 9–11am in your target audience's timezone
+- Tag relevant accounts (Apple, product hunt, indie dev communities)
+- Use 2–3 relevant hashtags: #indiedev, #iOS, #buildinpublic
+- Engage with every reply — the algorithm rewards engagement
+- Pin the thread to your profile for the next 30 days
+
+## LinkedIn: Reach Beyond Developers
+
+LinkedIn often gets overlooked by developers, but it's excellent for apps that target professionals — productivity tools, business apps, note-taking apps, and anything work-related.
+
+The audience is different from Twitter: fewer developers, more potential end users. Adjust your tone accordingly — less technical, more benefit-focused.
+
+### The LinkedIn Post Format
+
+LinkedIn rewards longer, story-driven posts that don't have external links in the body (add the App Store link in the comments instead — LinkedIn deprioritizes posts with outbound links).
+
+Start with a hook that stops the scroll:
+
+*"I just launched my first iOS app after 18 months of development. Here's what I learned along the way."*
+
+Then tell your story: what you built, why you built it, what obstacles you faced, and what success looks like. Close with a soft call to action:
+
+*"If this sounds like something that could help you, I'd love for you to try it. Link in the comments."*
+
+Include 2–3 of your best showcase images directly in the post. LinkedIn shows images prominently and they significantly increase engagement.
+
+### LinkedIn Tips
+
+- Post during business hours, Tuesday through Thursday
+- Avoid hashtag spam — 3–5 relevant hashtags maximum
+- Respond to comments within the first hour to boost distribution
+- Share the post in relevant LinkedIn Groups in your app's niche
+
+## Instagram: Visual-First Discovery
+
+Instagram is challenging for app launches because you can't include clickable links in posts. But it's excellent for building brand awareness and driving users to your bio link.
+
+### Instagram Post Format
+
+Your showcase images are the star here. Post a carousel of 5–8 images: your best showcase screenshots, with the first image acting as a cover slide.
+
+The first image should be visually striking — bold typography, high contrast, clear value proposition. Something like: "The habit tracker that actually fits your life."
+
+Your caption should be conversational and benefit-focused. Keep it under 200 words. End with a clear call to action pointing to your bio link.
+
+### Instagram Stories
+
+Stories are often more effective than feed posts for driving direct action. Create a story sequence:
+
+1. Problem slide: "Do any of these sound familiar?"
+2. Solution slide: Introduce your app with a quick demo
+3. Feature slide: Highlight 1–2 key features
+4. CTA slide: "Download free — link in bio"
+
+Use the Link sticker to add a direct App Store link if your account has that feature.
+
+### Instagram Tips
+
+- Update your bio to point directly to your App Store link before launch
+- Use location tags and relevant hashtags to increase discoverability
+- Post Reels if you have a 15–30 second demo — Reels get dramatically more reach than static posts
+
+## The 3-Day Launch Window
+
+Your launch isn't a single post — it's a 3-day campaign:
+
+**Day 1 (Launch day)**: Your main announcement across all platforms. This should be your most polished, well-timed post.
+
+**Day 2 (Feature spotlight)**: Post one or two follow-up posts focusing on specific features. These can be more detailed and speak to specific use cases.
+
+**Day 3 (Social proof)**: Share early reviews, user feedback, or download milestones. "100 downloads in the first 48 hours — thank you!" performs well as a follow-up.
+
+## Measuring What Works
+
+After your launch, check which posts drove the most traffic. App Store Connect shows you referrer data — you can see how many downloads came from social media.
+
+On Twitter, track impressions, engagements, and link clicks. On LinkedIn, track post views and profile visits. On Instagram, track story views and bio link taps.
+
+Use what you learn to improve your next launch — or to decide which platform is worth maintaining for ongoing promotion.
+
+## The Most Important Thing
+
+Your launch announcement is just the beginning. The developers who consistently get downloads from social media are the ones who keep posting: sharing updates, engaging with their community, and talking openly about the process of building and improving their app.
+
+Launch loud. Then keep showing up.
+`,
+  },
+  {
+    slug: "ios-app-approved-next-steps",
+    title: "Your iOS App Just Got Approved — Here's What to Do Next",
+    description:
+      "App Store approval is a milestone, but the real work starts now. Here's a practical checklist of everything to do in the first 48 hours after your app goes live.",
+    date: "2026-03-18",
+    readingTime: 7,
+    content: `
+## The Moment You've Been Waiting For
+
+The email arrives. "Your app [App Name] is now available on the App Store." You've survived the review process, the nervousness, the waiting — and now your app is live, available to anyone with an iPhone.
+
+This moment deserves to be celebrated. But after a quick celebration, there's real work to do.
+
+The first 48 hours after launch are critical. The actions you take immediately after approval significantly impact your app's early trajectory — your initial download velocity, your first reviews, your search rankings, and the habits you'll build as a developer.
+
+This guide walks you through everything you should do, in order, starting the moment you get that approval email.
+
+## Step 1: Verify Your App Store Listing (First 30 Minutes)
+
+Before you tell anyone your app is live, verify that everything looks correct in the App Store.
+
+**Search for your app by name.** Does it appear? Sometimes there's a delay between approval and full indexing — if it doesn't appear immediately, wait 15–30 minutes and try again.
+
+**Check your listing:**
+- Is your app icon displaying correctly?
+- Are all screenshots showing in the right order?
+- Does the description read as intended?
+- Is your pricing correct (free, paid, or in-app purchases active)?
+- Is your app available in all the regions you intended?
+
+**Download your own app** from the App Store on a fresh device or account if possible. Test it as a new user would — go through the onboarding, try the core features, check that your in-app purchases work.
+
+Fix any issues through App Store Connect before you start driving traffic.
+
+## Step 2: Generate Your Launch Assets (First Hour)
+
+You need visual assets ready before you share the news. Specifically:
+
+- **Showcase images**: Professional screenshots in device frames with caption text. These are what you'll use across social media, your website, and any press outreach. [AppFrame](https://appfra.me) can generate these in minutes — your app is live on the App Store, so just search for it and export.
+- **App Store badge**: Apple provides official "Download on the App Store" badges at [apple.com/app-store/marketing/guidelines](https://developer.apple.com/app-store/marketing/guidelines/). Always use the official badge, not a custom one.
+- **Your short App Store link**: Copy your App Store URL from App Store Connect. Shorten it with a service like bit.ly for sharing in social posts.
+
+Having these ready before your announcement means you can post confidently and professionally, rather than scrambling for assets after the fact.
+
+## Step 3: Tell Your Personal Network (Hours 1–3)
+
+Your personal network — friends, family, colleagues, former coworkers — is your fastest source of initial downloads and reviews. These people want to support you. Make it easy for them.
+
+Send a personal message (not just a mass email blast) to at least 20–30 people who you think might genuinely use your app or know someone who would. A personal message converts far better than a group text.
+
+**What to include:**
+- What your app does in one sentence
+- Why you built it (the personal story)
+- The App Store link
+- A specific ask: "Would you mind downloading it and leaving a review? It would mean a lot and really helps with discoverability."
+
+Be specific with your ask. "Let me know what you think" gets fewer reviews than "If you have 60 seconds, leaving a 5-star review would help me so much."
+
+## Step 4: Set Up App Store Connect Analytics (Hours 1–3)
+
+App Store Connect's analytics dashboard starts collecting data the moment your app goes live. Setting up your tracking now means you'll have a baseline to measure against.
+
+Go to App Store Connect → Analytics and bookmark it. Check:
+
+- **Impressions**: How many times your app appears in search results
+- **Product page views**: How many users visit your listing
+- **Downloads**: Self-explanatory, but watch this number daily
+- **Conversion rate**: Impressions → downloads ratio. This is your core metric to improve over time.
+
+Set up email summaries if App Store Connect offers them for your territory. You want to be notified of significant changes without having to check manually every hour.
+
+## Step 5: Announce on Social Media (Hours 3–6)
+
+Now that your listing is verified and your network has been notified, it's time for the public announcement.
+
+Don't rush this step — a well-crafted announcement will outperform a hasty one every time. Write your launch posts thoughtfully. The key platforms for indie iOS developers:
+
+- **Twitter/X**: The indie developer community lives here. Write a thread with your story, showcase images, and App Store link.
+- **LinkedIn**: Especially valuable if your app targets professionals or productivity.
+- **Instagram**: Lead with your best showcase image in a carousel post.
+- **Reddit**: Find the relevant subreddit for your app's niche (not r/iphone — something more specific to your use case).
+
+Post across platforms, but tailor the format to each one. Twitter favors threads; LinkedIn favors longer personal narratives; Instagram favors beautiful visuals; Reddit favors genuine participation over pure promotion.
+
+## Step 6: Submit to Discovery Platforms (Day 1–2)
+
+Beyond social media, several platforms can drive meaningful initial traction:
+
+**Product Hunt**: Launch on Product Hunt on the same day or within the first week. Prepare a solid description and high-quality images in advance. Schedule your launch for 12:01am Pacific Time to maximize the 24-hour voting window.
+
+**Hacker News**: If your app has a technical angle or an interesting developer story, post to the "Show HN" section. HN has a knowledgeable audience that can provide valuable early feedback.
+
+**Indie Hackers**: Share your launch story in the community. Indie Hackers users love rooting for solo developers.
+
+**AppAdvice and SimilarWeb directories**: Submit your app to app discovery directories. These provide long-tail search traffic over time.
+
+## Step 7: Reach Out to Press and Bloggers (Day 1–3)
+
+The first week after launch is the best time to pursue press coverage. Your app is new, which is inherently newsworthy. After a few weeks, it's just another existing app.
+
+Make a list of 20–30 blogs, newsletters, and YouTube channels that cover apps in your category. Find the writer's email or Twitter handle and send a short, personalized pitch.
+
+**Pitch formula:**
+- One line about who you are
+- One line about what your app does and who it's for
+- One line about what makes it different or interesting
+- Your App Store link
+- Offer to provide anything they need (press kit, promo codes, interview)
+
+Keep it under 150 words. Journalists get dozens of pitches a week. Shorter is more respectful of their time and more likely to get read.
+
+## Step 8: Respond to Your First Reviews (Days 2–7)
+
+Your first reviews will start appearing within the first few days. How you handle them sets the tone for your relationship with users.
+
+**Respond to every review in the first month** — positive and negative. For positive reviews, a simple thank-you that mentions a specific detail from their review shows you actually read it. For negative reviews, acknowledge the issue, thank them for the feedback, and let them know when a fix is coming (or is already live).
+
+Public responses to reviews are visible to anyone considering downloading your app. A thoughtful, professional response to a negative review builds more trust than the negative review loses.
+
+## Step 9: Plan Your First Update (Week 1–2)
+
+The best time to plan your first update is right after launch. You'll have initial user feedback, App Store analytics showing which features get used, and fresh energy from the launch.
+
+An update within the first 2–4 weeks of launch signals to the App Store algorithm that your app is actively maintained. It also gives you something new to announce, which can drive another wave of downloads.
+
+Prioritize:
+1. Bug fixes reported by early users
+2. The single feature that users are asking for most
+3. Any conversion improvements to your listing based on early analytics
+
+## Step 10: Celebrate — Then Build
+
+You built something. That's genuinely hard, and most people who say they want to build an app never do. Take a moment to appreciate what you've accomplished.
+
+Then get back to work. The apps that succeed long-term aren't the ones with the best launches — they're the ones that keep improving, keep marketing, and keep listening to their users.
+
+Your approval email is the starting line, not the finish line. The real journey has just begun.
+`,
+  },
+  {
     slug: "app-store-screenshots-that-convert",
     title: "How to Create App Store Screenshots That Convert",
     description:
