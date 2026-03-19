@@ -19,7 +19,7 @@ Server-side Next.js App Router app. The homepage is a client component with live
 ```
 src/
   app/
-    page.tsx              # Homepage — hero, search bar, how-it-works, examples marquee, pricing CTA, footer with legal links
+    page.tsx              # Homepage (SERVER component) — hero, how-it-works, examples marquee, pricing CTA, footer. Static prerendered for SEO.
     layout.tsx            # Root layout — Albert Sans font, Navbar, SEO metadata (OG/Twitter), PureAnalytics script
     globals.css           # Tailwind 4 + custom animations (fade-in, marquee)
     sitemap.ts            # Dynamic sitemap (/, /login, /pricing)
@@ -42,6 +42,8 @@ src/
   middleware.ts           # Route protection: /app/* requires auth, /login redirects if logged in, ?format=md rewrites to /api/md
   components/
     Navbar.tsx            # Shared navbar (client component) — session-aware via fetch to /api/auth/session, hidden on /app/* pages, has logout via CSRF token
+    AppSearch.tsx          # Client component — debounced live search bar, App Store URL detection, search results grid
+    ScrollToTopButton.tsx  # Client component — CTA button that scrolls to top
 public/
   logo.svg               # Monochrome logo (white bg, dark frame)
   favicon.svg            # Monochrome favicon
@@ -77,7 +79,7 @@ public/
 - **Examples marquee:** Homepage infinite scroll marquee with 5 popular apps (WhatsApp, Spotify, Telegram, Notion, Duolingo) — some with screenshots, some without
 - **QR code generation:** Dynamic QR code linking to the app's App Store page, themed to match card colors
 - **Pro:** $5 one-time via Stripe, stored as localStorage flag (`appframe_pro`, `appframe_email`) + server verification on page load
-- **SEO:** Full OpenGraph/Twitter cards, dynamic sitemap, per-app OG images (app icon), metadata templates
+- **SEO:** Full OpenGraph/Twitter cards, dynamic sitemap, per-app OG images (app icon), metadata templates, canonical URLs on all pages, homepage is server-rendered (static prerender) for crawlability
 - **Legal:** Privacy policy and Terms of Service pages linked from homepage footer and login page
 
 ## Themes (AppShowcase only)
