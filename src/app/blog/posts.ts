@@ -9,6 +9,429 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "best-tools-indie-ios-developers-2026",
+    title: "Best Tools for Indie iOS Developers in 2026",
+    description:
+      "From design to distribution, here are the best tools indie iOS developers are using in 2026 to ship faster, market smarter, and grow their apps without a big team or budget.",
+    date: "2026-03-19",
+    readingTime: 7,
+    content: `
+## The Indie Developer Stack in 2026
+
+Building an iOS app solo used to mean wearing every hat — developer, designer, marketer, and support team — while working with a fraction of the resources a startup has. That's still true. But the tooling available to indie developers in 2026 has never been better.
+
+The right stack doesn't just save time. It closes the gap between a one-person operation and a polished, professional product. This guide covers the tools that are genuinely worth paying for (or using for free) across every stage of indie iOS development.
+
+---
+
+## Design and Visual Assets
+
+### Figma
+
+Figma remains the go-to for iOS UI design. The free tier is generous enough for most solo projects, the iOS component libraries are excellent, and Figma's dev mode makes it easy to inspect your own designs when you move to Xcode.
+
+If you're not a designer, lean on community templates. Search "iOS app UI kit" in the Figma community — there are hundreds of high-quality, free starting points.
+
+### SF Symbols
+
+Apple's SF Symbols library (now over 6,000 icons) is the most underrated free resource in iOS development. Every icon is designed to work with the system font, supports multicolor and hierarchical rendering, and scales perfectly across Dynamic Type sizes. Use it before reaching for any third-party icon pack.
+
+### AppFrame
+
+When your app is ready to ship, you need marketing images that look professional. [AppFrame](https://appfra.me) generates polished showcase images — screenshots displayed in device frames with styled backgrounds and captions — without requiring any design skills. Search for your app by name, pick a style, and export. It's the fastest way to go from approval to a shareable launch image.
+
+---
+
+## Development and Productivity
+
+### Xcode + Swift
+
+The obvious ones. But worth noting: Swift 6's concurrency model, combined with Xcode's improved previews, has made the solo development loop meaningfully faster in 2026. If you're still on Objective-C, migrating incrementally to Swift is worth the investment.
+
+### RocketSim
+
+RocketSim supercharges the iOS Simulator with features Apple hasn't shipped natively: recording to GIF/video, push notification testing, location simulation, and App Store screenshot capture. For $29/year it's one of the best productivity investments an iOS developer can make.
+
+### GitHub Copilot / Cursor
+
+AI-assisted coding is now table stakes. GitHub Copilot works directly in Xcode via a third-party plugin, while Cursor offers a full editor experience with Claude and GPT-4 integration. For boilerplate-heavy iOS code (table view data sources, Core Data stack setup, networking layers), AI assistance cuts development time significantly.
+
+### TestFlight
+
+Apple's own beta testing tool is free, works seamlessly, and supports up to 10,000 external testers. There's no reason not to use it. Set up an external testing group before your review submission so you have a ready audience on launch day.
+
+---
+
+## Backend and Data
+
+### Supabase
+
+If your app needs a backend, Supabase gives you a Postgres database, authentication, real-time subscriptions, and edge functions — all on a generous free tier. The Swift SDK is well-maintained and the documentation is solid. It's the fastest way to add user accounts and cloud sync without managing infrastructure.
+
+### RevenueCat
+
+Subscriptions and in-app purchases are notoriously painful to implement correctly. RevenueCat abstracts away the StoreKit complexity, handles receipt validation, and provides cross-platform purchase tracking. The free tier covers up to $2,500 monthly revenue — most indie apps don't outgrow it quickly.
+
+### CloudKit
+
+For apps that don't need a custom backend, CloudKit is worth considering. It's free (up to Apple's storage limits), requires no server, and integrates deeply with iOS. The trade-off is that it's Apple-only — fine for an iOS-first product, limiting if you plan to go cross-platform later.
+
+---
+
+## Marketing and Distribution
+
+### App Store Connect
+
+Obvious, but underused. Most developers treat App Store Connect as a submission tool and ignore its analytics. The Acquisition, Usage, and Monetization dashboards in the Analytics tab contain valuable data: which search terms bring users to your page, where drop-offs happen in the product page, and how your install rates compare to your impressions.
+
+Spend time in App Store Connect analytics before you invest in any paid marketing.
+
+### Beehiiv / Substack
+
+Email is still the highest-ROI marketing channel for indie developers. A small, engaged list of users who opted in is worth more than ten times as many social media followers. Both Beehiiv and Substack have free tiers that work fine until you have a few thousand subscribers.
+
+Start building your list before you launch. Announce early access, share development updates, and treat subscribers as your most important audience.
+
+### Product Hunt
+
+Launching on Product Hunt is free and can drive a meaningful spike in downloads, especially for productivity and developer tools. Prepare your launch page with good screenshots, a compelling tagline, and a first comment that tells your story. Schedule your launch for Tuesday–Thursday for the best visibility.
+
+### Indie Hackers
+
+Indie Hackers is a community of bootstrapped founders sharing revenue numbers, launch stories, and tactical advice. It's worth both reading and posting in — the community skews heavily toward developer-founders, so iOS app launches get genuine attention.
+
+---
+
+## Analytics and Crash Reporting
+
+### TelemetryDeck
+
+TelemetryDeck is privacy-first analytics built specifically for Apple platforms. No IDFA, no personal data, no consent banners required — just anonymous event counts and funnels. It's free for small apps and integrates in minutes. If you want usage analytics without the privacy baggage of Firebase, TelemetryDeck is the right choice.
+
+### Sentry
+
+Sentry provides crash reporting and error tracking with an excellent free tier. The iOS SDK captures crashes, captures breadcrumbs leading up to errors, and integrates with GitHub for direct issue linking. If your app crashes and you don't have Sentry (or a similar tool), you'll find out from a 1-star review instead of a dashboard alert.
+
+---
+
+## Customer Support
+
+### Typeform or Google Forms
+
+For a simple, low-friction support option, a linked form works fine. But most users won't seek out a form — they'll leave a review. Which brings up:
+
+### AppFollow or Appbot
+
+Both services monitor your App Store reviews and send alerts when new reviews come in. Responding to reviews — especially negative ones — improves your overall rating and shows potential users that you're responsive. This is one of the highest-leverage activities an indie developer can do, and both tools make it easy.
+
+---
+
+## Putting It Together
+
+You don't need all of these tools on day one. A reasonable progression:
+
+1. **Build phase**: Xcode, SF Symbols, TestFlight, GitHub Copilot
+2. **Pre-launch**: Figma (screenshots), AppFrame (showcase images), Beehiiv (email list)
+3. **Launch**: App Store Connect analytics, Product Hunt, Indie Hackers
+4. **Post-launch**: TelemetryDeck, Sentry, RevenueCat, AppFollow
+
+Each tool solves a specific problem. The goal isn't to add every tool — it's to identify where you're losing time or information and fill those gaps specifically.
+
+The indie developer advantage has always been speed and focus. The right tools protect both.
+`,
+  },
+  {
+    slug: "celebrate-app-launch-indie-developer",
+    title: "How to Celebrate Your App Launch as an Indie Developer",
+    description:
+      "Shipping an iOS app is a genuine achievement. Here's how to mark the moment, share it with the world, and turn your launch celebration into momentum for growth.",
+    date: "2026-03-19",
+    readingTime: 6,
+    content: `
+## You Shipped. Now What?
+
+The approval email lands in your inbox. After weeks or months of development, testing, rejections, revisions, and waiting — your app is live on the App Store.
+
+For about thirty seconds, it feels incredible.
+
+Then most indie developers open Xcode and start working on the next feature.
+
+Don't do that. At least not yet.
+
+Shipping an iOS app is a real achievement. The vast majority of people who start building an app never finish one. You did. That deserves to be marked, shared, and used as the starting point for actual growth — not quietly filed away.
+
+Here's how to make the most of your launch moment.
+
+---
+
+## First: Make Something Worth Sharing
+
+Before you post anywhere, you need a shareable asset. A plain App Store link is forgettable. A well-designed image showing your app in context — with the app name, a tagline, and a device mockup — is something people stop and look at.
+
+[AppFrame](https://appfra.me) generates these in seconds. Search for your app by name, choose a background style, and export a professional showcase image. It's the difference between posting "I launched an app, here's the link" and posting something that makes people say "wait, what is this?"
+
+Create two or three variants — different backgrounds, different screenshots — so you have options for different platforms.
+
+---
+
+## Share Your Story, Not Just Your Link
+
+The single biggest mistake developers make when launching is leading with features instead of story.
+
+"My new app tracks your habits with a clean UI and powerful statistics" is forgettable. "I built this because I tried every habit app on the market and none of them stuck. Here's what I did differently" is something people read, share, and remember.
+
+Your launch post should answer:
+
+- **What problem does it solve?** Be specific and relatable.
+- **Why did you build it?** The more personal, the better.
+- **What was the hardest part?** Vulnerability makes posts human.
+- **What's next?** Momentum is compelling.
+
+You don't need to be a writer. You just need to be honest about your experience. People root for builders who share the real story.
+
+---
+
+## Where to Post Your Launch
+
+### Twitter / X
+
+Twitter has the most active indie developer community of any platform. Post your story with your showcase image, tag relevant hashtags (#indiedev, #buildinpublic, #ios, #appstore), and engage with every reply.
+
+A good Twitter launch thread structure:
+1. Hook tweet: "I just shipped my first iOS app after [X months]. Here's what I learned." (with image)
+2. Tweet 2: The problem it solves
+3. Tweet 3: What building it was like
+4. Tweet 4: The features you're most proud of
+5. Tweet 5: The App Store link and what's coming next
+
+Threads outperform single tweets significantly. Write the thread before your launch day and post it the morning you go live.
+
+### LinkedIn
+
+LinkedIn reaches a different audience than Twitter — less developer-focused, more broadly professional. A launch post here can drive downloads from people who'd never see your Twitter post.
+
+Keep it shorter than a Twitter thread. One post, 150–250 words, with your image. Lead with the business angle: the problem you solved, what you learned building it, and the link.
+
+### Reddit
+
+The relevant communities depend on your app's category, but for the launch itself:
+- r/iOSProgramming — for the developer perspective
+- r/indiegaming (if it's a game)
+- r/productivity (if it's a productivity app)
+- Whatever community your target users live in
+
+Reddit is allergic to marketing. Post as a builder sharing something you made, not a marketer promoting a product. Tell the story, be specific about the technical challenges, and link to the App Store only at the end.
+
+### Hacker News: Show HN
+
+A "Show HN: [App Name] — [One-line description]" post on Hacker News can drive significant attention, especially for developer tools, productivity apps, or technically interesting projects. Keep the post text concise and be ready to answer technical questions in the comments.
+
+### Product Hunt
+
+Product Hunt gets its own section because it's bigger than a social media post. A proper Product Hunt launch requires:
+- A compelling tagline (not "the best X app")
+- Good screenshots and a GIF or video
+- A first comment that tells your story
+- Support from your existing network (ask friends, family, and early users to upvote on launch day)
+- Active engagement in the comments throughout the day
+
+Launch on a Tuesday, Wednesday, or Thursday for the best visibility.
+
+---
+
+## Tell Your Existing Network
+
+Don't underestimate the people who already know you.
+
+Send a personal email to friends and colleagues. Not a mass email — write it like a personal note. "Hey, I wanted to let you know I just launched something I've been working on for months. I'd love it if you checked it out." Include the link. Ask them to share it if they find it useful.
+
+Your existing network is often more powerful than any social media platform. These people want you to succeed and will share your launch more enthusiastically than strangers.
+
+---
+
+## Celebrate Offline Too
+
+This might sound obvious, but: do something to mark the moment in your physical life.
+
+Tell the people you live with. If you worked on this in evenings and weekends while holding down a day job, your family has made sacrifices for this too — acknowledge it together. Go to dinner. Open something nice. Take a day off.
+
+The indie development path can be lonely. The external validation of an App Store launch feels different from what you expect (often smaller, often followed quickly by imposter syndrome). Building in some physical, offline celebration creates a real memory that the launch happened — separate from download numbers or social media engagement.
+
+---
+
+## After the Celebration: Turn Momentum into Growth
+
+A launch is the beginning of the marketing effort, not the end of it.
+
+The week after launch, do three things:
+
+1. **Reply to every review**: Thank the positive ones, apologize and offer help for the negative ones. This shows potential users you're responsive and often converts 1-star reviews to 3 or 4 stars.
+
+2. **Send a follow-up to your early users**: Ask what they like, what's confusing, and what feature they'd most want to see. This conversation shapes your roadmap and makes users feel involved.
+
+3. **Write a launch retrospective**: A blog post or Twitter thread about how the launch went — downloads, what worked, what didn't, lessons learned. These posts are some of the most shared content in the indie dev community because everyone wants to know what actually happened.
+
+The launch celebration isn't just about enjoying the moment (though you should). It's about creating assets, relationships, and content that compound over the weeks and months that follow.
+
+Ship. Celebrate. Build again.
+`,
+  },
+  {
+    slug: "ios-app-launch-checklist",
+    title: "iOS App Launch Checklist: From Approval to First 1000 Downloads",
+    description:
+      "A step-by-step launch checklist for indie iOS developers covering everything from App Store optimization to social media announcements and first-week growth tactics.",
+    date: "2026-03-19",
+    readingTime: 7,
+    content: `
+## The Gap Between Approval and Downloads
+
+Getting your iOS app approved is a milestone. Getting your first 1000 downloads is a different challenge entirely.
+
+Most indie developers treat the approval email as the finish line. It's actually the starting gun. The work that happens in the 48 hours before and after your app goes live has an outsized effect on your first-week performance — which in turn affects your App Store ranking, your review count, and your early growth trajectory.
+
+This checklist covers everything you need to do, in order, to give your app the best possible start.
+
+---
+
+## Before You Submit: Pre-Launch Prep
+
+These tasks should be completed before your app goes into review.
+
+### ✅ Optimize Your App Store Listing
+
+Your App Store listing is your primary marketing asset. Before submitting:
+
+- **Title**: Include your primary keyword naturally. The title has the highest weight in App Store search.
+- **Subtitle**: 30 characters to add a second keyword or reinforce your value proposition.
+- **Keywords field**: 100 characters, comma-separated, no spaces after commas. Use keywords not already in your title or subtitle.
+- **Description**: The first three lines appear above "more" — make them count. Lead with the benefit, not the feature.
+- **Promotional text**: This can be changed without a new submission. Use it for time-sensitive messaging ("Now with iOS 18 widgets!").
+
+### ✅ Create Professional Screenshots
+
+Your screenshots are the most important visual element of your listing. Users decide whether to download in seconds, and screenshots are what they look at.
+
+Follow the App Store screenshot size requirements for each device type you support. Beyond the raw screenshots, create styled showcase images — screenshots in device frames with background colors and caption text — for your social media launch posts.
+
+[AppFrame](https://appfra.me) generates these showcase images automatically from your App Store screenshots. They're useful both for your launch posts and for your press kit.
+
+### ✅ Set Up Your Landing Page
+
+Even a minimal landing page — one page with your app name, icon, screenshots, and an App Store link — gives you something to link to from social profiles and email campaigns. It also establishes your web presence before anyone is searching for your app by name.
+
+### ✅ Build Your Email List
+
+If you've been building in public or have any existing audience, collect emails before launch. A pre-launch list of even 50–100 people who asked to be notified gives you a built-in audience for launch day.
+
+### ✅ Draft Your Launch Posts
+
+Write your launch posts before your app is approved. You want to publish immediately when you go live, not spend two hours writing copy while momentum is slipping.
+
+Draft posts for:
+- Twitter/X (a thread)
+- LinkedIn
+- Reddit (relevant communities)
+- Any Slack groups or Discord servers you're part of
+
+### ✅ Prepare Your Press Kit
+
+If you're reaching out to journalists or bloggers, have your press kit ready before launch. It should include your app icon, screenshots, showcase images, a short description, and your contact information.
+
+---
+
+## Launch Day: The First 24 Hours
+
+### ✅ Post Your Launch Announcement
+
+Publish your prepared posts across all channels. Do this the moment your app appears as "Ready for Sale" — not when you get the approval email, which can precede App Store availability by up to an hour.
+
+Sequence your posts:
+1. Twitter/X first (most real-time, fastest feedback)
+2. LinkedIn within the hour
+3. Reddit (pick the right community — not r/self-promotion)
+4. Email your list
+5. Notify your personal network
+
+### ✅ Submit to Product Hunt
+
+If you've prepared a Product Hunt launch (which is recommended), publish it the moment your app is live. Product Hunt launches are evaluated over a 24-hour period, so timing matters — publish at 12:01 AM Pacific time to get the full day.
+
+If you haven't prepared a full Product Hunt launch, schedule it for a future day rather than rushing it.
+
+### ✅ Post in Relevant Communities
+
+Beyond developer communities, post in communities your target users belong to. If it's a fitness app, post in fitness subreddits. If it's a writing tool, post in writing communities. Lead with the problem you solved, not with "check out my app."
+
+### ✅ Message Your Early Supporters
+
+Personally message people who expressed interest during development. These are your warmest leads and most likely to leave early reviews.
+
+### ✅ Monitor Reviews
+
+Check for reviews throughout the day. Respond to every review — positive and negative. Early review responses show the App Store algorithm (and potential users) that you're actively maintaining the app.
+
+---
+
+## First Week: Building Momentum
+
+### ✅ Respond to Every Review
+
+Make it a daily habit in week one. Responding to negative reviews often leads to updated ratings. Responding to positive reviews builds goodwill.
+
+### ✅ Submit to App Discovery Sites
+
+There are several sites that list new iOS apps. Submitting takes 15–30 minutes and can generate a small but consistent trickle of downloads:
+
+- **AppAdvice** — Accepts new app submissions
+- **AppRaven** — Curated app discovery
+- **Launching Next** — App launch directory (not iOS-specific)
+- **Betalist** — If you still have a beta/early access phase
+
+### ✅ Write a Launch Retrospective
+
+A post about how your launch went — download numbers, what you tried, what worked — is among the most-shared content in the indie developer community. Write it at the end of week one when you have real data.
+
+Post it on Indie Hackers, Medium, and your own blog (if you have one). This content drives ongoing discovery long after your launch day.
+
+### ✅ Identify Your Best Marketing Channel
+
+After a week, look at your data. Where did your downloads come from? Which post got the most engagement? Which community responded most positively?
+
+Double down on whatever worked. Don't spread effort evenly across every channel — focus on the one or two that showed real signal.
+
+### ✅ Set Up Analytics
+
+If you haven't already, integrate a lightweight analytics tool. TelemetryDeck is the privacy-respecting option that requires no consent banner. Even just tracking which screens users visit and where they drop off will inform your first update.
+
+---
+
+## After Week One: The Path to 1000
+
+Getting from 0 to 1000 downloads typically takes longer than launch week for most indie apps. The realistic timeline depends heavily on your category and marketing, but here's a framework:
+
+**100 downloads**: Achievable through your personal network and launch posts. This is "friends and interested strangers" territory.
+
+**500 downloads**: Requires getting into channels you don't personally control — media mentions, App Store feature consideration, review sites, or word of mouth from early users.
+
+**1000 downloads**: Usually requires either one big placement (a feature, a viral post, press coverage) or sustained, compounding organic growth through App Store search.
+
+The path from 100 to 1000 is where ASO starts to matter most. Update your keywords based on what you learn from App Store Connect analytics. Test different screenshots using Apple's built-in A/B testing. Improve your description based on user feedback.
+
+The launch checklist gets you to 100. The ongoing optimization work gets you to 1000 and beyond.
+
+---
+
+## The Mindset Behind the Checklist
+
+Every item on this list has the same goal: reduce friction between your app and the people who would benefit from it.
+
+Your app doesn't automatically find its users. You have to introduce them. The checklist is a structured way to make those introductions as broadly and effectively as possible in the critical window when your app is new and the algorithm is paying attention.
+
+Do the work. Ship the posts. Respond to the reviews. The downloads follow from the effort.
+`,
+  },
+  {
     slug: "ios-app-press-kit",
     title: "How to Create a Press Kit for Your iOS App",
     description:
