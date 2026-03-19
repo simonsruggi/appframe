@@ -4,6 +4,9 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "AppFrame terms of service. Read the terms that govern your use of the service.",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 export default function TermsPage() {

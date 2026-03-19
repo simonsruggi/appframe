@@ -1,68 +1,15 @@
-"use client";
-
-import { useState, useEffect, useRef, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import type { Metadata } from "next";
 import Link from "next/link";
-import type { AppData } from "./api/app/route";
+import AppSearch from "@/components/AppSearch";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState<AppData[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [searched, setSearched] = useState(false);
-  const router = useRouter();
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const abortRef = useRef<AbortController | null>(null);
-
-  const doSearch = useCallback(async (q: string) => {
-    if (!q.trim()) {
-      setResults([]);
-      setSearched(false);
-      return;
-    }
-
-    // If it's a direct URL or ID, go straight to showcase
-    const isDirectId = /^\d+$/.test(q.trim()) || q.includes("apps.apple.com");
-    if (isDirectId) {
-      const idMatch = q.match(/\/id(\d+)/) || [null, q.trim()];
-      router.push(`/app/${idMatch[1]}`);
-      return;
-    }
-
-    // Abort previous request
-    if (abortRef.current) abortRef.current.abort();
-    const controller = new AbortController();
-    abortRef.current = controller;
-
-    setLoading(true);
-    setSearched(true);
-    try {
-      const res = await fetch(`/api/app?q=${encodeURIComponent(q)}`, { signal: controller.signal });
-      const data = await res.json();
-      setResults(data.results || []);
-    } catch (err) {
-      if ((err as Error).name !== "AbortError") setResults([]);
-    }
-    setLoading(false);
-  }, [router]);
-
-  // Debounced live search on typing
-  useEffect(() => {
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    if (query.trim().length < 1) {
-      setResults([]);
-      setSearched(false);
-      return;
-    }
-    debounceRef.current = setTimeout(() => doSearch(query), 350);
-    return () => { if (debounceRef.current) clearTimeout(debounceRef.current); };
-  }, [query, doSearch]);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    doSearch(query);
-  };
-
   return (
     <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-white">
       {/* Dot grid pattern */}
@@ -93,65 +40,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="animate-fade-in-delay max-w-2xl mx-auto relative">
-            {/* Hand-drawn arrow + text */}
-            <div className="absolute -left-40 -top-8 hidden lg:flex flex-col items-end select-none pointer-events-none">
-              <p className="text-gray-700 text-xl -rotate-6 mr-2" style={{ fontFamily: "'Caveat', cursive" }}>Try now! It&apos;s free!</p>
-              <svg className="w-28 h-16 text-gray-700 -mt-1" viewBox="0 0 160 80" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 5 C 10 25, 25 50, 60 58 C 90 64, 120 58, 142 48" />
-                <path d="M132 40 L 145 49 L 135 55" />
-              </svg>
-            </div>
-
-            <div className="search-wrapper">
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Paste App Store URL or search by name..."
-                className="w-full px-6 py-4 rounded-[18px] bg-white text-gray-900 placeholder-gray-400 text-lg focus:outline-none transition-all relative z-10 shadow-sm"
-              />
-            </div>
-          </div>
-
-          {/* Loading spinner */}
-          {loading && (
-            <div className="mt-6 flex items-center justify-center gap-2 text-gray-400 text-sm animate-fade-in">
-              <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <circle cx="12" cy="12" r="10" strokeOpacity="0.2" />
-                <path d="M12 2a10 10 0 019.95 9" />
-              </svg>
-              Searching...
-            </div>
-          )}
-
-          {/* Search results */}
-          {!loading && searched && results.length > 0 && (
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 animate-fade-in max-w-2xl mx-auto">
-              {results.map((app) => (
-                <button
-                  key={app.trackId}
-                  onClick={() => router.push(`/app/${app.trackId}`)}
-                  className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left cursor-pointer"
-                >
-                  <img
-                    src={app.artworkUrl512}
-                    alt={app.trackName}
-                    className="w-16 h-16 rounded-2xl shadow-sm"
-                  />
-                  <div className="min-w-0">
-                    <p className="text-gray-900 font-semibold truncate">{app.trackName}</p>
-                    <p className="text-gray-500 text-sm truncate">{app.developerName}</p>
-                    <p className="text-gray-400 text-xs">{app.primaryGenreName}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          )}
-
-          {searched && !loading && results.length === 0 && (
-            <p className="mt-8 text-gray-400 animate-fade-in">No apps found. Try a different search.</p>
-          )}
+          <AppSearch />
 
           {/* Social proof */}
           <div className="mt-14 animate-fade-in-delay-2 space-y-6">
@@ -251,42 +140,27 @@ export default function Home() {
               step: "1",
               title: "Search your app",
               desc: "Paste an App Store link or search by name. We pull all the info automatically.",
-              icon: (
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="M21 21l-4.35-4.35" />
-                </svg>
-              ),
+              iconPath: "M11 11m-8 0a8 8 0 1016 0 8 8 0 10-16 0M21 21l-4.35-4.35",
             },
             {
               step: "2",
               title: "Choose a theme",
               desc: "Pick from 5 carefully crafted themes. Dark, light, colorful -- your call.",
-              icon: (
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="13.5" cy="6.5" r="2.5" />
-                  <circle cx="17.5" cy="10.5" r="2.5" />
-                  <circle cx="8.5" cy="7.5" r="2.5" />
-                  <circle cx="6.5" cy="12.5" r="2.5" />
-                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12a10 10 0 005.012 8.662" />
-                </svg>
-              ),
+              iconPath: "M13.5 6.5m-2.5 0a2.5 2.5 0 105 0 2.5 2.5 0 10-5 0M17.5 10.5m-2.5 0a2.5 2.5 0 105 0 2.5 2.5 0 10-5 0M8.5 7.5m-2.5 0a2.5 2.5 0 105 0 2.5 2.5 0 10-5 0M6.5 12.5m-2.5 0a2.5 2.5 0 105 0 2.5 2.5 0 10-5 0M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12a10 10 0 005.012 8.662",
             },
             {
               step: "3",
               title: "Download & share",
               desc: "Export a high-quality PNG and share it on Twitter, Product Hunt, or anywhere.",
-              icon: (
-                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
-                </svg>
-              ),
+              iconPath: "M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3",
             },
           ].map((item, idx) => (
             <div key={item.step} className="relative">
               <div className="text-center p-6 rounded-3xl bg-gray-50 border border-gray-100">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-gray-200 flex items-center justify-center mx-auto mb-4 text-gray-500 shadow-sm">
-                  {item.icon}
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d={item.iconPath} />
+                  </svg>
                 </div>
                 <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                   Step {item.step}
@@ -453,15 +327,7 @@ export default function Home() {
         <p className="text-gray-500 text-lg mb-8 max-w-lg mx-auto">
           Search your app, pick a theme, and download a stunning image in under 30 seconds. No design skills needed.
         </p>
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-gray-900 text-white font-semibold text-lg hover:bg-gray-800 transition-all cursor-pointer shadow-lg"
-        >
-          Get started — it&apos;s free
-          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </button>
+        <ScrollToTopButton />
       </div>
 
       {/* Footer */}

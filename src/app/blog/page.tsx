@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Blog",
   description:
     "Tips, guides, and insights for iOS developers on App Store optimization, screenshot design, and app marketing.",
+  alternates: {
+    canonical: "/blog",
+  },
   openGraph: {
     title: "Blog | AppFrame",
     description:

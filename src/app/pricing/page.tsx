@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Pricing",
   description:
     "AppFrame pricing plans. Generate stunning showcase images for your iOS apps for free, or go Pro for clean exports without watermarks.",
+  alternates: {
+    canonical: "/pricing",
+  },
 };
 
 const faqs = [
