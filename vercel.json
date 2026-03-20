@@ -1,3 +1,3 @@
 {
-  "ignoreCommand": "bash -c 'git diff --quiet HEAD^ HEAD -- . \":(exclude)*.md\" \":(exclude)docs/\" 2>/dev/null || exit 1'"
+  "ignoreCommand": "bash -c '[ \"$VERCEL_ENV\" = preview ] && exit 0; git diff --quiet HEAD^ HEAD -- . \":(exclude)*.md\" \":(exclude)docs/\" 2>/dev/null || exit 1'"
 }
