@@ -9,6 +9,462 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "ios-app-pricing-strategy",
+    title: "How to Price Your iOS App: Free vs Paid vs Freemium",
+    description:
+      "Choosing the right pricing model for your iOS app can make or break its success. Here's a practical framework for indie developers deciding between free, paid, and freemium.",
+    date: "2026-03-21",
+    readingTime: 7,
+    content: `
+## The Pricing Decision That Changes Everything
+
+You've built your iOS app. The code works, App Store review is done, and the launch is imminent. There's one question left — and it's harder than most developers expect: how much should it cost?
+
+Pricing is not just a revenue decision. It's a positioning decision, a growth decision, and a statement about who your app is for. Get it right and you'll attract the right users, earn sustainable income, and build word-of-mouth momentum. Get it wrong and you'll either leave money on the table or end up with a great app that nobody downloads.
+
+This guide breaks down the three main iOS pricing models — free, paid, and freemium — and helps you figure out which one actually fits your app and goals.
+
+---
+
+## Model 1: Paid Upfront
+
+### How It Works
+
+Users pay a one-time fee to download the app. You set a price — typically $0.99 to $9.99 for consumer apps, higher for professional tools — and collect revenue from every download.
+
+### When It Works Well
+
+Paid pricing works best when:
+
+- **Your app solves a specific, clearly-defined problem.** If someone searches "mortgage calculator" and yours is the best one, they'll pay $1.99 without hesitation.
+- **Your users are professionals or enthusiasts.** Developers, photographers, musicians, and writers are conditioned to pay for good tools. They're less price-sensitive than general consumers.
+- **Word-of-mouth is your primary channel.** A strong recommendation from a trusted source ("just buy this app, it's worth it") converts well for paid apps.
+- **The value is immediately obvious.** If a new user can understand what your app does and why it's worth the price within 10 seconds of seeing the App Store listing, paid can work.
+
+### The Challenge
+
+The core problem with paid pricing in 2026 is discoverability friction. Users can't try before they buy. App Store search rankings are partially driven by download velocity, which is harder to achieve at a price point. And when a free alternative exists — even an inferior one — many users default to free.
+
+Paid apps also need a higher-quality App Store listing. Your screenshots, description, and preview video need to do all the selling. There's no second chance after someone doesn't buy.
+
+### Pricing Psychology
+
+- $0.99 is the "impulse buy" zone — barely any friction, but low revenue per user
+- $1.99–$4.99 is a reasonable utility price
+- $9.99+ requires a stronger value proposition and often works better with a free trial or limited free tier
+- Avoid pricing that looks arbitrary — $3.47 looks odd; $3.99 looks intentional
+
+---
+
+## Model 2: Free (Ad-Supported or Freemium-Light)
+
+### How It Works
+
+The app is free to download with no in-app purchases. Revenue comes from ads (banner, interstitial, rewarded) if at all.
+
+### When It Actually Makes Sense
+
+Pure free, ad-supported apps are rarely the right choice for indie developers. Here's why:
+
+- Ad revenue at small scale is negligible. You need millions of monthly active users to earn meaningful income from mobile ads.
+- Ads degrade the user experience, which hurts ratings and word-of-mouth.
+- The "free" positioning attracts users who are least willing to pay — not necessarily the users who'll get the most value.
+
+The legitimate use case for a fully free app is when your app is a marketing vehicle for something else — a companion app for a paid web service, a portfolio piece, or a community tool. In these cases, you're not trying to monetize the app directly.
+
+### Free + Future Pricing
+
+Some developers launch free to build an audience and ratings, then introduce paid features later. This can work, but communicate the transition clearly. Users who downloaded expecting free feel burned when things change. A better approach is to be transparent upfront: "free while in beta" or "core features always free."
+
+---
+
+## Model 3: Freemium (Free + In-App Purchases)
+
+### How It Works
+
+The app is free to download. Users access a limited set of features for free. A subset of users unlock premium features through in-app purchases (IAP) — either a one-time purchase, a consumable, or a recurring subscription.
+
+### The Math Behind Freemium
+
+Freemium relies on a conversion funnel:
+- 100% of interested users download (no payment barrier)
+- A percentage try it and find value (retention matters here)
+- 2–10% convert to paid (this is your revenue base)
+
+The economics are radically different from paid apps. A paid $2.99 app needs 1,000 downloads to earn $2,990 (minus Apple's 30%). A freemium app with the same 1,000 downloads, 5% conversion, and a $9.99 in-app purchase earns roughly $350. But at 10,000 downloads, the freemium model earns $3,500 from that same 5% conversion. Scale favors freemium.
+
+### One-Time Purchase vs. Subscription
+
+This is the sub-decision within freemium that trips up most developers:
+
+**One-time "unlock all" purchase** works well for:
+- Utility apps with a fixed feature set
+- Apps where the value doesn't depend on ongoing content or server costs
+- Users who are psychologically resistant to subscriptions
+
+**Subscription** works well for:
+- Apps with ongoing costs (API calls, server-side processing, content updates)
+- Apps where the value grows over time (habit trackers, journaling apps, fitness apps)
+- Business tools where ROI justifies recurring spend
+
+A hybrid approach — lifetime purchase option plus annual subscription — captures both segments but adds complexity. Use it only if you can maintain it cleanly.
+
+### Designing the Free Tier
+
+The hardest part of freemium is drawing the line between free and paid. The principles:
+
+1. **Free must be genuinely useful.** If the free tier is so hobbled it's essentially useless, users churn before converting. They need to experience the value before they'll pay for more of it.
+2. **The upgrade should be obvious.** Users should hit a natural ceiling — not a wall. "You've used your 5 free exports this month. Upgrade for unlimited." is better than hiding features behind a paywall they don't understand.
+3. **Don't punish free users.** Friction, nags, and interstitials in the free tier create resentment. A single, well-placed upgrade prompt converts better than constant interruption.
+
+---
+
+## How to Actually Choose
+
+Here's a simple decision framework:
+
+**Choose Paid if:**
+- You're targeting a professional or niche enthusiast audience
+- Your app solves a specific problem with no free equivalent
+- You have an existing audience (newsletter, social following) to launch to
+- You're building a portfolio piece and want to signal quality
+
+**Choose Freemium (one-time IAP) if:**
+- Your app has broad consumer appeal
+- You want to maximize download velocity and App Store presence
+- Your app has a natural feature split between "good enough" and "great"
+
+**Choose Freemium (subscription) if:**
+- Your app has ongoing operating costs
+- You're building a service with evolving content or features
+- Your target users are businesses or professionals who understand subscription value
+
+**Choose Free if:**
+- Your app is a companion or marketing tool for another product
+- You're testing a concept before committing to a monetization strategy
+- You're building toward a different business model (audience, data, B2B)
+
+---
+
+## Practical Tips Before You Launch
+
+**Test your price with your audience.** If you have a waitlist or social following, simply asking "would you pay $X for this?" gives you real signal before you commit.
+
+**Check competitors' pricing.** Look at the top apps in your category. If every competitor is free with subscriptions, going paid is an uphill battle. If the category is full of paid utilities, you have room to charge.
+
+**Set your launch price strategically.** Some developers launch at a lower "introductory" price to boost early reviews and ranking, then increase it. Apple's App Store allows pricing changes at any time.
+
+**Don't undercharge out of insecurity.** Indie developers consistently underprice their work. A $4.99 app is not meaningfully more expensive than $1.99 for someone who wants it. Price for the value you deliver, not for the fear of rejection.
+
+Before you launch, make sure your App Store listing reflects your pricing strategy — professional screenshots, a clear description, and compelling visuals that communicate value. Tools like [AppFrame](https://appfra.me) can help you create polished showcase images that justify a premium price point before users even hit the download button.
+
+---
+
+## The Bottom Line
+
+There's no universally correct pricing model — only the right model for your app, your users, and your goals. The biggest mistake is choosing a model based on what feels safe rather than what fits. Free is not safer than paid; it just shifts the risk from conversion to scale.
+
+Pick a model, launch with conviction, and measure the results. You can always adjust.
+`,
+  },
+  {
+    slug: "indie-app-marketing-zero-budget",
+    title: "Indie App Marketing on a Zero Budget",
+    description:
+      "You don't need an ad budget to get your first 1,000 users. Here's how indie developers market their iOS apps with zero money and a clear strategy.",
+    date: "2026-03-21",
+    readingTime: 7,
+    content: `
+## The Myth of Paid Growth
+
+Open any app marketing guide and you'll find advice tailored to teams with advertising budgets, in-house designers, and dedicated growth engineers. For the solo developer who built something real and wants people to actually use it, most of that advice is useless.
+
+The good news: the most effective early-stage marketing channels for indie iOS apps cost nothing but time. The developers who break through on zero budget aren't doing anything magical — they're just doing the right things consistently, in the right order, with the right positioning.
+
+Here's what actually works.
+
+---
+
+## Step 1: Get Your Foundation Right (Before Any Marketing)
+
+Marketing amplifies what's already there. If your App Store listing is weak, every person you drive to it will bounce. If your app's screenshots are blurry or confusing, you've lost the conversion before it started.
+
+Before promoting anywhere, audit your listing:
+
+### App Store Listing Checklist
+
+- **Title and subtitle:** Include your primary keyword naturally. "Habit Tracker — Daily Goals" beats "HabitFlow Pro" for discoverability.
+- **Screenshots:** They should tell a story. First screenshot = your value proposition. Use device frames and clean backgrounds to look professional. Tools like [AppFrame](https://appfra.me) let you generate polished showcase images from your App Store screenshots in minutes.
+- **Description:** First three lines matter most (visible before "More"). Lead with the benefit, not the feature list.
+- **Ratings:** You need at least 10 ratings to display a star count. Getting those first reviews is a priority.
+
+Fix your listing before you spend a minute on distribution. Once it's solid, everything you promote will convert better.
+
+---
+
+## Step 2: Communities First
+
+The highest-ROI channel for an indie developer with no budget is online communities where your target users already spend time. The key is to be genuinely helpful, not promotional.
+
+### Where to Show Up
+
+**Reddit:** Find the subreddits where your users live. A productivity app belongs in r/productivity, r/getdisciplined, r/ADHD (if relevant). A finance app in r/personalfinance, r/ynab, r/povertyfinance.
+
+The mistake most developers make: posting a launch announcement in a community they've never contributed to. It reads as spam and gets removed. The right approach: spend two weeks answering questions, adding value, and building a presence. Then share your app contextually — "I built this because I had the same problem you're describing."
+
+**Indie Hacker communities:** r/indiehackers and the IndieHackers.com forums are actively receptive to launch posts from builders. These communities celebrate the process, not just the result. A transparent "I built this in 3 months, here's what I learned" post performs far better than a pure product pitch.
+
+**Niche forums and Discord servers:** Find communities organized around your app's topic — not around "indie hacking" or "startups." If you've built a running app, join running Discord servers. A recipe app belongs in cooking communities, not in builder communities.
+
+### The Right Tone
+
+Never open with "I built an app." Open with the problem. "I couldn't find a good [X] app that did [Y], so I built one" is a story. It creates curiosity, not resistance.
+
+---
+
+## Step 3: Twitter / X — The Indie Dev Distribution Channel
+
+Twitter/X is the primary word-of-mouth engine for indie developers, especially in the Apple ecosystem. The audience is self-selected toward people who care about software, tools, and productivity.
+
+### What Actually Gets Traction
+
+**Build in public.** Document your development process. Screenshots of work in progress, decisions you're wrestling with, metrics as you grow — these posts compound over time. People who followed your journey are invested in your launch.
+
+**Launch posts with visuals.** A tweet with a good device mockup image outperforms plain text by a significant margin. Your hero screenshot inside an iPhone frame, on a clean background, makes people stop scrolling. This is why spending time on your launch image matters.
+
+**Thread, don't pitch.** A 5-tweet thread explaining the problem you solved, how you solved it, what you learned building it, and linking to the app at the end performs vastly better than a single promotional tweet.
+
+**Tag relevant accounts.** If you built something relevant to a niche, tag accounts in that niche — not to beg for RTs, but to genuinely let them know. Many accounts with 50K–200K followers in specific niches actively look for good tools to share with their audience.
+
+### Consistency Beats Virality
+
+One viral tweet is nice. Showing up with useful content twice a week for six months is better. The developers who build meaningful Twitter audiences treat it like a long game, not a slot machine.
+
+---
+
+## Step 4: Hacker News
+
+If your app has any technical angle — you used an interesting algorithm, faced a novel engineering challenge, solved a hard problem — Hacker News is a legitimate zero-budget distribution channel.
+
+**"Show HN" posts** perform best when they're honest and technical. Not "I built the best habit tracker," but "Show HN: I built a habit tracker that uses implementation intentions — show me why I'm wrong about the approach." Intellectual honesty and genuine curiosity get upvoted; marketing language gets flagged.
+
+The audience is technical, skeptical, and will point out every flaw. This is a feature, not a bug — if you handle criticism well and engage authentically, you get free product feedback, genuine word of mouth, and links that contribute to your web presence.
+
+---
+
+## Step 5: Product Hunt
+
+A Product Hunt launch is a one-shot event, so timing and preparation matter. It's worth its own deep-dive, but here are the zero-budget essentials:
+
+- **Build your hunter network before launch day.** Follow makers in your space, engage with their launches, build relationships. Asking cold connections to upvote feels transactional; asking people who know your work feels natural.
+- **Launch on a Tuesday, Wednesday, or Thursday.** Monday and Friday see less traffic. Weekends are competitive because fewer business launches happen.
+- **Prepare your gallery.** Product Hunt rewards apps with strong visuals. Crisp screenshots, a GIF or video of the app in action, and a clear tagline.
+- **Respond to every comment.** Engagement boosts visibility on Product Hunt's algorithm. Be in the comments all day.
+
+A top 5 finish on Product Hunt for your category can generate hundreds of downloads and App Store reviews in a single day — entirely for free.
+
+---
+
+## Step 6: Email Outreach (Done Right)
+
+Cold email has a terrible reputation because most people do it terribly. Done right, it's highly effective for zero budget.
+
+### Who to Email
+
+- **Bloggers and YouTubers in your niche.** Find people who have reviewed similar apps. A short, personalized email ("I noticed you covered [similar app] in [post/video] — I built something that solves the limitation you mentioned: [specific thing]") converts at a surprisingly high rate.
+- **Newsletter writers.** Curated newsletters in your niche actively look for good tools to recommend. A one-paragraph pitch with a link is enough.
+- **Journalists at tech/niche publications.** Less likely to respond, but the upside is significant if they do.
+
+### The Formula
+
+Subject: Quick question about [specific thing they covered]
+
+Body: 3–4 sentences. Reference something specific they wrote/said. Explain your app in one sentence. Offer a free promo code. Ask nothing else.
+
+That's it. No pitch decks, no long descriptions, no asking for a review. Let them decide what to do with it.
+
+---
+
+## Step 7: Consistency Over Time
+
+Zero-budget marketing doesn't produce overnight results. What it produces, with consistency, is a compounding return: each post, comment, and relationship builds on the last.
+
+Track what matters:
+- **App Store impressions and conversion rate** — are people clicking through, and is the listing converting?
+- **Source of installs** — which channels are actually driving downloads?
+- **Review velocity** — are you getting enough ratings to show a star count?
+
+Adjust based on data, not gut feeling. Double down on what's working. Drop what isn't.
+
+The developers who grow sustainably without an ad budget aren't lucky — they're consistent, genuine, and patient. The same qualities that made you ship a good app will make the marketing work, too.
+`,
+  },
+  {
+    slug: "app-store-description-that-converts",
+    title: "How to Write an App Store Description That Converts",
+    description:
+      "Most App Store descriptions are wasted space. Here's how to write copy that convinces users to download your app — and helps it rank in search.",
+    date: "2026-03-21",
+    readingTime: 6,
+    content: `
+## Why Most App Store Descriptions Fail
+
+Open the App Store and read the descriptions of the top 10 apps in any category. Most of them are, at best, forgettable. At worst, they're a dense wall of bullet points listing features that mean nothing to a user who hasn't tried the app yet.
+
+This is a missed opportunity. Your App Store description has two jobs: convince undecided users to download, and signal to Apple's search algorithm that your app is relevant for key queries. Most descriptions do neither well.
+
+Here's how to write a description that actually works.
+
+---
+
+## Understand the Anatomy of an App Store Description
+
+Before writing a word, understand what users actually see:
+
+**Visible without tapping "more":** approximately 252 characters on iPhone — roughly 3 short lines. This is your most valuable real estate. Everything here must earn its place.
+
+**Full description (visible after "more"):** up to 4,000 characters. Users who tap "more" are already interested — they want to be convinced, not just informed.
+
+**Subtitle:** 30 characters, always visible beneath the app name. Appears in search results. Highly valuable for both keyword targeting and first impressions.
+
+**Keywords field:** Not visible to users, but directly influences search ranking. Separate keywords with commas (not spaces), don't repeat words already in your title or subtitle, and treat the 100-character limit as precious real estate.
+
+---
+
+## The First Three Lines: Your Conversion Copy
+
+The first ~252 characters are read by everyone who taps your listing. They're also indexed by Apple's search algorithm. Get these right.
+
+### The Wrong Approach (What Most Apps Do)
+
+> "HabitFlow Pro is a powerful habit tracking app with beautiful design and a full suite of tools to help you build better habits, stay motivated, and achieve your goals. Track daily, weekly, or custom habits with streaks, reminders, and analytics."
+
+This is technically accurate and completely ineffective. It lists features without connecting them to outcomes, and it reads like it was written by someone who had to fill a space.
+
+### The Right Approach
+
+Lead with the transformation, not the tool.
+
+**Formula:** [Who it's for] + [what they're struggling with] + [what your app makes possible]
+
+> "Build habits that stick — even when motivation fails. HabitFlow tracks your daily routines and shows you exactly where you're losing streaks, so you can fix the pattern, not just restart it."
+
+This version:
+- Addresses a real emotional pain point ("even when motivation fails")
+- Differentiates from competitors implicitly (shows *where* you lose streaks, not just counts them)
+- Creates a clear, desirable outcome
+- Uses natural language, not jargon
+
+### Tips for Your First Three Lines
+
+- **Start with a statement, not a question.** "Build habits that stick" is stronger than "Want to build better habits?"
+- **Use "you," not "users."** Write to one person, not a demographic.
+- **Avoid superlatives.** "The most powerful habit tracker" is unverifiable and ignored. Specific claims outperform vague claims every time.
+- **Don't repeat your app name.** Apple already shows it. Use those characters for copy.
+
+---
+
+## The Full Description: Structure and Strategy
+
+Once a user taps "more," they want detail. Give it to them in a scannable format.
+
+### Section 1: Expand the Lead (2–3 sentences)
+
+Deepen the value proposition. If your opening promised transformation, explain *how*. What's the core mechanism or insight that makes your app different?
+
+### Section 2: Key Features (as benefits, not specs)
+
+Use a short header ("What you get with HabitFlow:") followed by 5–8 bullet points. Each bullet should follow the format: **Feature** — benefit to the user.
+
+Not: "✓ Daily reminders"
+Better: "✓ **Smart reminders** — scheduled when you're most likely to complete each habit, based on your history"
+
+Avoid:
+- Bullets that are just feature names ("Dark mode," "Widgets," "iCloud sync")
+- Technical jargon that means nothing to a non-developer
+- More than 8–10 bullets (diminishing returns, and it looks like padding)
+
+### Section 3: Social Proof (if you have it)
+
+A single strong quote from a real user or press mention ("'The best habit app I've used' — LifeHacker") outperforms any claim you can make about your own app. If you have App Store reviews with strong language, you can paraphrase them here (check Apple's guidelines on this). Even "Trusted by 50,000+ users" is meaningful social proof.
+
+### Section 4: Use Cases or Personas (optional but effective)
+
+This section resonates with users who see themselves in the description:
+
+> "Whether you're building a morning routine, trying to exercise consistently, or learning a new skill — HabitFlow is designed for people who've tried other systems and found them too rigid."
+
+This tells users who the app is for, which helps the right people self-select in and reduces churn from mismatched expectations.
+
+### Section 5: The Call to Action
+
+End with momentum, not a whimper.
+
+Not: "Download HabitFlow today."
+Better: "Your next streak starts today. Download free and track your first habit in under a minute."
+
+---
+
+## ASO: Writing for Search, Not Just Humans
+
+Your description content influences App Store Search (to a limited degree — title, subtitle, and keywords field carry more weight). But strategic word placement in the description signals context to Apple's algorithm.
+
+### Keyword Research for Your Description
+
+Before writing, identify:
+1. **Primary keywords:** what users type when they want exactly your app ("habit tracker," "daily routine app")
+2. **Secondary keywords:** broader category terms ("productivity app," "goal tracking")
+3. **Problem-based queries:** what users search when they don't know the solution exists ("how to build habits," "stick to routines")
+
+Use your primary keywords naturally in the first paragraph. Don't keyword-stuff — Apple's algorithm is sophisticated and over-optimization reads poorly to human reviewers as well.
+
+### What NOT to Do for ASO
+
+- Don't include competitor app names (Apple's guidelines prohibit this)
+- Don't repeat the same keyword 10 times (keyword stuffing is penalized)
+- Don't include your website URL in the description (it's not clickable and wastes characters)
+- Don't list pricing information (it changes and creates support issues)
+
+---
+
+## Localizing Your Description
+
+If you support multiple languages, localize your description for each market — don't just auto-translate. A Japanese user searching for a productivity app uses different search terms, different emotional appeals, and different social proof expectations than a US user.
+
+Even if you only localize for one additional market, the App Store's algorithm treats localized listings as strongly matching for that market's searches.
+
+---
+
+## Testing and Iteration
+
+Apple now offers **Custom Product Pages** — a feature that lets you create up to 35 alternate versions of your App Store listing with different screenshots, promotional text, and (with some limitations) different descriptions. You can drive traffic from different sources to different pages and compare conversion rates.
+
+For indie developers, the simplest form of A/B testing is time-based: change your description, measure conversion rate for 30 days (App Store Connect shows conversion metrics), compare to the previous period. It's not a perfect controlled experiment, but it's better than setting a description and never revisiting it.
+
+---
+
+## The Underrated Promotional Text Field
+
+Above your description, there's a 170-character **Promotional Text** field that you can update at any time without submitting a new app version. It appears at the top of your listing (above the main description) and is perfect for:
+
+- Time-limited announcements ("New in v2.1: full iPad support")
+- Seasonal promotions ("Black Friday: 50% off lifetime unlock")
+- Responding to coverage ("Featured by Apple in Best New Apps")
+
+Most indie developers ignore this field. Keeping it current signals an active, maintained app and gives you a free conversion lever you can pull any time.
+
+---
+
+## One Final Principle
+
+Write for the user who is almost convinced — someone who has already looked at your screenshots, read the ratings, and is 60% sold. Your description's job is to get them to 100%.
+
+That user doesn't need a feature list. They need to see themselves using your app successfully. Write to that image, and your conversion rate will follow.
+
+When your description is ready, make sure your visual assets match the quality of your copy. A polished listing with weak screenshots — or great screenshots with a weak description — leaves conversion on the table. Both need to work together. Tools like [AppFrame](https://appfra.me) can help you create the visual side of a high-converting App Store presence.
+`,
+  },
+  {
     slug: "app-launch-images-without-design-skills",
     title: "How to Create App Launch Images Without Design Skills",
     description:
