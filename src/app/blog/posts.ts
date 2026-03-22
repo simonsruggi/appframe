@@ -9,6 +9,559 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "app-preview-video",
+    title: "How to Create App Preview Videos That Drive Downloads",
+    description:
+      "App preview videos are the most underused asset on the App Store. Here's how indie developers can create compelling preview videos that actually convert browsers into downloaders.",
+    date: "2026-03-22",
+    readingTime: 7,
+    content: `
+## The Most Underused Asset on the App Store
+
+Ask most indie developers what drives App Store downloads, and they'll mention screenshots, keywords, and ratings. Rarely does anyone lead with app preview videos — and that's a mistake.
+
+Apple's own data has shown that app listings with preview videos see significantly higher conversion rates than those without. Users who watch a preview video are more likely to download, and more likely to understand what the app does before they do. Yet the majority of indie app listings still have no video at all.
+
+This guide covers everything you need to know about creating an app preview video that actually helps people decide to download.
+
+---
+
+## What Is an App Preview Video?
+
+An app preview video is a short video (15–30 seconds) that appears at the beginning of your screenshot gallery on the App Store. It plays automatically (without sound by default) when a user scrolls to your listing.
+
+Unlike a marketing video on your website, the App Store preview must follow Apple's guidelines:
+- It must show **actual footage of the app being used** — no cinematic animations, no lifestyle footage, no voiceovers claiming features
+- Maximum length: **30 seconds**
+- Audio is optional, but if included, it must be appropriate (no misleading sound effects)
+- Must be in the correct resolution for each device type
+
+Apple reviews preview videos as part of your app submission. Videos that don't show real in-app UI are rejected.
+
+---
+
+## Why Most Developers Skip It (And Why You Shouldn't)
+
+The perceived barriers are real: you need to record screen footage, edit it, add captions or music, and export in the right format. That sounds like work. But the payoff is significant.
+
+Here's what preview videos do that screenshots can't:
+- **Show flow and interaction** — how does the app actually feel to use?
+- **Demonstrate animations and transitions** — static screenshots can't capture your beautiful swipe gestures or loading states
+- **Convey speed** — if your app is fast, a video proves it
+- **Build confidence** — users who see the app in motion are less likely to feel surprised after downloading
+
+For games especially, a preview video is almost mandatory. For productivity tools, utilities, and creative apps, it's a powerful differentiator when competitors don't have one.
+
+---
+
+## Planning Your Preview Video
+
+Before you start recording, decide what story you want to tell in 30 seconds. That's not much time, so you need to be ruthless about what to include.
+
+### The 3-Scene Framework
+
+Most effective app preview videos follow a simple structure:
+
+1. **Hook (0–5 seconds):** Show your app's most impressive or surprising moment first. Don't build up to it — lead with the payoff.
+2. **Core Features (5–25 seconds):** Walk through 2–4 key interactions. Move quickly, but give each feature enough time to register.
+3. **Call to Action (25–30 seconds):** End with your app icon, name, and a simple tagline.
+
+Avoid showing onboarding screens, login flows, settings pages, or error states. Show your app at its best.
+
+### Write a Shot List
+
+Before recording, write down exactly what you'll show and in what order. This makes recording much faster and ensures you don't forget anything.
+
+Example for a habit tracker:
+1. Open app to main dashboard (2s)
+2. Tap to log a habit completion (3s)
+3. View streak animation (2s)
+4. Open weekly stats chart (4s)
+5. Add a new habit from the "+" button (4s)
+6. App icon + tagline (3s)
+
+---
+
+## Recording Your Screen
+
+### On-Device Recording with iOS Screen Record
+
+The simplest approach: use iOS's built-in screen recording (Control Center → Screen Recording).
+
+Pros: Free, native quality, shows real touch indicators if you enable them.
+
+Cons: You may see notification banners, battery indicators, or other distractions. Use a simulator for a cleaner capture.
+
+### Recording in the Xcode Simulator
+
+The Xcode Simulator lets you record clean screen footage without real-device clutter. Use **File → Record Screen** in the Simulator, or use QuickTime to record the simulator window.
+
+Benefits:
+- No status bar distractions (set a clean status bar with xcrun simctl status_bar)
+- No incoming calls or notifications
+- Consistent, reproducible footage
+
+### Using QuickTime with a Physical Device
+
+Connect your iPhone to your Mac and open QuickTime → New Movie Recording → select your iPhone as the camera source. This gives you full-resolution footage from a real device.
+
+---
+
+## Editing Your Preview Video
+
+You don't need Final Cut Pro or Adobe Premiere. Several tools work well for indie developers:
+
+**iMovie (free, Mac):** Good enough for simple cuts, text overlays, and basic transitions. Export at 1080p or higher.
+
+**CapCut (free):** Popular with app developers for quick edits. Has auto-captions, transitions, and music built in.
+
+**Descript:** Good if you want to add voiceover or transcript-based editing.
+
+**DaVinci Resolve (free):** More powerful than iMovie, still free. Worth learning if you want more control.
+
+### Adding Captions
+
+Since App Store previews play without sound by default, captions are critical. Add short text overlays that describe what the user is seeing:
+
+- "Log habits in one tap"
+- "See your streaks and stats"
+- "Set smart daily reminders"
+
+Use short phrases (under 5 words), positioned consistently (usually bottom third), and keep them on screen for 2–3 seconds each.
+
+### Music
+
+If you add music, keep it subtle and upbeat. Use royalty-free tracks from sources like Pixabay Music, Free Music Archive, or Apple's built-in iMovie library. Avoid anything that sounds like a stock music cliché.
+
+---
+
+## Export Specifications
+
+Apple requires specific video formats depending on device:
+
+| Device | Resolution | Frame Rate |
+|--------|-----------|-----------|
+| iPhone 16 Pro Max | 1320 × 2868 | 30fps |
+| iPhone 16 / 15 | 1179 × 2556 | 30fps |
+| iPad Pro 13" | 2064 × 2752 | 30fps |
+
+Export as H.264 or HEVC. File size must be under 500MB (in practice, a 30-second video is usually under 50MB).
+
+You don't need to create a video for every device size — you can reuse one video across compatible screen sizes, but verify Apple's current guidelines before submitting, as these change with new hardware.
+
+---
+
+## Common Mistakes to Avoid
+
+**Starting slow:** The first 3 seconds determine whether someone keeps watching. Don't show a splash screen or loading animation — show value immediately.
+
+**Showing too much:** 30 seconds forces you to choose. Pick the 3–4 features that matter most to a new user and show only those.
+
+**Not adding captions:** Silent autoplay means most users experience your video as a silent film. Captions aren't optional — they're essential.
+
+**Using outdated footage:** If you update your UI, update your preview video. Outdated visuals confuse users and hurt trust.
+
+**Mismatched screenshots and video:** Your preview video and screenshots should feel like a cohesive story. If your video shows dark mode, don't use light mode screenshots. Tools like [AppFrame](https://appfra.me) can help you create screenshots that visually match your video's style and color palette.
+
+---
+
+## After You Upload
+
+Once your preview video is live, monitor your conversion rate in App Store Connect under **Metrics → Conversion Rate**. Compare before and after the video was added.
+
+It can take a few weeks to get statistically meaningful data, but most developers who add a quality preview video see a measurable lift in installs-per-impressions.
+
+If the lift isn't there, revisit your video. Does the first 5 seconds hook? Are features easy to understand? Does the pacing feel right?
+
+The preview video is one of the few App Store listing elements you can iterate on without a new app submission (video-only updates don't require an app binary update). Take advantage of that.
+
+---
+
+## Quick-Start Checklist
+
+- [ ] Write a 3-scene shot list (hook → features → CTA)
+- [ ] Record clean footage via Simulator or QuickTime
+- [ ] Edit to exactly 15–30 seconds
+- [ ] Add text captions for every feature shown
+- [ ] Add subtle background music (optional)
+- [ ] Export in correct resolution for your target devices
+- [ ] Upload in App Store Connect alongside your screenshots
+
+A preview video isn't a luxury — it's one of the highest-ROI improvements you can make to your App Store listing. Build it once, let it convert for years.
+`,
+  },
+  {
+    slug: "app-landing-page",
+    title: "Building an App Landing Page That Converts",
+    description:
+      "Your App Store listing isn't enough. A dedicated landing page gives you control over SEO, messaging, and conversions. Here's how to build one that actually drives downloads.",
+    date: "2026-03-22",
+    readingTime: 6,
+    content: `
+## Why Your App Needs Its Own Landing Page
+
+The App Store is a great distribution channel — but it's not a marketing channel. You can't run Google Ads to an App Store listing effectively. You can't optimize for long-tail search terms. You can't A/B test your headline or capture email addresses from people who aren't ready to download yet.
+
+A dedicated landing page solves all of this. It gives you a URL you own, complete control over messaging, and the ability to drive traffic from any source: Google, social media, newsletters, press coverage, or word of mouth.
+
+This guide covers what makes an app landing page actually convert — not just look nice — and how to build one even if you're a solo developer without a design background.
+
+---
+
+## The One Goal: Get the Download
+
+Before you write a single word or choose a color scheme, anchor everything to one question: *what does this person need to believe or understand in order to tap "Download"?*
+
+Your landing page has one job. Not to impress designers. Not to tell your whole app story. Not to showcase every feature. One job: turn a curious visitor into someone who downloads your app.
+
+Everything on the page should serve that goal. If a section doesn't move someone closer to downloading, cut it.
+
+---
+
+## Essential Sections of an App Landing Page
+
+### 1. Hero Section
+
+This is the first thing a visitor sees. It needs to communicate:
+- **What the app does** (in one sentence)
+- **Who it's for**
+- **Why they should care**
+
+Your hero headline should be benefit-focused, not feature-focused. Not "A habit tracker with streak counting" — but "Build habits that actually stick."
+
+Include your app icon prominently. It's the visual anchor that connects your page to what they'll see on the App Store.
+
+Add a **Download on the App Store** badge that links directly to your App Store listing. This should be above the fold — visible without scrolling.
+
+### 2. Hero Screenshot or Video
+
+Show the app. A single great screenshot or a short looping video is more persuasive than paragraphs of text.
+
+Use a realistic device mockup (iPhone or iPad frame around your screenshot). Tools like [AppFrame](https://appfra.me) are built specifically to create polished, professional showcase images from your app screenshots — ideal for landing pages, press kits, and social media.
+
+The image should show the app in its best, most representative state — not an onboarding screen or a settings page.
+
+### 3. Problem → Solution
+
+Two to three paragraphs (or a two-column layout) that describe:
+- The problem your user has
+- Why existing solutions fall short
+- How your app solves it
+
+Write in plain language. Avoid jargon. Your reader should feel understood, not marketed to.
+
+### 4. Key Features (3–5 only)
+
+Don't list every feature. Pick 3–5 that matter most to a new user and give each one a short headline + one sentence of explanation + a supporting screenshot or icon.
+
+Use real screenshots, not illustrations. Real UI builds trust.
+
+### 5. Social Proof
+
+Include:
+- App Store rating (e.g., "4.8 ★ on the App Store")
+- Number of downloads or users if notable
+- Real user reviews or testimonials (copy a few from your App Store reviews)
+- Press mentions if you have them ("Featured in MacStories", "As seen in...")
+
+Even one good testimonial dramatically increases conversion. People trust other people more than they trust marketing copy.
+
+### 6. FAQ
+
+Answer the 3–5 questions a potential user would Google before downloading. This also helps SEO — FAQ content often surfaces in search results.
+
+Common FAQ items:
+- Is it free?
+- Is it available on iPad / Mac?
+- Does it work offline?
+- How is my data stored?
+- What's the difference between free and premium?
+
+### 7. Footer
+
+Include links to your privacy policy (required by Apple and by law), support email, and social media if you're active there. The footer is also a good place for your full copyright and any legal disclosures.
+
+---
+
+## What NOT to Include
+
+**Your entire feature list:** Feature lists overwhelm. Curate, don't catalog.
+
+**Autoplay audio:** No one wants this.
+
+**Slow-loading hero videos:** If your hero video takes 3 seconds to load, the visitor is already gone.
+
+**Generic stock photos:** Lifestyle photos of people staring at phones are meaningless. Show the actual app.
+
+**"Coming Soon" for anything:** If it's not ready, don't mention it. It signals the product isn't finished.
+
+---
+
+## Technical Setup
+
+### Domain
+
+Register a domain that matches your app name (e.g., habitflow.app, focuspad.io). The .app TLD is great for iOS apps — clean, memorable, and signals what the product is.
+
+If your ideal domain is taken, try adding a verb: "get", "use", or "try" (e.g., gethabitflow.com).
+
+### Hosting Options
+
+**Carrd ($19/year):** The fastest way to get a landing page live. Limited flexibility, but enough for a single-product app.
+
+**Framer (free tier available):** Beautiful templates, good animation support, CMS capabilities for a blog.
+
+**Next.js + Vercel (free):** Developer-friendly, full control, fast. Great if you want to add a blog for SEO over time.
+
+**Webflow:** Powerful, but overkill for most indie app landing pages.
+
+For most indie developers, Carrd or Framer gets you 80% of the result in 10% of the time. You can always migrate to a more powerful stack later.
+
+### Performance
+
+Google's Core Web Vitals affect your search ranking. Make sure your page:
+- Loads in under 2 seconds on mobile
+- Passes Lighthouse's performance check (run in Chrome DevTools)
+- Has properly compressed images (use WebP format)
+
+### SEO Basics
+
+- Set a descriptive title tag that includes your app name and main keyword
+- Write a meta description (150–160 characters) that reads like ad copy
+- Use your target keywords naturally in headings and body text
+- Create a sitemap.xml and submit it to Google Search Console
+- Add structured data markup (SoftwareApplication schema) so Google can show star ratings in search results
+
+---
+
+## Driving Traffic to Your Landing Page
+
+A landing page without traffic is a brochure sitting in a drawer. Here's how to get visitors:
+
+**Google Ads:** Run search ads targeting "[app category] app" keywords. Link to your landing page, not the App Store — the landing page gives you more control over the conversion funnel.
+
+**Content marketing:** Write blog posts targeting keywords your potential users search for. A landing page with a blog gets dramatically more organic traffic than one without.
+
+**Social media:** Share your landing page URL, not your App Store link, when promoting on Twitter/X, LinkedIn, or Reddit. It's easier to click a web URL than navigate to an App Store listing.
+
+**Product Hunt:** Your PH listing should link to your landing page. Curious visitors can learn more before deciding to download.
+
+**App review sites:** When you reach out to bloggers or reviewers, give them your landing page URL as the primary link. It's more professional than an App Store link and gives them context.
+
+---
+
+## Measuring What Works
+
+Set up Google Analytics or Plausible (privacy-friendly alternative) on your landing page. Track:
+
+- **Sessions:** How many people visit
+- **App Store click-through rate:** What % click the download badge
+- **Traffic sources:** Where your visitors come from
+- **Bounce rate:** What % leave immediately
+
+The most important metric is App Store CTR — the percentage of landing page visitors who tap "Download on the App Store." A well-optimized page typically achieves 15–30% CTR for warm traffic.
+
+If your CTR is under 10%, your hero section isn't convincing people fast enough. Test a different headline or lead with a different screenshot.
+
+---
+
+## The Minimum Viable Landing Page
+
+If you're pre-launch or just getting started, you don't need all of the above on day one. The absolute minimum:
+
+1. App icon + name + one-sentence description
+2. One great screenshot in a device mockup
+3. App Store download badge (or email capture if pre-launch)
+4. Privacy policy link
+
+Get this live first. Improve it over time as you learn what questions visitors actually have. A good landing page is never finished — it's just continuously refined.
+`,
+  },
+  {
+    slug: "app-store-ab-testing",
+    title: "App Store A/B Testing: How to Optimize Your Listing",
+    description:
+      "Apple's Product Page Optimization tool lets you A/B test your App Store listing. Here's how to run experiments that actually improve your conversion rate.",
+    date: "2026-03-22",
+    readingTime: 6,
+    content: `
+## Why Most App Store Listings Are Guesses
+
+Every element of your App Store listing — your icon, screenshots, preview video, description — represents a guess. A guess about what will make someone decide to download.
+
+Most developers make these guesses once, at launch, and never revisit them. The icon gets designed, the screenshots get uploaded, and then attention moves elsewhere. Months later, when downloads plateau, there's no data to understand why.
+
+Apple's **Product Page Optimization** (PPO) tool changes this. It lets you run controlled A/B tests on your App Store listing and measure which version actually drives more downloads. This guide explains how it works and how to run experiments that produce actionable results.
+
+---
+
+## What Is Product Page Optimization?
+
+Product Page Optimization is Apple's built-in A/B testing tool for App Store listings. It's available to any app on the App Store and accessible through App Store Connect.
+
+With PPO, you can test:
+- **App icon** (including custom icons not on the device)
+- **Screenshots** (up to 3 alternate sets)
+- **App preview videos**
+
+You cannot currently test your app name, subtitle, or description through PPO.
+
+Each test runs as a true randomized experiment: Apple randomly shows different users different versions of your listing and tracks which version generates more installs. You set what percentage of traffic sees each variant (up to 3 treatments + the control).
+
+---
+
+## Setting Up Your First Test
+
+### Step 1: Identify What to Test
+
+Before you open App Store Connect, decide what hypothesis you're testing.
+
+Bad hypothesis: "Let's try different screenshots and see what happens."
+
+Good hypothesis: "We believe showing the dashboard first (rather than the onboarding screen) will increase conversion, because it immediately communicates the app's value without requiring context."
+
+A clear hypothesis helps you:
+- Design a focused test with a real alternative
+- Interpret the results once the test ends
+- Know what to do next regardless of the outcome
+
+### Step 2: Create Your Variants
+
+In App Store Connect, go to **App Store → [Your App] → Product Page Optimization** and create a new test.
+
+You'll upload your alternate icon, screenshots, or preview video for each treatment. These assets go through App Review — allow a few days for approval before your test goes live.
+
+Design your variants with the hypothesis in mind. If you're testing screenshot order, keep everything else (colors, style, device frames) identical. Changing multiple things at once makes it impossible to know what caused any difference in performance.
+
+### Step 3: Set Traffic Allocation
+
+You decide what percentage of your App Store impressions go to each variant. A common setup:
+- 50% control (your current listing)
+- 50% treatment A
+
+Or if you're testing multiple variants:
+- 34% control
+- 33% treatment A
+- 33% treatment B
+
+More traffic to variants speeds up the test but means fewer users see your proven-best listing during the experiment. For most apps, a 50/50 split is reasonable.
+
+---
+
+## How Long Should You Run a Test?
+
+This is where most developers make mistakes. They run a test for a week, see one variant "winning," and call it done.
+
+Statistical validity requires a minimum sample size — and that depends on your traffic volume and how large a difference you're trying to detect.
+
+**Rule of thumb:** Run your test until you've accumulated at least **1,000 impressions per variant**, ideally more. For apps with low traffic (under a few hundred daily impressions), this might take several weeks.
+
+Apple's PPO dashboard shows a confidence indicator that tells you when results are statistically significant. Wait for this before making decisions — or you risk optimizing for noise.
+
+Avoid ending tests:
+- On a holiday or unusual traffic spike
+- After less than 7 days (day-of-week effects matter)
+- Before hitting statistical significance
+
+---
+
+## What to Test First
+
+If you've never run a PPO test, start with the element most likely to move the needle: **screenshots**.
+
+Screenshots are the first thing users engage with after your icon. They occupy the most visual space on your listing page and do the heaviest lifting in communicating value.
+
+### Screenshot Tests Worth Running
+
+**First screenshot subject:** What's the most impactful first impression? Try leading with your core feature vs. leading with a user benefit statement.
+
+**Text overlays on/off:** Some apps perform better with caption text on screenshots; others perform better with clean, text-free UI. Test both.
+
+**Light mode vs. dark mode:** If your app supports both, test which screenshot style resonates more with your audience.
+
+**Lifestyle context vs. pure UI:** Some categories (fitness, meditation) see better conversion with contextual backgrounds. Others (productivity, developer tools) perform better with clean, focused UI.
+
+### Icon Tests
+
+Your icon is the first thing someone sees in search results. Icon tests are high-value but require more design investment.
+
+Test:
+- Different background colors (especially contrasting colors vs. blending with neighboring apps)
+- Simpler vs. more detailed icon design
+- Dark vs. light icon
+
+Use real search result screenshots when evaluating icon variants — seeing your icon among competitors is very different from viewing it in isolation.
+
+---
+
+## Reading Your Results
+
+When your test concludes, App Store Connect shows you conversion rates for each variant and whether the difference is statistically significant.
+
+Key metrics:
+- **Conversion rate:** % of impressions that resulted in a download
+- **Improvement:** % increase or decrease vs. control
+- **Confidence:** How certain Apple is that the difference is real and not random
+
+If a treatment wins with high confidence, apply it. If results are inconclusive (no statistically significant difference), treat that as useful information: the variants performed equivalently, which means either element doesn't drive conversion, or your test needs more traffic.
+
+Don't discard losing variants without understanding why. A screenshot treatment that underperformed might tell you something about what users don't respond to — equally valuable.
+
+---
+
+## Beyond A/B Testing: Custom Product Pages
+
+Related to PPO but different: **Custom Product Pages** let you create entirely separate App Store listings (different screenshots, preview video, description) for specific audiences.
+
+Use cases:
+- Link from a paid ad campaign to a page tailored to that ad's audience
+- Create a page for a specific feature that one user segment cares about
+- Show different content to users coming from a QR code in a physical location
+
+Custom Product Pages don't replace A/B testing — they're complementary. Use PPO to optimize your default listing for organic search traffic, and Custom Product Pages to tailor the experience for paid or referral traffic.
+
+---
+
+## Building a Testing Culture
+
+The developers who get the most from PPO treat it as an ongoing process, not a one-time fix.
+
+After each test:
+1. Document what you tested and why
+2. Record the outcome and your interpretation
+3. Design the next test based on what you learned
+
+Over time, you build a library of knowledge about your specific audience — what visuals they respond to, what messages resonate, what's genuinely irrelevant. This compound learning is impossible to replicate with guesswork.
+
+A practical cadence for most indie developers: run one test per month. That's 12 tests per year, each building on the last. By the end of the year, your App Store listing will be dramatically more effective than a listing that was set up at launch and never revisited.
+
+---
+
+## Practical Notes
+
+**Your screenshots also appear on your website and press kit.** When you update your listing based on test results, update your other assets too. Tools like [AppFrame](https://appfra.me) make it easy to generate fresh, polished showcase images from your updated screenshots, so your landing page and social media stay consistent with your App Store listing.
+
+**International markets:** PPO results are global by default. If your app has significant traffic from multiple countries, consider whether your winning variant works equally well across languages and cultural contexts. A screenshot with English text overlays may not translate visually.
+
+**Retest over time:** What converts well in Q1 may not be optimal in Q4. User expectations, App Store UI changes, and competitor listings all evolve. Revisit winning variants every 6–12 months.
+
+---
+
+## Getting Started Today
+
+You don't need a sophisticated testing strategy to begin. Just follow these steps:
+
+1. Open App Store Connect → Product Page Optimization
+2. Create your first test with one alternate screenshot set
+3. Pick a clear hypothesis (what do you expect to change and why?)
+4. Set a 50/50 traffic split and submit for review
+5. Wait for statistical significance before drawing conclusions
+6. Apply the winner, document the result, design the next test
+
+The developers who win on the App Store are rarely the ones with the best apps at launch. They're the ones who keep improving — and PPO gives you a structured, data-driven way to do exactly that.
+`,
+  },
+  {
     slug: "ios-app-pricing-strategy",
     title: "How to Price Your iOS App: Free vs Paid vs Freemium",
     description:
