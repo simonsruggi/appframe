@@ -9,6 +9,462 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "apple-search-ads-app-growth",
+    title: "How to Leverage Apple Search Ads for App Growth",
+    description:
+      "Apple Search Ads puts your app at the top of App Store search results. Here's a practical guide for indie developers to run effective campaigns without wasting budget.",
+    date: "2026-03-23",
+    readingTime: 7,
+    content: `
+## The Most Direct Path to App Store Visibility
+
+Organic search on the App Store is competitive. For popular keywords, the top results are dominated by apps with thousands of reviews, large marketing budgets, and years of ASO work behind them. Breaking through organically takes time — sometimes a lot of it.
+
+Apple Search Ads (ASA) offers a shortcut. By paying to appear at the top of search results for specific keywords, you can get your app in front of high-intent users immediately. These are people actively searching for what you've built — not passive scrollers, but potential users who already want something like your app.
+
+This guide covers how to get started with Apple Search Ads, structure campaigns that work, and measure results without burning through your budget.
+
+---
+
+## What Is Apple Search Ads?
+
+Apple Search Ads is Apple's own advertising platform for the App Store. When a user searches for a term in the App Store, a sponsored result appears at the top — marked with a small "Ad" label. That's an Apple Search Ad.
+
+There are two tiers:
+
+**Apple Search Ads Basic** — Simplified campaign management. You set a monthly budget and a target cost-per-install (CPI), and Apple handles keyword selection and optimization automatically. Good for getting started quickly.
+
+**Apple Search Ads Advanced** — Full control over keywords, match types, bids, audiences, and ad creative. More work, but much more flexibility. Essential once you're serious about growth.
+
+Most indie developers start with Basic, then graduate to Advanced once they have enough install data to make informed decisions.
+
+---
+
+## Why Apple Search Ads Is Different from Other Advertising
+
+Unlike Facebook Ads or Google UAC, Apple Search Ads targets users at the moment of intent. The user is already in the App Store, already searching for something. That makes conversion rates significantly higher than most other mobile ad channels.
+
+A few notable advantages:
+- **No creative fatigue**: Your App Store listing *is* the ad. Apple pulls your screenshots, icon, and title automatically.
+- **First-party data**: Apple doesn't rely on third-party tracking. Attribution is accurate and doesn't depend on ATT consent.
+- **Lower competition for niche keywords**: Popular keywords are expensive, but long-tail terms for specific niches can have very low cost-per-tap.
+
+The main downside: it only works on the App Store. If you also want to reach users on the web or social media, you'll need additional channels.
+
+---
+
+## Setting Up Your First Campaign
+
+### Step 1: Create an Account
+
+Go to [searchads.apple.com](https://searchads.apple.com) and sign in with your Apple ID (the same one you use for App Store Connect). Apple Search Ads Basic is free to start — you only pay when someone taps your ad.
+
+### Step 2: Choose Your Campaign Objective
+
+For most indie developers, the goal is installs. Select "Downloads" as your campaign goal.
+
+### Step 3: Set Your Budget
+
+Start small — $5–$10/day is enough to gather initial data. The goal of your first campaign isn't necessarily to scale; it's to learn which keywords convert at an acceptable cost.
+
+Set a maximum cost-per-tap (CPT) bid. For most apps, starting with the suggested bid Apple provides is a reasonable baseline. You can adjust once you see actual performance data.
+
+### Step 4: Select Keywords (Advanced Only)
+
+This is where the real work happens. Three keyword categories matter most:
+
+**Brand keywords**: Your app's name and variations. Always bid on these — competitors can bid on your brand name, and you want to own that traffic.
+
+**Competitor keywords**: Names of similar apps. Bidding on competitor terms is allowed and common. Conversion rates are lower (since users were specifically searching for a competitor), but volume can be significant.
+
+**Category/feature keywords**: Descriptive terms for what your app does. "habit tracker", "expense tracker", "focus timer" — these are the high-intent searches you want to capture.
+
+Use **broad match** to start. It allows Apple to match your ad to related searches, giving you more data on what terms actually drive installs. Once you see which terms perform, refine to **exact match** for efficiency.
+
+---
+
+## Structuring Campaigns for Efficiency
+
+A common mistake is dumping all keywords into one campaign. Instead, structure campaigns by intent:
+
+**Campaign 1 — Brand Defense**: Your app name only. Exact match, with a high bid to ensure you always appear for your own name. This is non-negotiable.
+
+**Campaign 2 — Discovery (Broad Match)**: A wide set of category keywords on broad match. This catches unexpected search terms and surfaces keywords you hadn't thought of. Use a lower bid and treat this as a learning campaign.
+
+**Campaign 3 — Exact Match Performers**: Once Campaign 2 reveals which terms drive low-cost installs, move the best ones to a dedicated exact match campaign with optimized bids.
+
+**Campaign 4 — Competitor Keywords**: Separate campaign for competitor names. Monitor CPT and conversion rates closely — these are often expensive.
+
+---
+
+## Reading the Metrics That Matter
+
+Apple Search Ads provides detailed reporting. Here's what to focus on:
+
+**Taps**: How many people tapped your ad. High taps, low installs = your listing isn't converting well. Consider improving your screenshots or app icon.
+
+**Conversions (Installs)**: The installs attributed to each keyword.
+
+**TTR (Tap-Through Rate)**: The percentage of impressions that result in a tap. Low TTR usually means your creative or app name isn't compelling for that keyword.
+
+**CPA (Cost Per Acquisition)**: Your total spend divided by installs. The most important metric for budget efficiency. Compare this to your app's average revenue per user to understand if acquisition is profitable.
+
+**Impression Share**: The percentage of eligible impressions you won. If it's low, either your bid is too low or relevance scores are poor.
+
+---
+
+## Improving Conversion with a Great Listing
+
+Apple Search Ads gets users to tap on your ad. But what converts them into downloaders is your App Store listing — specifically your icon, screenshots, and app preview video.
+
+If your TTR is healthy but conversion rate is low, the problem isn't your ads. It's your listing. This is why investing in high-quality screenshots matters as much as ad spend. Tools like [AppFrame](https://appfra.me) help you create polished showcase images that communicate your app's value quickly and professionally.
+
+A great listing is the multiplier on every dollar you spend on ads. Improving conversion rate by 20% is equivalent to reducing your CPA by 20%.
+
+---
+
+## Common Mistakes to Avoid
+
+**Bidding on irrelevant keywords.** If you make a photo editor, bidding on "social media" will get you taps from users who have no interest in editing tools. Wasted spend.
+
+**Ignoring negative keywords.** In Advanced campaigns, you can add negative keywords — terms you explicitly don't want to trigger your ad. Use them to exclude irrelevant traffic.
+
+**Setting it and forgetting it.** Apple Search Ads requires ongoing attention. Review performance weekly, adjust bids, pause underperforming keywords.
+
+**Not giving campaigns time to learn.** Broad match campaigns need at least 100–200 taps before you can draw conclusions. Don't optimize too early.
+
+**Skipping the Search Terms Report.** Under "Keyword" → "Search Terms", you can see the exact queries that triggered your ads. This is gold for finding new keywords to target and irrelevant queries to exclude.
+
+---
+
+## Apple Search Ads Basic: When It Makes Sense
+
+If you're just launching and want some initial momentum without managing campaigns, Basic is a reasonable starting point. Set a $100–$200 monthly budget, let Apple optimize, and focus your energy on improving your app and ASO.
+
+Once you have enough install volume (usually after 50–100 installs from Basic), switch to Advanced. You'll immediately see which keywords are driving results and can build more targeted campaigns.
+
+---
+
+## Measuring ROI
+
+For paid apps, the math is relatively simple: if your app costs $2.99 and CPA is $1.50, you're profitable per install. For free apps with in-app purchases or subscriptions, you need to estimate lifetime value (LTV) to determine if acquisition spend is sustainable.
+
+Apple's attribution is more reliable than most channels thanks to first-party data, but it only captures App Store-origin installs. Use App Store Connect's analytics alongside ASA reporting for a full picture.
+
+---
+
+## Getting Started Today
+
+Apple Search Ads doesn't require a big budget or marketing expertise. A $50 test campaign can teach you more about your audience and keyword landscape than months of guessing.
+
+Start with your brand keywords (always), add a handful of category terms on broad match, and check back in a week. The data you collect will shape your entire keyword strategy — not just for ads, but for your organic ASO as well.
+`,
+  },
+  {
+    slug: "app-store-rejection-common-reasons",
+    title: "App Store Rejection: Common Reasons and How to Avoid Them",
+    description:
+      "Getting rejected by App Store review is frustrating. Here are the most common rejection reasons and how to prevent them before you submit.",
+    date: "2026-03-23",
+    readingTime: 7,
+    content: `
+## Rejection Is Part of the Process — Until It Doesn't Have to Be
+
+If you've spent weeks building an app and the first email you get from Apple after submission is a rejection notice, the feeling is difficult to describe. A mix of frustration, confusion, and urgency — especially if you had a launch date planned.
+
+The good news: most App Store rejections are preventable. Apple publishes its [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/) in detail, and the most common rejection reasons are well-documented. Understanding them before you submit can save you days or weeks of back-and-forth with the review team.
+
+This guide covers the most frequent rejection reasons, what they actually mean in practice, and how to address them before they become a problem.
+
+---
+
+## How the App Store Review Process Works
+
+When you submit an app through App Store Connect, it enters a review queue. Apple's reviewers — real humans — test your app on actual devices. They check it against the App Store Review Guidelines, which cover everything from content policies to technical performance.
+
+The average review time is 24–48 hours for most submissions, though it can take longer for complex apps or during high-volume periods (like the weeks before major Apple events). If your app is rejected, you receive a message in App Store Connect explaining which guideline was violated.
+
+You can then resolve the issue and resubmit, or file an appeal if you believe the rejection was incorrect.
+
+---
+
+## The Most Common Rejection Reasons
+
+### 1. Guideline 2.1 — App Completeness
+
+**What it means**: Your app doesn't work as described, crashes on launch, has broken features, or includes placeholder content like "Lorem ipsum" text or buttons that do nothing.
+
+**How to avoid it**:
+- Test on a real device before submitting — simulators don't catch everything
+- Test on the oldest iOS version you claim to support
+- Walk through every screen, every button, every edge case
+- Remove all placeholder content
+- If your app requires a login, provide Apple's review team with a test account in the App Review Notes
+
+This is the single most common reason for rejection. A 30-minute QA pass before submission can prevent it entirely.
+
+---
+
+### 2. Guideline 4.2 — Minimum Functionality
+
+**What it means**: Your app does too little to be valuable. Apple considers apps that are essentially just websites wrapped in a WebView, single-function utilities with no real utility, or apps that duplicate built-in iOS functionality without meaningful added value.
+
+**How to avoid it**:
+- Build something genuinely useful. If your app is a web wrapper, you need native features that go beyond what Safari offers.
+- Be clear in your app description about what unique value you provide
+- If your app is intentionally simple (a single utility), make sure it executes that single function exceptionally well
+
+---
+
+### 3. Guideline 3.1.1 — In-App Purchase Required
+
+**What it means**: You're not using Apple's In-App Purchase system for digital goods and services. If your app sells anything that's consumed within the app — subscriptions, premium features, virtual goods, credits — it must go through IAP. You cannot direct users to purchase on a website to unlock in-app features.
+
+**How to avoid it**:
+- Use StoreKit for all in-app purchases of digital content
+- Physical goods and services delivered outside the app (like ride-sharing or food delivery) are exempt
+- Reader apps have a special exception but it's narrowly defined
+- Don't mention external payment methods in your app or its metadata
+
+---
+
+### 4. Guideline 5.1 — Privacy — Data Collection and Storage
+
+**What it means**: Your app collects more data than necessary, doesn't disclose data collection properly, or doesn't have a privacy policy when required.
+
+**How to avoid it**:
+- Add a privacy policy URL in App Store Connect (required if you collect any user data)
+- Only request permissions you actually need — requesting microphone access for an app that doesn't record audio is a red flag
+- Complete the App Privacy section in App Store Connect accurately, including all data types your app and third-party SDKs collect
+- If you include analytics SDKs (Firebase, Mixpanel, etc.), their data collection must be disclosed
+
+---
+
+### 5. Guideline 2.3 — Accurate Metadata
+
+**What it means**: Your app's name, description, screenshots, or preview video don't accurately represent what the app does. This includes screenshots that show features not in the app, app names that include unrelated keywords for ASO purposes, or descriptions that make claims you can't support.
+
+**How to avoid it**:
+- Screenshots must show actual app UI — no lifestyle photos unless they're combined with real UI
+- Don't stuff keywords into your app name unless they're genuinely part of the name
+- App description claims ("Best in class", "#1 habit tracker") require backing — vague superlatives can be flagged
+- If your screenshots show an iPhone 16 device frame, make sure the UI inside it is real
+
+This guideline is also why investing in accurate, high-quality screenshots matters — tools like [AppFrame](https://appfra.me) help you create professional images that showcase your real UI without any misleading embellishment.
+
+---
+
+### 6. Guideline 1.1 / 1.2 — Objectionable Content
+
+**What it means**: Your app contains content that Apple considers inappropriate — violent, hateful, discriminatory, or adult content that isn't properly gated behind an age rating.
+
+**How to avoid it**:
+- Set your age rating appropriately in App Store Connect
+- If your app allows user-generated content, you must have a moderation system and a way for users to report inappropriate content
+- Don't rely on the honor system for age verification — Apple expects technical enforcement
+
+---
+
+### 7. Guideline 4.3 — Spam
+
+**What it means**: You've submitted multiple apps that are essentially the same, or your app is a trivial clone of an existing app with minor visual changes.
+
+**How to avoid it**:
+- Each app you submit should have a unique, clearly differentiated purpose
+- If you're building a series of apps (e.g., regional variations), make sure each is meaningfully different or use a single app with localization
+- Reskinning app templates and submitting them as original apps is specifically called out
+
+---
+
+## Practical Pre-Submission Checklist
+
+Before you hit submit, go through this list:
+
+- [ ] App launches without crashing on a real device
+- [ ] All features shown in screenshots are functional
+- [ ] Test account credentials provided in App Review Notes (if login required)
+- [ ] Privacy policy URL added in App Store Connect
+- [ ] App Privacy section completed accurately
+- [ ] All permissions have explanatory usage descriptions in Info.plist
+- [ ] Age rating set appropriately
+- [ ] In-app purchases use StoreKit (no external payment links)
+- [ ] App description is accurate — no false claims
+- [ ] Screenshots show real app UI
+
+---
+
+## What to Do When You Get Rejected
+
+First: don't panic. Rejection emails are formulaic but they contain specific guideline references. Read them carefully.
+
+**If the rejection is clear**: Fix the issue, test the fix, and resubmit. Include a note in the "App Review Notes" field explaining what you changed and why the app now complies.
+
+**If the rejection seems wrong**: You can reply directly to the review team within App Store Connect. Be polite, specific, and reference the relevant guideline. Attach screenshots or screen recordings if they help illustrate your point.
+
+**If you disagree with the decision**: File an appeal through the [App Store Review Appeal Process](https://developer.apple.com/app-store/review/#appeals). Appeals are reviewed by a separate team and should be used when you believe the guideline was misapplied, not when you simply want to negotiate.
+
+---
+
+## Building for Approval from Day One
+
+The best way to handle rejections is to not get them. That means reading the App Store Review Guidelines before you build, not after. Key sections to bookmark:
+
+- **Section 2**: Performance — covers crashes, completeness, and software requirements
+- **Section 3**: Business — covers IAP, subscriptions, and monetization rules
+- **Section 5**: Privacy — covers data collection and permissions
+
+Apple updates the guidelines periodically. If you submit infrequently, re-read the relevant sections before each submission — something that was fine a year ago may have a new requirement today.
+
+Building with the guidelines in mind doesn't constrain your creativity. It channels it toward building apps that genuinely respect users, work reliably, and deliver real value — which is what the best apps on the store have always done.
+`,
+  },
+  {
+    slug: "app-store-ratings-and-reviews",
+    title: "App Store Ratings and Reviews: A Developer's Guide",
+    description:
+      "Ratings and reviews directly impact your App Store ranking and conversion rate. Here's a practical guide for indie developers on earning more reviews and managing them effectively.",
+    date: "2026-03-23",
+    readingTime: 6,
+    content: `
+## Why Ratings Can Make or Break Your App
+
+Open the App Store and search for almost any app category. Notice how your eye immediately jumps to the star rating beneath each result. Before reading the name, before looking at screenshots, before checking the price — the rating registers.
+
+This isn't just psychology. It's data. Studies of mobile app behavior consistently show that apps with higher ratings convert at higher rates. A 4.8-star app with 200 reviews will outperform a 4.2-star app with 2000 reviews in most search positions. And apps with fewer than 5 reviews effectively have no social proof at all.
+
+For indie developers, building a positive review base is one of the highest-leverage activities you can do for your app's growth. This guide covers how ratings affect your app, when and how to ask for reviews, how to respond to feedback, and how to turn negative reviews into product improvements.
+
+---
+
+## How Ratings Affect Your App Store Performance
+
+Ratings influence your app in three distinct ways:
+
+**Conversion rate**: Users browsing search results or category lists use star ratings as a quick filter. An app below 4.0 stars is often skipped entirely. Apps above 4.5 stars have measurably higher tap-through rates from search results.
+
+**Search ranking**: Apple's App Store algorithm factors in ratings as part of its ranking signals. Higher average ratings contribute to better organic positioning, especially in competitive categories.
+
+**Editorial consideration**: Apple's App Store editors who curate features and "App of the Day" selections look at ratings as one signal of app quality. A poorly rated app is rarely featured, no matter how polished it looks.
+
+The cumulative effect is compounding: more reviews → higher ranking → more downloads → more potential reviewers. Getting the flywheel started is the hard part.
+
+---
+
+## The Right Time to Ask for a Review
+
+The worst thing you can do is ask for a review immediately after launch, before users have experienced your app's value. The second worst is asking at a random moment that interrupts the user mid-task.
+
+The right time to request a review is when the user has just experienced a moment of success or satisfaction. This is called the "peak moment" approach, and it consistently produces higher ratings.
+
+Examples of good moments to ask:
+- Just after a user completes a significant action (finished a workout, published a post, logged their habit streak)
+- After the user has used the app a meaningful number of times (their 7th session, or after they've completed 10 items)
+- When the user has achieved a milestone they were working toward
+- After a user explicitly gives positive feedback in-app (taps a "thumbs up" or "love this app" type prompt)
+
+Examples of bad moments to ask:
+- On first launch
+- During a loading screen
+- In the middle of a multi-step flow
+- When the user is actively troubleshooting a problem
+
+---
+
+## Using SKStoreReviewController Effectively
+
+Apple's \`SKStoreReviewController.requestReview()\` is the only approved way to prompt for reviews on iOS. Third-party review gates (interstitial screens that ask "Was this useful? Yes/No" and only show the review prompt to users who tapped "Yes") violate Apple's guidelines.
+
+Key constraints to know:
+- Apple limits how often the prompt can appear to **three times per year** per user
+- You cannot control when or whether Apple actually shows the prompt — it's at Apple's discretion based on their own logic
+- You cannot trigger the prompt in response to a user tapping a button that says "Rate us" — that's a guideline violation
+
+What you *can* do:
+- Call \`requestReview()\` at appropriate peak moments as described above
+- Time your calls thoughtfully since you only get 3 chances per year
+- In iOS 16+, use \`requestReview(in:)\` with the current scene for more reliable behavior
+
+### A Simple Gating Pattern
+
+A common pattern that stays within guidelines: use a simple in-app prompt that gauges user satisfaction *before* calling \`requestReview()\`. This isn't the same as a review gate — you're not asking "was this good?" to filter who sees the review prompt. Instead, you're using the satisfaction signal to choose the *right moment* to call it.
+
+Example: show a non-modal banner after a success event that says "Enjoying [App Name]?" with options "Yes! 🎉" and "Not really." If they tap "Yes", trigger \`requestReview()\`. If they tap "Not really", show a feedback form. This respects guidelines while being smart about timing.
+
+---
+
+## Responding to Reviews: The Developer's Competitive Advantage
+
+Most indie developers never respond to their App Store reviews. This is a missed opportunity.
+
+Responding to reviews — especially negative ones — signals to potential users that a real person is behind the app and that problems get addressed. Research on app store behavior suggests that responses to negative reviews can actually improve the reviewer's perception enough that some users update their rating.
+
+### Responding to Negative Reviews
+
+**Step 1: Read it without defensiveness.** Even a harsh 1-star review often contains a real problem. Identify it.
+
+**Step 2: Acknowledge the experience.** Don't argue. Don't explain at length. Acknowledge that they had a bad experience.
+
+**Step 3: Give them a path forward.** "If you'd like to share more details, please reach out at [email]. We'd love to help."
+
+**Step 4: Mention if it's been fixed.** If a subsequent update resolves the issue, note it: "This was fixed in version 2.1 — hope you'll give it another try."
+
+What to avoid:
+- Defending your design decisions in public
+- Matching the user's tone if they're angry
+- Copy-pasting the same response to every negative review
+
+### Responding to Positive Reviews
+
+Don't ignore the good ones. A short, genuine response to a positive review reinforces the relationship and encourages the reviewer to keep using the app. Something like: "Thanks so much — comments like this mean the world to a small indie dev. More features coming soon!" takes 30 seconds and shows personality.
+
+---
+
+## Building a Review-Friendly App Experience
+
+Beyond the prompt timing, the overall experience of your app determines whether users want to review it at all.
+
+A few principles that drive organic reviews:
+
+**Delight matters.** Apps that do something slightly surprising or genuinely delightful get talked about and reviewed. A small animation at a meaningful moment, a thoughtful empty state, a well-written error message — these create emotional responses that translate into reviews.
+
+**Fix bugs fast.** A 1-star rating for a crash is often from a user who would otherwise give 5 stars. Responding quickly to bugs and acknowledging them in release notes builds goodwill.
+
+**Make your support discoverable.** Many users who have a problem will leave a 1-star review because they can't find any other way to reach you. An in-app contact option (a "Feedback" or "Help" button in settings) gives frustrated users a better outlet than the review form.
+
+**Give returning users reasons to update their rating.** Users who gave 2 stars after a crash may forget to update their rating after you fix it. Your response to their review is the best reminder to reconsider.
+
+---
+
+## Managing Your App's Rating Over Time
+
+Ratings reset with major version updates — if you choose to reset them when submitting. This is a strategic decision:
+
+**Don't reset** if your current rating is good (4.5+). You've earned those stars.
+
+**Consider resetting** if your rating is below 4.0 and you've made substantial improvements. A fresh start with an improved app gives you a chance to rebuild the rating positively.
+
+You can also manage which rating is shown by choosing whether to display your current version's rating only, or the all-time rating. Go to App Store Connect → Your App → App Information → Ratings Reset.
+
+---
+
+## Building a Ratings Strategy
+
+A sustainable ratings strategy looks like this:
+
+1. **Identify 2–3 peak moments** in your app's user journey where satisfaction is high
+2. **Implement \`requestReview()\`** at those moments, with light sentiment gating to time it appropriately
+3. **Monitor new reviews** weekly in App Store Connect or with a tool like [AppFollow](https://appfollow.io) or Appbot
+4. **Respond to reviews** — especially new negative ones — within 48 hours
+5. **Track your rating trend** over time, correlating changes with app updates and marketing pushes
+
+Ratings are not something you can force. But you can create the conditions where satisfied users are more likely to share their experience. For indie developers who rely entirely on word of mouth and organic discovery, that investment pays dividends for the lifetime of your app.
+
+Your screenshots and icon create the first impression that gets users to download. Your app creates the experience. And your ratings strategy determines whether that experience gets shared.
+
+If you're working on making your App Store listing as compelling as possible — including screenshots that communicate your app's value at a glance — [AppFrame](https://appfra.me) can help you create professional showcase images that make the most of every search impression.
+`,
+  },
+  {
     slug: "app-preview-video",
     title: "How to Create App Preview Videos That Drive Downloads",
     description:
