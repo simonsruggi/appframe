@@ -9,6 +9,437 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "mobile-app-analytics-key-metrics",
+    title: "Mobile App Analytics: Key Metrics Every Developer Should Track",
+    description:
+      "Downloads are just the beginning. Here are the analytics metrics that actually tell you whether your iOS app is healthy — and what to do when they aren't.",
+    date: "2026-03-25",
+    readingTime: 7,
+    content: `
+## Why Most Developers Track the Wrong Things
+
+Downloads feel good. They're easy to measure, easy to share, and easy to celebrate. But experienced mobile developers know that downloads are a vanity metric — they tell you very little about whether your app is actually succeeding.
+
+The metrics that matter are the ones that tell you what's happening *after* the download: Are users coming back? Are they completing key actions? Are they paying? Are they leaving reviews? These signals give you actionable data. Downloads just tell you your marketing worked once.
+
+This guide walks through the metrics every iOS developer should be tracking, what benchmarks to aim for, and how to interpret the numbers to make smarter decisions.
+
+---
+
+## The Metrics Funnel
+
+Think of your analytics as a funnel. At each stage, users either continue or drop off. Your job is to understand where the biggest drop-offs happen and fix them.
+
+**Acquisition → Activation → Engagement → Retention → Revenue → Referral**
+
+Most apps have a leaky funnel — not because the app is bad, but because no one has looked closely at where users are falling out. Analytics help you find the holes.
+
+---
+
+## Acquisition Metrics
+
+### Impressions and Product Page Views
+
+Impressions measure how often your app appeared in search results or featured placements. Product page views measure how many people tapped through to your listing. The ratio between them — your **click-through rate (CTR)** — tells you how compelling your icon, title, and preview screenshots are.
+
+A strong CTR is typically 2–5% for search results. If yours is below 1%, your icon or screenshots may not be standing out.
+
+### Conversion Rate (Impressions to Downloads)
+
+App Store Connect shows this directly. An average conversion rate across categories is roughly 30–35% from product page view to download. If yours is significantly lower, your screenshots, description, or ratings may be the problem.
+
+Improving your App Store page — better screenshots, a stronger first sentence in the description, more reviews — often has a bigger impact on growth than acquiring more impressions.
+
+---
+
+## Activation Metrics
+
+### Onboarding Completion Rate
+
+What percentage of users who install your app complete the onboarding flow? If a large fraction exits during setup, you're losing users before they've experienced any value.
+
+Funnel tracking in Firebase or Mixpanel can show you exactly where users are dropping off in onboarding — often it's a specific screen (permission request, account creation, or a confusing step) causing the abandonment.
+
+### Time to First Key Action
+
+How long does it take a new user to complete the core action your app is built around — logging a workout, sending a message, creating a note? The faster you can get users to this "aha moment," the better your activation and retention will be.
+
+If your average time to first key action is more than 5 minutes, your onboarding likely has too much friction.
+
+---
+
+## Engagement Metrics
+
+### Daily Active Users (DAU) and Monthly Active Users (MAU)
+
+DAU/MAU ratio — sometimes called the "stickiness ratio" — tells you how often your monthly users are actually using the app. A ratio above 20% is solid; above 40% indicates a genuinely habit-forming product.
+
+For context, messaging and social apps often hit 60–70% DAU/MAU ratios. Productivity and utility apps are typically lower, around 15–30%, because users don't need them every day.
+
+### Session Length and Depth
+
+How long do users spend per session? How many screens do they visit? A very short average session length might indicate users aren't finding what they need. Very long sessions with low task completion might mean your UX is confusing.
+
+Neither is inherently good or bad — it depends on what your app is for. The key is tracking trends over time, not comparing to averages.
+
+### Feature Usage
+
+Which features do users actually use? In most apps, a small number of features drive the majority of engagement. Understanding this helps you know what to prioritize in development — and what to simplify or remove.
+
+Firebase's screen tracking or Amplitude's behavioral analytics can show you feature-level usage patterns without complex setup.
+
+---
+
+## Retention Metrics
+
+### Day 1 / Day 7 / Day 30 Retention
+
+These are the gold standard retention metrics. Cohort retention curves show you what percentage of users who installed on a given day are still active 1, 7, and 30 days later.
+
+Typical benchmarks:
+- **Day 1**: 25–40%
+- **Day 7**: 10–20%
+- **Day 30**: 5–10%
+
+Apps above these benchmarks are genuinely sticky. If your day-1 retention is below 15%, improving onboarding should be your top priority before any other marketing investment.
+
+### Churn Rate
+
+Churn is the inverse of retention — the percentage of active users who stop using the app in a given period. For subscription apps, monthly churn below 3–5% is healthy. Above 8–10%, you likely have a product or value perception problem.
+
+---
+
+## Revenue Metrics
+
+### Average Revenue Per User (ARPU)
+
+Total revenue divided by total users. This tells you how much each user is worth on average — critical for calculating whether your paid acquisition channels are profitable.
+
+### Lifetime Value (LTV)
+
+LTV estimates how much revenue a user will generate over their entire relationship with your app. For subscription apps, it's roughly ARPU multiplied by average subscription length. For one-time purchase apps, LTV is closer to the purchase price minus refunds.
+
+LTV vs. customer acquisition cost (CAC) is the fundamental equation of sustainable app growth. If your LTV is $12 and your CAC is $8, you have a healthy business. If they're inverted, you're losing money on every user.
+
+### Subscription Metrics
+
+If your app uses subscriptions, track:
+- **Trial-to-paid conversion**: What percentage of trial users convert? Industry average is around 20–30%.
+- **Renewal rate**: What percentage of subscribers renew after their first period?
+- **Revenue Churn**: Monthly revenue lost from cancellations, not just user count.
+
+RevenueCat is the standard tool for subscription analytics in iOS apps — it handles the complexity of App Store receipts and gives you clean dashboards.
+
+---
+
+## Ratings and Reviews Analytics
+
+### Rating Trends Over Time
+
+Your average rating matters, but the trend matters more. A 4.1 rating trending upward is a better signal than a 4.3 rating trending downward.
+
+App Store Connect now shows rolling 30-day and 60-day ratings. Watch these after every release — a spike in negative reviews after an update often indicates a regression.
+
+### Review Sentiment
+
+Read your negative reviews carefully. Users who write 1-star reviews are often the most motivated to tell you exactly what went wrong. Common themes in negative reviews are effectively free qualitative research.
+
+---
+
+## Setting Up Analytics Without Overcomplicating It
+
+For most indie developers, three tools are sufficient:
+
+1. **App Store Connect** — Free. Covers impressions, downloads, conversion rates, sessions, crashes, and ratings.
+2. **Firebase Analytics** — Free. Covers custom events, user properties, funnels, and cohort retention.
+3. **RevenueCat** — Free tier available. Handles all subscription and IAP analytics cleanly.
+
+Don't try to track everything at once. Start with one metric per funnel stage, get baseline numbers, then work on improving the weakest stage.
+
+---
+
+## Turning Data Into Action
+
+Analytics are only useful if they change what you do. A simple framework:
+
+1. Pick the metric with the worst performance relative to benchmarks
+2. Form a hypothesis about why it's underperforming
+3. Make one change (not five) and measure the impact
+4. Keep what works, discard what doesn't
+
+The temptation is to analyze everything and change nothing. Build a habit of monthly reviews where you look at your funnel, identify the weakest stage, and commit to one improvement before the next review.
+
+---
+
+## Final Thoughts
+
+Downloads tell you how well your marketing worked. Everything else tells you whether your app is worth using. Focus on the metrics that measure user behavior — activation, engagement, retention, revenue — and you'll have a much clearer picture of what to build, fix, or change.
+
+The best-performing apps on the App Store aren't always the ones with the biggest marketing budgets. They're the ones where the developer actually looked at the data.
+    `,
+  },
+  {
+    slug: "app-store-category-strategy",
+    title: "App Store Category Strategy: Choosing the Right Category for Your iOS App",
+    description:
+      "The category you choose affects search visibility, featured placement chances, and how users discover your app. Here's how to make the right call.",
+    date: "2026-03-25",
+    readingTime: 6,
+    content: `
+## Why Category Choice Is a Strategic Decision
+
+When submitting an app to the App Store, most developers pick the category that seems most obvious and move on. But category selection is one of the few decisions that significantly impacts your app's discoverability, ranking potential, and chances of editorial featuring — and it deserves more than 30 seconds of thought.
+
+The category you choose determines which charts your app can rank on, which editorial collections it's eligible for, and how Apple's recommendation algorithms categorize it. It also shapes the competitive landscape you're entering: some categories are dominated by billion-dollar companies, while others have room for independent developers to rank.
+
+---
+
+## Understanding the App Store Category System
+
+The App Store allows you to choose one **primary category** and one optional **secondary category**. The primary category is the most important — it determines chart rankings and most search placement factors.
+
+Secondary categories are useful for discoverability but don't affect primary chart rankings. Think of the secondary category as a way to tell Apple's algorithm "my app is also relevant to users browsing this area."
+
+### Primary and secondary categories are independent
+
+You can, for example, set your primary category to Productivity and your secondary to Education. This means you'll rank on the Productivity charts and appear in search results for both categories.
+
+---
+
+## Competitive Analysis Before Choosing
+
+Before picking a category, do competitive research. Open the App Store and browse the top charts for the categories you're considering. Ask yourself:
+
+- **Who is in the top 10?** Are they well-funded companies (Notion, Google, Microsoft) or indie developers?
+- **How many ratings do the top apps have?** 100,000+ ratings means entrenched competition. 500–5,000 ratings means the category is more accessible.
+- **What are the top apps charging?** Paid apps in a category suggests users are willing to pay; free-only categories usually rely on ads or subscriptions.
+
+Categories like Games, Social Networking, and Navigation are dominated by massive companies with enormous marketing budgets. Ranking on their charts is effectively impossible for indie developers without a viral moment.
+
+Categories like Reference, Weather, Food & Drink, Health & Fitness, and certain Productivity niches tend to have more reachable top charts.
+
+---
+
+## The Case for a Smaller Category
+
+One of the most effective strategies for indie developers is to choose a **smaller, less competitive category** where your app can rank higher, even if it's not a perfect fit.
+
+A rank of #10 in a smaller category like Reference or Graphics & Design will drive significantly more organic downloads than a rank of #500 in Utilities or Productivity.
+
+This isn't about tricking users — it's about understanding that App Store rankings compound. A higher-ranked app gets more visibility, which leads to more downloads, which leads to higher rankings, which leads to more visibility. Getting into a top chart, even a niche one, can start a virtuous cycle.
+
+The tradeoff: if users browsing that category find your app irrelevant, your conversion rate may suffer. Test and monitor both categories before committing.
+
+---
+
+## Category-Specific Considerations
+
+### Games
+
+Games have their own subcategory system: Action, Arcade, Casual, Puzzle, Simulation, Sports, Strategy, and more. The subcategory determines chart eligibility, so choose the one that best fits your game's genre.
+
+Casual and Puzzle games tend to have more accessible charts. Action and Simulation are heavily dominated by live-service games with massive engagement budgets.
+
+### Productivity
+
+One of the most competitive non-game categories. Large players like Notion, Obsidian, and Microsoft 365 dominate. However, highly specific productivity tools (e.g., for a specific profession or workflow) can carve out niches. Pair Productivity as primary with a more specific secondary if applicable.
+
+### Health & Fitness
+
+Dominated by platforms (Apple Health, Calm, Headspace) but still has room for focused utilities — specific tracking apps, niche wellness tools, or apps targeting specific conditions or athletic disciplines. The secondary category here can be Lifestyle or Medical depending on focus.
+
+### Utilities
+
+Often a good secondary category for apps that don't fit neatly elsewhere. Many functional tools that could claim another category benefit from Utilities as a secondary because users browsing there are specifically looking for practical tools.
+
+### Education
+
+Broadly competitive but highly segmented by audience. Apps targeting specific age groups or subjects (language learning for professionals, coding for kids) can rank well in subcategories. Apple also features Education apps frequently for back-to-school periods.
+
+---
+
+## How Categories Affect Editorial Featuring
+
+Apple's editorial team curates app features, collections, and "Apps We Love" spotlights every week. While the algorithm for editorial selection is opaque, a few things are clear:
+
+- Apps in categories with clear editorial narratives (Education, Health & Fitness, Kids) get featured more frequently around seasonal themes
+- Apple specifically features apps around major iOS release cycles when apps adopt new APIs or frameworks
+- Well-designed apps with professional screenshots and metadata are more likely to be noticed
+
+Your App Store presentation matters enormously here. High-quality screenshots, a polished icon, and a clear description signal that your app is worth featuring. Tools like [AppFrame](https://appfra.me) can help you create professional-quality showcase images that make your listing stand out from the crowd.
+
+---
+
+## Using Metadata to Reinforce Category Signals
+
+Your app's name, subtitle, keyword field, and description all send signals to the App Store algorithm about relevance. These signals should align with your chosen category.
+
+If you're in Productivity, your keywords and description should include terms users in that category actually search for. If you've chosen a secondary category of Finance, include relevant financial terms in your subtitle and keyword list.
+
+Avoid keyword stuffing — Apple's guidelines prohibit it and it can result in metadata rejections. Instead, be specific and use terms that reflect what users in your target category actually type.
+
+---
+
+## When to Change Your Category
+
+You can update your app's category at any time without submitting a new binary. This means you can experiment.
+
+Consider a category change if:
+- Your current chart position is stagnant despite good download velocity
+- You find an adjacent category with better competitive dynamics
+- Your app has evolved to serve a different primary use case
+- A new iOS feature or category emerges that fits your app well
+
+When you change categories, monitor your ranking and download trends closely over the following two to four weeks. Category changes can cause temporary volatility while the algorithm recalibrates.
+
+---
+
+## A Framework for Making the Decision
+
+1. **List the 3–5 categories your app could reasonably belong to**
+2. **Check top charts for each** — note the top 10 apps and their review counts
+3. **Estimate your realistic ranking potential** in each category given your likely download volume
+4. **Choose the category where a realistic ranking position drives the most organic visibility**
+5. **Set a secondary category** that adds discoverability without conflicting with the primary
+
+Don't overthink it, but do think about it. Five minutes of category research before submission can meaningfully affect your app's long-term trajectory on the App Store.
+
+---
+
+## Final Thoughts
+
+Category strategy isn't glamorous, but it's one of the highest-leverage decisions you'll make during App Store submission. The right category gives your app a fighting chance at chart rankings, editorial attention, and organic discovery. The wrong one puts you in a competitive bracket you'll never escape.
+
+Spend time on it before your first submission — and revisit it if your app isn't growing the way you expected.
+    `,
+  },
+  {
+    slug: "app-store-seasonal-trends",
+    title: "App Store Seasonal Trends: When to Launch Your iOS App for Maximum Impact",
+    description:
+      "Timing your app launch around App Store seasonal patterns can dramatically affect downloads and visibility. Here's what the data shows and how to plan your release.",
+    date: "2026-03-25",
+    readingTime: 6,
+    content: `
+## Does Launch Timing Actually Matter?
+
+Ask a random developer when to launch an app and most will say "as soon as it's ready." That's not wrong — a polished app launched on a slow day beats an unfinished app launched on the biggest day of the year. But timing does matter, and understanding the App Store's seasonal patterns can give you a meaningful edge.
+
+The App Store experiences predictable cycles of high and low activity. Downloads spike during certain periods, search behavior shifts with real-world events, and editorial featuring follows a calendar that Apple largely sticks to year over year. Developers who understand these patterns can time their launches and marketing pushes to catch the waves rather than fight against them.
+
+---
+
+## The Big Seasons: When Downloads Surge
+
+### December 25 – January 7: The Holiday Wave
+
+The single largest download event of the App Store calendar. Millions of people receive new iPhones and iPads as gifts over the holidays and spend the days following setup filling them with apps. January 1–7 is consistently the highest-volume period of the year for downloads across nearly every category.
+
+What this means practically:
+- If your app is ready, aim for a **mid-December launch** to be indexed and ranked before the wave hits
+- Games, productivity tools, fitness apps, and anything related to new year's resolutions all see massive spikes
+- Editorial featuring during this period is extremely competitive — Apple's editors have their holiday picks locked in weeks in advance
+
+### January: New Year Resolution Season
+
+Beyond the hardware gifts, January brings a behavioral pattern: people starting fresh. Fitness, habit tracking, journaling, learning, finance, and goal-setting apps all see their highest organic search volumes of the year in the first two to three weeks of January.
+
+If your app falls into any self-improvement category, January is your most valuable launch window. The combination of new devices and motivated users creates exceptional conditions.
+
+### September – October: Back to School and New Hardware
+
+Apple's fall event cycle — typically featuring new iPhone models and updated iOS — drives a second significant download surge. Users upgrading to new devices revisit the App Store and are particularly receptive to apps that showcase new platform capabilities.
+
+Developers who build features using new iOS APIs tend to get editorial attention during this window. Apple actively promotes apps that adopt new frameworks — it reinforces their platform narrative. If you're building anything that can use new iOS capabilities, timing your update for the fall cycle is worth the development effort.
+
+### Back to School (July – August in the US)
+
+Education, reference, and productivity apps see a notable spike as students return to school. Apple typically runs a Back to School promotion with curated collections. If your app serves students, teachers, or parents, July to early August is an important window.
+
+---
+
+## Slower Periods: When to Avoid if You Can
+
+### February – March
+
+After the holiday wave subsides and new year's resolution momentum fades, February and March tend to be quieter months for downloads. Users who received new devices have settled into their routines, and the next major marketing cycle hasn't started yet.
+
+This doesn't mean you shouldn't launch — but if you have flexibility, avoid a major first launch in late February unless your app is specifically relevant to Valentine's Day, Spring events, or another February/March hook.
+
+### May – Early June
+
+A similarly quiet stretch in many categories, falling between the post-spring momentum and the summer ramp-up. It can be a good period for soft launches or testing, but major launch pushes tend to have less organic tailwind.
+
+---
+
+## Category-Specific Patterns
+
+Not all apps follow the same seasonal curves. Your specific category should inform your timing:
+
+**Fitness and Health**: Peak in January (resolutions), second peak in spring (people preparing for summer). Lowest points in November as holidays approach.
+
+**Games**: Strongest in December (gifts, holiday break), followed by summer (school out). Weakest in September–October as people return to school and work routines.
+
+**Finance and Budgeting**: January (new year financial goals), March–April (tax season in the US), September (back-to-school household budget reset).
+
+**Travel**: Spring break (March–April), early summer (May–June), and late summer (August) as people plan holidays.
+
+**Education**: August–September (back to school), January (new semester), and May for language learning specifically.
+
+**Productivity**: January is strong, but productivity apps see relatively steady demand year-round compared to more seasonal categories.
+
+---
+
+## Planning Your Launch Calendar
+
+A few practical recommendations based on these patterns:
+
+### 1. Work backwards from your target window
+
+If you want to launch in early January, your app needs to be submitted by mid-December at the latest (App Review typically takes 24–48 hours, but allow buffer time around the holidays when review times can extend). Building backwards from a target launch date helps you set realistic development milestones.
+
+### 2. Build for the wave, not into it
+
+The best time to be featured is before the download wave peaks, not during it. If you're trying to catch the January surge, you want to already have some initial reviews and ratings by the time traffic spikes. A December launch with a marketing push in the first week of January is often more effective than a January 1 launch with zero social proof.
+
+### 3. Match your marketing to the calendar
+
+Your App Store screenshots, description, and social media content should reflect seasonal relevance when appropriate. A fitness app launching in January should lean into the "new year, new you" narrative even if the app itself isn't changing. Relevance to the user's current mindset increases conversion rates.
+
+Creating professional launch visuals that match the season and energy of your campaign matters too. Tools like [AppFrame](https://appfra.me) let you quickly produce polished showcase images that match whatever seasonal narrative you're running.
+
+### 4. Plan updates around key windows
+
+You don't have to save everything for a new app launch. Major feature updates can function as mini-launches with their own marketing push. Aligning a significant update with a seasonal peak — a new fitness feature in January, a back-to-school mode in August — gives you a fresh reason to promote the app and potentially earn editorial attention.
+
+---
+
+## Timing App Store Metadata Changes
+
+Category changes, screenshot updates, and description refreshes can temporarily affect ranking while the algorithm recalibrates. Avoid making these changes in the week before a high-traffic period. Make them 2–3 weeks earlier so rankings stabilize before the traffic peaks.
+
+---
+
+## Staying Responsive to Real-World Events
+
+Beyond the predictable calendar, be ready to adapt to real-world moments. An app that's genuinely relevant to a major news event, a viral social media trend, or a new Apple announcement can see outsized discovery in the days following that event.
+
+You can't fully plan for these, but you can build the habit of watching trending searches in App Store Connect and App Store search data to spot emerging opportunities.
+
+---
+
+## A Simple Launch Timing Framework
+
+1. Identify your app's most relevant seasonal window based on its category
+2. Work backwards to set a realistic submission date
+3. Plan a soft launch 2–4 weeks before the target peak to build reviews and ratings
+4. Execute your main marketing push 1–2 weeks before the expected download peak
+5. Align App Store creative and social media messaging to the seasonal narrative
+
+Timing won't save a bad app, and a great app will eventually find its audience regardless of when it launches. But everything else being equal, riding seasonal tailwinds is one of the easiest free advantages available to indie iOS developers.
+    `,
+  },
+  {
     slug: "user-retention-strategies-mobile-apps",
     title: "User Retention Strategies for Mobile Apps: A Developer's Playbook",
     description:
