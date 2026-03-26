@@ -9,6 +9,438 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "app-onboarding-ux-best-practices",
+    title: "App Onboarding UX Best Practices: Hook Users in the First 60 Seconds",
+    description:
+      "Your app has one shot to make a first impression. Here's how to design an onboarding experience that activates users fast, reduces churn, and turns installs into loyal fans.",
+    date: "2026-03-26",
+    readingTime: 7,
+    content: `
+## The First 60 Seconds Make or Break Your App
+
+Most apps lose the majority of their users within the first three days. According to Appsflyer data, average Day-1 retention across categories sits around 25–35%. That means two-thirds of people who install your app never open it again after the first session.
+
+The leading cause isn't a bad app — it's a bad first impression. Users don't give second chances. If they feel confused, overwhelmed, or uncertain about what your app does in those first 60 seconds, they leave. And they don't come back.
+
+Good onboarding doesn't just explain your app — it delivers value immediately, builds confidence, and earns the next session.
+
+---
+
+## Principle 1: Delay Friction, Frontload Value
+
+The single most common onboarding mistake is asking for things before giving anything. Sign up before you see the app. Allow notifications before you know what you're getting. Connect your account before you understand the benefit.
+
+Every request you make of the user before they've experienced value is a reason to quit. Flip the order. Let people experience your app's core value *first*, then ask for what you need.
+
+**Practical pattern:** Use a "try before you sign up" flow. Let new users interact with the core feature, then prompt for account creation after they've done something meaningful — saved a note, completed a task, seen a result.
+
+The best apps earn permission by demonstrating value first.
+
+---
+
+## Principle 2: Show, Don't Tell
+
+A three-screen carousel explaining your app's features is not onboarding — it's a brochure. Users swipe past feature tours without reading them. The only information that sticks is what users *discover by doing*.
+
+Design onboarding as a guided experience, not a lecture. Instead of a screen that says "Track your habits daily," put the user in the habit tracker and let them create their first habit. The act of doing creates understanding that no amount of copy can replicate.
+
+### The Job-to-Be-Done Frame
+
+Ask yourself: what is the single most important thing a new user needs to *do* in their first session to understand your app's value? Then build onboarding around enabling that specific action. Remove every screen, step, and decision that doesn't directly lead to that moment.
+
+If your core value is "easily track your finances," the first session should end with the user having added at least one transaction and seen their balance. Everything else can wait.
+
+---
+
+## Principle 3: Minimize Required Steps
+
+Every additional step in onboarding reduces the percentage of users who complete it. Count your required steps. Then challenge each one:
+
+- **Can this be skipped?** Profile photos, notification preferences, and display name are all examples of steps that can wait until later.
+- **Can this be pre-filled?** Default settings that work for most users eliminate decisions. Let users adjust later.
+- **Can this be inferred?** If your app knows the user's timezone from their device, don't ask for it.
+
+A good benchmark: if your required onboarding takes more than 5 minutes or more than 6 steps, it's too long. The best onboarding flows take under 2 minutes.
+
+### Progress Indicators
+
+If you can't cut steps further, show progress. A simple "Step 2 of 4" label dramatically reduces abandonment because it sets expectations. Users are more willing to complete a known process than an open-ended one.
+
+---
+
+## Principle 4: Nail the Permission Request Timing
+
+iOS requires your app to request permission before accessing the camera, microphone, location, contacts, or notifications. How you time these requests is critical.
+
+**Never ask on the first screen.** Users who see a permission dialog before they understand your app deny it at far higher rates — and a denied permission is very hard to recover from.
+
+**Always provide context before the system dialog.** iOS shows a generic "App wants to send you notifications" prompt with no room for explanation. Create a custom "pre-permission" screen first that explains *why* you're asking and *what value the user gets*. Something like: "Enable notifications to get a reminder when your timer finishes." Then trigger the system dialog.
+
+**Request permissions in context.** If your app has a photo feature, ask for photo library access when the user tries to add a photo — not at startup.
+
+Timing permission requests correctly can double your opt-in rates for notifications, which has a direct downstream impact on retention.
+
+---
+
+## Principle 5: Design the Empty State
+
+New users start with no data. An empty screen with no guidance — a blank list, an empty dashboard — is disorienting. What should I do now? Is something broken?
+
+Design your empty states as onboarding cues. An empty list can show a sample item, a clear call-to-action ("Add your first task"), and a brief explanation of what goes here. This transforms a moment of confusion into an invitation to act.
+
+Great empty states are:
+- **Inviting:** They make the next action obvious
+- **Reassuring:** They confirm the app is working correctly
+- **Brief:** They don't explain the entire app — just the next step
+
+Tools like Lottie animations can make empty states feel alive and polished without heavy development investment.
+
+---
+
+## Principle 6: Personalization as Engagement
+
+If your app can serve different types of users differently, onboarding is a great time to capture that signal. A fitness app might ask "What's your goal — lose weight, build muscle, or stay active?" Not to gatekeep features, but to personalize the experience from the start.
+
+When users feel like the app was designed for *them specifically*, activation and retention improve significantly. The key is to only ask questions you'll actually use to customize the experience. Don't ask about goals and then show everyone the same home screen.
+
+Even simple personalization — "What should we call you?" used as a name in push notifications — creates a feeling of tailored experience that generic apps can't match.
+
+---
+
+## Principle 7: Make Your App Look Good from Day One
+
+First impressions are visual before they're functional. If your app looks unpolished — default system icons, placeholder screenshots, inconsistent spacing — users assume the product quality matches the visual quality.
+
+Invest in the visual entry points: your app icon, your launch screen, and your first interactive screen. These are the moments users form their initial assessment.
+
+When you're ready to promote your app, tools like [AppFrame](https://appfra.me) help you create professional showcase images that reflect the quality of your product — so the impression you make on the App Store matches the experience inside the app.
+
+---
+
+## Measuring Onboarding Effectiveness
+
+You can't improve what you don't measure. Instrument your onboarding with funnel analytics (Firebase, Mixpanel, or Amplitude all work well for this). Track:
+
+- **Onboarding completion rate:** What % of users who start onboarding finish it?
+- **Time to first key action:** How long until users complete your core flow?
+- **Day-1 retention:** Do users who complete onboarding retain better than those who don't?
+
+These metrics tell you where users are dropping off and whether your improvements are working. A 10% improvement in onboarding completion typically produces a measurable lift in Day-7 retention — the compounding effect is significant.
+
+---
+
+## Quick Wins to Implement This Week
+
+If you're looking for immediate improvements without a full redesign:
+
+1. **Cut the feature tour** — Remove or condense any screens that explain features without letting users interact with them
+2. **Move sign-up later** — Allow at least one meaningful action before requiring account creation
+3. **Add a pre-permission screen** — Before requesting notifications, explain why on a custom screen
+4. **Improve your empty states** — Every empty list or dashboard should have a clear next-action prompt
+5. **Test with real users** — Watch someone use your app for the first time without helping them. Every moment of hesitation is an onboarding problem to fix
+
+The apps with the best retention aren't always the ones with the most features — they're the ones that get users to value fastest. Onboarding is where that race is won or lost.
+`,
+  },
+  {
+    slug: "localize-app-store-listing",
+    title: "How to Localize Your App Store Listing for Global Markets",
+    description:
+      "Localization isn't just translation — it's one of the highest-ROI growth levers available to indie developers. Here's how to do it right, without blowing your budget.",
+    date: "2026-03-26",
+    readingTime: 6,
+    content: `
+## Why Localization Is an Underused Growth Lever
+
+Most indie developers build their app in English, launch it globally, and then wonder why their download numbers plateau. The answer is often sitting in plain sight: 75% of App Store users are non-native English speakers, and Apple ranks apps significantly higher in local storefronts when those apps have localized metadata.
+
+Localization — done well — is one of the highest-ROI growth moves available to a solo developer. You're not building new features. You're not acquiring new users with paid ads. You're making your existing product visible and compelling to millions of people who are actively searching for what you've already built.
+
+This guide covers how to approach App Store localization strategically, what to prioritize, and how to execute it without a dedicated translation team.
+
+---
+
+## The Two Types of Localization
+
+Before diving in, it's worth distinguishing between two distinct efforts:
+
+**App Store metadata localization** — Translating your app name, subtitle, description, keywords, and screenshots for different storefronts. This is what drives ASO and download growth. You can do this without changing a single line of code.
+
+**In-app localization** — Translating the actual UI, text, and content inside your app. This is more complex, but also has a direct impact on activation and retention for non-English users.
+
+For most indie developers, **start with metadata localization**. It's low cost, directly improves App Store ranking, and you can ship it without a new build.
+
+---
+
+## Which Markets to Target First
+
+Don't try to localize into 20 languages at once. Start with 3–5 markets based on data.
+
+### Check Your Existing Analytics
+
+Before anything else, look at where you're already getting downloads without localization. If you're getting unexpected traction in Brazil, Germany, or Japan, those markets are telling you something — there's demand you haven't fully tapped yet.
+
+App Store Connect > Analytics > Territory shows your current download distribution. Any market where you have downloads but no localized metadata is a quick win.
+
+### High-Value Markets to Consider
+
+A few markets that consistently outperform for indie app developers:
+
+- **Germany** — High purchasing power, strong App Store culture, German users strongly prefer German-language apps
+- **Brazil** — Largest mobile market in Latin America, Portuguese-speaking, underserved in many app categories
+- **Japan** — Extremely high average revenue per user (ARPU), but localization quality is scrutinized — machine translation isn't enough
+- **France** — Similar to Germany; French users respond well to fully localized listings
+- **South Korea** — Highly engaged mobile users, strong in gaming and productivity apps
+
+---
+
+## What to Localize in Your App Store Listing
+
+### App Name and Subtitle
+
+These are your most important ASO fields — they carry the most keyword weight and are the first thing users see. Translate them, but also *adapt* them. A translated title that sounds unnatural in the target language will hurt conversions. Work with a native speaker or a professional translator for these fields.
+
+In some markets, it's common to keep the app name in English but localize the subtitle with local keywords. Experiment with what works for your category.
+
+### Keywords Field
+
+Apple gives you 100 characters of keyword field per locale. This is separate from your primary market keywords — use it to target search terms that are specific to the local market and language. Research local competitors to understand what keywords they're ranking for.
+
+Tools like AppFollow, Sensor Tower, and AppFigures have localized keyword research features, though free tiers are limited. A manual search through the App Store in the local language can also surface useful keyword ideas.
+
+### Description
+
+The description carries less keyword weight for ASO but is crucial for conversion. When a user reads your description, they're deciding whether to download. A machine-translated description full of awkward phrasing creates doubt. A well-written local description builds confidence.
+
+For your top 2–3 markets, invest in a human translation. For secondary markets, a high-quality AI translation reviewed by a native speaker can be acceptable.
+
+### Screenshots and Preview Videos
+
+Localized screenshots — ones that show the app UI in the local language — significantly outperform generic English screenshots in non-English markets. This is often skipped because it requires localized app builds, but even adding localized text overlays to your existing screenshots (showing the app name or feature callouts in the local language) can improve conversion rates.
+
+---
+
+## Tools and Workflow for Localization
+
+### Translation Options
+
+**For small indie developers:**
+- **AI translation (Claude, DeepL, GPT-4)** — Good baseline for app descriptions and marketing copy. Always review with a native speaker before publishing.
+- **Fiverr / ProZ / One Hour Translation** — Affordable professional translators for specific markets. Budget $20–50 per language for metadata, more for full in-app localization.
+- **Lokalise / Phrase** — Professional localization platforms with translator management, useful once you're handling multiple languages regularly.
+
+**For in-app strings:**
+- Apple's Xcode has built-in localization export/import. Export your .strings files, send to a translator, reimport. The workflow is straightforward once you've set up NSLocalizedString properly.
+
+### Maintaining Localized Metadata
+
+Set a reminder when you update your English listing — every change to your primary description should trigger a review of your localized versions. Outdated localized descriptions (that describe features that no longer exist or miss new ones) erode credibility.
+
+---
+
+## Common Localization Mistakes
+
+**Literal translation without cultural adaptation.** Idioms, humor, and marketing phrases rarely translate directly. "One tap away" in English might sound strange or mean something different in Japanese. Have a native speaker review for naturalness, not just accuracy.
+
+**Ignoring right-to-left languages.** If you're targeting Arabic or Hebrew markets, your UI needs to support RTL layout. This is a significant development investment — factor it in before adding these locales.
+
+**Localizing the metadata but not the app.** A fully localized App Store listing that leads to an English-only app creates a terrible first impression. At minimum, ensure your core UI strings are translated before pushing localized metadata.
+
+**Machine-translating your screenshots.** App Store screenshots with machine-translated UI text are often worse than English originals — bad translation creates distrust. Either do it properly or keep English screenshots.
+
+---
+
+## Measuring Impact
+
+After publishing localized metadata, track performance per territory in App Store Connect Analytics:
+
+- **Impressions by territory** — Are you now showing up in local search?
+- **Conversion rate by territory** — Are localized listings converting better?
+- **Downloads by territory** — Is there growth in the target markets?
+
+Give each new localization 4–6 weeks before evaluating results, as App Store indexing for new keyword sets takes time. Don't judge a localization effort by week-one data.
+
+---
+
+## The ROI Calculation
+
+Here's a simple way to think about whether localization is worth it for your app:
+
+If you're getting 100 downloads/month from Germany organically (with no German localization), a well-executed German localization typically produces a 2–4x lift in that market — because you start ranking for German keywords and your conversion rate improves.
+
+At 200–400 German downloads/month, if even 10% convert to a paid purchase or subscription, the math on a $50–100 translation investment starts looking very attractive very quickly.
+
+Localization is one of the few growth levers where the effort scales across time — you invest once and the compounding benefit continues for years.
+
+---
+
+## Where to Start This Week
+
+1. **Check App Store Connect** — Find your top 3 non-English markets by existing downloads
+2. **Copy your English metadata** — Into App Store Connect for those 3 locales as a starting point
+3. **Run it through DeepL** — Get a baseline translation of your description and subtitle
+4. **Post on Reddit (r/languagelearning or local subreddits)** — Ask for a quick native-speaker review in exchange for a promo code
+5. **Publish and track** — Set calendar reminders to check territory analytics in 6 weeks
+
+You don't need a localization team or a big budget to start. You need a plan, a spreadsheet, and a willingness to ship imperfect-but-good-enough metadata. The apps growing quietly in global markets aren't always the best-funded — they're often just the ones that bothered to show up in the local language.
+`,
+  },
+  {
+    slug: "app-store-search-algorithms-2026",
+    title: "Understanding App Store Search Algorithms in 2026",
+    description:
+      "How does Apple actually decide which apps rank for a search query? Here's a practical breakdown of the App Store search algorithm and what you can do to rank higher.",
+    date: "2026-03-26",
+    readingTime: 7,
+    content: `
+## The Black Box Is Less Black Than You Think
+
+Apple doesn't publish documentation for its App Store search algorithm. There's no "App Store SEO guide" from Cupertino, and there never will be. But through years of experimentation, data analysis, and reverse engineering by ASO practitioners, we have a pretty clear picture of how the algorithm works — and what factors actually move rankings.
+
+This guide breaks down the key signals Apple uses to rank apps in 2026, how they interact with each other, and what you should actually prioritize in your optimization strategy.
+
+---
+
+## The Two Phases of App Store Search
+
+Before diving into ranking factors, understand that App Store search involves two phases:
+
+**Phase 1: Eligibility** — Can your app even show up for this query? This is determined entirely by your metadata: app name, subtitle, keyword field, and in-app purchase names. If the search term doesn't appear in any of these fields (or isn't closely related), your app simply won't be indexed for that query.
+
+**Phase 2: Ranking** — Among all eligible apps, which ones rank highest? This is where performance signals (ratings, downloads, conversion rate) take over.
+
+Most developers focus obsessively on Phase 2 when they have a Phase 1 problem — their keywords just aren't getting indexed. Always verify eligibility before trying to optimize ranking.
+
+---
+
+## Metadata Signals (Phase 1)
+
+### App Name
+
+The app name carries the most keyword weight of any metadata field. Keywords in your app name rank significantly higher than the same keywords in your subtitle or keyword field. This is why many top-ranked apps embed category keywords directly in their name — "Habits: Daily Tracker & Journal" rather than just "Habits."
+
+**Character limit:** 30 characters. Use them wisely.
+
+**Key constraint:** Your app name must accurately describe your app and not be purely a keyword list. Apple rejects names that are obvious keyword stuffing ("Task Planner To-Do List Reminders Organizer"). Balance brand identity with keyword inclusion.
+
+### Subtitle
+
+The subtitle (also 30 characters) carries slightly less weight than the app name but significantly more than the keyword field. Think of it as your second-most-valuable keyword real estate.
+
+Best practice: Don't repeat words already in your name — each field should expand your keyword coverage. If your name is "Marble: Budget Tracker," your subtitle should target different intent keywords like "Savings Goals & Expense Log" rather than repeating "budget" and "tracker."
+
+### Keyword Field
+
+100 characters per locale, not visible to users, used solely for indexing. Several important rules:
+
+- **Don't repeat words** from your name or subtitle — they're already indexed
+- **Separate with commas, no spaces** — "finance,budget,money" uses 2 fewer characters than "finance, budget, money"
+- **Use singular forms** — Apple indexes both singular and plural when you include either one
+- **Include competitor-adjacent terms** — Terms associated with categories your app competes in
+- **Think in phrases, not just words** — "photo editor" as a phrase is more valuable than "photo" and "editor" separately
+
+### In-App Purchase Names
+
+Often overlooked: the names of your in-app purchases and subscriptions are indexed by the App Store. An IAP named "Premium Features Unlock" adds "Premium Features" to your indexable keywords. Name your IAPs accordingly.
+
+### App Description
+
+Apple has officially confirmed that the description is **not** directly used for keyword indexing. However, it affects conversion rates (how many people who land on your page actually download) — and conversion rate is a major ranking signal. Write your description for humans, not algorithms.
+
+---
+
+## Performance Signals (Phase 2)
+
+Once your app is eligible for a query, Apple ranks it using performance data. These signals are the hardest to manipulate but the most powerful.
+
+### Conversion Rate
+
+Conversion rate — the percentage of users who view your product page and then download your app — is widely considered the single most important ranking signal. Apps that convert well signal to Apple that they're the right answer for a given search query.
+
+This means everything on your product page that affects conversion also indirectly affects search ranking:
+- Icon design and first impressions
+- Screenshot quality and messaging
+- Ratings and number of reviews
+- App name and subtitle (do they match user intent?)
+
+A 5% improvement in conversion rate compounds into meaningful ranking gains over time. Tools like [AppFrame](https://appfra.me) help developers create professional showcase images that improve that critical first impression on the App Store.
+
+### Download Velocity
+
+How many downloads you're getting, and how fast the rate is growing, signals relevance and popularity. This is why new apps often see a ranking boost immediately after launch (when friends, family, and early users download quickly) before settling into their natural position.
+
+Sustained download velocity — not just a spike — is what drives sustained rankings. This is the argument for consistent marketing rather than launch-and-forget.
+
+### Ratings and Reviews
+
+Volume and recency of ratings both matter. An app with 500 reviews ranks higher than an app with 50 reviews, all else equal. An app that recently received 100 new reviews ranks higher than one whose 500 reviews were all collected two years ago.
+
+Key implications:
+- **Prompt for ratings at the right moment** — After a success state (completed task, won level, achieved goal), not randomly
+- **Respond to negative reviews** — While this doesn't directly affect algorithm ranking, it improves the visual credibility of your listing for users reading reviews
+- **Never buy fake reviews** — Apple has sophisticated detection systems, and the consequences (removal, demotion) are severe
+
+### Retention and Engagement
+
+This is the most speculative ranking factor but increasingly supported by evidence: Apple uses downstream behavioral signals — how often people open your app after downloading, how long they use it, whether they delete it quickly — to assess whether your app is actually delivering value.
+
+An app that gets downloaded and deleted within 24 hours at high rates is signaling to Apple that it's misleading or low quality. This eventually depresses ranking even if conversion rates look good.
+
+---
+
+## How Signals Interact
+
+Here's a practical mental model:
+
+1. **Get indexed** (metadata) → your app appears as a candidate for relevant queries
+2. **Win the click** (icon, screenshots, name/subtitle on results page) → drives impressions-to-tap CTR
+3. **Win the download** (full product page, ratings, description) → drives conversion rate
+4. **Deliver value** (in-app experience) → drives retention, which feeds back into ranking
+
+Every stage feeds the next. You can't skip to optimizing retention if your metadata doesn't get you indexed. You can't win on conversion if your icon loses the click. The algorithm rewards apps that execute well across the entire funnel.
+
+---
+
+## Practical Priorities for 2026
+
+### If You're a New App (Under 100 Reviews)
+
+Focus almost entirely on Phase 1 (metadata) and early review collection. Your performance signals are too weak to compete on high-volume terms. Target long-tail keywords where eligibility matters more than volume.
+
+**Tactic:** Identify 3–5 specific, low-competition queries that your app perfectly answers. Optimize hard for those before chasing broad category terms.
+
+### If You're an Established App
+
+Conversion rate optimization becomes your highest-leverage activity. Test different screenshot sets, icon variations (via custom product pages), and subtitle variants. A/B test is available for icons and screenshots in App Store Connect.
+
+### For All Apps in 2026
+
+- **Localization is underused** — Localizing your keyword fields for top non-English markets is pure Phase 1 expansion with minimal investment
+- **In-app events** — Apple's In-App Events feature (launched in iOS 15) shows up in search results and can boost visibility for time-limited offers, updates, and challenges
+- **Custom Product Pages** — Apple now allows up to 35 custom product pages per app, each with different screenshots and promotional text. These can be used in Apple Search Ads campaigns but also allow experimentation without affecting your default listing
+
+---
+
+## What Doesn't Work (Myths Debunked)
+
+**"More keywords in the description = better ranking"** — False. Description is not indexed for keywords.
+
+**"Keyword stuffing in the name works"** — Partially true but increasingly penalized. Apple reviews submissions and rejects names that read as keyword lists.
+
+**"Buying downloads boosts ranking"** — Short-term it can, but Apple detects pattern anomalies (installs with no engagement, installs from concentrated geographic regions) and penalizes accordingly. The risk-reward is terrible.
+
+**"Reviews from the same device/account are counted"** — Apple deduplicates and filters suspicious review patterns. Quality and authentic volume matters; quantity alone doesn't.
+
+---
+
+## The Long Game
+
+App Store search optimization is not a one-time setup. It's an ongoing practice. Your competitors are iterating. Apple updates its algorithm. New features (like in-app events and custom pages) create new opportunities for visibility.
+
+The developers who consistently win in search aren't gaming the system — they're building good apps, collecting genuine reviews, optimizing their listings with real data, and staying current with platform changes. The algorithm, for all its inscrutability, is ultimately trying to surface the best answer to a user's search query. Build something worth surfacing.
+`,
+  },
+  {
     slug: "mobile-app-analytics-key-metrics",
     title: "Mobile App Analytics: Key Metrics Every Developer Should Track",
     description:
